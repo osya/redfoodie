@@ -18,9 +18,9 @@ namespace redfoodie.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public sealed partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+        private ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
