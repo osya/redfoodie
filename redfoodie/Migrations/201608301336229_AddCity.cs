@@ -3,17 +3,16 @@ namespace redfoodie.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class test2 : DbMigration
+    public partial class AddCity : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Restaurant",
+                "dbo.City",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        PhoneNumber = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -21,7 +20,7 @@ namespace redfoodie.Migrations
         
         public override void Down()
         {
-            DropTable("dbo.Restaurant");
+            DropTable("dbo.City");
         }
     }
 }

@@ -20,9 +20,10 @@ namespace redfoodie.Models
 
     public sealed partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        private ApplicationDbContext()
+        public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new ApplicationDbInitializer());
         }
 
         public static ApplicationDbContext Create()

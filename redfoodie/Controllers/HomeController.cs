@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using redfoodie.Models;
 
 namespace redfoodie.Controllers
 {
@@ -10,7 +11,15 @@ namespace redfoodie.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var context = new ApplicationDbContext();
+            var redFoodieViewModel = new RedFoodieViewModel
+            {
+                CityId = 0,
+                Name = "City1",
+                Cities = context.Cities
+            };
+
+            return View(redFoodieViewModel);
         }
 
         public ActionResult About()

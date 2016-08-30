@@ -1,0 +1,13 @@
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace redfoodie.Models
+{
+    public class RedFoodieViewModel
+    {
+        [Required]
+        public int CityId;
+        public string Name;
+        public IEnumerable<City> Cities { get; set; }
+    }
+}
