@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace redfoodie.Models
@@ -7,6 +8,8 @@ namespace redfoodie.Models
     {
         [Required]
         public int CityId;
+        public int? ParentId;
+        public string Href;
         public string Name;
         public IEnumerable<City> Cities { get; set; }
     }

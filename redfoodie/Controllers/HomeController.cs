@@ -12,11 +12,15 @@ namespace redfoodie.Controllers
         public ActionResult Index()
         {
             var context = new ApplicationDbContext();
+
+            var defaultCity = context.Cities.First(x => x.ParentId == null);
+
             var redFoodieViewModel = new RedFoodieViewModel
             {
-                CityId = 0,
-                Name = "City1",
-                Cities = context.Cities
+                CityId = defaultCity.Id,
+                Href = defaultCity.Href,
+                Name = defaultCity.Name,
+                Cities = context.Cities.Where(x => x.ParentId != null)
             };
 
             return View(redFoodieViewModel);

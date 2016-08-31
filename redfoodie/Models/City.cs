@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace redfoodie.Models
 {
@@ -6,6 +7,9 @@ namespace redfoodie.Models
     {
         [Key]
         public int Id { get; set; }
+
+        public int? ParentId { get; set; }
+        public string Href { get; set; }
         public string Name { get; set; }
     }
 }

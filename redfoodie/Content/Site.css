@@ -26,8 +26,9 @@ textarea {
 @font-face {
     font-family: 'redfoodie';
     src: url('../fonts/redfoodie.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
-
 .redfood-icon {
     font-family: 'redfoodie';
     speak: none;
@@ -37,17 +38,148 @@ textarea {
     text-transform: none;
     line-height: 1;
 }
-
+.redfood-invite-search:before {
+    content: "\e610";
+}
+.redfood-cross:before {
+    content: "\e60f";
+}
+.redfood-check-filled:before {
+    content: "\e60e";
+}
+.redfood-check:before {
+    content: "\e60d";
+}
+.redfood-searchup:before {
+    content: "\e60c";
+}
+.redfood-search:before {
+    content: "\e60b";
+}
 .redfood-redfoodie:before {
     content: "\e60a";
 }
-
-a,a:focus {
+.redfood-twitter:before {
+    content: "\e600";
+}
+.redfood-google:before {
+    content: "\e601";
+}
+.redfood-restaurant:before {
+    content: "\e602";
+}
+.redfood-bar:before {
+    content: "\e603";
+}
+.redfood-coffee:before {
+    content: "\e604";
+}
+.redfood-diamond:before {
+    content: "\e605";
+}
+.redfood-ice:before {
+    content: "\e606";
+}
+.redfood-bicycle:before {
+    content: "\e607";
+}
+.redfood-facebook:before {
+    content: "\e608";
+}
+.redfood-capcake:before {
+    content: "\e609";
+}
+h1#logo {
+    margin-top: -15px;
+}
+#logo a {
     text-decoration: none;
-    outline: none;
-    color: #D91E18;
+    vertical-align: sub;
+}
+.city-list {
+    height: 35px;
+    position: relative;
+}
+.city-box {
+    background: no-repeat 10px 9px;
+    line-height: 35px;
+    cursor: pointer;
+    margin-left: 20px;
+    position: relative;
+}
+.city-box span {
+    font-size: 11px;
+}
+.city-box:hover,.opened {
+    box-shadow: 2px 3px 3px #000000;
+    box-shadow: 2px 3px 3px rgba(0,0,0,0.4);
+    background-color: #e5e5e3;
 }
 
-a:hover {
-    color: #D91E18;
+.city-box:hover .drop_menu {
+    display: block!important;
+    background-color: #e5e5e3;
+}
+.city-box:hover .fa {
+    /*TODO: investigate whats wrong with `transform` CSS property*/
+    transform: rotate(180deg);
+}
+.drop_menu {
+    width: 116px;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    top: 30px;
+    box-shadow: 2px 3px 3px #000000;
+    box-shadow: 2px 3px 3px rgba(0,0,0,0.4);
+    display: none;
+    font-size: 13px;
+    z-index: 200;
+}
+.drop_menu li {
+    float: left;
+}
+.first-country {
+    background-color: #f8f8f8;
+}
+.drop_menu li.first-item {
+    border: none;
+}
+.drop_menu li a {
+    width: 100%;
+    float: left;
+    line-height: 28px;
+    color: #555;
+    padding-left: 10px;
+    display: block;
+    text-decoration: none;
+}
+.drop_menu li a {
+    width: 100%;
+    float: left;
+    line-height: 28px;
+    color: #555;
+    padding-left: 10px;
+    display: block;
+    text-decoration: none;
+}
+.drop_menu li a:hover {
+    background-color: #fff;
+}
+.main-header {
+    padding: 10px 0 3px;
+    font-size: 14px;
+}
+.navbar-default .navbar-link {
+  color: #D91E18;
+  padding: 0 10px;
+  line-height: 35px;
+}
+.navbar-default .navbar-link:hover {
+  color: #D91E18;
+}
+.navbar-brand {
+  font-size: 24px;
+  padding: 0;
+  height: 35px;
 }
