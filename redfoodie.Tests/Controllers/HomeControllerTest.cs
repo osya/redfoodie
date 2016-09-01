@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using redfoodie;
 using redfoodie.Controllers;
+using redfoodie.Models;
 
 namespace redfoodie.Tests.Controllers
 {
+    // TODO: Implement copying or generating database for testing
     [TestClass]
     public class HomeControllerTest
     {
@@ -16,23 +19,38 @@ namespace redfoodie.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            var result = controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
+        public void ChangeCity()
+        {
+            // Arrange
+            var controller = new HomeController();
+
+            // Act
+            // TODO: Get city names from database
+            var result = controller.Index("amritsar") as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(((redfoodie.Models.RedFoodieViewModel)result.Model).Name, "Amritsar");
+        }
+
+        [TestMethod]
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.About() as ViewResult;
+            var result = controller.About() as ViewResult;
 
             // Assert
             Assert.AreEqual("Your application description page.", result.ViewBag.Message);
@@ -42,10 +60,10 @@ namespace redfoodie.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            var result = controller.Contact() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

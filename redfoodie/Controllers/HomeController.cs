@@ -9,7 +9,7 @@ namespace redfoodie.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(string city)
+        public ActionResult Index(string city = null)
         {
             var context = new ApplicationDbContext();
 

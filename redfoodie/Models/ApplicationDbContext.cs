@@ -11,7 +11,7 @@ namespace redfoodie.Models
     using System.Linq;
     using System.Data.Entity.ModelConfiguration.Conventions;
 
-    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class ApplicationDbInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {
