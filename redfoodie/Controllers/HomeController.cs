@@ -9,18 +9,18 @@ namespace redfoodie.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string city)
         {
             var context = new ApplicationDbContext();
 
-            var defaultCity = context.Cities.First(x => x.ParentId == null);
+            var defaultCity = city != null ? context.Cities.First(x => x.Name == city) : context.Cities.First(x => x.ParentId == null);
 
             var redFoodieViewModel = new RedFoodieViewModel
             {
                 CityId = defaultCity.Id,
                 Href = defaultCity.Href,
                 Name = defaultCity.Name,
-                Cities = context.Cities.Where(x => x.ParentId != null)
+                Cities = context.Cities.Where(x => x.Id != defaultCity.Id)
             };
 
             return View(redFoodieViewModel);
