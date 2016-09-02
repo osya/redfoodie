@@ -1,12 +1,8 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Set padding to keep content from hitting the edges */
+﻿/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    margin-top: 15px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -162,10 +158,109 @@ h1#logo {
     padding: 10px 0 3px;
     font-size: 14px;
 }
+#loginLink,#registerLink {
+    height: 30px;
+    line-height: 30px;
+    padding-top: 0;
+    color: #8d8d8d;
+    /*TODO: investigate whats wrong with `border-radius` CSS property*/
+    border-radius: 0;
+}
+#registerLink {
+    background-color: #D91E18;
+    color: #fff;
+    display: inline-block;
+}
+#registerLink:hover {
+    background-color: #ca4433;
+}
+.top_banner_image_page_contact_us {
+    background: url('/bundles/ispgapp/images/banners/contact_us.png') no-repeat;
+    /*TODO: investigate whats wrong with `background-size` CSS property*/
+    background-size: cover;
+    padding: 0;
+    list-style: none;
+    height: 224px!important;
+    margin-top: 48px;
+}
+#footer {
+    width: 100%;
+    min-width: 1024px;
+}
+#footer .footer-1 {
+    background: #313131;
+    min-height: 62px;
+    line-height: 61px;
+}
+#footer .footer-2 {
+    background: #242121;
+    min-height: 58px;
+    line-height: 58px;
+}
+#footer .footer-1 ul {
+    margin-bottom: 0;
+}
+#footer .fr_top li {
+    float: left;
+    margin-right: 35px;
+}
+#footer .fr_top li a {
+    font-size: 16px;
+    color: #fff;
+}
+#footer .fr_bottom {
+    padding: 15px 0 0;
+}
+#footer .rights,#footer .rights a,#footer .fr_qck_links {
+    color: #8d8d8d;
+    font-size: 11px;
+}
+#footer .fr_bottom {
+    padding: 15px 0 0;
+}
+#footer .fr_qck_links {
+    padding: 0 0 5px;
+}
+#footer .fr_qck_links a {
+    padding: 0 4px;
+}
+#footer .rights a {
+    padding-left: 4px;
+}
+#footer .rights a:first-child {
+    padding-left: 0;
+}
+#footer .fr_qck_links a:last-child,#footer .fr_qck_links a:nth-child(28) {
+    border-right: none;
+}
+#footer .rights a:hover,#footer .fr_qck_links a:hover {
+    color: #fff;
+}
+.social_wrapper a {
+    color: #ebebeb;
+    font-size: 25px;
+    text-decoration: none;
+    margin-left: 10px;
+    line-height: 50px;
+    vertical-align: middle;
+}
+.social_wrapper a .twitter:hover {
+    color: #2ba8de;
+}
+.social_wrapper a .facebook:hover {
+    color: #3d5998;
+}
+.social_wrapper a .google:hover {
+    color: #D91E18;
+}
+/*Changing Bootstrap*/
+.navbar-default {
+    background-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
 .navbar-default .navbar-link {
-  color: #D91E18;
-  padding: 0 10px;
-  line-height: 35px;
+    color: #D91E18;
+    margin-left: 20px;
 }
 .navbar-default .navbar-link:hover {
   color: #D91E18;
@@ -174,4 +269,18 @@ h1#logo {
   font-size: 24px;
   padding: 0;
   height: 35px;
+}
+@media (min-width: 768px) {
+  .navbar > .container .navbar-brand {
+    margin-left: 0;
+  }
+}
+@media (min-width: 768px) {
+    .navbar-right {
+        margin-right: 0;
+    }
+}
+.navbar-nav {
+    margin-top: 0;
+    margin-bottom: 0;
 }

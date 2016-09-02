@@ -9,20 +9,18 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-<div class="navbar navbar-fixed-top main-header navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @Html.ActionLink(" ", "Index", "Home", new { area = "" }, new { id = "logo", @class = "navbar-brand navbar-link redfood-icon redfood-redfoodie" })
-        </div>
-
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="pull-left">
+    <div class="navbar navbar-default navbar-static-top main-header">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink(" ", "Index", "Home", new { area = "" }, new { id = "logo", @class = "navbar-brand navbar-link redfood-icon redfood-redfoodie" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <nav class="nav navbar-nav navbar-left">
                     <nav class="city-list">
                         <div class="city-box pull-left">
                             @Model.Name<span class="fa fa-angle-down"></span>
@@ -40,28 +38,51 @@
                             </div>
                         </div>
                     </nav>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    @Html.Partial("_LoginPartial")
-                </li>
-            </ul>
+                </nav>
+                <nav class="nav navbar-nav navbar-right">
+                    <nav class="header-user-container noauth">
+                        @Html.Partial("_LoginPartial")
+                    </nav>
+                </nav>
+            </div>
         </div>
     </div>
-</div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            @Html.ActionLink("About", "About", "Home", new { @class = "pull-left navbar-link" })
-            @Html.ActionLink("Contact", "Contact", "Home", new { @class = "pull-left navbar-link" })
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+    <footer id="footer" class="footer">
+        <div class="footer-1 clearfix ">
+            <div class="container">
+                <div class="fr_top">
+                    <ul class="list-unstyled clearfix pull-left">
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li><a href="/business/new-restaurant">Add Restaurant</a></li>
+                        <li><a href="/advertise-with-us">Advertise</a></li>
+                        <li><a href="/jobs">Jobs</a></li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+                <div class="social_wrapper pull-right">
+                    <a target="_blank" href="https://www.facebook.com/Redfoodiedotcom"><span class="fa facebook fa-facebook"></span></a>
+                    <a target="_blank" href="https://twitter.com/RedfoodieApp"><span class="twitter fa fa-twitter"></span></a>
+                    <a target="_blank" href="https://plus.google.com/+Redfoodiedotcom/"><span class="google fa fa-google-plus"></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-2 clearfix ">
+            <div class="container">
+                <div class="rights pull-left">
+                    &copy;2016 Valeriy Osipov. All rights reserved. <a href="/termsofservice">Terms</a> •<a href="/privacypolicy">Privacy</a>
+                </div>
+                <i class="redfood-icon redfood-bicycle" style="visibility: hidden"></i>
+                <div class="rights pull-right">All trademarks are properties of their respective owners.</div>
+            </div>
+        </div>
+    </footer>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </body>
 </html>
