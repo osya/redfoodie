@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,7 @@ namespace redfoodie.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(((redfoodie.Models.RedFoodieViewModel)result.Model).Name, "Amritsar");
+            Assert.AreEqual(((redfoodie.Models.BaseViewModel)result.Model).Name, "Amritsar");
         }
 
         [TestMethod]
@@ -53,6 +54,7 @@ namespace redfoodie.Tests.Controllers
             var result = controller.About() as ViewResult;
 
             // Assert
+            Debug.Assert(result != null, "result != null");
             Assert.AreEqual("Your application description page.", result.ViewBag.Message);
         }
 

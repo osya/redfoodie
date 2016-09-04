@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace redfoodie.Models
 {
-    public class RedFoodieViewModel
+    public class BaseViewModel
     {
         [Required]
         public int CityId;
