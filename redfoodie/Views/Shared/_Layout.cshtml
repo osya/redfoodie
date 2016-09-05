@@ -192,6 +192,24 @@
                 $('#msdpdwn3').hide();
             }
         });
+
+        $('.msrch-mn,.msrch-dpdwn,.form-pane .button').click(function (event) {
+            event.stopPropagation();
+        });
+
+        $('body').click(function (event) {
+            if ($('#msdpdwn1').is(':visible')) {
+                $('#msdpdwn1').hide();
+            } else if ($('#msdpdwn2').is(':visible')) {
+                $('.msrch-wrp1 input').show()
+                $('#msdpdwn2').hide();
+                $('#msdpdwn1').show();
+
+            }
+            if ($('#msdpdwn3').is(':visible')) {
+                $('#msdpdwn3').hide();
+            }
+        });
     </script>
 </body>
 </html>
