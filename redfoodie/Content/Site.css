@@ -183,6 +183,38 @@ h1#logo {
     height: 224px!important;
     margin-top: 48px;
 }
+.banner {
+    overflow: hidden;
+    text-align: center;
+    margin-top: 57px;
+    height: 224px;
+}
+.slide-contnet-wrap2 {
+    background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0.75) 100%) repeat scroll 0 0 rgba(0,0,0,0);
+    bottom: 0;
+    height: 224px;
+    left: 0;
+    right: 0;
+    transition: background-color .15s ease-out 0s;
+}
+ul.bxslider {
+    margin: 0;
+}
+ul.bxslider li {
+    left: 0;
+    width: 100%;
+    background: url("/Content/thumbs/banners/1280x600_5749bf6e284c1-fd.png") no-repeat;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size:cover;
+    height: 599px;
+}
+ul.bxslider li a {
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
 #footer {
     width: 100%;
     min-width: 1024px;
@@ -254,6 +286,7 @@ h1#logo {
     color: #D91E18;
 }
 /*Changing Bootstrap*/
+.navbar { margin-bottom: 0 }
 .navbar-default {
     background-color: #ffffff;
     border-bottom-color: #ffffff;
