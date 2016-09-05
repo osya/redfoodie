@@ -413,6 +413,98 @@ ul.bxslider li a {
     border: none;
     height: 37px;
 }
+.msrch-mn {
+    overflow: hidden;
+    height: 39px;
+    width: 500px;
+}
+.msrch-wrp1,.msrch-wrp2 {
+    float: left;
+    width: 500px;
+}
+.quick-search .msrch-wrp2 {
+    margin-top: 1px;
+}
+.msrch-wrp1 input[type="text"] {
+    cursor: pointer;
+    border: none;
+    height: 37px;
+}
+.msrch-wrp2 input[type="text"] {
+    float: left;
+    width: 455px;
+    border: none;
+    height: 37px;
+}
+.msrch-dpdwn {
+    display: none;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #b0b0b0;
+    top: 85px;
+    width: 468px;
+}
+.msrch-dpdwn ul {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: auto;
+}
+.msrch-dpdwn li {
+    padding: 0 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: auto;
+    float: none;
+    text-align: left;
+    color: #000;
+    font-size: 12px;
+    line-height: 45px;
+}
+.msrch-dpdwn li a {
+    height: auto;
+    color: #8d8d8d;
+    float: left;
+}
+.msrch-dpdwn li:hover a {
+    color: #000;
+}
+.msrch-dpdwn li.active a {
+    color: #000;
+}
+.msrch-dpdwn li.suggestLoc {
+    color: #8d8d8d;
+}
+
+.msrch-dpdwn li span.outlet {
+    float: right;
+    color: #8d8d8d;
+    font-size: 11px;
+}
+.msrch-dpdwn li.slabel {
+    background: #f3f3f3;
+    border-bottom: 0;
+    font-weight: bold;
+}
+.msrch-dpdwn li.sitem {
+    cursor: pointer;
+}
+
+.msrch-dpdwn li.sitem div:before {
+    font-size: 18px;
+    margin-right: 10px;
+    margin-top: -1px;
+    float: left;
+}
+.msrch-dpdwn li.sitem:hover {
+    background: #E2E2E0;
+    color: #000;
+}
+.msrch-dpdwn li.active {
+    background: #E2E2E0;
+    color: #000;
+}
 .quick-search .msrch-wrp2 {
     margin-top: 1px;
 }
@@ -452,6 +544,38 @@ button.search-button:after {
     border-right: 10px solid #D91E18;
     left: -10px;
     top: 16px;
+}
+div.sitem,div.locauto {
+    border-bottom: 1px solid #e2e2e0;
+    padding: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: auto;
+    float: none;
+    text-align: left;
+    color: #8d8d8d;
+    font-size: 12px;
+    background: #f3f3f3;
+    cursor: pointer;
+}
+div.sitem:hover,div.locauto:hover {
+    background: #E2E2E0;
+    color: #000;
+}
+.sitem div .redfood-icon {
+    font-size: 25px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+input[type="text"],input[type="password"],textarea {
+    background: #fff;
+    border: 1px solid #b7b7b7;
+    color: #363636;
+    padding: 5px 10px;
+}
+input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
+    border-color: #d94a38!important;
 }
 #footer {
     width: 100%;

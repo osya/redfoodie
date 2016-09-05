@@ -60,12 +60,12 @@
     <!-- .banner -->
     <section class="skin search_wrapper">
         <div class="main-search ">
-            <div class="globalwidth s-form clearfix" style="border:none">
-                <div class="form-pane home-pane-or" style="background:rgba(0,0,0,0);">
+            <div class="globalwidth s-form clearfix" style="border: none">
+                <div class="form-pane home-pane-or" style="background: rgba(0, 0, 0, 0);">
                     <form id="autoSuggestSearchForm" action="/search">
                         <div class="msrch-mn">
                             <div class="msrch-wrp1">
-                                <input id="searchTxt" type="text" name="q" placeholder="Find restaurant, cuisine, locality..." autocomplete="off">
+                                <input id="searchTxt" type="text" name="q" placeholder="Find restaurant, cuisine, locality..." autocomplete="off" style="display: inline-block;">
                             </div>
                             <!-- msrch-wrp1 -->
                             <div class="msrch-wrp2">
@@ -75,7 +75,7 @@
                             <!-- msrch-wrp1 -->
                             <button name="btn" type="button" class="button search-button"><span class="redfood-icon redfood-searchup"></span></button>
                         </div>
-                        @*<input id="hiddCatSearch" type="hidden" value="" name="category">
+                        <input id="hiddCatSearch" type="hidden" value="" name="category">
                         <input id="hiddTagSearch" type="hidden" value="" name="tags">
                         <input id="hiddLocSearch" type="hidden" value="" name="neighbourhoods">
                         <div class="msrch-dpdwn" id="msdpdwn1">
@@ -116,7 +116,7 @@
                         <!-- msrch-dpdwn -->
                         <div class="msrch-dpdwn" id="msdpdwn3">
                             <ul class="clearfix list-unstyled"></ul>
-                        </div>*@
+                        </div>
                     </form>
                 </div>
             </div>
@@ -158,8 +158,40 @@
         </div>
     </footer>
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+        //Main Search
+        $('.msrch-wrp1 input').click(function () {
+            if ($('#msdpdwn1').is(':hidden') && $('.msrch-wrp1 input').val() == "") {
+                $('#msdpdwn1').show();
+                $('#msdpdwn3').hide();
+            }
+        });
+        $('#msdpdwn1 li.sitem').click(function () {
+            var dicon = $(this).children("div").attr("data-icon")
+            var currClass = $('.sel-cat').children('i').attr('class')
+            if ($('#msdpdwn2').is(':hidden')) {
+                $('.msrch-wrp1 input').hide();
+                $('.msrch-wrp1 input').blur();
+                $('#msdpdwn1').hide();
+
+                $('#msdpdwn2').show();
+                $('.sel-cat').children('i').removeClass(currClass)
+                $('.sel-cat').children('i').attr({ class: dicon })
+
+                $('#searchTxtLoc').focus();
+            }
+        });
+        $('.sel-cat').click(function () {
+            if (!$('#msdpdwn1').is(':visible')) {
+                $('.msrch-wrp1 input').show();
+                $('#msdpdwn2').hide();
+                $('#msdpdwn1').show();
+                $('#msdpdwn3').hide();
+            }
+        });
+    </script>
 </body>
 </html>
