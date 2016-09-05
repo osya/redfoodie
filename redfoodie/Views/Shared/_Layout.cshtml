@@ -58,6 +58,71 @@
         </ul>
     </section>
     <!-- .banner -->
+    <section class="skin search_wrapper">
+        <div class="main-search ">
+            <div class="globalwidth s-form clearfix" style="border:none">
+                <div class="form-pane home-pane-or" style="background:rgba(0,0,0,0);">
+                    <form id="autoSuggestSearchForm" action="/search">
+                        <div class="msrch-mn">
+                            <div class="msrch-wrp1">
+                                <input id="searchTxt" type="text" name="q" placeholder="Find restaurant, cuisine, locality..." autocomplete="off">
+                            </div>
+                            <!-- msrch-wrp1 -->
+                            <div class="msrch-wrp2">
+                                <div style="width: 53px;line-height: 51px;" class="sel-cat"><i class=""></i></div>
+                                <input id="searchTxtLoc" type="text" placeholder="Type Location Name" autocomplete="off">
+                            </div>
+                            <!-- msrch-wrp1 -->
+                            <button name="btn" type="button" class="button search-button"><span class="redfood-icon redfood-searchup"></span></button>
+                        </div>
+                        @*<input id="hiddCatSearch" type="hidden" value="" name="category">
+                        <input id="hiddTagSearch" type="hidden" value="" name="tags">
+                        <input id="hiddLocSearch" type="hidden" value="" name="neighbourhoods">
+                        <div class="msrch-dpdwn" id="msdpdwn1">
+                            <ul class="clearfix list-unstyled">
+                                <li class="sitem">
+                                    <div data-icon="redfood-icon redfood-bicycle" data-type="cat" data-type-id="1"><i class="redfood-icon redfood-bicycle"></i>Delivery</div>
+                                </li>
+                                <li class="sitem">
+                                    <div data-icon="redfood-icon redfood-restaurant" data-type="cat" data-type-id="2"><i class="redfood-icon redfood-restaurant"></i>Dine out</div>
+                                </li>
+                                <li class="sitem">
+                                    <div data-icon="redfood-icon redfood-bar" data-type="cat" data-type-id="3"><i class="redfood-icon redfood-bar"></i>Nightlife</div>
+                                </li>
+                                <li class="sitem">
+                                    <div data-icon="redfood-icon redfood-coffee" data-type="cat" data-type-id="4"><i class="redfood-icon redfood-coffee"></i>Cafes</div>
+                                </li>
+                                <li class="sitem">
+                                    <div data-icon="redfood-icon redfood-diamond" data-type="tag" data-type-id="North Indian"><i class="redfood-icon redfood-diamond"></i>Luxury Dining</div>
+                                </li>
+                                <li class="sitem">
+                                    <div data-icon="redfood-icon redfood-capcake" data-type="tag" data-type-id="Desserts"><i class="redfood-icon redfood-capcake"></i>Bakes &amp; Desserts</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- msrch-dpdwn -->
+                        <div class="msrch-dpdwn" id="msdpdwn2">
+                            <div class="sitem allOfCity">All of Delhi NCR</div>
+                            <div class="locauto shareLocation" data-icon="i" onclick="geoFindMe();">Detect Current Location <span style="margin-left: 97px;"><i></i></span></div>
+                            <ul class="clearfix">
+                                <li class="slabel">POPULAR LOCATION</li>
+                                <li class="sitem" data-neigh-id="366">Rohini, Delhi NCR</li>
+                                <li class="sitem" data-neigh-id="206">Dwarka, Delhi NCR</li>
+                                <li class="sitem" data-neigh-id="181">Connaught place, Delhi NCR</li>
+                                <li class="sitem" data-neigh-id="241">Indirapuram, Delhi NCR</li>
+                                <li class="sitem" data-neigh-id="461">Uttam nagar, Delhi NCR</li>
+                            </ul>
+                        </div>
+                        <!-- msrch-dpdwn -->
+                        <div class="msrch-dpdwn" id="msdpdwn3">
+                            <ul class="clearfix list-unstyled"></ul>
+                        </div>*@
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     
    <div class="container body-content">
         @RenderBody()
