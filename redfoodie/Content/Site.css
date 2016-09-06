@@ -2,7 +2,6 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 15px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -24,6 +23,21 @@ textarea {
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
 .redfood-icon {
     font-family: 'redfoodie';
     speak: none;
@@ -577,6 +591,19 @@ input[type="text"],input[type="password"],textarea {
 input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
     border-color: #d94a38!important;
 }
+.clr-red {
+    color: #D91E18!important;
+}
+.home-left {
+    float: left;
+    width: 700px;
+    padding-top: 10px;
+}
+.home-right {
+    float: right;
+    width: 300px;
+    padding-top: 10px;
+}
 #footer {
     width: 100%;
     min-width: 1024px;
@@ -647,7 +674,32 @@ input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
 .social_wrapper a .google:hover {
     color: #D91E18;
 }
+.heading-01 {
+    padding: 20px 0;
+}
+.heading-01 h2 {
+    color: #363636;
+    font-size: 18px;
+    line-height: 20px;
+    font-family: 'Open Sans',sans-serif;
+    margin: 0;
+    font-weight: 600;
+}
+.heading-01 h2 a {
+    color: #363636;
+}
+.heading-01 h2 a:hover {
+    color: #363636;
+    text-decoration: none;
+}
 /*Changing Bootstrap*/
+body { 
+    cursor: default; 
+    font-family: 'Open Sans',sans-serif;
+}
+p {
+    font-size: 13px;
+}
 .navbar { margin-bottom: 0 }
 .navbar-default {
     background-color: #ffffff;
