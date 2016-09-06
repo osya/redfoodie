@@ -229,9 +229,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\collections\imgs\apple-iphone-5s.svg" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\thumbs\banners\1280x600_5749bf6e284c1-fd.png" />
+    <Content Include="Content\thumbs\heart--big-dark-red.png" />
+    <Content Include="Content\thumbs\heart-big-dark-orange.png" />
+    <Content Include="Content\thumbs\heart-big-light-red.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

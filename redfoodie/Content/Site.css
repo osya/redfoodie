@@ -604,6 +604,189 @@ input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
     width: 300px;
     padding-top: 10px;
 }
+.recommend-list {
+    border: 1px solid #e4e4e2;
+    border-left: none;
+    overflow: hidden;
+}
+.recommend-list .tabs {
+    float: left;
+    margin-bottom: -1px;
+}
+.recommend-list .tab-content {
+    float: left;
+    padding: 10px;
+    width: 450px;
+}
+
+.recommend-list .tab-content .tab-pane {
+    min-height: 240px;
+    position: relative;
+    padding-top: 10px;
+}
+.recommend-list .tabs li {
+    height: 103px;
+    width: 248px;
+    line-height: 99px;
+    margin: 4px 0;
+    background-position: 50% 50%;
+    border-right: 4px solid transparent;
+    background-size: cover;
+    position: relative;
+}
+.recommend-list .tabs li.more {
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #e4e4e2;
+}
+.recommend-list .tabs li.more a {
+    color: #8d8d8d!important;
+    font-size: 20px;
+    font-weight: 400;
+}
+.recommend-list .tabs li.more a:hover {
+    color: #000;
+}
+.recommend-list .tabs li.active {
+    border-right-color: #D91E18;
+}
+.recommend-list .tabs li.active:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #D91E18;
+    right: 0;
+    top: 40px;
+}
+.recommend-list .tabs li:first-child {
+    margin-top: 0;
+}
+.recommend-list .tab-pane .more {
+    font-weight: 600;
+    font-size: 14px;
+    overflow: hidden;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+.recommend-list .tab-pane .more a {
+    color: #D91E18;
+}
+.recommend-item {
+    height: 90px;
+    border-bottom: 1px solid #e4e4e2;
+    margin-bottom: 10px;
+}
+.recommend-item:last-child {
+    height: 90px;
+    border-bottom: none;
+}
+.recommend-item .restaurant-link {
+    color: #D94A39;
+    font-weight: 600;
+    font-size: 14px;
+    display: block;
+}
+.recommend-item .restaurant-locality {
+    display: block;
+}
+.recommend-item .restaurant-locality a {
+    color: #8d8d8d;
+    font-size: 12px;
+}
+.recommend-item .restaurant-rating {
+    float: right;
+    font-size: 18px;
+    line-height: 27px;
+}.recommend-item .restaurant-review {
+    display: block;
+    width: 305px;
+    overflow: hidden;
+    height: 55px;
+    font-size: 13px;
+}
+.recommend-item .review-text {
+    overflow: hidden;
+    display: block;
+}
+.recommend-item .restaurant-img img {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 0 10px 10px 0;
+}
+.recommend-item .review-reviewer-photo {
+    float: left;
+    margin: 10px;
+    margin: 5px 10px 0 0;
+}
+.recommend-item .review-reviewer-photo img {
+    width: 30px;
+    height: 30px;
+}
+.greyHeart {
+    color: #8a8a8a;
+}
+.rateHigherHeart {
+    color: #d91e18;
+    background: url(/Content/collections/imgs/heart--big-dark-red.png) no-repeat left center;
+    background-size: 13px 11px;
+    padding-left: 15px;
+}
+.rateHigherHeart.bigHeart {
+    background-size: 45px 37px;
+    background-image: url(/Content/collections/imgs/heart--big-dark-red.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+.rateMiddleHeart {
+    color: #f9690e;
+    background: url(/Content/collections/imgs/heart-big-dark-orange.png) no-repeat left center;
+    background-size: 13px 11px;
+    padding-left: 15px;
+}
+.rateMiddleHeart.bigHeart {
+    background-size: 45px 37px;
+    background-image: url(/Content/collections/imgs/heart-big-dark-orange.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+.rateHighHeart {
+    color: #f22613;
+    background: url(/Content/collections/imgs/heart-big-light-red.png) no-repeat left center;
+    background-size: 13px 11px;
+    padding-left: 15px;
+}
+.rateHighHeart.bigHeart {
+    background-size: 45px 37px;
+    background-image: url(/Content/collections/imgs/heart-big-light-red.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+.rateLowHeart {
+    color: #f89406;
+    background: url(/Content/collections/imgs/heart-big-light-orange.png) no-repeat left center;
+    background-size: 13px 11px;
+    padding-left: 15px;
+}
+.rateLowHeart.bigHeart {
+    background-size: 45px 37px;
+    background-image: url(/Content/collections/imgs/heart-big-light-orange.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+.rateLowerHeart.bigHeart {
+    background-size: 45px 37px;
+    background-image: url(/Content/collections/imgs/heart-big-yellow.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+#subscription-notice {
+    padding-top: 8px;
+    text-align: center;
+}
 #footer {
     width: 100%;
     min-width: 1024px;
