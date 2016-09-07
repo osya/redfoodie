@@ -594,6 +594,9 @@ input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
 .clr-red {
     color: #D91E18!important;
 }
+.bg-red {
+    background-color: #D91E18!important;
+}
 .home-left {
     float: left;
     width: 700px;
@@ -786,6 +789,34 @@ input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
 #subscription-notice {
     padding-top: 8px;
     text-align: center;
+}
+.download_icon_container {
+    padding-bottom: 8px;
+    display: block;
+}
+.download_icon_container img {
+    margin: 0 auto;
+    width: 70%;
+}
+.neighbourhoods-list {
+    margin-top: -6px;
+}
+.neighbourhoods-list ul {
+    float: left;
+}
+.neighbourhoods-list ul.even {
+    float: right;
+}
+.neighbourhoods-list a {
+    color: #000;
+    font-size: 13px;
+    font-weight: 600;
+}
+.neighbourhoods-list a.more {
+    margin: 20px 0;
+    color: #8d8d8d;
+    display: block;
+    clear: both;
 }
 #footer {
     width: 100%;
