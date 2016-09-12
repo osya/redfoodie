@@ -8,46 +8,11 @@ using redfoodie.Models;
 
 namespace redfoodie.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext _context = new ApplicationDbContext();
-
-        private BaseViewModel UpdateBaseViewModel(City city)
-        {
-            var currentBaseViewModel = new BaseViewModel
-            {
-                CityId = city.Id,
-                Href = city.Href,
-                Name = city.Name,
-                Cities = _context.Cities.Where(x => x.Id != city.Id)
-            };
-            if (Session != null)
-            {
-                Session["currentBaseViewModel"] = currentBaseViewModel;
-            }
-            return currentBaseViewModel;
-        }
-
-        private BaseViewModel CurrentViewModel
-        {
-            get
-            {
-                if (Session?["currentBaseViewModel"] != null)
-                {
-                    return (BaseViewModel) Session["currentBaseViewModel"];
-                }
-                var currentCity = _context.Cities.First(x => x.ParentId == null);
-                if (Session!= null && Session["currentCity"] == null)
-                {
-                    Session["currentCity"] = currentCity;
-                }
-                return UpdateBaseViewModel(currentCity);
-            }
-        }
-
         public ActionResult Index(string city = null)
         {
-            var currentCity = city != null ? _context.Cities.First(x => x.Name == city) : _context.Cities.First(x => x.ParentId == null);
+            var currentCity = city != null ? Context.Cities.First(x => x.Name == city) : Context.Cities.First(x => x.ParentId == null);
             if (Session != null)
             {
                 Session["currentCity"] = currentCity;

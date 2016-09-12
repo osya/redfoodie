@@ -62,7 +62,7 @@ namespace redfoodie.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
+    public class RegisterViewModel: BaseViewModel
     {
         [Required]
         [EmailAddress]

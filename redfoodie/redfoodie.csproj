@@ -195,6 +195,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Migrations\201608301336229_AddCity.cs" />
     <Compile Include="Migrations\201608301336229_AddCity.Designer.cs">
       <DependentUpon>201608301336229_AddCity.cs</DependentUpon>
