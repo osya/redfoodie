@@ -9,8 +9,8 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-default navbar-static-top main-header">
-        <div class="container">
+    <div class="container">
+        <div class="navbar navbar-default navbar-static-top main-header">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -23,20 +23,19 @@
                 <nav class="nav navbar-nav navbar-left">
                     <nav class="city-list">
                         <div class="city-box pull-left">
-                            @*
-                            @Model.Name<span class="fa fa-angle-down"></span>
-                            <div class="drop_menu " style="display: none">
-                                <ul class="list-unstyled">
-                                    <li class="cat clearfix second-country">
-                                        <div class="country_city_list">
-                                            @foreach (var city in Model.Cities)
-                                            {
-                                                <a href="@city.Href">@city.Name</a>
-                                            }
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>*@
+                                @Model.Name<span class="fa fa-angle-down"></span>
+                                <div class="drop_menu " style="display: none">
+                                    <ul class="list-unstyled">
+                                        <li class="cat clearfix second-country">
+                                            <div class="country_city_list">
+                                                @foreach (var city in Model.Cities)
+                                                {
+                                                    <a href="@city.Href">@city.Name</a>
+                                                }
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                         </div>
                     </nav>
                 </nav>

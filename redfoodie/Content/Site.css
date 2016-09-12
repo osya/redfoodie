@@ -174,7 +174,7 @@ h1#logo {
 #loginLink,#registerLink {
     height: 30px;
     line-height: 30px;
-    padding-top: 0;
+    padding: 0 10px;
     color: #8d8d8d;
     /*TODO: investigate whats wrong with `border-radius` CSS property*/
     border-radius: 0;
@@ -268,7 +268,6 @@ ul.bxslider li a {
     width: 100px;
 }
 .globalwidth {
-    width: 1024px;
     margin: 0 auto;
     position: relative;
 }
@@ -591,6 +590,9 @@ input[type="text"],input[type="password"],textarea {
 input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
     border-color: #d94a38!important;
 }
+a:hover {
+    color: #D91E18;
+}
 .clr-red {
     color: #D91E18!important;
 }
@@ -599,12 +601,12 @@ input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
 }
 .home-left {
     float: left;
-    width: 700px;
+    width: 68%;
     padding-top: 10px;
 }
 .home-right {
     float: right;
-    width: 300px;
+    width: 29%;
     padding-top: 10px;
 }
 .recommend-list {
@@ -615,13 +617,13 @@ input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
 .recommend-list .tabs {
     float: left;
     margin-bottom: -1px;
+    width: 35%
 }
 .recommend-list .tab-content {
     float: left;
     padding: 10px;
-    width: 450px;
+    width: 65%;
 }
-
 .recommend-list .tab-content .tab-pane {
     min-height: 240px;
     position: relative;
@@ -629,7 +631,6 @@ input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
 }
 .recommend-list .tabs li {
     height: 103px;
-    width: 248px;
     line-height: 99px;
     margin: 4px 0;
     background-position: 50% 50%;
@@ -818,6 +819,18 @@ input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
     display: block;
     clear: both;
 }
+.collection_item {
+    color: #fff!important;
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+}
+.collection_item:hover,.collection_item:active {
+    text-decoration: none;
+}
 #footer {
     width: 100%;
     min-width: 1024px;
@@ -921,7 +934,6 @@ p {
 }
 .navbar-default .navbar-link {
     color: #D91E18;
-    margin-left: 20px;
 }
 .navbar-default .navbar-link:hover {
   color: #D91E18;
