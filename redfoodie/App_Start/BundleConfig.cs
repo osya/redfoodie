@@ -3,7 +3,7 @@ using System.Web.Optimization;
 
 namespace redfoodie
 {
-    public class BundleConfig
+    public static class BundleConfig
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
@@ -27,6 +27,9 @@ namespace redfoodie
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css", 
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/Content/js").Include(
+                      "~/Scripts/Site.js"));
         }
     }
 }

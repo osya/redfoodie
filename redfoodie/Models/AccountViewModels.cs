@@ -3,9 +3,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace redfoodie.Models
 {
-    public class ExternalLoginConfirmationViewModel
+    public class ExternalLoginConfirmationViewModel: BaseViewModel
     {
+        public ExternalLoginConfirmationViewModel(BaseViewModel model, string email) : base(model)
+        {
+            Email = email;
+        }
+
+        /// <summary>
+        /// Do no tdelete this constructor. If delete it there will be error in runtime
+        /// </summary>
+        public ExternalLoginConfirmationViewModel()
+        {
+        }
+
         [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
