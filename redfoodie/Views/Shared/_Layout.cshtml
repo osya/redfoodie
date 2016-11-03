@@ -1,4 +1,4 @@
-﻿@model redfoodie.Models.BaseViewModel
+﻿@using redfoodie.Models
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body style="cursor: progress;">
     <div class="container">
         <div class="navbar navbar-default navbar-static-top main-header">
             <div class="navbar-header">
@@ -23,12 +23,12 @@
                 <nav class="nav navbar-nav navbar-left">
                     <nav class="city-list">
                         <div class="city-box pull-left">                            
-                                @Model.Name<span class="fa fa-angle-down"></span>
+                                @Session["currentCity"]<span class="fa fa-angle-down"></span>
                                 <div class="drop_menu " style="display: none">
                                     <ul class="list-unstyled">
                                         <li class="cat clearfix second-country">
                                             <div class="country_city_list">
-                                                @foreach (var city in Model.Cities)
+                                                @foreach (var city in (List<City>)Session["cities"])
                                                 {
                                                     <a href="@city.Href">@city.Name</a>
                                                 }
@@ -49,7 +49,7 @@
     </div>
     <!--banner -->
     <section class="banner" role="banner" style="margin-top: 0">
-        <ul class="bxslider" style="padding: 0px; display: block; list-style: none;">
+        <ul class="bxslider" style="padding: 0; display: block; list-style: none;">
             <li>
                 <a href="#" style="cursor: initial;">
                     <div class="slide-contnet-wrap2"></div>
@@ -58,10 +58,10 @@
         </ul>
     </section>
     <!-- .banner -->
-    <section class="skin search_wrapper">
+     <section class="skin search_wrapper">
         <div class="main-search ">
             <div class="globalwidth s-form clearfix" style="border: none">
-                <div class="form-pane home-pane-or" style="background: rgba(0, 0, 0, 0);">
+                <div class="form-pane home-pane-or" style="background: #000000; background: rgba(0, 0, 0, 0);">
                     <form id="autoSuggestSearchForm" action="/search">
                         <div class="msrch-mn">
                             <div class="msrch-wrp1">
@@ -126,7 +126,7 @@
     
     <div class="container body-content" style="padding-top: 30px!important;">
         @RenderBody()
-        <hr />
+    <hr />
     </div>
     <footer id="footer" class="footer">
         <div class="footer-1 clearfix ">
@@ -159,9 +159,10 @@
     </footer>
     
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     <!-- ======================= flag widget ======================= -->
-    <div class="pop_wrapper">
+                                                                   <div class="pop_wrapper">
         <div class="pop-container-relative">
             <a class="pop_close modal-popup-close redfood-icon redfood-cross"></a>
             <div id="pp_desc" class="width_462">
@@ -169,7 +170,7 @@
                     #login_errors {
                         color: red;
                         border: 1px solid #FBEED5;
-                        padding: 0px 15px 2px;
+                        padding: 0 15px 2px;
                         margin-bottom: 6px;
                         text-align: center;
                     }
@@ -214,48 +215,9 @@
                     }
                 </style>
 
-                <!-- #NEW Signup MODAL-->
-                <div id="Signup" data-modal-content-container="1" data-modal-wrapper-class="width_350" class="login_wrapper">
-                    <h3 class="form-signin-heading">Sign Up</h3>
-                    
-                    <div class="row facebook-link-storage">
-                        <div class="col-md-10 col-md-offset-1">
-                            <div class="fb-sign-up fb-button"></div>                            
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <div class="divi-new"><span>OR</span></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <form id="register_form" action="" novalidate="novalidate">
-                                <input type="hidden" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="67710fa81e4c72ef7133410305281de3787dc082">
-
-                                <div class="form-group">
-                                    <input type="text" id="fos_user_registration_form_firstName" name="fos_user_registration_form[firstName]" required="required" class="form-control input-lg" placeholder="Full Name" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required" class="form-control input-lg" placeholder="Email" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" class="form-control input-lg" placeholder="Password" onchange="$(&quot;#fos_user_registration_form_plainPassword_second&quot;).val($(this).val())" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
-                                    <input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" style="display: none; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block form-sign-submit-button" id="submit-user-registration" onclick="event.preventDefault();registerUser();">
-                                    Sign Up
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    <hr class="login_wrapper_hr">
-                    <div class="row">
-                        Already have an account? <a data-modal-link="1" href="#login">Log in now »</a>
-                    </div>
-                </div>
-                <!-- END #NEW Signup MODAL-->
+                @Html.Partial("~/Views/Account/Register.cshtml", new RegisterViewModel())
+                @Html.Partial("~/Views/Account/Login.cshtml", new LoginViewModel())
+                
                 <!--sign up confirmation -->
                 @*<div data-modal-content-container="1" data-modal-wrapper-class="width_300" class="hide" id="signup-confirmation">
                         <div class="pad_0x17 join_form">
@@ -295,54 +257,9 @@
                                 </ul>
                             </div>
                         </form>
-                    </div>
+                    </div>*@
 
-                    <div data-modal-content-container="1" data-modal-wrapper-class="width_350" class="hide login_wrapper" id="login">
-                        <h3 class="form-signin-heading">Log In</h3>
-
-                        <div class="row facebook-link-storage">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="fb-log-in fb-button"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="divi-new"><span>OR</span></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
-                                <form id="login_form" action="">
-                                    <div id="login_errors" style="display: none">Invalid email or password</div>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control input-lg" name="_username" id="username" placeholder="Email" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control input-lg" name="_password" id="password" placeholder="Password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
-                                    </div>
-                                    <button type="submit" class="btn btn-lg btn-block form-submit-button" id="redfoodie-user-signin" onclick="event.preventDefault(); accessLoginParams(this);">
-                                        Log In
-                                    </button>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input class="login_wrapper_checkbox" type="checkbox" id="remember_me" name="_remember_me" checked="checked" value="on"> Remember me
-                                        </div>
-                                        <div class="col-md-6">
-                                            <a data-modal-link="1" href="#Forgot-Password" style="font-size: 15px;">Forgot password? </a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <hr class="login_wrapper_hr">
-                        <div class="row">
-                            <a data-modal-link="1" href="#Signup">Sign up now »</a>
-                        </div>
-                        <!-- END LOGIN MODAL-->
-                    </div>
-
-
-                    <div id="flagPopup" class="hide" data-modal-content-container="1" data-modal-wrapper-class="width_300">
+                    @*<div id="flagPopup" class="hide" data-modal-content-container="1" data-modal-wrapper-class="width_300">
 
                         <form action="" method="post" class="form-inline">
 
@@ -408,58 +325,6 @@
                                 });
                                 if (typeof window.loginCallBack == 'function') {
                                     loginCallBack.call();
-                                }
-                            }
-                        },
-                        error: function () {
-                            $('.pop-container-relative').loadingIcon('detach');
-                        }
-                    });
-                }
-                function registerUser() {
-                    if (!$('#register_form').valid()) {
-                        $('.register-validation-error').hide();
-                        return;
-                    }
-                    $('#Registration').loadingIcon('attach');
-                    $('.modal-popup-close').hide();
-                    var form_data = $('#register_form').serialize();
-                    $.ajax({
-                        type: 'post',
-                        url: '/register/user/',
-                        data: form_data,
-                        success: function (response) {
-                            var result = JSON.parse(response);
-                            if (result.status == 'fail') {
-                                $('#Registration').loadingIcon('detach');
-                                $('.modal-popup-close').show();
-                                $('.register-validation-error').hide();
-                                var nameerror = result.form.errors;
-                                if (nameerror) {
-                                    $('#fos_user_registration_form_firstName').parent().append('<span class="register-validation-error" style="color:red">' + nameerror + '</span>')
-                                }
-                                var objVal = result.form.children;
-                                Object.keys(objVal).forEach(function (key) {
-                                    var objt = key;
-                                    var $formField = $('#fos_user_registration_form_' + key).parent();
-                                    $('span.validation-error', $formField).each(function () {
-                                        $(this).remove();
-                                    });
-                                    if (typeof objVal[key].errors != 'undefined' && typeof objVal[key].errors[0] != 'undefined')
-                                        $formField.append('<span class="register-validation-error" style="color:red">' + objVal[key].errors[0] + '</span>');
-                                });
-                            }
-                            if (result.status == 'success') {
-                                $('#Registration').loadingIcon('detach');
-                                $('.modal-popup-close').show();
-                                $('.modal-popup-close').click();
-                                $('#Registration').hide();
-
-                                if (result.redirectTo) {
-                                    window.location.href = result.redirectTo;
-                                }
-                                else {
-                                    window.location.reload();
                                 }
                             }
                         },
@@ -572,110 +437,48 @@
  
     <div id="fb-root"></div>
     @Scripts.Render("~/Content/js")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", false)
         
     <script>
-        postMessages = {
-            api_post_change_location: '/api/change/location.json',
-            api_post_home_location: '/api/home/location.json',
-            api_post_message: '/api/messages.json',
-            api_post_messages_reply: '/api/messages/reply.json',
-            api_post_msg_inbox: '/api/messages/all.json',
-            api_post_delete_conversation: '/api/messages/delete/conversation.json',
-            api_post_all_recipients: '/api/recipients/all.json'
-        };
-
-        if (typeof App.page.urls == 'undefined') {
-            App.page.urls = {};
-        }
-        if (typeof faviconNotificationCount != 'undefined' && typeof Notificon != 'undefined') {
-            Notificon(faviconNotificationCount);
-        }
-//        App.page.urls.loginUrl = '/user/login';
-//        var api_post_review_vote = "/api/review/vote.json";
-//        function onFbInit() {
-//            if (typeof(FB) != 'undefined' && FB != null) {
-//                FB.Event.subscribe('auth.statusChange', function (response) {
-//                    if (response.session || response.authResponse) {
-//                        setTimeout(goLogIn, 50);
-//                    } else {
-//                        window.location = "/logout";
-//                    }
-//                });
-//            }
-//        }
-
-        window.fbAsyncInit = function() {
-            FB.init({"appId":"1116755848371978","xfbml":true,"oauth":true,"status":false,"cookie":true,"logging":false});
-//            onFbInit();
-        };
-
-        (function() {
+        (function () {
             var e = document.createElement('script');
             e.src = document.location.protocol + "\/\/connect.facebook.net\/en_US\/all.js";
-            e.async = true;
+            e.async = false;
             document.getElementById('fb-root').appendChild(e);
         }());
+        window.fbAsyncInit = function () {
+            window.FB.init({ "appId": "1116755848371978", "xfbml": true, "oauth": true, "status": false, "cookie": true, "logging": false });
+        };
 
-//        // Script for FOSFacebookBundle
-//        var popupGlobal = '';
-//        var popupGlobalVariables = '';
-//        var child = '';
-        jQuery(document).ready(function ($) {
-//            if (typeof App.page != 'undefined') {
-//                App.page.user = null;
-//            }
-//            if (App.page.user == null) {
-//                App.page.user = {};
-//            }
-//            App.page.user.profile_image_path = '/assets/images/profile/';
-//            App.baseUrl = '';
-//            App.basePath = '';
-//
-//            $('.gplus').on('click', function (e) {
-//                e.preventDefault();
-//                child = window.open($(this).attr('href'), "", "width=400,height=500");
-//                $('.pop-container-relative').loadingIcon('attach');
-//                var timer = setInterval(checkChild, 250);
-//
-//                function checkChild() {
-//                    if (child.closed) {
-//                        $('.pop-container-relative').loadingIcon('detach');
-//                        clearInterval(timer);
-//                    }
-//                }
-//            });
+        // Script for FOSFacebookBundle
+        $(document).ready(function ($) {
             $('.fb-button').on('click', function (event) {
                 event.preventDefault();
-                FB.login(function (response) {
+                window.FB.login(function (response) {
                     if (response.authResponse) {
-                        window.location = "/signin-facebook?accessToken=" + FB.getAuthResponse()['accessToken'] + "&expiresIn=" + FB.getAuthResponse()["expiresIn"];
-                        $('.pop-container-relative').loadingIcon('attach');
-                    } else {
-                        //user cancelled login or did not grant authorization
+                        window.location = "/signin-facebook?accessToken=" + window.FB.getAuthResponse()['accessToken'] + "&expiresIn=" + window.FB.getAuthResponse()["expiresIn"];
                     }
                 }, {scope: 'email,user_birthday,user_location'});
             });
         });
         //Main Search
         $('.msrch-wrp1 input').click(function () {
-            if ($('#msdpdwn1').is(':hidden') && $('.msrch-wrp1 input').val() == "") {
+            if ($('#msdpdwn1').is(':hidden') && $('.msrch-wrp1 input').val() === "") {
                 $('#msdpdwn1').show();
                 $('#msdpdwn3').hide();
             }
         });
         $('#msdpdwn1 li.sitem').click(function () {
-            var dicon = $(this).children("div").attr("data-icon")
-            var currClass = $('.sel-cat').children('i').attr('class')
+            var dicon = $(this).children("div").attr("data-icon");
+            var currClass = $('.sel-cat').children('i').attr('class');
             if ($('#msdpdwn2').is(':hidden')) {
                 $('.msrch-wrp1 input').hide();
                 $('.msrch-wrp1 input').blur();
                 $('#msdpdwn1').hide();
 
                 $('#msdpdwn2').show();
-                $('.sel-cat').children('i').removeClass(currClass)
-                $('.sel-cat').children('i').attr({ class: dicon })
-
+                $('.sel-cat').children('i').removeClass(currClass);
+                $('.sel-cat').children('i').attr({ "class": dicon });
                 $('#searchTxtLoc').focus();
             }
         });
@@ -692,11 +495,11 @@
             event.stopPropagation();
         });
 
-        $('body').click(function (event) {
+        $('body').click(function () {
             if ($('#msdpdwn1').is(':visible')) {
                 $('#msdpdwn1').hide();
             } else if ($('#msdpdwn2').is(':visible')) {
-                $('.msrch-wrp1 input').show()
+                $('.msrch-wrp1 input').show();
                 $('#msdpdwn2').hide();
                 $('#msdpdwn1').show();
 

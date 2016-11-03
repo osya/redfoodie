@@ -191,13 +191,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="JsonResponseFactory.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationHandler.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationMiddleware.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Migrations\201608301336229_AddCity.cs" />
     <Compile Include="Migrations\201608301336229_AddCity.Designer.cs">
       <DependentUpon>201608301336229_AddCity.cs</DependentUpon>
@@ -222,11 +222,11 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\RedFoodieViewModel.cs" />
     <Compile Include="MyFacebookMiddleware\Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ValidateMessagesFor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppSettingsSecrets.config" />
@@ -276,6 +276,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

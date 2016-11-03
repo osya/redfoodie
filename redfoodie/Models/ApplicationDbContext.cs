@@ -9,8 +9,8 @@ namespace redfoodie.Models
     {
         protected override void Seed(ApplicationDbContext context)
         {
-            var defaultCity = context.Cities.Add(new City() {Name = "Delhi NCR" });
-            var cities = new List<City>()
+            var defaultCity = context.Cities.Add(new City { Href = "/", Name = "Delhi NCR" });
+            var cities = new List<City>
             {
                 new City { ParentId = defaultCity.Id, Href = "/amritsar", Name = "Amritsar"},
                 new City { ParentId = defaultCity.Id, Href = "/chandigarh", Name = "Chandigarh"},
@@ -30,7 +30,7 @@ namespace redfoodie.Models
 
     public sealed partial class ApplicationDbContext
     {
-        public DbSet<Restaurant> Restaurants { get; private set; }
+        public DbSet<Restaurant> Restaurants { get; }
         public DbSet<City> Cities { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

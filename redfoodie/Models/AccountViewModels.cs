@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace redfoodie.Models
 {
-    public class ExternalLoginConfirmationViewModel: BaseViewModel
+    public class ExternalLoginConfirmationViewModel
     {
-        public ExternalLoginConfirmationViewModel(BaseViewModel model, string email) : base(model)
+        public ExternalLoginConfirmationViewModel(string email)
         {
             Email = email;
         }
 
         /// <summary>
-        /// Do no tdelete this constructor. If delete it there will be error in runtime
+        /// Do no tdelete this constructor. If delete it there will be error in runtime during Facebook registration
         /// </summary>
         public ExternalLoginConfirmationViewModel()
         {
@@ -71,11 +73,16 @@ namespace redfoodie.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
+
+        public LoginViewModel()
+        {
+            RememberMe = true;
+        }
     }
 
-    public class RegisterViewModel: BaseViewModel
+    public class RegisterViewModel
     {
         [Required]
         [EmailAddress]
@@ -85,13 +92,13 @@ namespace redfoodie.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).+$", ErrorMessage = "Passwords must have at least one digit('0' - '9'), at least one lowercase ('a'-'z'), at least one uppercase('A' - 'Z'), and at least one non letter or digit character")]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        [Required]
+        [Display(Name = "Full Name")]
+        public string UserName { get; set; }
     }
 
     public class ResetPasswordViewModel

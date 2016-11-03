@@ -60,7 +60,7 @@ $(document).ready(function () {
         $el = $(f.currentTarget).closest("[data-modal-link=1]");
         var c = $(".pop_wrapper")
           , b = c.clone();
-        if ("none" == c.css("display")) {
+        if ("none" === c.css("display")) {
             c.css("top", "200px").show().css("opacity", 0);
             $(".pop_outer_wrapper").show();
             c.css("top", "150px");

@@ -1,32 +1,34 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using redfoodie.Models;
 
 namespace redfoodie.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController: Controller
     {
+        public ApplicationDbContext Context = new ApplicationDbContext();
+
         public ActionResult Index(string city = null)
         {
-            var currentCity = city != null ? Context.Cities.First(x => x.Name == city) : Context.Cities.First(x => x.ParentId == null);
             if (Session != null)
             {
-                Session["currentCity"] = currentCity;
+                Session["currentCity"] = city != null ? Context.Cities.First(x => x.Name.ToLower() == city).Name : Context.Cities.First(x => x.ParentId == null).Name;
             }
-            return View(UpdateBaseViewModel(currentCity));
+            return View();
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View(CurrentViewModel);
+            return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
-            return View(CurrentViewModel);
+            return View();
         }
     }
 }
