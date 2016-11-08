@@ -1,4 +1,5 @@
 ﻿@using redfoodie.Models
+@using redfoodie.Views
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
@@ -12,17 +13,16 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            @using (Ajax.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "registerSuccess" }, new { role = "form", id = "login_form" }))
+            @using (Ajax.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnBegin = "loginBegin", OnSuccess = "loginSuccess" }, new { role = "form", id = "login_form" }))
             {
-                <div id="login_errors" style="display: none">Invalid email or password</div>
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger", id= "login_errors" })
                 <div class="form-group">
-                    @Html.EditorFor(m => m.Email, new {htmlAttributes = new {@class = "form-control input-lg", placeholder = Html.DisplayNameFor(x => x.Email), style = "background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;"}})
+                    @Html.EditorFor(m => m.Email, new {htmlAttributes = new {@class = "form-control input-lg", placeholder = Html.DisplayNameFor(x => x.Email) }})
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", placeholder = Html.DisplayNameFor(x => x.Password), style = "background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC\"); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat; cursor: auto;" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", placeholder = Html.DisplayNameFor(x => x.Password) })
                     @Html.ValidationMessagesFor(m => m.Password, new { @class = "text-danger" })
                 </div>
                 <button type="submit" class="btn btn-lg btn-block form-submit-button" id="redfoodie-user-signin">
@@ -30,15 +30,11 @@
                 </button>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe, new { style = "font-weight: normal;" })
-                        </div>
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe, new { style = "font-weight: normal;" })
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.ActionLink("Forgot password?", "ForgotPassword", null, new { style = "font-size: 15px;", data_modal_link = "1" })
-                        </div>
+                        <a style = "font-size: 15px;" data-modal-link="1" href="#Forgot-Password">Forgot password?</a>
                     </div>
                 </div>
             }
@@ -49,3 +45,30 @@
         <a data-modal-link="1" href="#Signup">Sign up now »</a>
     </div>
 </div>
+<script>
+    function loginBegin() {
+        $('#login').loadingIcon('attach');
+    }
+    function loginSuccess(data) {
+        $('#login').loadingIcon('detach');
+        if (data.Success) {
+            window.location.reload();
+        } else {
+            // display errors
+            for (var property in data.ModelState) {
+                if (data.ModelState.hasOwnProperty(property)) {
+                    if (!property) {
+                        var node = $("#login_form");
+                        var child = document.createElement("span");
+                        child.className = "text-danger validation-summary-errors";
+                        child.setAttribute("id", "login_errors");
+                        child.innerText = data.ModelState[property].join(" ");
+                        node.prepend(child);
+                    } else if (data.ModelState.hasOwnProperty(property)) {
+                        $("#login #" + property + "+span").text(data.ModelState[property].join(" "));
+                    }
+                }
+            }
+        }
+    }
+</script>

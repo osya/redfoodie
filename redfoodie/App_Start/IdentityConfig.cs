@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using redfoodie.Models;
+using SparkPost;
 
 namespace redfoodie
 {
@@ -14,8 +16,20 @@ namespace redfoodie
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var transmission = new Transmission();
+            transmission.Content.From.Name = "Redfoodie";
+            transmission.Content.From.Email = "restaurants@sparkpostbox.com";
+            transmission.Content.Subject = message.Subject;
+            transmission.Content.Html = message.Body;
+
+            var recipient = new Recipient
+            {
+                Address = new Address { Email = message.Destination }
+            };
+            transmission.Recipients.Add(recipient);
+
+            var client = new Client(WebConfigurationManager.AppSettings["SparkPost:Password"]);
+            return client.Transmissions.Send(transmission);
         }
     }
 
@@ -53,7 +67,7 @@ namespace redfoodie
                 RequireNonLetterOrDigit = true,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = true
             };
 
             // Configure user lockout defaults
@@ -100,6 +114,59 @@ namespace redfoodie
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+        }
+
+        /// <summary>Sign in the user in using the user name and password</summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="isPersistent"></param>
+        /// <param name="shouldLockout"></param>
+        /// <returns></returns>
+        public override async Task<SignInStatus> PasswordSignInAsync(string email, string password, bool isPersistent, bool shouldLockout)
+        {
+            if (UserManager == null)
+                return SignInStatus.Failure;
+            var user = await UserManager.FindByEmailAsync(email).WithCurrentCulture();
+            if (user == null)
+                return SignInStatus.Failure;
+            if (await UserManager.IsLockedOutAsync(user.Id).WithCurrentCulture())
+                return SignInStatus.LockedOut;
+            if (await UserManager.CheckPasswordAsync(user, password).WithCurrentCulture())
+            {
+                await UserManager.ResetAccessFailedCountAsync(user.Id).WithCurrentCulture();
+                return await SignInOrTwoFactor(user, isPersistent).WithCurrentCulture();
+            }
+            if (!shouldLockout) return SignInStatus.Failure;
+            await UserManager.AccessFailedAsync(user.Id).WithCurrentCulture();
+            if (await UserManager.IsLockedOutAsync(user.Id).WithCurrentCulture())
+                return SignInStatus.LockedOut;
+            return SignInStatus.Failure;
+        }
+
+        /// <summary>
+        /// Copied from SignInManage.SignInOrTwoFactor due it is a private method
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="isPersistent"></param>
+        /// <returns></returns>
+        private async Task<SignInStatus> SignInOrTwoFactor(ApplicationUser user, bool isPersistent)
+        {
+            var id = Convert.ToString((object)user.Id);
+            if (await UserManager.GetTwoFactorEnabledAsync(user.Id).WithCurrentCulture())
+            {
+                if ((await UserManager.GetValidTwoFactorProvidersAsync(user.Id).WithCurrentCulture()).Count > 0)
+                {
+                    if (!await AuthenticationManager.TwoFactorBrowserRememberedAsync(id).WithCurrentCulture())
+                    {
+                        var claimsIdentity = new ClaimsIdentity("TwoFactorCookie");
+                        claimsIdentity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", id));
+                        AuthenticationManager.SignIn(claimsIdentity);
+                        return SignInStatus.RequiresVerification;
+                    }
+                }
+            }
+            await SignInAsync(user, isPersistent, false).WithCurrentCulture();
+            return SignInStatus.Success;
         }
     }
 }

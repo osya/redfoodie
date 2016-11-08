@@ -1,8 +1,4 @@
-﻿using System.Web.Helpers;
-using System.Web.Mvc;
-using Newtonsoft.Json;
-
-namespace redfoodie
+﻿namespace redfoodie.Controllers
 {
     public static class JsonResponseFactory
     {

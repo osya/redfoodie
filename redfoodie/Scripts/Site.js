@@ -53,13 +53,33 @@
         return a.toLowerCase().replace(/[^\w ]+/g, "").replace(/ +/g, "-");
     }
 };
-
+(function (a) {
+    a.fn.loadingIcon = function (c) {
+        var b = this;
+        c = c === "attach" ? "attach" : "detach";
+        b.each(function () {
+            if (c === "attach") {
+                a("body").css("cursor", "progress");
+                var e = a(this).width();
+                var d = a(this).height();
+                a(this).children().hide();
+                a(this).append('<span class="icon-loading2"></span>');
+                a("span.icon-loading2", this).css("width", e + "px");
+                a("span.icon-loading2", this).css("height", d + "px");
+            } else {
+                a("body").css("cursor", "default");
+                a(this).find("span.icon-loading2").remove();
+                a(this).children().show();
+            }
+        });
+        return b
+    }
+})(jQuery);
 $(document).ready(function () {
     $(document).on("click", "[data-modal-link=1]", function (f) {
         f.preventDefault();
-        $el = $(f.currentTarget).closest("[data-modal-link=1]");
-        var c = $(".pop_wrapper")
-          , b = c.clone();
+        var $el = $(f.currentTarget).closest("[data-modal-link=1]");
+        var c = $(".pop_wrapper"), b;
         if ("none" === c.css("display")) {
             c.css("top", "200px").show().css("opacity", 0);
             $(".pop_outer_wrapper").show();
@@ -68,12 +88,7 @@ $(document).ready(function () {
             c.css("z-index", 10000);
             b = $(".pop_wrapper");
         } else {
-            $(".pop_wrapper:first").hide().css("opacity", 1);
-            b.css("opacity", 0);
-            c.after(b);
-            b.css("top", "150px");
-            b.css("opacity", 1);
-            $(".pop_wrapper:first").remove();
+            b = $(".pop_wrapper");
         }
         $("div[data-modal-content-container=1]", b).css("display", "none");
         var d = $el.data("target");
@@ -81,6 +96,7 @@ $(document).ready(function () {
             d = $el.attr("href");
         }
         var a = $(d, b);
+        $("form .text-danger", a).empty();
         a.triggerHandler("popup.show", $el);
         a.attr("style", "display: block !important");
         a.css("display", "block !important");

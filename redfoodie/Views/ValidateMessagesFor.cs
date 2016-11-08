@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
-namespace redfoodie
+namespace redfoodie.Views
 {
     public static class ValidateMessagesFor
     {

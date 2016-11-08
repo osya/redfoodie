@@ -1,11 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using redfoodie.Models;
+using RazorEngine;
+using RazorEngine.Templating;
 
 namespace redfoodie.Controllers
 {
@@ -67,29 +72,26 @@ namespace redfoodie.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<JsonResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(model);
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return Json(JsonResponseFactory.SuccessResponse());
+//                    case SignInStatus.LockedOut:
+//                        return View("Lockout");
+//                    case SignInStatus.RequiresVerification:
+//                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
+                }
+                ModelState.AddModelError("", "Invalid email or password");
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            return Json(JsonResponseFactory.ErrorResponse(ModelState.Where(pair => pair.Value.Errors.Count > 0)
+                .ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
         }
 
         //
@@ -205,55 +207,57 @@ namespace redfoodie.Controllers
         }
 
         //
-        // GET: /Account/ForgotPassword
-        [AllowAnonymous]
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-        //
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        public async Task<JsonResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (Session != null)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
-                }
+                var prevDate = Session["ForgotPasswordDate"] as DateTime?;
 
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                int forgotPasswordTimeout;
+                var res = int.TryParse(WebConfigurationManager.AppSettings["ForgotPasswordTimeout"], out forgotPasswordTimeout);
+                if (prevDate != null && res && forgotPasswordTimeout > 0 && DateTime.Now.Subtract(prevDate.Value).Hours < forgotPasswordTimeout)
+                {
+                    return Json(JsonResponseFactory.ErrorResponse("The password for this user has already been requested within the last 24 hours."));
+                }
+                Session["ForgotPasswordDate"] = DateTime.UtcNow;
+            }
+            if (!ModelState.IsValid)
+                return Json(JsonResponseFactory.ErrorResponse(ModelState.Where(pair => pair.Value.Errors.Count > 0)
+                    .ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
+
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return Json(JsonResponseFactory.ErrorResponse($"The email address {model.Email} does not exist."));
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+            // Send an email with this link
+            var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, Request.Url?.Scheme);
+
+            string body;
+            using (var sr = new StreamReader(Server.MapPath("\\Views\\ResetPasswordEmail.cshtml")))
+            {
+                body = Engine.Razor.RunCompile(sr.ReadToEnd(), "resetPasswordEmail", typeof(ForgootPasswordEmailViewModel), new ForgootPasswordEmailViewModel { CallbackUrl = callbackUrl});
+            }
+            await UserManager.SendEmailAsync(user.Id, "Redfoodie Password Reset", body);
+            return Json(JsonResponseFactory.SuccessResponse());
         }
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
-        {
-            return View();
-        }
-
-        //
+        //r
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public async Task<ActionResult> ResetPassword(string userId, string code)
         {
-            return code == null ? View("Error") : View();
+            var user = await UserManager.FindByIdAsync(userId);
+            return ((user == null) || (code == null))
+                ? View("Error")
+                : View(new ResetPasswordViewModel {Email = user.Email});
         }
 
         //
@@ -267,26 +271,21 @@ namespace redfoodie.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return View("Error");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                if (SignInStatus.Success ==
+                    await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, false))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             AddErrors(result);
-            return View();
-        }
-
-        //
-        // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
-        {
             return View();
         }
 

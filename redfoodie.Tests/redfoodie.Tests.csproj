@@ -139,6 +139,9 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LoginByLoginPasswordTest.orderedtest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="RegisterExistedUser.orderedtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using redfoodie.Models;
 
 namespace redfoodie.Tests
 {
-    public class MemoryUserStore<TUser> : IUserStore<TUser>, IUserPasswordStore<TUser>, IQueryableUserStore<TUser, string>, IUserEmailStore<TUser> where TUser : class, IUser<string>
+    public class MemoryUserStore<TUser> : IUserLockoutStore<TUser, string>, IUserStore<TUser>, IUserPasswordStore<TUser>, IUserEmailStore<TUser>, IQueryableUserStore<TUser>, IUserTwoFactorStore<TUser, string> where TUser : class, IUser<string>
     {
         private readonly Dictionary<string, TUser> _users = new Dictionary<string, TUser>();
-
         public IQueryable<TUser> Users => _users.Values.AsQueryable();
 
         public void Dispose()
@@ -36,10 +35,9 @@ namespace redfoodie.Tests
         {
             throw new NotImplementedException();
         }
-
         public Task<TUser> FindByIdAsync(string userId)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(Users.FirstOrDefault(x => string.Equals((x as IdentityUser).Id, userId)));
         }
 
         public Task<TUser> FindByNameAsync(string userName)
@@ -56,22 +54,7 @@ namespace redfoodie.Tests
             return Task.FromResult(0);
         }
 
-        public Task<string> GetPasswordHashAsync(TUser user)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<bool> HasPasswordAsync(TUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<string> GetPasswordHashAsync(ApplicationUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> HasPasswordAsync(ApplicationUser user)
         {
             throw new NotImplementedException();
         }
@@ -102,6 +85,70 @@ namespace redfoodie.Tests
         public Task<TUser> FindByEmailAsync(string email)
         {
             return Task.FromResult(Users.FirstOrDefault(u => string.Equals((u as ApplicationUser).Email, email, StringComparison.CurrentCultureIgnoreCase)));
+        }
+
+        Task<string> IUserPasswordStore<TUser, string>.GetPasswordHashAsync(TUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+            return Task.FromResult((user as IdentityUser)?.PasswordHash);
+        }
+
+        public Task<int> IncrementAccessFailedCountAsync(TUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ResetAccessFailedCountAsync(TUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetAccessFailedCountAsync(TUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+            var identityUser = user as IdentityUser;
+            if (identityUser == null)
+                throw new ArgumentNullException(nameof(identityUser));
+            return Task.FromResult(identityUser.AccessFailedCount);
+        }
+
+        public Task<DateTimeOffset> GetLockoutEndDateAsync(TUser user)
+        {
+            throw new NotImplementedException();
+        }
+        public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset lockoutEnd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> GetLockoutEnabledAsync(TUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+            var identityUser = user as IdentityUser;
+            return Task.FromResult(identityUser != null && identityUser.LockoutEnabled);
+        }
+        
+        public Task SetLockoutEnabledAsync(TUser user, bool enabled)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetTwoFactorEnabledAsync(TUser user, bool enabled)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> GetTwoFactorEnabledAsync(TUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+            var identityUser = user as IdentityUser;
+            if (identityUser == null)
+                throw new ArgumentNullException(nameof(identityUser));
+            return Task.FromResult(identityUser.TwoFactorEnabled);
         }
     }
 }

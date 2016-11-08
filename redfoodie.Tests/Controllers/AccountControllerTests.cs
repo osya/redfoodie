@@ -23,50 +23,48 @@ namespace redfoodie.Tests.Controllers
         {           
             get
             {
-                if (_userManager == null)
+                if (_userManager != null) return _userManager;
+                _userManager = new ApplicationUserManager(new MemoryUserStore<ApplicationUser>());
+                // Configure validation logic for usernames
+                _userManager.UserValidator = new UserValidator<ApplicationUser>(_userManager)
                 {
-                    _userManager = new ApplicationUserManager(new MemoryUserStore<ApplicationUser>());
-                    // Configure validation logic for usernames
-                    _userManager.UserValidator = new UserValidator<ApplicationUser>(_userManager)
-                    {
-                        AllowOnlyAlphanumericUserNames = false,
-                        RequireUniqueEmail = true
-                    };
+                    AllowOnlyAlphanumericUserNames = false,
+                    RequireUniqueEmail = true
+                };
 
-                    // Configure validation logic for passwords
-                    _userManager.PasswordValidator = new PasswordValidator
-                    {
-                        RequiredLength = 6,
-                        RequireNonLetterOrDigit = true,
-                        RequireDigit = true,
-                        RequireLowercase = true,
-                        RequireUppercase = true
-                    };
+                // Configure validation logic for passwords
+                _userManager.PasswordValidator = new PasswordValidator
+                {
+                    RequiredLength = 6,
+                    RequireNonLetterOrDigit = true,
+                    RequireDigit = true,
+                    RequireLowercase = true,
+                    RequireUppercase = true
+                };
 
-                    // Configure user lockout defaults
-                    _userManager.UserLockoutEnabledByDefault = true;
-                    _userManager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                    _userManager.MaxFailedAccessAttemptsBeforeLockout = 5;
+                // Configure user lockout defaults
+                _userManager.UserLockoutEnabledByDefault = false;
+                _userManager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                _userManager.MaxFailedAccessAttemptsBeforeLockout = 5;
 
-                    // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
-                    // You can write your own provider and plug it in here.
-                    _userManager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser>
-                    {
-                        MessageFormat = "Your security code is {0}"
-                    });
-                    _userManager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
-                    {
-                        Subject = "Security Code",
-                        BodyFormat = "Your security code is {0}"
-                    });
-                    _userManager.EmailService = new EmailService();
-                    _userManager.SmsService = new SmsService();
-                }
+                // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
+                // You can write your own provider and plug it in here.
+                _userManager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser>
+                {
+                    MessageFormat = "Your security code is {0}"
+                });
+                _userManager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
+                {
+                    Subject = "Security Code",
+                    BodyFormat = "Your security code is {0}"
+                });
+                _userManager.EmailService = new EmailService();
+                _userManager.SmsService = new SmsService();
                 return _userManager;
             }
         }
         private static readonly RegisterViewModel DummyModel = new RegisterViewModel { Email = "my_email@ya.ru", UserName = "my_fullname", Password = "Aa123#" };
-            
+
         [TestMethod]
         public async Task RegisterByLoginPasswordTest()
         {
@@ -106,6 +104,38 @@ namespace redfoodie.Tests.Controllers
                 var name = DummyModel.GetType().GetProperty(el.Key).GetValue(DummyModel, null);
                 StringAssert.Matches(el.Value.First(), new Regex($"\\w '?{name}'? is already taken."));
             }
+        }
+
+        [TestMethod]
+        public async Task LoginTest()
+        {
+            // Arrange
+            var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
+            var controller = new AccountController(UserManager, signInManager);
+            var loginVm = new LoginViewModel { Email = DummyModel.Email, Password = DummyModel.Password};
+
+            // Act
+            var actual = await controller.Login(loginVm);
+
+            // Assert
+            Debug.Assert(actual != null, "result != null");
+            Assert.AreEqual(true, actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+        }
+
+        [TestMethod]
+        public async Task LoginTestWithFailPassword()
+        {
+            // Arrange
+            var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
+            var controller = new AccountController(UserManager, signInManager);
+            var loginVm = new LoginViewModel { Email = DummyModel.Email, Password = string.Empty };
+
+            // Act
+            var actual = await controller.Login(loginVm);
+
+            // Assert
+            Debug.Assert(actual != null, "result != null");
+            Assert.AreEqual(false, actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
         }
     }
 }
