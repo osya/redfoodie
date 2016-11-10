@@ -82,6 +82,7 @@ $(document).ready(function () {
         var c = $(".pop_wrapper"), b;
         if ("none" === c.css("display")) {
             c.css("top", "200px").show().css("opacity", 0);
+            $("#ispg_appbundle_messagestype_sentTo").chosen();
             $(".pop_outer_wrapper").show();
             c.css("top", "150px");
             c.css("opacity", 1);

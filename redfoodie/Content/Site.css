@@ -11,12 +11,6 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-select,
-textarea {
-    max-width: 280px;
-}
-
 @font-face {
     font-family: 'redfoodie';
     src: url('../fonts/redfoodie.ttf') format('truetype');
@@ -493,6 +487,28 @@ ul.bxslider li a {
     font-size: 20px;
 }
 
+.mgn_lft {
+    margin-left: 6px;
+}
+
+.blk_style {
+    position: relative;
+}
+
+.blk_style>.button {
+    width: 35px;
+    height: 30px;
+    font-size: 20px;
+}
+
+.header-messages .message-popup-link {
+    text-align: center;
+    display: block;
+    line-height: 30px;
+    border-top: 1px solid #b7b7b7;
+    border-bottom: 1px solid #b7b7b7;
+}
+
 .home-pane-or button {
     right: -57px!important;
     top: 0;
@@ -688,6 +704,11 @@ input[type="text"],input[type="password"],textarea {
 input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
     border-color: #d94a38!important;
 }
+a,a:focus {
+    text-decoration: none;
+    outline: none;
+    color: #D91E18;
+}
 a:hover {
     color: #D91E18;
 }
@@ -697,12 +718,29 @@ a:hover {
 .bg-red {
     background-color: #D91E18!important;
 }
+.clr-grey {
+    color: #8d8d8d!important;
+}
 .icon-loading2 {
     background-image: url(/Content/thumbs/rf-loading.gif);
     background-position: center center!important;
     background-repeat: no-repeat;
     display: block;
     z-index: 1000;
+}
+.wmd-panel textarea {
+    width: 100%;
+    margin-bottom: 15px;
+}
+.compose-area {
+    float: right;
+}
+.compose-area a {
+    padding: 8px 10px;
+    background-color: #D91E18;
+    outline: none;
+    color: #fff!important;
+    text-decoration: none;
 }
 .home-left {
     float: left;
@@ -1130,6 +1168,30 @@ p {
 
 .pad_0x17 {
     padding: 0 17px;
+}
+
+.user-dropdown {
+    box-shadow: 0 5px 5px #000000;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.3);
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 220px;
+    z-index: 9;
+    font-size: 13px;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.arrow_box {
+    background: url(/Content/collections/imgs/arrow_box.png) no-repeat;
+    height: 50px;
+    position: absolute;
+    right: -20px;
+    top: -10px;
+    width: 50px;
+    z-index: 10;
 }
 
 .join_form h2 {

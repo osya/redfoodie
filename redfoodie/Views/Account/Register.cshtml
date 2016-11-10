@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Sign Up";
 }
-<div id="Signup" data-modal-content-container="1" data-modal-wrapper-class="width_350" class="login_wrapper">
+<div id="Signup" data-modal-content-container="1" data-modal-wrapper-class="width_350" class="hide login_wrapper">
     <h3 class="form-signin-heading">@ViewBag.Title</h3>
     <div class="row facebook-link-storage">
         <div class="col-md-10 col-md-offset-1">
@@ -20,7 +20,7 @@
             @using (Ajax.BeginForm("Register", "Account", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "registerBegin", OnSuccess = "registerSuccess" }, new { role = "form", id = "register_form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control input-lg", placeholder = Html.DisplayNameFor(x => x.UserName) })
                     @Html.ValidationMessagesFor(m => m.UserName, new { @class = "text-danger" })

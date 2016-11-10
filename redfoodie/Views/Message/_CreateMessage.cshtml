@@ -1,0 +1,97 @@
+﻿@model redfoodie.Models.MessagePostViewModel
+@{
+    ViewBag.Title = "Create Message";
+}
+<div data-modal-content-container="1" data-modal-wrapper-class="width_300" id="message">
+    <div class="messaging-wrap">
+        <h2>@ViewBag.Title</h2>
+        
+        @using (Ajax.BeginForm("Post", "Message", new {ViewBag.ReturnUrl}, new AjaxOptions {HttpMethod = "POST", OnBegin = "postBegin", OnSuccess = "postSuccess"}, new {role = "form", id = "newform" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger", id = "post_message_errors" })
+            <div class="confirmation-message" id="message-port-confirmation" style="display: none;">Message sent</div>
+            <div class="messaging-top-area clearfix">
+                <div class="recipients" style="position: relative;">
+                    @Html.LabelFor(m => m.To, new { @class = "caption", style = "font-weight: normal;margin-bottom:0;display:inline;" })
+                    @Html.ListBoxFor(m => m.To, new List<SelectListItem>(), new { id = "ispg_appbundle_messagestype_sentTo", required = "required", data_placeholder = "Select Users", style = "width: 550px; margin-left: 10px;" })
+                </div>
+                <div class="clearfix"></div>
+                <div class="message-write">
+                    @Html.LabelFor(m => m.Message, new { @class="caption", style= "font-weight: normal;margin-bottom:0;display:inline;" })
+                    <div class="wmd-panel">
+                        @Html.TextAreaFor(m => m.Message, new { id = "ispg_appbundle_messagestype_message", name = "ispg_appbundle_messagestype[message]", required = "required" })
+                    </div>
+                    <div class="compose-area clearfix">
+                        <span class="sentmsg" data-send="1">
+                            <button class="btn bg-red compose send-btn" type="submit" style="color: #fff"><span>Send</span></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@Scripts.Render("~/bundles/chosen")
+<script>
+    function postBegin() {
+        $('#message').loadingIcon('attach');
+    }
+    function postSuccess(data) {
+        $('#message').loadingIcon('detach');
+        if (data.Success) {
+            //$(".pop_wrapper").hide().css("opacity", 1);
+            //$(".pop_outer_wrapper").hide();
+            $("#newform .confirmation-message").show();
+        } else {
+            $("#newform .confirmation-message").hide();
+            $("#newform .validation-summary-valid").text(data.ErrorMessage);
+            // display errors
+            //for (var property in data.ModelState) {
+            //    if (data.ModelState.hasOwnProperty(property)) {
+            //        if (!property) {
+            //            var node = $("#login_form");
+            //            var child = document.createElement("span");
+            //            child.className = "text-danger validation-summary-errors";
+            //            child.setAttribute("id", "login_errors");
+            //            child.innerText = data.ModelState[property].join(" ");
+            //            node.prepend(child);
+            //        } else if (data.ModelState.hasOwnProperty(property)) {
+            //            $("#login #" + property + "+span").text(data.ModelState[property].join(" "));
+            //        }
+            //    }
+            //}
+        }
+    }
+//    $(document).ready(function () {
+//        $(".sentmsg").on("click", function () {
+//            doSave($(this).data("send"))
+//        });
+//
+//
+//        var b = 0;
+//        var a = 0;
+//        $("input[type='checkbox']").on("click", function () {
+//            if ($(this).is(":checked")) {
+//                var c = $("#ispg_appbundle_messagestype_sentTo");
+//                $(c).find("option").each(function (d) {
+//                    $(this).attr("selected", "selected")
+//                });
+//                $(c).trigger("liszt:updated")
+//            } else {
+//                $("#ispg_appbundle_messagestype_sentTo_chzn").find(".search-choice-close").trigger("click")
+//            }
+//        });
+//        $(".search-choice-close").on("click", function () {
+//            if ($("#ispg_appbundle_messagestype_sentTo_chzn").find(".search-choice-close").length == 0) {
+//                $("#tickUsers").prop("checked", false)
+//            }
+//        })
+//    });
+//    function doSave(a) {
+//        $("#ispg_appbundle_messagestype_sentStatus").val(a);
+//        formValues = $("form.createmsg", this.el).serialize();
+//        $(".pop-container-relative").loadingIcon("attach");
+//        postMessageClient.doAjax(formValues)
+//    }
+</script>

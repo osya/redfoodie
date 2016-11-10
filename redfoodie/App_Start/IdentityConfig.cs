@@ -16,11 +16,15 @@ namespace redfoodie
     {
         public Task SendAsync(IdentityMessage message)
         {
-            var transmission = new Transmission();
-            transmission.Content.From.Name = "Redfoodie";
-            transmission.Content.From.Email = "restaurants@sparkpostbox.com";
-            transmission.Content.Subject = message.Subject;
-            transmission.Content.Html = message.Body;
+            var transmission = new Transmission
+            {
+                Content =
+                {
+                    From = new Address {Name = "Redfoodie", Email = "restaurants@sparkpostbox.com"},
+                    Subject = message.Subject,
+                    Html = message.Body
+                }
+            };
 
             var recipient = new Recipient
             {

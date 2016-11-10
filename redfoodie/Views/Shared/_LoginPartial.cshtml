@@ -1,16 +1,32 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
+    <div class="pull-right header-messages blk_style mgn_lft">
+        <div class="button" data-toggle="dropdown">
+            <i class="fa fa-envelope-o clr-grey"></i>
+        </div>
+        <div class="user-dropdown dropdown-menu">
+            <div class="arrow_box"></div>
+            <div class="">
+                <a data-modal-link="1" class="message-popup-link clr-grey" href="#message" rel="message">New message</a>
+                <div style="max-height: 296.85px; text-align: center;padding: 10px " class="tabContents">
+                    <img src="/Content/collections/imgs/message.svg" style="width: 75%;height:100%;display: block;margin: 20px auto">
+                    <strong>Send messages to your friends!</strong><br>
+                    Plan dine-out, swap ideas and share your best discoveries.
+                </div>
+            </div>
+        </div>
+    </div>
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav nav-pills">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", null, new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        <ul class="nav nav-pills">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", null, new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
     }
 }
 else

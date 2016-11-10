@@ -40,7 +40,7 @@
                     </nav>
                 </nav>
                 <nav class="nav navbar-nav navbar-right">
-                    <nav class="header-user-container noauth">
+                    <nav class="header-user-container">
                         @Html.Partial("_LoginPartial")
                     </nav>
                 </nav>
@@ -126,7 +126,7 @@
     
     <div class="container body-content" style="padding-top: 30px!important;">
         @RenderBody()
-    <hr />
+        <hr />
     </div>
     <footer id="footer" class="footer">
         <div class="footer-1 clearfix ">
@@ -165,7 +165,7 @@
     <div class="pop_wrapper">
         <div class="pop-container-relative">
             <a class="pop_close modal-popup-close redfood-icon redfood-cross"></a>
-            <div id="pp_desc" class="width_462">
+            <div id="pp_desc" class="width_300">
                 <style>
                     .fos_user_resetting_reset label{ margin-bottom: 15px;width: 155px;}
                     .btn-primary {
@@ -229,6 +229,7 @@
                 @Html.Partial("~/Views/Account/Register.cshtml", new RegisterViewModel())
                 @Html.Partial("~/Views/Account/Login.cshtml", new LoginViewModel())
                 @Html.Partial("~/Views/Account/ForgotPassword.cshtml", new ForgotPasswordViewModel())
+                @Html.Partial("~/Views/Message/_CreateMessage.cshtml", new MessagePostViewModel())
                 
                 <!--sign up confirmation -->
                 @*<div data-modal-content-container="1" data-modal-wrapper-class="width_300" class="hide" id="signup-confirmation">
@@ -245,9 +246,9 @@
                         <div class="pad_0x17 join_form">
                             <p><b>Logged in successfully</b></p>
                         </div>
-                    </div>*@
+                    </div>
 
-                    @*<div id="flagPopup" class="hide" data-modal-content-container="1" data-modal-wrapper-class="width_300">
+                    <div id="flagPopup" class="hide" data-modal-content-container="1" data-modal-wrapper-class="width_300">
 
                         <form action="" method="post" class="form-inline">
 
@@ -323,10 +324,10 @@
 
                 // });
 
-                    </script>*@
+                    </script>
             </div>
         </div>
-    </div>
+    </div>*@
  
     <div id="fb-root"></div>
     @Scripts.Render("~/Content/js")

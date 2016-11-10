@@ -88,6 +88,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -95,7 +96,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -200,6 +200,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\JsonResponseFactory.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Models\MessageViewModels.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationHandler.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationMiddleware.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -243,9 +245,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
+    <Content Include="Content\chosen.css" />
+    <Content Include="Content\chosen.min.css" />
     <Content Include="Content\collections\imgs\5776ba6724553-Trending %281%29.png" />
     <Content Include="Content\collections\imgs\apple-iphone-5s.svg" />
+    <Content Include="Content\collections\imgs\arrow_box.png" />
     <Content Include="Content\collections\imgs\bg-1px-grey-divi-09f48aedcf909eaa3eadfef0d8f9ffa1.png" />
+    <Content Include="Content\collections\imgs\message.svg" />
     <Content Include="Content\collections\imgs\sprite.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -294,6 +302,8 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -343,6 +353,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Message\_CreateMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

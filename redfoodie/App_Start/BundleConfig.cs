@@ -22,10 +22,14 @@ namespace redfoodie
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/chosen").Include(
+                      "~/Scripts/chosen.jquery.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css", 
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/chosen.css"));
 
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                       "~/Scripts/Site.js"));

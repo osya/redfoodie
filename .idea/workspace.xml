@@ -2,26 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c9fe4bb-4d93-4596-9f04-879a69d2ce92" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/redfoodie/JsonResponseFactory.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/redfoodie/ValidateMessagesFor.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/redfoodie/Views/Account/ForgotPasswordConfirmation.cshtml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie.Tests/Controllers/AccountControllerTests.cs" afterPath="$PROJECT_DIR$/redfoodie.Tests/Controllers/AccountControllerTests.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie.Tests/MemoryUserStore.cs" afterPath="$PROJECT_DIR$/redfoodie.Tests/MemoryUserStore.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie.Tests/redfoodie.Tests.csproj" afterPath="$PROJECT_DIR$/redfoodie.Tests/redfoodie.Tests.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/App_Start/BundleConfig.cs" afterPath="$PROJECT_DIR$/redfoodie/App_Start/BundleConfig.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/App_Start/IdentityConfig.cs" afterPath="$PROJECT_DIR$/redfoodie/App_Start/IdentityConfig.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Content/Site.css" afterPath="$PROJECT_DIR$/redfoodie/Content/Site.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Content/bootstrap.css" afterPath="$PROJECT_DIR$/redfoodie/Content/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Controllers/AccountController.cs" afterPath="$PROJECT_DIR$/redfoodie/Controllers/AccountController.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Models/AccountViewModels.cs" afterPath="$PROJECT_DIR$/redfoodie/Models/AccountViewModels.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Scripts/Site.js" afterPath="$PROJECT_DIR$/redfoodie/Scripts/Site.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Startup.cs" afterPath="$PROJECT_DIR$/redfoodie/Startup.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Views/Account/ForgotPassword.cshtml" afterPath="$PROJECT_DIR$/redfoodie/Views/Account/ForgotPassword.cshtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Views/Account/Login.cshtml" afterPath="$PROJECT_DIR$/redfoodie/Views/Account/Login.cshtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Views/Account/Register.cshtml" afterPath="$PROJECT_DIR$/redfoodie/Views/Account/Register.cshtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Views/Account/ResetPassword.cshtml" afterPath="$PROJECT_DIR$/redfoodie/Views/Account/ResetPassword.cshtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Scripts/_references.js" afterPath="$PROJECT_DIR$/redfoodie/Scripts/_references.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Views/Shared/_Layout.cshtml" afterPath="$PROJECT_DIR$/redfoodie/Views/Shared/_Layout.cshtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Web.config" afterPath="$PROJECT_DIR$/redfoodie/Web.config" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/packages.config" afterPath="$PROJECT_DIR$/redfoodie/packages.config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/Views/Shared/_LoginPartial.cshtml" afterPath="$PROJECT_DIR$/redfoodie/Views/Shared/_LoginPartial.cshtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redfoodie/redfoodie.csproj" afterPath="$PROJECT_DIR$/redfoodie/redfoodie.csproj" />
     </list>
     <ignored path="redfoodie.iws" />
@@ -80,6 +67,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -88,10 +77,18 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="redfoodie" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="redfoodie" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -116,26 +113,34 @@
     <frame x="-8" y="-8" width="1552" height="840" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2600536" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
