@@ -29,7 +29,8 @@ namespace redfoodie
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css", 
                       "~/Content/site.css",
-                      "~/Content/chosen.css"));
+                      "~/Content/chosen.css",
+                      "~/Content/notification.css"));
 
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                       "~/Scripts/Site.js"));

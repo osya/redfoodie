@@ -1,0 +1,127 @@
+﻿.notification_wrapper h2 {
+    padding: 20px 26px 0;
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #333942;
+    line-height: 16px;
+}
+
+.notification_wrapper ul li {
+    border-bottom: 1px solid #e5e9ed;
+    padding: 15px 26px;
+    position: relative;
+}
+
+.notification_wrapper ul li.last-item {
+    border-bottom: none;
+}
+
+.notification_wrapper ul li span {
+    padding-left: 31px;
+    float: left;
+    width: 700px;
+}
+
+.notification_wrapper ul li span a {
+    font-weight: bold;
+}
+
+.notification_wrapper ul li span i {
+    position: absolute;
+    left: 26px;
+    top: 15px;
+    z-index: 9;
+}
+
+.notification_wrapper .deal_time {
+    float: right;
+    color: #c6c6c6;
+}
+
+.notification_wrapper a.deal_time:hover {
+    text-decoration: none;
+}
+
+.business_notifications ul li span {
+    padding-left: 0!important;
+    width: 525px;
+}
+
+.business_notifications ul li .star-rating-container-small span {
+    padding-left: 0!important;
+    width: inherit;
+}
+
+.business_notifications ul li {
+    border: 0!important;
+}
+
+.notify-left {
+    width: 630px;
+}
+
+.paging-loader {
+    height: 20px;
+}
+
+.notify-left h3 {
+    margin-top: 0;
+}
+
+.notify-right {
+    width: 390px;
+    font-size: 13px;
+    padding-left: 15px;
+}
+
+.notify-right .panel-heading {
+    background-color: transparent;
+}
+
+.notify-right .panel-heading h4 {
+    margin: 0;
+}
+
+.notify-right .panel-heading a {
+    display: block;
+    text-decoration: none;
+    color: grey;
+    text-align: center;
+}
+
+.notify-right .panel-heading a:hover {
+    color: #000;
+}
+
+#user-notification-list li {
+    overflow: hidden;
+    padding: 10px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+#user-notification-list a {
+    font-weight: 700;
+    color: #000;
+}
+
+#user-notification-list li:first-child {
+    border-top: none;
+}
+
+#user-notification-list .button {
+    display: inline-block;
+    width: 150px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0;
+}
+
+#user-notification-list li figure {
+    margin-right: 10px;
+    float: left;
+}
+
+#user-notification-list li figure img {
+    width: 40px;
+    height: 40px;
+}

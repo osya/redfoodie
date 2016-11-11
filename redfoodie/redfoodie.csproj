@@ -201,6 +201,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\JsonResponseFactory.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\Notification.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Models\MessageViewModels.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationHandler.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationMiddleware.cs" />
@@ -257,6 +259,7 @@
     <Content Include="Content\collections\imgs\sprite.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\notification.css" />
     <Content Include="Content\thumbs\banners\1280x600_5749bf6e284c1-fd.png" />
     <Content Include="Content\thumbs\business\beera-chicken-house-white-avenue-amritsar\80x80_10443385_285064841671459_7689177930821632313_n-beera-chicken-house-white-avenue-amritsar-1a06165745dd7616689fcf8a7ee49263.jpg" />
     <Content Include="Content\thumbs\business\bharawan-da-dhaba-town-hall-amritsar\80x80_13335580_850689478371009_1285615177655183737_n-bharawan-da-dhaba-town-hall-amritsar-34bf957b7eadeeb7d7e066a1a092963f.jpg" />
@@ -318,6 +321,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Notification\SeeAll.cshtml" />
     <None Include="Views\ResetPasswordEmail.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -354,9 +358,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Message\_CreateMessage.cshtml" />
+    <Content Include="Views\Shared\_SearchBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

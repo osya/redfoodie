@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using redfoodie.Models;
 
 namespace redfoodie.Controllers
 {
-    [Authorize]
-    public class MessageController : Controller
+    public class SearchController : Controller
     {
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Post(MessagePostViewModel model)
+        public JsonResult Search(string searchTxt)
         {
             return Json(JsonResponseFactory.SuccessResponse());
         }

@@ -6,7 +6,7 @@
     <div class="messaging-wrap">
         <h2>@ViewBag.Title</h2>
         
-        @using (Ajax.BeginForm("Post", "Message", new {ViewBag.ReturnUrl}, new AjaxOptions {HttpMethod = "POST", OnBegin = "postBegin", OnSuccess = "postSuccess"}, new {role = "form", id = "newform" }))
+        @using (Ajax.BeginForm("Post", "Message", new {ViewBag.ReturnUrl}, new AjaxOptions {HttpMethod = "POST", OnBegin = "$('#message').loadingIcon('attach');", OnSuccess = "postSuccess"}, new {role = "form", id = "newform" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary("", new { @class = "text-danger", id = "post_message_errors" })
@@ -34,64 +34,14 @@
 </div>
 @Scripts.Render("~/bundles/chosen")
 <script>
-    function postBegin() {
-        $('#message').loadingIcon('attach');
-    }
     function postSuccess(data) {
         $('#message').loadingIcon('detach');
         if (data.Success) {
-            //$(".pop_wrapper").hide().css("opacity", 1);
-            //$(".pop_outer_wrapper").hide();
             $("#newform .confirmation-message").show();
         } else {
             $("#newform .confirmation-message").hide();
-            $("#newform .validation-summary-valid").text(data.ErrorMessage);
             // display errors
-            //for (var property in data.ModelState) {
-            //    if (data.ModelState.hasOwnProperty(property)) {
-            //        if (!property) {
-            //            var node = $("#login_form");
-            //            var child = document.createElement("span");
-            //            child.className = "text-danger validation-summary-errors";
-            //            child.setAttribute("id", "login_errors");
-            //            child.innerText = data.ModelState[property].join(" ");
-            //            node.prepend(child);
-            //        } else if (data.ModelState.hasOwnProperty(property)) {
-            //            $("#login #" + property + "+span").text(data.ModelState[property].join(" "));
-            //        }
-            //    }
-            //}
+            $("#newform .validation-summary-valid").text(data.ErrorMessage);
         }
     }
-//    $(document).ready(function () {
-//        $(".sentmsg").on("click", function () {
-//            doSave($(this).data("send"))
-//        });
-//
-//
-//        var b = 0;
-//        var a = 0;
-//        $("input[type='checkbox']").on("click", function () {
-//            if ($(this).is(":checked")) {
-//                var c = $("#ispg_appbundle_messagestype_sentTo");
-//                $(c).find("option").each(function (d) {
-//                    $(this).attr("selected", "selected")
-//                });
-//                $(c).trigger("liszt:updated")
-//            } else {
-//                $("#ispg_appbundle_messagestype_sentTo_chzn").find(".search-choice-close").trigger("click")
-//            }
-//        });
-//        $(".search-choice-close").on("click", function () {
-//            if ($("#ispg_appbundle_messagestype_sentTo_chzn").find(".search-choice-close").length == 0) {
-//                $("#tickUsers").prop("checked", false)
-//            }
-//        })
-//    });
-//    function doSave(a) {
-//        $("#ispg_appbundle_messagestype_sentStatus").val(a);
-//        formValues = $("form.createmsg", this.el).serialize();
-//        $(".pop-container-relative").loadingIcon("attach");
-//        postMessageClient.doAjax(formValues)
-//    }
 </script>

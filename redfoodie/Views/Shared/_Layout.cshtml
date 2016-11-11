@@ -9,6 +9,10 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body style="cursor: progress;">
+    @{
+        var toolbarSearchBar = Request.Url?.LocalPath != "/";
+    }
+    @Scripts.Render("~/bundles/jquery")
     <div class="container">
         <div class="navbar navbar-default navbar-static-top main-header">
             <div class="navbar-header">
@@ -23,20 +27,28 @@
                 <nav class="nav navbar-nav navbar-left">
                     <nav class="city-list">
                         <div class="city-box pull-left">                            
-                                @Session["currentCity"]<span class="fa fa-angle-down"></span>
-                                <div class="drop_menu " style="display: none">
-                                    <ul class="list-unstyled">
-                                        <li class="cat clearfix second-country">
-                                            <div class="country_city_list">
-                                                @foreach (var city in (List<City>)Session["cities"])
-                                                {
-                                                    <a href="@city.Href">@city.Name</a>
-                                                }
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                            @Session["currentCity"]<span class="fa fa-angle-down"></span>
+                            <div class="drop_menu " style="display: none">
+                                <ul class="list-unstyled">
+                                    <li class="cat clearfix second-country">
+                                        <div class="country_city_list">
+                                            @foreach (var city in (List<City>)Session["cities"])
+                                            {
+                                                <a href="@city.Href">@city.Name</a>
+                                            }
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+                        @if (toolbarSearchBar)
+                        {
+                            <div class="pull-left quick-search">
+                                <div class="form-pane">
+                                    @Html.Partial("_SearchBar", new ViewDataDictionary { { "toolbarSearchBar", true } })
+                                </div>
+                            </div>
+                        }
                     </nav>
                 </nav>
                 <nav class="nav navbar-nav navbar-right">
@@ -47,83 +59,31 @@
             </div>
         </div>
     </div>
-    <!--banner -->
-    <section class="banner" role="banner" style="margin-top: 0">
-        <ul class="bxslider" style="padding: 0; display: block; list-style: none;">
-            <li>
-                <a href="#" style="cursor: initial;">
-                    <div class="slide-contnet-wrap2"></div>
-                </a>
-            </li>
-        </ul>
-    </section>
-    <!-- .banner -->
-     <section class="skin search_wrapper">
-        <div class="main-search ">
-            <div class="globalwidth s-form clearfix" style="border: none">
-                <div class="form-pane home-pane-or" style="background: #000000; background: rgba(0, 0, 0, 0);">
-                    <form id="autoSuggestSearchForm" action="/search">
-                        <div class="msrch-mn">
-                            <div class="msrch-wrp1">
-                                <input id="searchTxt" type="text" name="q" placeholder="Find restaurant, cuisine, locality..." autocomplete="off" style="display: inline-block;">
-                            </div>
-                            <!-- msrch-wrp1 -->
-                            <div class="msrch-wrp2">
-                                <div style="width: 53px;line-height: 51px;" class="sel-cat"><i class=""></i></div>
-                                <input id="searchTxtLoc" type="text" placeholder="Type Location Name" autocomplete="off">
-                            </div>
-                            <!-- msrch-wrp1 -->
-                            <button name="btn" type="button" class="button search-button"><span class="redfood-icon redfood-searchup"></span></button>
-                        </div>
-                        <input id="hiddCatSearch" type="hidden" value="" name="category">
-                        <input id="hiddTagSearch" type="hidden" value="" name="tags">
-                        <input id="hiddLocSearch" type="hidden" value="" name="neighbourhoods">
-                        <div class="msrch-dpdwn" id="msdpdwn1">
-                            <ul class="clearfix list-unstyled">
-                                <li class="sitem">
-                                    <div data-icon="redfood-icon redfood-bicycle" data-type="cat" data-type-id="1"><i class="redfood-icon redfood-bicycle"></i>Delivery</div>
-                                </li>
-                                <li class="sitem">
-                                    <div data-icon="redfood-icon redfood-restaurant" data-type="cat" data-type-id="2"><i class="redfood-icon redfood-restaurant"></i>Dine out</div>
-                                </li>
-                                <li class="sitem">
-                                    <div data-icon="redfood-icon redfood-bar" data-type="cat" data-type-id="3"><i class="redfood-icon redfood-bar"></i>Nightlife</div>
-                                </li>
-                                <li class="sitem">
-                                    <div data-icon="redfood-icon redfood-coffee" data-type="cat" data-type-id="4"><i class="redfood-icon redfood-coffee"></i>Cafes</div>
-                                </li>
-                                <li class="sitem">
-                                    <div data-icon="redfood-icon redfood-diamond" data-type="tag" data-type-id="North Indian"><i class="redfood-icon redfood-diamond"></i>Luxury Dining</div>
-                                </li>
-                                <li class="sitem">
-                                    <div data-icon="redfood-icon redfood-capcake" data-type="tag" data-type-id="Desserts"><i class="redfood-icon redfood-capcake"></i>Bakes &amp; Desserts</div>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- msrch-dpdwn -->
-                        <div class="msrch-dpdwn" id="msdpdwn2">
-                            <div class="sitem allOfCity">All of Delhi NCR</div>
-                            <div class="locauto shareLocation" data-icon="i" onclick="geoFindMe();">Detect Current Location <span style="margin-left: 97px;"><i></i></span></div>
-                            <ul class="clearfix">
-                                <li class="slabel">POPULAR LOCATION</li>
-                                <li class="sitem" data-neigh-id="366">Rohini, Delhi NCR</li>
-                                <li class="sitem" data-neigh-id="206">Dwarka, Delhi NCR</li>
-                                <li class="sitem" data-neigh-id="181">Connaught place, Delhi NCR</li>
-                                <li class="sitem" data-neigh-id="241">Indirapuram, Delhi NCR</li>
-                                <li class="sitem" data-neigh-id="461">Uttam nagar, Delhi NCR</li>
-                            </ul>
-                        </div>
-                        <!-- msrch-dpdwn -->
-                        <div class="msrch-dpdwn" id="msdpdwn3">
-                            <ul class="clearfix list-unstyled"></ul>
-                        </div>
-                    </form>
+
+    <!-- banner -->
+    @if (!toolbarSearchBar)
+    {
+        <section class="banner" role="banner" style="margin-top: 0">
+            <ul class="bxslider" style="padding: 0; display: block; list-style: none;">
+                <li>
+                    <a href="#" style="cursor: initial;">
+                        <div class="slide-contnet-wrap2"></div>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- .banner -->
+         <section class="skin search_wrapper">
+            <div class="main-search ">
+                <div class="globalwidth s-form clearfix" style="border: none">
+                    <div class="form-pane home-pane-or" style="background: #000000; background: rgba(0, 0, 0, 0);">
+                        @Html.Partial("_SearchBar", new ViewDataDictionary { { "toolbarSearchBar", false } })
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- .search -->
-    
+        </section>
+    }
+            
     <div class="container body-content" style="padding-top: 30px!important;">
         @RenderBody()
         <hr />
@@ -158,7 +118,6 @@
         </div>
     </footer>
     
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     <!-- ======================= flag widget ======================= -->
@@ -170,12 +129,9 @@
                     .fos_user_resetting_reset label{ margin-bottom: 15px;width: 155px;}
                     .btn-primary {
                         background-color: #D94A38;
-                        border-color:none;
+                        border-color: transparent; 
                         border-radius: 0;
                         color: #FFFFFF; margin-top: 10px;
-                        margin-left: 15%;
-                        border:none;
-                        margin-top: 20px;
                     }
                     .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{background:#D94A38 !important;}
                     #login_errors {
@@ -270,9 +226,6 @@
 
                     </div>
 
-
-
-
                     <script type="text/javascript">
                 
                 $(document).on('click', '.modal-popup-close,.pop_outer_wrapper', function () {
@@ -293,41 +246,10 @@
                     $('.password_errors').hide();
                     $('#password-change-confirmation').remove();
                 });
-
-                // $(function () {
-
-                /*   $(document).ready(function(){
-                    $('#reset_form').submit(function(e){
-                    e.preventDefault();
-                    });
-                    })  */
-
-
-                $('#register_form').on('keyup', function (e) {
-                    if (e.keyCode == 13) {
-                        registerUser();
-                    }
-                });
-                $('#reset_form').on('keyup', function (e) {
-                    if (e.keyCode == 13) {
-                        $('#reset_form').submit(function (e) {
-                            e.preventDefault();
-                        });
-                        resetPasswordAction();
-                    }
-                });
-                $('#register_form').validate({
-                    onfocusout: function (element) {
-                        $(element).valid();
-                    }
-                });
-
-                // });
-
-                    </script>
+                </script>*@
             </div>
         </div>
-    </div>*@
+    </div>
  
     <div id="fb-root"></div>
     @Scripts.Render("~/Content/js")
@@ -355,13 +277,6 @@
                 }, {scope: 'email,user_birthday,user_location'});
             });
         });
-        //Main Search
-        $('.msrch-wrp1 input').click(function () {
-            if ($('#msdpdwn1').is(':hidden') && $('.msrch-wrp1 input').val() === "") {
-                $('#msdpdwn1').show();
-                $('#msdpdwn3').hide();
-            }
-        });
         $('#msdpdwn1 li.sitem').click(function () {
             var dicon = $(this).children("div").attr("data-icon");
             var currClass = $('.sel-cat').children('i').attr('class');
@@ -374,32 +289,6 @@
                 $('.sel-cat').children('i').removeClass(currClass);
                 $('.sel-cat').children('i').attr({ "class": dicon });
                 $('#searchTxtLoc').focus();
-            }
-        });
-        $('.sel-cat').click(function () {
-            if (!$('#msdpdwn1').is(':visible')) {
-                $('.msrch-wrp1 input').show();
-                $('#msdpdwn2').hide();
-                $('#msdpdwn1').show();
-                $('#msdpdwn3').hide();
-            }
-        });
-
-        $('.msrch-mn,.msrch-dpdwn,.form-pane .button').click(function (event) {
-            event.stopPropagation();
-        });
-
-        $('body').click(function () {
-            if ($('#msdpdwn1').is(':visible')) {
-                $('#msdpdwn1').hide();
-            } else if ($('#msdpdwn2').is(':visible')) {
-                $('.msrch-wrp1 input').show();
-                $('#msdpdwn2').hide();
-                $('#msdpdwn1').show();
-
-            }
-            if ($('#msdpdwn3').is(':visible')) {
-                $('#msdpdwn3').hide();
             }
         });
     </script>

@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            @using (Ajax.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnBegin = "loginBegin", OnSuccess = "loginSuccess" }, new { role = "form", id = "login_form" }))
+            @using (Ajax.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#login').loadingIcon('attach');", OnSuccess = "loginSuccess" }, new { role = "form", id = "login_form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class = "text-danger", id= "login_errors" })
@@ -46,9 +46,6 @@
     </div>
 </div>
 <script>
-    function loginBegin() {
-        $('#login').loadingIcon('attach');
-    }
     function loginSuccess(data) {
         $('#login').loadingIcon('detach');
         if (data.Success) {

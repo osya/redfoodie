@@ -191,7 +191,7 @@ h1#logo {
     margin-top: 48px;
 }
 .slide-contnet-wrap2 {
-    background: #000000;
+    background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0.75) 100%) repeat scroll 0 0 #000000;
     background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0.75) 100%) repeat scroll 0 0 rgba(0,0,0,0);
     bottom: 0;
     height: 224px;
@@ -418,13 +418,57 @@ ul.bxslider li a {
     height: 39px;
     width: 500px;
 }
+
+.quick-search {
+    margin-top: 1px;
+}
+.quick-search .form-pane {
+    background: none;
+    border: none;
+    height: auto;
+    width: 500px;
+}
+.quick-search .form-pane .sup-div {
+    padding: 0 0 0 20px;
+}
+.quick-search form {
+    margin: 0;
+}
+.quick-search .form-pane input[type="text"] {
+    background-color: #b7b7b7;
+    background-color: rgba(183,183,183,0.19);
+    border-color: #e5e5e3;
+}
+.quick-search .form-pane input[type="text"],.quick-search .form-pane .button,.quick-search .form-pane .button span {
+    height: 31px;
+}
+.quick-search .form-pane .button,.quick-search .form-pane .button span {
+    width: 32px;
+}
+.quick-search .form-pane .button span {
+    background-position: 0 -348px;
+}
+.quick-search .form-pane .button span.hover {
+    background-position: 0 -348px;
+}
+.quick-search .form-pane:hover .button span {
+    top: -30px;
+}
 .quick-search .msrch-mn {
     height: 32px;
 }
 .quick-search .msrch-wrp2 {
     margin-top: 1px;
 }
-
+.quick-search .form-pane .button {
+    right: -20px;
+    top: 0;
+    color: #fff;
+    font-size: 20px;
+}
+.quick-search .msrch-dpdwn {
+    top: 31px;
+}
 .pop_outer_wrapper {
     background: #ffffff;
     background: rgba(255,255,255,0.50);
@@ -446,6 +490,35 @@ ul.bxslider li a {
     z-index: 9999;
 }
 
+.random-users .user-name a {
+    color: #000;
+    margin: 2px;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.random-users .item {
+    margin: 10px 0;
+}
+
+.random-users .followed,.random-users .following {
+    height: 20px;
+    font-size: 14px;
+    margin: 1px 3px!important;
+    line-height: 20px;
+    text-decoration: none;
+    width: 98%;
+}
+
+.random-users .user-details {
+    width: 82%;
+}
+
+.random-users .user-image img {
+    width: 40px;
+    height: 40px;
+}
+
 .pop-container-relative {
     position: relative;
     left: -50%;
@@ -454,6 +527,7 @@ ul.bxslider li a {
     border-radius: 4px;
     padding: 10px;
     border-bottom: 1px solid #cfcfcf;
+    box-shadow: 0 0 92px 0 #000000;
     box-shadow: 0 0 92px 0 rgba(0,0,0,.26);
 }
 
@@ -491,6 +565,33 @@ ul.bxslider li a {
     margin-left: 6px;
 }
 
+div.followed {
+    background: #fff!important;
+    font-weight: 600;
+    height: 30px;
+    font-size: 20px;
+    width: 85%;
+    border: 1px solid #D91E18;
+    color: #D91E18!important;
+    padding: 0 45px;
+    margin: 5px auto!important;
+    line-height: 30px;
+}
+
+div.followed a {
+    color: #D91E18!important;
+    text-decoration: none;
+}
+
+div.following {
+    background: #D91E18!important;
+    color: #D91E18!important;
+}
+
+div.following a {
+    color: #fff!important;
+}
+
 .blk_style {
     position: relative;
 }
@@ -501,6 +602,9 @@ ul.bxslider li a {
     font-size: 20px;
 }
 
+.header-notifications .button .icon {
+    background-position: -223px 0;
+}
 .header-messages .message-popup-link {
     text-align: center;
     display: block;

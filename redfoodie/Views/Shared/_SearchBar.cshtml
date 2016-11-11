@@ -1,0 +1,341 @@
+﻿@using (Ajax.BeginForm("Search", "Search", new { ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnBegin="searchBegin", OnSuccess = "searchSuccess" }, new { role = "form", id = "autoSuggestSearchForm" }))
+{
+    @Html.AntiForgeryToken()
+    var toolbarSearchBar = (bool)ViewData["toolbarSearchBar"];
+    if (toolbarSearchBar)
+    {
+        @Html.Raw(@"<div class=""sup-div"">")
+    }
+    <div class="msrch-mn">
+        <div class="msrch-wrp1">
+            @Html.TextBox("searchTxt", null, new { placeholder = "Find restaurant, cuisine, locality...", autocomplete = "off" })
+        </div>
+        <!-- msrch-wrp1 -->
+        <div class="msrch-wrp2">
+            <div class="sel-cat" style="@(toolbarSearchBar ? "" : "width: 53px;line-height: 51px")"><i class=""></i></div>
+            @Html.TextBox("searchTxtLoc", null, new { placeholder = "Type Location Name", autocomplete = "off" })
+        </div>
+        <!-- msrch-wrp1 -->
+        @if (!toolbarSearchBar)
+        {
+            <button name="btn" type="submit" class="button search-button"><span class="redfood-icon redfood-searchup"></span></button>
+        }
+    </div>
+    if (toolbarSearchBar)
+    {
+        <button name="btn" type="submit" class="button"><i class="fa fa-search"></i></button>
+    }
+    @Html.Hidden("category", null, new { id = "hiddCatSearch" })
+    @Html.Hidden("tags", null, new { id = "hiddTagSearch" })
+    @Html.Hidden("neighbourhoods", null, new { id = "hiddLocSearch" })
+    <div class="msrch-dpdwn" id="msdpdwn1">
+        <ul class="clearfix list-unstyled">
+            <li class="sitem">
+                <div data-icon="redfood-icon redfood-bicycle" data-type="cat" data-type-id="1"><i class="redfood-icon redfood-bicycle"></i>Delivery</div>
+            </li>
+            <li class="sitem">
+                <div data-icon="redfood-icon redfood-restaurant" data-type="cat" data-type-id="2"><i class="redfood-icon redfood-restaurant"></i>Dine out</div>
+            </li>
+            <li class="sitem">
+                <div data-icon="redfood-icon redfood-bar" data-type="cat" data-type-id="3"><i class="redfood-icon redfood-bar"></i>Nightlife</div>
+            </li>
+            <li class="sitem">
+                <div data-icon="redfood-icon redfood-coffee" data-type="cat" data-type-id="4"><i class="redfood-icon redfood-coffee"></i>Cafes</div>
+            </li>
+            <li class="sitem">
+                <div data-icon="redfood-icon redfood-diamond" data-type="tag" data-type-id="North Indian"><i class="redfood-icon redfood-diamond"></i>Luxury Dining</div>
+            </li>
+            <li class="sitem">
+                <div data-icon="redfood-icon redfood-capcake" data-type="tag" data-type-id="Desserts"><i class="redfood-icon redfood-capcake"></i>Bakes &amp; Desserts</div>
+            </li>
+        </ul>
+    </div>
+    <!-- msrch-dpdwn -->
+    <div class="msrch-dpdwn" id="msdpdwn2">
+        <div class="sitem allOfCity">All of Delhi NCR</div>
+        <div class="locauto shareLocation" data-icon="i" onclick="geoFindMe();">
+            Detect Current Location<span style="margin-left: @(toolbarSearchBar ? "108" : "97")px;">@if (!toolbarSearchBar)
+            {<i></i>}</span>
+            @if (toolbarSearchBar)
+            {<i></i>}
+        </div>
+        <ul class="clearfix">
+            <li class="slabel">POPULAR LOCATION</li>
+            <li class="sitem" data-neigh-id="366">Rohini, Delhi NCR</li>
+            <li class="sitem" data-neigh-id="206">Dwarka, Delhi NCR</li>
+            <li class="sitem" data-neigh-id="181">Connaught place, Delhi NCR</li>
+            <li class="sitem" data-neigh-id="241">Indirapuram, Delhi NCR</li>
+            <li class="sitem" data-neigh-id="461">Uttam nagar, Delhi NCR</li>
+        </ul>
+    </div>
+    <!-- msrch-dpdwn -->
+    <div class="msrch-dpdwn" id="msdpdwn3">
+        <ul class="clearfix list-unstyled"></ul>
+    </div>
+    if (toolbarSearchBar)
+    {
+        @Html.Raw(@"</div>")
+    }
+}
+<script>
+    $(function ($) {
+        var ajaxReq = null;
+        var timer = null;
+
+        $("#searchTxt").keyup(function (e) {
+            if (e.keyCode === 40 || e.keyCode === 38 || e.which === 40 || e.which === 38) {
+                return;
+            }
+            if (e.keyCode === 13 && ($("div.msrch-dpdwn:visible li.active").length > 0)) {
+                if ($("div.msrch-dpdwn").attr('id') === 'msdpdwn1') {
+                    console.log('msdpdwn1');
+                    $("div.msrch-dpdwn:visible li.active div").click();
+                } else {
+                    console.log("else msdpdwn2 3 ");
+                    $("div.msrch-dpdwn:visible li.active").click();
+                }
+
+
+                return;
+            }
+            searchword = $(this).val();
+            if (searchword.length) {
+                $('#msdpdwn1').hide();
+            } else {
+                $('#msdpdwn1').show();
+                $('#msdpdwn3').hide();
+            }
+//            if ((searchword.length) > 2) {
+
+
+//                if (timer) {
+//                    clearTimeout(timer);
+//                }
+//                timer = setTimeout(function () {
+//
+//
+//                    if (ajaxReq != null) ajaxReq.abort();
+//                    ajaxReq = $.get('/_search_autosuggest', { query: searchword }, function (ajaxContent) {
+//                        if ($('#msdpdwn3').is(':hidden')) {
+//                            $('#msdpdwn1').hide();
+//                            $('#msdpdwn2').hide();
+//                            $('#msdpdwn3').show();
+//                        }
+//
+//                        if (ajaxContent.options.length > 0) {
+//                            $.each(ajaxContent.options, function (index, value) {
+//                                console.log(value);
+//
+//
+//                                if (index === 0) $('#msdpdwn3 ul').html("");
+//                                if (value.type === "business") {
+//                                    var bus = value.text + ', ' + value.params;
+//                                    if (bus.length > 45) {
+//                                        var shortText = jQuery.trim(bus).substring(0, 45).trim(this) + "...";
+//                                    } else {
+//                                        var shortText = value.text + ', ' + value.params;
+//                                    }
+//                                    $('#msdpdwn3 ul').append('<li class="sitem querytext"><div data-icon="e"><a href="' + value.url + '">' + shortText + '</a></div><span class="outlet">Outlet</span></li>');
+//                                } else if (value.type == "tags")
+//                                    $('#msdpdwn3 ul').append('<li class="sitem querytext"><div data-icon="f"><a href="' + value.url + '">' + value.text + '</a></div><span class="outlet">Cuisines</span></li>');
+//                                else if (value.type == "category")
+//                                    $('#msdpdwn3 ul').append('<li class="sitem querytext"><div data-icon="f"><a href="' + value.url + '">' + value.text + '</a></div><span class="outlet">Category</span></li>');
+//                                else if (value.type == "area" || value.type == "districts" || value.type == "neighbourhood")
+//                                    $('#msdpdwn3 ul').append('<li class="sitem querytext"><div data-icon="f"><a href="' + value.url + '">' + value.text + '</a></div><span class="outlet">Locality</span></li>');
+//                                else if (value.type == "groups")
+//                                    $('#msdpdwn3 ul').append('<li class="sitem querytext"><div data-icon="f"><a href="' + value.url + '">' + value.text + '</a></div><span class="outlet">' + value.params + ' Outlets</span></li>');
+//                                else
+//                                    $('#msdpdwn3 ul').append('<li class="sitem querytext"><div data-icon="f"><a href="' + value.url + '">' + value.text + '</a></div></li>');
+//                            });
+//                            $('#msdpdwn3').highlight(searchword);
+//                            var searchwordArray = searchword.split(" ");
+//                            for (var i = 0; i < searchwordArray.length; i++) {
+//                                if (searchwordArray[i].length > 2) {
+//                                    $('#msdpdwn3').highlight(searchwordArray[i]);
+//                                }
+//                            }
+//                            for (var i = 0; i < searchwordArray.length; i++) {
+//                                if (searchwordArray[i].length <= 2) {
+//                                    $('#msdpdwn3').highlight(searchwordArray[i]);
+//                                }
+//                            }
+//
+//                        } else {
+//                            $('#msdpdwn3 ul').html('<li class="sitem">No results found</li>')
+//                        }
+//
+//                    });
+//
+//                }, 250);
+//            }
+        });
+        var ajaxReq2 = null;
+        var timer2 = null;
+        jQuery("#searchTxtLoc").keyup(function (e) {
+            if (e.keyCode === 40 || e.keyCode === 38 || e.which === 40 || e.which === 38) {
+                return;
+            }
+            if (e.keyCode === 13 && ($("div.msrch-dpdwn:visible li.active").length > 0)) {
+                console.log("msp222");
+                $("div.msrch-dpdwn:visible li.active").click();
+                return;
+            }
+            searchword = $(this).val();
+            if (searchword.length) {
+                $('#msdpdwn2').hide();
+            } else {
+                $('#msdpdwn2').show();
+                $('#msdpdwn3').hide();
+            }
+            if ((searchword.length) > 2) {
+
+                if (timer2) {
+                    clearTimeout(timer2);
+                }
+//                timer2 = setTimeout(function () {
+//                    if (ajaxReq2 != null) ajaxReq2.abort();
+//                    ajaxReq2 = $.get('/_search_autosuggest_loc', { query: searchword }, function (ajaxContent) {
+//
+//                        if ($('#msdpdwn3').is(':hidden')) {
+//                            $('#msdpdwn1').hide();
+//                            $('#msdpdwn2').hide();
+//                            $('#msdpdwn3').show();
+//                        }
+//                        console.log(ajaxContent.options.length);
+//                        if (ajaxContent.options.length > 0) {
+//                            $.each(ajaxContent.options, function (index, value) {
+//                                if (index === 0) $('#msdpdwn3 ul').html("");
+//
+//                                $('#msdpdwn3 ul').append('<li class="sitem suggestLoc" data-neigh-id="' + value.id + '"><div data-icon="e" data-neigh-id="' + value.id + '">' + value.text + '</div><span class="outlet">Locality</span></li>');
+//
+//                            });
+//                            $('#msdpdwn3').highlight(searchword);
+//                        } else {
+//                            $('#msdpdwn3 ul').html('<li class="sitem">No results found</li>')
+//                        }
+//
+//                    });
+//
+//                }, 250);
+            }
+        });
+        $('#msdpdwn1 li div').click(function () {
+            if ($(this).data('type') === "cat") {
+                $('#hiddCatSearch').val($(this).data('type-id'));
+                $('#hiddTagSearch').val('');
+                console.log($('#hiddCatSearch').val());
+            } else if ($(this).data('type') === "tag") {
+                $('#hiddTagSearch').val($(this).data('type-id'));
+                $('#hiddCatSearch').val('');
+                console.log($('#hiddTagSearch').val());
+            } else {
+                console.log($(this).data('type'));
+                $('#hiddTagSearch').val('');
+                $('#hiddCatSearch').val('');
+            }
+        });
+        $('#msdpdwn2 li.sitem').click(function () {
+            $('#hiddLocSearch').val($(this).data('neigh-id'));
+            $('#msdpdwn2').hide();
+
+            //$('form#autoSuggestSearchForm').submit();
+            $('#searchTxtLoc').val($(this).html());
+            $('#autoSuggestSearchForm button').loadingIcon('attach');
+//            searchsubmit();
+        });
+        $('#msdpdwn2 .allOfCity').click(function () {
+            $('#msdpdwn2').hide();
+            // $('form#autoSuggestSearchForm').submit();
+            $('#searchTxtLoc').val($(this).html());
+            $('#autoSuggestSearchForm button').loadingIcon('attach');
+//            searchsubmit();
+        });
+        $('#msdpdwn3').delegate('li.suggestLoc', 'click', function () {
+            $('#hiddLocSearch').val($(this).data('neigh-id'));
+            $('#msdpdwn3').hide();
+            // $('form#autoSuggestSearchForm').submit();
+            $('#searchTxtLoc').val($(this).find('div').text());
+            $('#autoSuggestSearchForm button').loadingIcon('attach');
+//            searchsubmit();
+        });
+
+        $('#msdpdwn3').delegate('li.querytext', 'click', function () {
+
+            $('#msdpdwn3').hide();
+
+            $('#searchTxt').val($(this).find('a').text());
+
+            $('#autoSuggestSearchForm button').loadingIcon('attach');
+
+
+            var href = $(this).find('a').attr('href');
+            window.location.href = href;
+        });
+    });
+    //Main Search
+    $('.msrch-wrp1 input').click(function () {
+        if ($('#msdpdwn1').is(':hidden') && $('.msrch-wrp1 input').val() === "") {
+            $('#msdpdwn1').show();
+            $('#msdpdwn3').hide();
+        }
+    });
+    $('.sel-cat').click(function () {
+        if (!$('#msdpdwn1').is(':visible')) {
+            $('.msrch-wrp1 input').show();
+            $('#msdpdwn2').hide();
+            $('#msdpdwn1').show();
+            $('#msdpdwn3').hide();
+        }
+    });
+    $('.msrch-mn,.msrch-dpdwn,.form-pane .button').click(function (event) {
+        event.stopPropagation();
+    });
+    $('body').click(function () {
+        if ($('#msdpdwn1').is(':visible')) {
+            $('#msdpdwn1').hide();
+        } else if ($('#msdpdwn2').is(':visible')) {
+            $('.msrch-wrp1 input').show();
+            $('#msdpdwn2').hide();
+            $('#msdpdwn1').show();
+
+        }
+        if ($('#msdpdwn3').is(':visible')) {
+            $('#msdpdwn3').hide();
+        }
+    });
+    $(document).keydown(function (e) {
+        var focusedEle = '';
+        if ($('#searchTxt').is(':focus') || $('#searchTxtLoc').is(':focus')) {
+            if (e.keyCode === 40) {
+                if ($("div.msrch-dpdwn:visible li.active").length) {
+                    focusedEle = $("div.msrch-dpdwn:visible li.active");
+                    focusedEle.next().addClass('active').siblings().removeClass('active');
+                    focusedEle.next().focus();
+                } else {
+                    $("div.msrch-dpdwn:visible li:eq(0)").addClass('active');
+                    $("div.msrch-dpdwn:visible li:eq(0)").focus();
+                }
+
+            }
+
+            // Up key
+            if (e.keyCode === 38) {
+                if ($("div.msrch-dpdwn:visible li.active").length) {
+                    focusedEle = $("div.msrch-dpdwn:visible li.active");
+                    focusedEle.prev().addClass('active').siblings().removeClass('active');
+                    focusedEle.prev().focus();
+                } else {
+                    $("div.msrch-dpdwn:visible li:last").addClass('active');
+                    $("div.msrch-dpdwn:visible li:last").focus();
+                }
+            }
+        }
+    });
+    function searchBegin() {
+        $('#autoSuggestSearchForm button').loadingIcon('attach');
+    }
+    function searchSuccess(data) {
+        $('#autoSuggestSearchForm button').loadingIcon('dettach');
+    }
+</script>
+
