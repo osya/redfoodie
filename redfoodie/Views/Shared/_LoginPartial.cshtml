@@ -1,6 +1,47 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
+    <div class="pull-right user-nav mgn_lft">
+        <div class="header-after-login" data-toggle="dropdown">
+            <img src="/Content/collections/imgs/user.svg" height="146" width="146" alt="a " title="a ">
+            <div class="button">
+                <span class="anim-top icon pos_relative"></span>
+            </div>
+        </div>
+        <div class="header-after-login">
+            <div class="button">
+                <span class="anim-top icon pos_relative"></span>
+            </div>
+        </div>
+        <div class="user-dropdown dropdown-menu">
+            <div class="arrow_box"></div>
+            <div class="user-snippet style-01">
+                <header class="user-details-wrapper user-details-wrapper-override">
+                    <div class="user-details">
+                        <div class="user-name">
+                            <a href="/users/a-3566/profile">a </a>
+                            <a href="/users/a-3566/profile" class="sub-link">View profile</a>
+                        </div>
+                        <div class="user-invite"><a href="/users/import-user-contacts">Invite friends</a></div>
+                        <div class="user-settings"><a href="/users/edit">Settings</a></div>
+
+
+                        <div class="user-logout">
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="anim-top pos_relative">Logout</a>
+                            }
+
+                        </div>
+                        
+
+                    </div>
+                </header>
+            </div>
+        </div>
+        <!-- .user-dropdown -->
+    </div>
     <div class="pull-right header-notifications blk_style mgn_lft">
         <div class="button">
             <a href="@Url.Action("SeeAll", "Notification")"><i class="fa fa-bell-o clr-grey"></i></a>
@@ -22,17 +63,6 @@
             </div>
         </div>
     </div>
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-        @Html.AntiForgeryToken()
-
-        <ul class="nav nav-pills">
-            <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", null, new { title = "Manage" })
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        </ul>
-    }
 }
 else
 {

@@ -162,8 +162,8 @@ h1#logo {
     background-color: #fff;
 }
 .main-header {
-    padding: 10px 0 3px;
-    font-size: 14px;
+    /*padding: 10px 0 3px;
+    font-size: 14px;*/
 }
 #loginLink,#registerLink {
     height: 30px;
@@ -302,6 +302,28 @@ ul.bxslider li a {
     -ms-transition: background-color .3s ease 0s;
     -o-transition: background-color .3s ease 0s;
     transition: background-color .3s ease 0s;
+}
+
+.anim-top {
+    -webkit-transition: top .3s ease 0s;
+    -moz-transition: top .3s ease 0s;
+    -ms-transition: top .3s ease 0s;
+    -o-transition: top .3s ease 0s;
+    transition: top .3s ease 0s;
+}
+.icon {
+    background-image: url(/Content/collections/imgs/sprite.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+}
+.pos_relative {
+    position: relative;
+    left: 0;
+    top: 0;
+    display: block;
+    height: 100%;
 }
 .s-form ul {
     height: 111px;
@@ -564,6 +586,33 @@ ul.bxslider li a {
 .mgn_lft {
     margin-left: 6px;
 }
+.user-nav {
+    height: 30px;
+    position: relative;
+    background-color: #D91E18;
+    padding: 1px;
+}
+.header-after-login {
+    width: 45px;
+    cursor: pointer;
+}
+
+.header-after-login img {
+    float: left;
+    width: 28px;
+    height: 28px;
+}
+
+.header-after-login .button {
+    float: right;
+    width: 15px;
+    height: 28px;
+    border-top: 1px solid #e3776a;
+}
+
+.header-after-login .button .icon {
+    background-position: -208px 0;
+}
 
 div.followed {
     background: #fff!important;
@@ -611,6 +660,23 @@ div.following a {
     line-height: 30px;
     border-top: 1px solid #b7b7b7;
     border-bottom: 1px solid #b7b7b7;
+}
+
+.user-logout form {
+    float: none !important;
+}
+
+.user-invite a,.user-settings a,.user-logout a {
+    color: #8d8d8d!important;
+    display: block;
+    padding: 10px 20px!important;
+    line-height: 26px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.user-invite:hover a,.user-settings:hover a,.user-logout:hover a {
+    color: #fff!important;
+    background: #D91E18;
 }
 
 .home-pane-or button {
@@ -1287,6 +1353,46 @@ p {
     padding: 0;
     margin: 0;
 }
+
+.style-01 .user-details-wrapper .user-name a {
+    line-height: 20px;
+    font-weight: 600;
+}
+
+.style-01 .user-details-wrapper .user-name {
+    font-size: 16px;
+    position: relative;
+    padding: 10px 20px;
+    font-size: 15px;
+}
+
+.header-user-container .style-01 .user-details-wrapper .user-name a {
+    line-height: 20px;
+    font-weight: 600;
+    display: block;
+}
+
+.style-01 .user-details-wrapper .user-name a.sub-link {
+    line-height: 16px;
+    font-weight: normal;
+    font-size: 13px!important;
+    display: block;
+    color: #8d8d8d!important;
+}
+
+.header-user-container a {
+    text-decoration: none !important;
+}
+
+.header-user-container .style-01 .user-details-wrapper .user-name:hover {
+    background: #D91E18;
+}
+
+.header-user-container .style-01 .user-details-wrapper .user-name:hover a {
+    color: #fff!important;
+}
+
+
 
 .arrow_box {
     background: url(/Content/collections/imgs/arrow_box.png) no-repeat;

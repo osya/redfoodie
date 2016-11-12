@@ -257,6 +257,7 @@
     <Content Include="Content\collections\imgs\bg-1px-grey-divi-09f48aedcf909eaa3eadfef0d8f9ffa1.png" />
     <Content Include="Content\collections\imgs\message.svg" />
     <Content Include="Content\collections\imgs\sprite.png" />
+    <Content Include="Content\collections\imgs\user.svg" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\notification.css" />
