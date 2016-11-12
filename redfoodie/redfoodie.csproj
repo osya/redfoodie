@@ -203,6 +203,10 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\Notification.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Migrations\201611121401524_Drop Href column from City.cs" />
+    <Compile Include="Migrations\201611121401524_Drop Href column from City.Designer.cs">
+      <DependentUpon>201611121401524_Drop Href column from City.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\MessageViewModels.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationHandler.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationMiddleware.cs" />
@@ -323,6 +327,8 @@
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Notification\SeeAll.cshtml" />
+    <Content Include="Views\Manage\ViewProfile.cshtml" />
+    <Content Include="Views\Manage\InviteFriends.cshtml" />
     <None Include="Views\ResetPasswordEmail.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -381,6 +387,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608312033453_Add Href to City.resx">
       <DependentUpon>201608312033453_Add Href to City.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611121401524_Drop Href column from City.resx">
+      <DependentUpon>201611121401524_Drop Href column from City.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

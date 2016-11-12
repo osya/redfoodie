@@ -55,13 +55,13 @@ namespace redfoodie.Tests.Controllers
             // Create a list of cities
             var cities = new List<City>
             {
-                new City { Id = 0, ParentId = null, Href = "/", Name = "Delhi NCR"},
-                new City { Id = 1, ParentId = 0, Href = "/amritsar", Name = "Amritsar"},
-                new City { Id = 2, ParentId = 0, Href = "/chandigarh", Name = "Chandigarh"},
-                new City { Id = 3, ParentId = 0, Href = "/jaipur", Name = "Jaipur"},
-                new City { Id = 4, ParentId = 0, Href = "/ludhiana", Name = "Ludhiana"},
-                new City { Id = 5, ParentId = 0, Href = "/mumbai", Name = "Mumbai"},
-                new City { Id = 6, ParentId = 0, Href = "/pune", Name = "Pune"}
+                new City { Id = 0, ParentId = null, Name = "Delhi NCR"},
+                new City { Id = 1, ParentId = 0, Name = "Amritsar"},
+                new City { Id = 2, ParentId = 0, Name = "Chandigarh"},
+                new City { Id = 3, ParentId = 0, Name = "Jaipur"},
+                new City { Id = 4, ParentId = 0, Name = "Ludhiana"},
+                new City { Id = 5, ParentId = 0, Name = "Mumbai"},
+                new City { Id = 6, ParentId = 0, Name = "Pune"}
             };
             
             // Convert the IEnumerable list to an IQueryable list

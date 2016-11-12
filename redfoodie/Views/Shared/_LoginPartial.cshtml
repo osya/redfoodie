@@ -19,13 +19,11 @@
                 <header class="user-details-wrapper user-details-wrapper-override">
                     <div class="user-details">
                         <div class="user-name">
-                            <a href="/users/a-3566/profile">a </a>
-                            <a href="/users/a-3566/profile" class="sub-link">View profile</a>
+                            @Html.ActionLink(User.Identity.GetUserName() + "!", "ViewProfile", "Manage", null, null)
+                            @Html.ActionLink("View profile", "ViewProfile", "Manage", null, new { @class="sub-link" })
                         </div>
-                        <div class="user-invite"><a href="/users/import-user-contacts">Invite friends</a></div>
+                        <div class="user-invite">@Html.ActionLink("Invite friends", "InviteFriends", "Manage", null, null)</div>
                         <div class="user-settings"><a href="/users/edit">Settings</a></div>
-
-
                         <div class="user-logout">
                             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                             {

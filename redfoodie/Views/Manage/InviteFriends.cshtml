@@ -1,0 +1,124 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="globalwidth clearfix invite">
+    <h2 style="text-align: center">
+        Get free food vouchers and invites to foodie meet-ups every month by inviting
+        your friends to Redfoodie!
+    </h2>
+
+    <div class="clearfix" style="text-align: center; margin: 20px 0">
+        <img src="/redfoodie/img/invite.svg">
+    </div>
+    <p class="clr-grey">Invite whoever's missing ask your frinds to join you on Redfoodie</p>
+    <div class="clearfix bdr_btm" style="padding: 20px 0">
+        <div class="socials-connects fb">
+            <div class="input-group">
+                <span class="input-group-addon"><img src="/redfoodie/img/facebook-invite.svg"></span>
+                <button class="form-control btn btn-default clr-grey" type="button">Connect with Facebook</button>
+            </div>
+            <p class="clr-grey">We'll only import your contacts, and won't send any invites at this step</p>
+        </div>
+        <div class="socials-connects mail">
+            <div class="input-group">
+                <span class="input-group-addon"><img src="/redfoodie/img/email-invite.svg"></span>
+                <input type="email" class="form-control email-invite" placeholder="Email address" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;" autocomplete="off">
+                <span class="input-group-btn">
+                    <button class="btn btn-default  send-email-invite" type="button"><span>Send invite</span></button>
+                </span>
+            </div>
+            <p class="clr-grey">Just so you know: We never email your contacts without your say so.</p>
+        </div>
+    </div>
+
+    <div class="clearfix bdr_btm" style="padding: 20px 0">
+        <p class="clr-grey">Name or Redfoodie username</p>
+        <div class="socials-connects search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Find foodies on Redfoodie" id="searchUsers">
+                <span class="input-group-addon" id="search-redfoodies-button"><i class="redfood-icon redfood-invite-search clr-red"></i></span>
+            </div>
+            <div class="socials-connects-search-dpdwn" id="socials-connects-search-dpdwn" style="display: none;">
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 20px 0">
+        <p class="clr-grey">Suggested Redfoodie to follow</p>
+        <ul class="list-unstyled users-list-short">
+            <li>
+                <figure class="user-photo">
+                    <a href="/users/105062907804598117668/profile"><img src="/uploads/thumbs/user/105062907804598117668/146x146_ea221f441971898ed7612dac91516792237abec8.jpg" height="146" width="146" alt="Himanshu Mehra" title="Himanshu Mehra"></a>
+                </figure>
+                <div class="user-name">
+                    <a class="user-name" href="/users/105062907804598117668/profile">Himanshu</a>
+                </div>
+                <div class="button followed follow" data-prototype="105062907804598117668" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+            </li>
+            <li>
+                <figure class="user-photo">
+                    <a href="/users/117092079021640639172/profile"><img src="/uploads/thumbs/user/117092079021640639172/146x146_3895ab052e2b2d7e7f687b148d09784be62d0bd2.jpg" height="146" width="146" alt="Aman Sawhney" title="Aman Sawhney"></a>
+                </figure>
+                <div class="user-name">
+                    <a class="user-name" href="/users/117092079021640639172/profile">Aman</a>
+                </div>
+                <div class="button followed follow" data-prototype="117092079021640639172" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+            </li>
+            <li>
+                <figure class="user-photo">
+                    <a href="/users/100894947180715866681/profile"><img src="/uploads/thumbs/user/100894947180715866681/146x146_90752a997c07ceeab51c6e827e828ba9d4152347.jpg" height="146" width="146" alt="tanisha wadhawan" title="tanisha wadhawan"></a>
+                </figure>
+                <div class="user-name">
+                    <a class="user-name" href="/users/100894947180715866681/profile">tanisha</a>
+                </div>
+                <div class="button followed follow" data-prototype="100894947180715866681" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+            </li>
+            <li>
+                <figure class="user-photo">
+                    <a href="/users/raman-416/profile"><img src="/assets/images/default/profile/user/user.svg" height="146" width="146" alt="Raman " title="Raman "></a>
+                </figure>
+                <div class="user-name">
+                    <a class="user-name" href="/users/raman-416/profile">Raman</a>
+                </div>
+                <div class="button followed follow" data-prototype="raman-416" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+            </li>
+            <li>
+                <figure class="user-photo">
+                    <a href="/users/111-417/profile"><img src="/assets/images/default/profile/user/user.svg" height="146" width="146" alt="111 " title="111 "></a>
+                </figure>
+                <div class="user-name">
+                    <a class="user-name" href="/users/111-417/profile">111</a>
+                </div>
+                <div class="button followed follow" data-prototype="111-417" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+            </li>
+            <li>
+                <figure class="user-photo">
+                    <a href="/users/veggie-foodie-418/profile"><img src="/assets/images/default/profile/user/user.svg" height="146" width="146" alt="Veggie Foodie " title="Veggie Foodie "></a>
+                </figure>
+                <div class="user-name">
+                    <a class="user-name" href="/users/veggie-foodie-418/profile">Veggie Fo...</a>
+                </div>
+                <div class="button followed follow" data-prototype="veggie-foodie-418" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+            </li>
+            <li>
+                <figure class="user-photo">
+                    <a href="/users/109762608901507583056/profile"><img src="/uploads/thumbs/user/109762608901507583056/146x146_83188930403289bc7d000dbb7cf3d23abba7b065.jpg" height="146" width="146" alt="shubhit mathur" title="shubhit mathur"></a>
+                </figure>
+                <div class="user-name">
+                    <a class="user-name" href="/users/109762608901507583056/profile">shubhit</a>
+                </div>
+                <div class="button followed follow" data-prototype="109762608901507583056" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+            </li>
+            <li>
+                <figure class="user-photo">
+                    <a href="/users/110312489067191127646/profile"><img src="/uploads/thumbs/user/110312489067191127646/146x146_59ddd4da88e22525b47ef2f965c03e96faf6012d.jpg" height="146" width="146" alt="Amit Suri" title="Amit Suri"></a>
+                </figure>
+                <div class="user-name">
+                    <a class="user-name" href="/users/110312489067191127646/profile">Amit</a>
+                </div>
+                <div class="button followed follow" data-prototype="110312489067191127646" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+            </li>
+        </ul>
+    </div>
+</div>

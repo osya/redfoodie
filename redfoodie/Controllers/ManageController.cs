@@ -74,6 +74,16 @@ namespace redfoodie.Controllers
             return View(model);
         }
 
+        public ActionResult ViewProfile()
+        {
+            return View();
+        }
+
+        public ActionResult InviteFriends()
+        {
+            return View();
+        }
+
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

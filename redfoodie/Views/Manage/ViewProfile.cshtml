@@ -1,0 +1,786 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="clearfix font_roman pad_110">
+
+    <div class="globalwidth clearfix">
+        <div class="profile-left pull-left">
+            <div class="img-wrap" style="margin: 0 auto;">
+
+                <div class="profile-image">
+                    <a data-modal-link="1" href="#imagePopup" id="image-uploading"><img src="/Content/collections/imgs/user.svg" height="146" width="146" alt="a " title="a "><span>Change Profile Image</span></a>
+
+
+                </div>
+
+            </div>
+
+            <div class="profile-wrap clearfix">
+
+                <div class="profile-info">
+                    <a class="name" href="#" data-sc-user-profile="username" title="@User.Identity.GetUserName()">@User.Identity.GetUserName()</a>
+
+
+                    <div class="profile-dtail">
+
+                        <div class="links clearfix style-01">
+
+
+                            <div class="button  followed settings follow"><a href="/users/edit">Settings</a></div>
+
+                        </div>
+                    </div>
+                    <div class="rating-distribution">
+                        <strong> Rating Distribution</strong>
+                        <ul class="list-unstyled">
+                            <li>
+                                <span class="pull-left">Likes</span>
+                                <div class="progress">
+                                    <div class="progress-bar rate-red" role="progressbar " aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                        <span class="sr-only">0%</span>
+                                    </div>
+                                </div>
+                                <span class="count pull-right">0</span>
+                            </li>
+                            <li>
+                                <span class="pull-left">Dislikes</span>
+                                <div class="progress">
+                                    <div class="progress-bar rate-grey" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                        <span class="sr-only">0%</span>
+                                    </div>
+                                </div>
+                                <span class="count pull-right">0</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="profile-wrap">
+                        <div class="profile-dtail" style="border-bottom:none; padding-top: 20px">
+                            <span class="fa fa-clock-o tooltipclass" data-toggle="tooltip" data-original-title="Started using Redfoodie Nov 08, 2016"></span><span style="vertical-align: top;">Redfoodie since Nov 2016</span>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="profile-center pull-left">
+
+
+            <div class="prof-dtail clearfix ">
+
+                <div class="nav-top">
+                    <ul class="nav nav-tabs rest_tab clearfix user-tabs  nav-justified">
+
+                        <li class="active"><a data-toggle="tab" href="#reviews"><strong>0</strong><br>Reviews</a></li>
+
+                        <li><a data-toggle="tab" href="#photos" data-hasclicked="false"><strong>0</strong><br>Photos</a></li>
+
+                        <li><a data-toggle="tab" data-hasclicked="false" href="#networks"><strong class="follower-count">0</strong><br>Followers</a></li>
+
+                        <li><a data-toggle="tab" data-hasclicked="false" href="#wishlist"><strong>0</strong><br>Bookmarks</a></li>
+
+                        <li><a data-toggle="tab" data-hasclicked="false" href="#likes"><strong>0</strong><br>Likes</a></li>
+
+                        <li><a data-toggle="tab" data-hasclicked="false" href="#stats"><strong>0</strong><br>Points</a></li>
+
+
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                    </div>
+
+                    <div id="reviews" class="tab-pane fade in active">
+                        <div class="top-head clearfix">
+                            <span class="pull-left large" style="color: #8D8D8D;"></span>
+                            <div class="pull-right small reviews-small">
+                                <a href="#overview-reviews" data-toggle="tab" id="user-reviews" class="active">Reviews<span class="arrow_box"></span></a>
+                                <a href="#overview-ratings" data-toggle="tab" data-hasclicked="false" id="user-ratings">Likes/Dislikes<span class="arrow_box"></span></a>
+                            </div>
+                        </div>
+
+                        <div class="tab-content">
+                            <div id="overview-reviews" class="tab-pane user-reviews-all active" style=" min-height 200px;">
+
+                                <div class="" id="user-restaurant-review-listing">
+                                    <div class="no-networks">
+                                        You haven't created any notes yet. Why not write some? It's your turn to be the critic.
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div id="overview-ratings" class="tab-pane">
+
+                                <div class="profile_networks-2 user-ratings-all clearfix" style=" min-height 200px;">
+                                    <div id="user-restaurant-rating-listing" class="profile-dsc">
+                                    </div>
+                                    <div class="load_more" style="display: block; float: left; width: 100%;padding: 20px;">
+                                        <a class="btn anim-top mgn_t10"> LOAD MORE <span class="load-more-count"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="networks" class="tab-pane fade">
+
+                        <div class="top-head clearfix">
+                            <span class="pull-left large" style="color: #8D8D8D;">User Networks</span>
+                            <div class="pull-right small networks-small">
+                                <a href="#network-user-followers" data-toggle="tab" id="user-profile-followers" class="active">Followers 0<span class="arrow_box"></span></a>
+                                <a href="#network-user-following" data-toggle="tab" data-hasclicked="false" id="user-profile-followings">Followings 0<span class="arrow_box"></span></a>
+                            </div>
+                        </div>
+
+
+                        <div class="user-networks tab-content">
+
+                            <div class="tab-pane active" id="network-user-followers">
+                                <div class="profile_networks-1  clearfix" id="network-user-followers" style="/*width: 681px;*/height: 200px;padding: 10px 20px">
+                                    <div class="profile_followers style-01">
+                                        <div class="tab-pane fade style-01" id="messages">
+                                            <script id="followers-item-template" type="text/template">
+
+                                                <div class="user-details-wrapper">
+
+                                                    <figure class="user-image">
+
+                                                        <a href="/users/__FOLLOWER__/profile">
+
+                                                            <img src="<%= follower.profile_image %>" alt="<%= follower.username %>" title="<%= follower.username %>">
+
+                                                        </a>
+
+                                                    </figure>
+
+                                                    <div class="user-details">
+
+                                                        <div class="user-name">
+
+                                                            <a title="<%= follower.first_name %>  <%= follower.last_name %>" href="/users/__FOLLOWER__/profile">
+                                                                <% var ff = $.trim(follower.first_name + ' ' + (follower.last_name!=undefined?follower.last_name:'') ); if (ff.length > 11) { ff = ff.slice(0,8) + '...'}; %>
+                                                                <%= ff %>
+                                                            </a>
+
+                                                            <% if(follower.is_Verified == true) { %>
+
+                                                            <a href="/verified" data-original-title="Verified Account" rel="tooltip"><i class="icon"></i></a>
+
+                                                            <% } %>
+
+                                                        </div>
+
+
+                                                        <div class="clearfix user-rank">
+                                                            <% var loginUser    =   '3566' %>
+                                                            <% if(loginUser != follower.id){ %>
+
+
+
+
+
+                                                            <% if(is_followed == 1) {  %>
+
+                                                            <div class="button pull-left followed following" data-prototype="<%= follower.username %>" data-follow-status="unfollow">
+
+                                                                <a href="#" class="anim-top pos_relative">Following</a>\n\
+
+                                                            </div>
+
+                                                            <% } else { %>
+
+                                                            <div class="button pull-left  followed follow" data-prototype="<%= follower.username %>" data-follow-status="follow">
+
+                                                                <a href="#" class="anim-top pos_relative">Follow</a>
+
+                                                            </div>
+
+                                                            <% } %>
+                                                            <% } %>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="load_more" style="display: block; float: left; width: 100%">
+                                        <a class="btn anim-top mgn_t10"> LOAD MORE <span class="load-more-count"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="network-user-following">
+                                <div class="profile_networks-2 clearfix" style="/*width: 681px;*/height: 200px; padding: 10px 20px">
+                                    <div class="profile_followings style-01">
+                                        <div class="tab-pane fade style-01" id="messages">
+
+                                            <script id="following-item-template" type="text/template">
+
+                                                <div class="user-details-wrapper">
+
+                                                    <figure class="user-image pull-left">
+
+                                                        <a href="/users/__FOLLOWED__/profile">
+
+                                                            <img src="<%= followed.profile_image %>" alt="<%= followed.username %>" title="<%= followed.username %>">
+
+                                                        </a>
+
+                                                    </figure>
+
+                                                    <div class="user-details">
+
+                                                        <div class="user-name">
+
+                                                            <a title="<%= followed.first_name %>  <%= followed.last_name %>" href="/users/__FOLLOWED__/profile">
+                                                                <% var ff =  $.trim(followed.first_name + ' ' + (followed.last_name!=undefined?followed.last_name:'')); if (ff.length > 11) { ff = ff.slice(0,8) + '...'}; %>
+                                                                <%= ff %>
+                                                            </a>
+
+                                                            <% if(followed.is_Verified == true) { %>
+
+                                                            <a href="/verified" data-original-title="Verified Account" rel="tooltip"><i class="icon"></i></a>
+
+                                                            <% } %>
+
+                                                        </div>
+
+
+                                                        <div class="clearfix user-rank">
+
+
+
+
+                                                            <% var loginUser    =   '3566' %>
+                                                            <% if(loginUser != followed.id){ %>
+                                                            <% if(is_followed == 1) {  %>
+
+                                                            <div class="button pull-left followed following" data-prototype="<%= followed.username %>" data-follow-status="unfollow">
+
+                                                                <a href="#" class="anim-top pos_relative">Following</a>
+
+                                                            </div>
+
+                                                            <% } else { %>
+
+                                                            <div class="button pull-left  followed follow" data-prototype="<%= followed.username %>" data-follow-status="follow">
+
+                                                                <a href="#" class="anim-top pos_relative">Follow</a>
+
+                                                            </div>
+
+                                                            <% } %>
+                                                            <% } %>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="load_more" style="display: block; float: left; width: 100%">
+                                        <a class="btn anim-top mgn_t10"> LOAD MORE <span class="load-more-count"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div id="compliments" class="tab-pane fade">
+                    </div>
+
+                    <div id="photos" class="tab-pane fade">
+                        <div>
+                            <div class="user-photos-container clearfix" id="user-photos" style="/*width: 681px;*/height: 300px; padding: 20px 10px">
+
+                                <ul id="user_profile_photos" class="restaurant-review-images list-unstyled photo_thumb clearfix"></ul>
+
+                                <div class="load_more" style="display: block; float: left; width: 100%">
+                                    <a class="btn anim-top mgn_t10"> LOAD MORE <span class="load-more-count"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="likes" class="tab-pane fade">
+
+                        <div class="user-favorites">
+
+                            <div class="user-likes clearfix" id="user-likes" style="/*width: 681px;*/height: 300px; padding: 20px">
+                                <div class="user_profile_lkes">
+                                    <div class="tab-pane fade" id="messages">
+                                        <script id="user-likes-list-template" type="text/template">
+                                            <%  if(typeof business != "undefined") { %>
+
+                                            <div class="clearfix user-restaurant-review">
+
+                                                <figure class="user-image pull-left  restaurant-review-logo">
+
+                                                    <a href="/__CITY__/__BUSINESS__">
+
+                                                        <img src="<%= business.profile_image %>" alt="<%= business.business_name %>"
+                                                             title="<%= business.business_name %>">
+
+                                                    </a>
+
+                                                </figure>
+
+                                                <div class="user-details">
+
+                                                    <div class="user-name">
+
+                                                        <%
+
+                                                        var restaurant_name = business.business_name;
+
+                                                        if(business.business_name.length > 30){
+
+                                                        restaurant_name = restaurant_name.substr(0,30);
+
+                                                        } %>
+
+                                                        <% if(business.business_name.length > 30){ %>
+
+                                                        <a href="/__CITY__/__BUSINESS__" class="restaurant-name"><%=restaurant_name%>...</a>
+
+                                                        <% }else{ %>
+
+                                                        <a href="/__CITY__/__BUSINESS__" class="restaurant-name"><%=restaurant_name%></a>
+
+                                                        <% } %>
+
+                                                    </div>
+
+                                                    <div class="user-stats">
+
+                                                        <span class="user-stat restaurant-locality">
+
+                                                            <% if(typeof checkin != "undefined") { %>
+
+                                                            <%= checkin.neighbourhood.neighbourhood%>
+
+                                                            <% }else{ %>
+                                                            <a href="/search?neighbourhoods=__NEIGHBOURHOOD_ID__">
+                                                                <%=
+                                                                business.addresses[0].neighbourhood.neighbourhood %>
+                                                            </a>,
+                                                            <a href="/search?city=__CITY_ID__">
+                                                                <%=
+                                                                business.addresses[0].neighbourhood.city.city %>
+                                                            </a>
+
+                                                            <% } %>
+
+                                                        </span>
+
+                                                    </div>
+
+                                                    <div class="user-stats user-like" data-prototype="cuisines">
+                                                        <span class="restaurant-rating">
+                                                            <% if (business.percentRate == -1 ) { %>
+                                                            <% percentRateColor = 'grey' %>
+                                                            <% } %>
+                                                            <% if (business.percentRate < 30 && business.percentRate > 0) { %>
+                                                            <% percentRateColor = 'rateLower' %>
+                                                            <% } %>
+                                                            <% if (business.percentRate < 50 && business.percentRate > 29) { %>
+                                                            <% percentRateColor = 'rateLow' %>
+                                                            <% } %>
+                                                            <% if (business.percentRate < 70 && business.percentRate > 49) { %>
+                                                            <% percentRateColor = 'rateMiddle' %>
+                                                            <% } %>
+                                                            <% if (business.percentRate < 90 && business.percentRate > 69) { %>
+                                                            <% percentRateColor = 'rateHigh' %>
+                                                            <% } %>
+                                                            <% if (business.percentRate > 89) { %>
+                                                            <% percentRateColor = 'rateHigher' %>
+                                                            <% } %>
+                                                            <p class="<%= percentRateColor %>Heart"><% if (business.percentRate > 0) { %> <%= business.percentRate %>% <% } else { %> &mdash; <% } %></p>
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <% } %>
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="load_more" style="display: block; float: left; width: 100%">
+                                    <a class="btn anim-top mgn_t10"> LOAD MORE <span class="load-more-count"></span></a>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div id="wishlist" class="tab-pane fade">
+
+                        <div class="user-wishlist clearfix" style="/*width: 681px;*/height: 300px;padding: 20px">
+
+                            <div class="user_profile_wishlist">
+                                <div class="tab-pane fade style-01" id="messages">
+
+                                    <script id="user-wishlist-list-template" type="text/template">
+
+                                        <% if(typeof checkin != "undefined") {
+
+                                        var business = checkin.business;
+
+                                        }%>
+
+
+
+                                        <div class="user-details-wrapper">
+
+                                            <figure class="user-image pull-left  restaurant-review-logo">
+
+                                                <a href="/__CITY__/__BUSINESS__">
+
+                                                    <img src="<%= business.profile_image %>" alt="<%= business.business_name %>" title="<%= business.business_name %>">
+
+                                                </a>
+
+                                            </figure>
+
+                                            <div class="user-details">
+
+                                                <div class="user-name">
+
+                                                    <%
+
+                                                    var restaurant_name = business.business_name;
+
+                                                    if(business.business_name.length > 30){
+
+                                                    restaurant_name = restaurant_name.substr(0,30);
+
+                                                    }          %>
+
+                                                    <% if(business.business_name.length > 30){ %>
+
+                                                    <a href="/__CITY__/__BUSINESS__" class="restaurant-name"><%=restaurant_name%>...</a>
+
+                                                    <% }else{ %>
+
+                                                    <a href="/__CITY__/__BUSINESS__" class="restaurant-name"><%=restaurant_name%></a>
+
+                                                    <% } %>
+
+                                                </div>
+
+                                                <div class="user-stats">
+
+                                                    <span class="user-stat restaurant-locality">
+
+                                                        <% if(typeof checkin != "undefined") { %>
+
+                                                        <%= checkin.neighbourhood.neighbourhood%>
+
+                                                        <% }else{ %>
+                                                        <a href="/search?neighbourhoods=__NEIGHBOURHOOD_ID__"><%= business.addresses[0].neighbourhood.neighbourhood %></a>,
+                                                        <a href="/search?city=__CITY_ID__"><%= business.addresses[0].neighbourhood.city.city %></a>
+
+                                                        <% } %>
+
+                                                    </span>
+
+                                                </div>
+
+
+                                                <div class="user-stats user-like" data-prototype="cuisines">
+                                                    <span class="restaurant-rating">
+                                                        <% if (business.percentRate == -1 ) { %>
+                                                        <% percentRateColor = 'grey' %>
+                                                        <% } %>
+                                                        <% if (business.percentRate < 30 && business.percentRate > 0) { %>
+                                                        <% percentRateColor = 'rateLower' %>
+                                                        <% } %>
+                                                        <% if (business.percentRate < 50 && business.percentRate > 29) { %>
+                                                        <% percentRateColor = 'rateLow' %>
+                                                        <% } %>
+                                                        <% if (business.percentRate < 70 && business.percentRate > 49) { %>
+                                                        <% percentRateColor = 'rateMiddle' %>
+                                                        <% } %>
+                                                        <% if (business.percentRate < 90 && business.percentRate > 69) { %>
+                                                        <% percentRateColor = 'rateHigh' %>
+                                                        <% } %>
+                                                        <% if (business.percentRate > 89) { %>
+                                                        <% percentRateColor = 'rateHigher' %>
+                                                        <% } %>
+                                                        <p class="<%= percentRateColor %>Heart"><% if (business.percentRate > 0) { %> <%= business.percentRate %>% <% } else { %> &mdash; <% } %></p>
+                                                    </span>
+                                                    <% var cus = ''   %>
+                                                    <%    _.each(business.tags,function(tag,key){ %>
+
+                                                    <%  if(tag.tag.tag == "Cuisines") {
+                                                    cus   +=   tag.option+', ';
+
+                                                    %>
+
+                                                    <%   }  });     %>
+                                                    <% var cusine  =   cus.substr(0,cus.length-1) ; %>
+
+
+
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="load_more" style="display: block; float: left; width: 100%">
+                                <a class="btn anim-top mgn_t10"> LOAD MORE <span class="load-more-count"></span></a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div id="stats" class="tab-pane fade">
+
+                        <style>
+                            .profile-info .verified {
+                                font-size: 14px;
+                                padding: 0 5px;
+                                line-height: 16px;
+                                vertical-align: text-top;
+                            }
+
+                            .user-tab-content {
+                                padding-left: 5px;
+                                padding-right: 5px;
+                            }
+
+                            .res-reviews-container {
+                                margin-bottom: 10px;
+                            }
+
+                            .user-tab-content.res-reviews-container {
+                                overflow: hidden;
+                            }
+
+                            .user-tab-content .section-title {
+                                margin-bottom: 10px;
+                                padding-bottom: 10px;
+                                border-bottom: 1px solid #f0f0f0;
+                            }
+
+                            .section-title {
+                                color: #2d2d2d;
+                                font-size: 18px;
+                                font-weight: 700;
+                            }
+
+                            .pt5 {
+                                padding-top: 5px;
+                            }
+
+                            .user-stats-header {
+                                display: table;
+                                width: 100%;
+                                border-bottom: 1px solid #f0f0f0;
+                            }
+
+                            .mtop0 {
+                                margin-top: 10px;
+                            }
+
+                            .user-stats-header__item {
+                                display: table-cell;
+                                -moz-box-sizing: border-box;
+                                box-sizing: border-box;
+                                border-left: 1px solid #f0f0f0;
+                                padding: 3px 0 10px 10px;
+                                font-size: 15px;
+                                width: 33%;
+                                text-align: center;
+                                vertical-align: middle;
+                            }
+
+                                .user-stats-header__item:first-child {
+                                    border-left: none;
+                                }
+
+                            .block {
+                                display: block;
+                            }
+
+                            .bold {
+                                font-weight: 700;
+                            }
+                        </style>
+                        <div id="tabtop" class="user-tab-content res-reviews-container zs-following-list brstd" style="min-height: 0px; padding: 20px">
+
+                            <div class="user-stats-header user-section">
+                                <div class="user-stats-header__item">
+                                    <div class="button" style="padding: 0px 10px; background-color: black;">
+                                        <span style="background-color: black;color: #fff;">Elite</span>
+                                    </div>
+                                </div>
+                                <div class="user-stats-header__item">
+                                    <span class="bold block">0</span>
+                                    <span class="text">Total Points</span>
+                                </div>
+                                <div class="user-stats-header__item">
+                                    <span class="bold block">7000</span>
+                                    <span class="text">Points to become an Elite</span>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 30px;">
+
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="100%">
+                                                <div class="progress" style="margin-bottom: 5px;">
+                                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="7000" style="width: 0%; min-width: 1em;">
+                                                        <span class="sr-only">80%</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span style="float: left; font-weight: 600;vertical-align: top;">0</span>
+                                                <span style="float: right; font-weight: 600;vertical-align: top;">7000</span>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                            <br>
+                            <p>
+                                Elite badge is earned after 7000 points
+                            </p>
+                            <br>
+                            <p>
+                                A review gets you 80 points, while a photo earn you 2 points each
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="profile-randoms pull-left">
+            <h4>Who to Follow</h4>
+            <div class="random-users">
+                <div class="item clearfix">
+                    <figure class="user-image pull-left"><a href="/users/ishita-jain-192/profile"><img src="/assets/images/default/profile/user/user.svg" height="146" width="146" alt="ishita jain " title="ishita jain "></a></figure>
+                    <div class="user-details pull-right">
+                        <div class="user-name">
+                            <a href="/users/ishita-jain-192/profile"><strong> ishita jain  </strong></a>
+                        </div>
+                        <div class="clearfix user-rank">
+
+                            <div class="button followed follow" data-prototype="ishita-jain-192" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item clearfix">
+                    <figure class="user-image pull-left"><a href="/users/117802163829190466033/profile"><img src="/uploads/thumbs/user/117802163829190466033/146x146_08feb40cdd839840555f0b2b1e58dbad0d052e65.jpg" height="146" width="146" alt="Akanksha Jain" title="Akanksha Jain"></a></figure>
+                    <div class="user-details pull-right">
+                        <div class="user-name">
+                            <a href="/users/117802163829190466033/profile"><strong> Akanksha Jain </strong></a>
+                        </div>
+                        <div class="clearfix user-rank">
+
+                            <div class="button followed follow" data-prototype="117802163829190466033" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item clearfix">
+                    <figure class="user-image pull-left"><a href="/users/108903065959792335454/profile"><img src="/uploads/thumbs/user/108903065959792335454/146x146_65e17ca1c7409cd899806970f6e74bb32ae14a44.jpg" height="146" width="146" alt="deepanshu goel" title="deepanshu goel"></a></figure>
+                    <div class="user-details pull-right">
+                        <div class="user-name">
+                            <a href="/users/108903065959792335454/profile"><strong> deepanshu goel </strong></a>
+                        </div>
+                        <div class="clearfix user-rank">
+
+                            <div class="button followed follow" data-prototype="108903065959792335454" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item clearfix">
+                    <figure class="user-image pull-left"><a href="/users/piyush-nayyer-195/profile"><img src="/assets/images/default/profile/user/user.svg" height="146" width="146" alt="piyush nayyer " title="piyush nayyer "></a></figure>
+                    <div class="user-details pull-right">
+                        <div class="user-name">
+                            <a href="/users/piyush-nayyer-195/profile"><strong> piyush nayyer  </strong></a>
+                        </div>
+                        <div class="clearfix user-rank">
+
+                            <div class="button followed follow" data-prototype="piyush-nayyer-195" data-follow-status="follow"><a href="#" class="anim-top pos_relative">Follow</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-box">
+        </div>
+        <div id="myModalRF">
+            <div aria-hidden="false" aria-labelledby="mySmallModalLabel" role="dialog" tabindex="-1" class="modal fade myModalRF-BP in" style="display: none;">
+                <div class="modal-dialog modal-sm" style="width: 285px;">
+                    <div class="modal-content" style="border-radius: 0px;">
+
+                        <div class="modal-header">
+                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                            <h4 id="mySmallModalLabel" class="modal-title">People who useful this</h4>
+                        </div>
+                        <div class="modal-body clearfix pad_t12" style="max-height: 300px;overflow: auto;">
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+
+        <div id="myModalReviewEdit">
+            <div aria-hidden="false" aria-labelledby="mySmallModalLabel" role="dialog" tabindex="-1" class="modal fade myModalRfEdit in" style="display: none;">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content" style="width:600px !important">
+
+                        <div class="modal-header">
+                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                            <h3 id="mySmallModalLabel" class="modal-title">Edit your review</h3>
+                        </div>
+                        <div class="modal-body clearfix pad_t12">
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+    </div>
+</div>

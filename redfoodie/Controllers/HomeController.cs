@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using redfoodie.Models;
 
@@ -12,7 +13,7 @@ namespace redfoodie.Controllers
         {
             if (Session != null)
             {
-                Session["currentCity"] = city != null ? Context.Cities.First(x => x.Name.ToLower() == city).Name : Context.Cities.First(x => x.ParentId == null).Name;
+                Session["currentCity"] = city != null ? Context.Cities.First(x => x.Name.Equals(city, StringComparison.InvariantCultureIgnoreCase)).Name : Context.Cities.First(x => x.ParentId == null).Name;
             }
             return View();
         }

@@ -34,7 +34,7 @@
                                         <div class="country_city_list">
                                             @foreach (var city in (List<City>)Session["cities"])
                                             {
-                                                <a href="@city.Href">@city.Name</a>
+                                                @Html.ActionLink(city.Name, "Index", "Home", new {city = city.Name }, null)
                                             }
                                         </div>
                                     </li>
