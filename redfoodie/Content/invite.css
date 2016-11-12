@@ -1,0 +1,141 @@
+﻿.invite {
+    margin-top: 55px;
+    text-align: center;
+}
+
+.invite p {
+    font-size: 12px;
+    line-height: 13px;
+}
+
+.invite h2 {
+    font-size: 20px;
+}
+
+.socials-connects {
+    width: 99%;
+}
+
+.socials-connects {
+    font-size: 25px;
+    line-height: 53px;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 403px;
+    vertical-align: top;
+    text-align: center;
+    display: inline-block;
+}
+
+.socials-connects a {
+    text-decoration: none;
+}
+
+.socials-connects img {
+    height: 46px;
+}
+
+.socials-connects.fb button {
+    text-align: left;
+}
+
+.socials-connects.search .redfood-icon {
+    font-size: 25px;
+}
+
+.socials-connects .input-group-addon {
+    background-color: #fff;
+}
+
+.socials-connects .input-group,.socials-connects .input-group input,.socials-connects .input-group button {
+    height: 60px;
+}
+
+.users-list-short {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
+    border-color: #b7b7b7!important;
+}
+
+.users-list-short li:last-child {
+    margin-right: 0;
+}
+
+.socials-connects-search-dpdwn {
+    background: #fff;
+    border: 1px solid #b0b0b0;
+    width: 353px;
+    position: absolute;
+}
+
+.socials-connects-search-dpdwn ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.socials-connects-search-dpdwn li {
+    cursor: pointer;
+    padding: 0 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: auto;
+    float: none;
+    text-align: left;
+    color: #000;
+    font-size: 12px;
+    line-height: 45px;
+}
+
+.socials-connects-search-dpdwn {
+    background: #fff;
+    border: 1px solid #b0b0b0;
+    width: 353px;
+    position: absolute;
+    z-index: 10;
+}
+
+.socials-connects-search-dpdwn ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.socials-connects-search-dpdwn li {
+    cursor: pointer;
+    padding: 0 4px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: auto;
+    float: none;
+    text-align: left;
+    color: #000;
+    font-size: 12px;
+    line-height: 45px;
+}
+
+.socials-connects-search-dpdwn li a {
+    height: auto;
+    color: #8d8d8d;
+    float: left;
+    width: 100%;
+}
+
+.socials-connects-search-dpdwn li:hover a {
+    color: #000;
+}
+
+.socials-connects-search-dpdwn li:hover {
+    background: #E2E2E0;
+}
+
+.import-user-contact-from-search>img {
+    height: 39px!important;
+}

@@ -30,7 +30,8 @@ namespace redfoodie
                       "~/Content/font-awesome.css", 
                       "~/Content/site.css",
                       "~/Content/chosen.css",
-                      "~/Content/notification.css"));
+                      "~/Content/notification.css",
+                      "~/Content/invite.css"));
 
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                       "~/Scripts/Site.js"));

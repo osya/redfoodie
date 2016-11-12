@@ -1043,6 +1043,53 @@ a:hover {
     width: 30px;
     height: 30px;
 }
+
+.users-list-short .user-photo img {
+    width: 80px;
+    height: 80px;
+}
+
+.users-list-short {
+    white-space: nowrap;
+}
+
+.users-list-short li {
+    width: 80px;
+    margin-right: 20px;
+    position: relative;
+    display: inline-table;
+}
+
+.users-list-short a {
+    text-decoration: none;
+}
+
+.users-list-short a.user-name {
+    font-size: 13px;
+    color: #fff;
+}
+
+.users-list-short div.user-name {
+    top: 60px;
+    background-color: rgba(138,127,127,0.53);
+    position: absolute;
+    width: 100%;
+    padding: 0 5px;
+}
+
+.users-list-short .button {
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    margin: 2px 0!important;
+    padding: 0!important;
+    width: 100%;
+}
+
+.users-list-short .verified {
+    vertical-align: middle;
+}
+
 .greyHeart {
     color: #8a8a8a;
 }
