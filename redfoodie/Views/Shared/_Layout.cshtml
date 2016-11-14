@@ -8,13 +8,13 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body style="cursor: progress;">
+<body>
     @{
         var toolbarSearchBar = Request.Url?.LocalPath != "/";
     }
     @Scripts.Render("~/bundles/jquery")
-    <div class="container">
-        <div class="navbar navbar-default navbar-static-top main-header">
+    <header class="navbar-fixed-top skin main-header font_roman">
+        <div class="header-inside globalwidth clearfix">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -26,7 +26,7 @@
             <div class="navbar-collapse collapse">
                 <nav class="nav navbar-nav navbar-left">
                     <nav class="city-list">
-                        <div class="city-box pull-left">                            
+                        <div class="city-box pull-left">
                             @Session["currentCity"]<span class="fa fa-angle-down"></span>
                             <div class="drop_menu " style="display: none">
                                 <ul class="list-unstyled">
@@ -51,14 +51,14 @@
                         }
                     </nav>
                 </nav>
-                <nav class="nav navbar-nav navbar-right">
+                <nav class="nav navbar-nav pull-right">
                     <nav class="header-user-container">
                         @Html.Partial("_LoginPartial")
                     </nav>
                 </nav>
             </div>
         </div>
-    </div>
+    </header>
 
     <!-- banner -->
     @if (!toolbarSearchBar)
@@ -84,10 +84,8 @@
         </section>
     }
             
-    <div class="container body-content" style="padding-top: 30px!important;">
-        @RenderBody()
-        <hr />
-    </div>
+    @RenderBody()
+        
     <footer id="footer" class="footer">
         <div class="footer-1 clearfix ">
             <div class="container">
@@ -187,66 +185,6 @@
                 @Html.Partial("~/Views/Account/ForgotPassword.cshtml", new ForgotPasswordViewModel())
                 @Html.Partial("~/Views/Message/_CreateMessage.cshtml", new MessagePostViewModel())
                 
-                <!--sign up confirmation -->
-                @*<div data-modal-content-container="1" data-modal-wrapper-class="width_300" class="hide" id="signup-confirmation">
-                        <div class="pad_0x17 join_form">
-                            <h2>Thank you for signing up!</h2>
-
-                            <p>We have sent you a verification mail. Please click on the link in mail to verify your email address.</p>
-                        </div>
-                    </div>
-
-                    <!--log in confirmation -->
-
-                    <div data-modal-content-container="1" data-modal-wrapper-class="width_300" class="hide" id="login-confirmation">
-                        <div class="pad_0x17 join_form">
-                            <p><b>Logged in successfully</b></p>
-                        </div>
-                    </div>
-
-                    <div id="flagPopup" class="hide" data-modal-content-container="1" data-modal-wrapper-class="width_300">
-
-                        <form action="" method="post" class="form-inline">
-
-                            <div class="pad_0x17 join_form">
-
-                                <h2>Flag This Review</h2>
-
-                                <div class="element-block comment-area clearfix">
-                                    <textarea id="ispg_appbundle_flagstype_message" name="ispg_appbundle_flagstype[message]" required="required" style="resize: vertical;" class="span4" placeholder="Type your message"></textarea>
-                                </div>
-
-                                <div class="element-block btn-wrap clearfix">
-                                    <a id="btn-cancel-flag" class="back pull-left cancel" href="javascript:void(0);">Cancel</a>
-                                    <span class="button pull-right create" id="btn-do-flag">Submit</span>
-                                </div>
-                            </div>
-
-                        </form>
-
-                    </div>
-
-                    <script type="text/javascript">
-                
-                $(document).on('click', '.modal-popup-close,.pop_outer_wrapper', function () {
-                    $('#fos_user_registration_form_username').val('');
-                    $('#fos_user_registration_form_email').val('');
-                    $('#fos_user_registration_form_plainPassword').val('');
-                    $('#password-reset').val('');
-                    $('#reset-password-mail-confirmation').hide();
-                    $('#login_errors').hide();
-                    $('.register-validation-error').hide();
-                    $('label.error').hide();
-                    $('.password-reset-validation-error').hide();
-                    $('#username').val('');
-                    $('#password').val('');
-                    $('#fos_user_registration_form_firstName').val('');
-                    $('#login_errors').hide();
-                    $('#deactivate-account-confirmation').hide();
-                    $('.password_errors').hide();
-                    $('#password-change-confirmation').remove();
-                });
-                </script>*@
             </div>
         </div>
     </div>

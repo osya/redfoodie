@@ -5,13 +5,52 @@ using Microsoft.Owin.Security;
 
 namespace redfoodie.Models
 {
-    public class IndexViewModel
+    public class ProfileSettingsViewModel
     {
-        public bool HasPassword { get; set; }
-        public IList<UserLoginInfo> Logins { get; set; }
-        public string PhoneNumber { get; set; }
-        public bool TwoFactor { get; set; }
-        public bool BrowserRemembered { get; set; }
+        [Required]
+        [Display(Name = "Full Name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Select City")]
+        public string City { get; set; }
+
+        [Required]
+        [Display(Name = "Twitter Handle")]
+        [Url]
+        public string Twitter { get; set; }
+
+        [Display(Name = "Facebook Page Url")]
+        [Url]
+        public string Facebook { get; set; }
+
+        [Display(Name = "Website or Blog")]
+        [Url]
+        public string Website { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [Phone]
+        public string Phone { get; set; }
+
+        [Display(Name = "Bio")]
+        public string Bio { get; set; }
+
+        [Display(Name = "Username")]
+        [Url]
+        public string ShortUrl { get; set; }
+
+        [Display(Name = "Someone follows me")]
+        public bool FollowMail { get; set; }
+        [Display(Name = "A restaurant owner replies to my review")]
+        public bool ReplyReviewmail { get; set; }
+        [Display(Name = "Someone thanked my reviews / liked photos")]
+        public bool ThanksFavoritemail { get; set; }
+
+        //        public bool HasPassword { get; set; }
+        //        public IList<UserLoginInfo> Logins { get; set; }
+        //        public string PhoneNumber { get; set; }
+        //        public bool TwoFactor { get; set; }
+        //        public bool BrowserRemembered { get; set; }
     }
 
     public class ManageLoginsViewModel

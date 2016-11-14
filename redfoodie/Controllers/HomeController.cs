@@ -31,5 +31,10 @@ namespace redfoodie.Controllers
 
             return View();
         }
+
+        public JsonResult Subscribe()
+        {
+            return Json(JsonResponseFactory.SuccessResponse());
+        }
     }
 }

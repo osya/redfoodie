@@ -29,12 +29,17 @@ namespace redfoodie
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css", 
                       "~/Content/site.css",
-                      "~/Content/chosen.css",
-                      "~/Content/notification.css",
-                      "~/Content/invite.css"));
+                      "~/Content/chosen.css"));
+
+            bundles.Add(new StyleBundle("~/Content/notification").Include("~/Content/notification.css"));
+            bundles.Add(new StyleBundle("~/Content/invite").Include("~/Content/invite.css"));
+            bundles.Add(new StyleBundle("~/Content/settings/css").Include(
+                "~/Content/settings.css", "~/Content/selectize.bootstrap3.css"));
 
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                       "~/Scripts/Site.js"));
+            bundles.Add(new ScriptBundle("~/Content/selectize/js").Include(
+                      "~/Scripts/selectize.min.js"));
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿@{
+﻿@model redfoodie.Models.InviteFriendsViewModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Styles.Render("~/Content/invite")
 <div class="globalwidth clearfix invite">
     <h2 style="text-align: center">
         Get free food vouchers and invites to foodie meet-ups every month by inviting
@@ -22,7 +24,7 @@
         <div class="socials-connects mail">
             <div class="input-group">
                 <span class="input-group-addon"><img src="/Content/collections/imgs/email-invite.svg" alt="Email Invite"></span>
-                <input type="email" class="form-control email-invite" placeholder="Email address" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;" autocomplete="off">
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class="form-control email-invite", placeholder=Html.DisplayNameFor(m => m.Email), autocomplete="off" } })
                 <span class="input-group-btn">
                     <button class="btn btn-default  send-email-invite" type="button"><span>Send invite</span></button>
                 </span>
@@ -35,7 +37,7 @@
         <p class="clr-grey">Name or Redfoodie username</p>
         <div class="socials-connects search">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Find foodies on Redfoodie" id="searchUsers">
+                @Html.TextBoxFor(m => m.SearchUsers, new {@class="form-control", placeholder=Html.DisplayNameFor(m => m.SearchUsers), id="searchUsers"})
                 <span class="input-group-addon" id="search-redfoodies-button"><i class="redfood-icon redfood-invite-search clr-red"></i></span>
             </div>
             <div class="socials-connects-search-dpdwn" id="socials-connects-search-dpdwn" style="display: none;">

@@ -207,7 +207,10 @@
     <Compile Include="Migrations\201611121401524_Drop Href column from City.Designer.cs">
       <DependentUpon>201611121401524_Drop Href column from City.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\MessageViewModels.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\InviteFriendsViewModel.cs" />
+    <Compile Include="Models\MessageViewModel.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationHandler.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationMiddleware.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -269,6 +272,8 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\invite.css" />
     <Content Include="Content\notification.css" />
+    <Content Include="Content\selectize.bootstrap3.css" />
+    <Content Include="Content\settings.css" />
     <Content Include="Content\thumbs\banners\1280x600_5749bf6e284c1-fd.png" />
     <Content Include="Content\thumbs\business\beera-chicken-house-white-avenue-amritsar\80x80_10443385_285064841671459_7689177930821632313_n-beera-chicken-house-white-avenue-amritsar-1a06165745dd7616689fcf8a7ee49263.jpg" />
     <Content Include="Content\thumbs\business\bharawan-da-dhaba-town-hall-amritsar\80x80_13335580_850689478371009_1285615177655183737_n-bharawan-da-dhaba-town-hall-amritsar-34bf957b7eadeeb7d7e066a1a092963f.jpg" />
@@ -328,6 +333,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\selectize.min.js" />
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Notification\SeeAll.cshtml" />
@@ -362,7 +368,7 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ProfileSettings.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />

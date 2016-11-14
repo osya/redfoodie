@@ -229,10 +229,10 @@ namespace redfoodie.Controllers
                 return Json(JsonResponseFactory.ErrorResponse(ModelState.Where(pair => pair.Value.Errors.Count > 0)
                     .ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
 
-            var user = await UserManager.FindByEmailAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Username);
             if (user == null)
             {
-                return Json(JsonResponseFactory.ErrorResponse($"The email address {model.Email} does not exist."));
+                return Json(JsonResponseFactory.ErrorResponse($"The email address {model.Username} does not exist."));
             }
 
             // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -374,7 +374,7 @@ namespace redfoodie.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("ProfileSettings", "Manage");
             }
 
             if (ModelState.IsValid)

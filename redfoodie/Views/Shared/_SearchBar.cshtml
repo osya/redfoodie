@@ -1,4 +1,5 @@
-﻿@using (Ajax.BeginForm("Search", "Search", new { ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnBegin="searchBegin", OnSuccess = "searchSuccess" }, new { role = "form", id = "autoSuggestSearchForm" }))
+﻿@model redfoodie.Models.SearchViewModel
+@using (Ajax.BeginForm("Search", "Search", new { ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnBegin="searchBegin", OnSuccess = "searchSuccess" }, new { role = "form", id = "autoSuggestSearchForm" }))
 {
     @Html.AntiForgeryToken()
     var toolbarSearchBar = (bool)ViewData["toolbarSearchBar"];
@@ -8,12 +9,12 @@
     }
     <div class="msrch-mn">
         <div class="msrch-wrp1">
-            @Html.TextBox("searchTxt", null, new { placeholder = "Find restaurant, cuisine, locality...", autocomplete = "off" })
+            @Html.TextBoxFor(m => m.SearchTxt, null, new { id = "searchTxt", placeholder = Html.DisplayNameFor(m => m.SearchTxt), autocomplete = "off" })
         </div>
         <!-- msrch-wrp1 -->
         <div class="msrch-wrp2">
             <div class="sel-cat" style="@(toolbarSearchBar ? "" : "width: 53px;line-height: 51px")"><i class=""></i></div>
-            @Html.TextBox("searchTxtLoc", null, new { placeholder = "Type Location Name", autocomplete = "off" })
+            @Html.TextBoxFor(m => m.SearchTxtLoc, null, new { id = "searchTxtLoc", placeholder = Html.DisplayNameFor(m => m.SearchTxtLoc), autocomplete = "off" })
         </div>
         <!-- msrch-wrp1 -->
         @if (!toolbarSearchBar)

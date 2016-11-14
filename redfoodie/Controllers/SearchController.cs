@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using redfoodie.Models;
 
 namespace redfoodie.Controllers
 {
@@ -10,7 +11,7 @@ namespace redfoodie.Controllers
     {
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Search(string searchTxt)
+        public JsonResult Search(SearchViewModel model)
         {
             return Json(JsonResponseFactory.SuccessResponse());
         }

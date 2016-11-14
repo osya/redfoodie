@@ -50,28 +50,36 @@ namespace redfoodie.Controllers
         }
 
         //
-        // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        // GET: /Manage/ProfileSettings
+        public ActionResult ProfileSettings(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
-
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+//            ViewBag.StatusMessage =
+//                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+//                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+//                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
+//                : message == ManageMessageId.Error ? "An error has occurred."
+//                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
+//                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+//                : "";
+//
+//            var userId = User.Identity.GetUserId();
+            var model = new ProfileSettingsViewModel
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                UserName = User.Identity.GetUserName()
+//                HasPassword = HasPassword(),
+//                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+//                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+//                Logins = await UserManager.GetLoginsAsync(userId),
+//                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult ProfileSettings(ProfileSettingsViewModel model)
+        {
+            return Json(JsonResponseFactory.SuccessResponse());
         }
 
         public ActionResult ViewProfile()
@@ -151,7 +159,7 @@ namespace redfoodie.Controllers
             {
                 await SignInManager.SignInAsync(user, false, false);
             }
-            return RedirectToAction("Index", "Manage");
+            return RedirectToAction("ProfileSettings", "Manage");
         }
 
         //
@@ -166,7 +174,7 @@ namespace redfoodie.Controllers
             {
                 await SignInManager.SignInAsync(user, false, false);
             }
-            return RedirectToAction("Index", "Manage");
+            return RedirectToAction("ProfileSettings", "Manage");
         }
 
         //
@@ -196,7 +204,7 @@ namespace redfoodie.Controllers
                 {
                     await SignInManager.SignInAsync(user, false, false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
+                return RedirectToAction("ProfileSettings", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "Failed to verify phone");
@@ -212,14 +220,14 @@ namespace redfoodie.Controllers
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
             if (!result.Succeeded)
             {
-                return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+                return RedirectToAction("ProfileSettings", new { Message = ManageMessageId.Error });
             }
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, false, false);
             }
-            return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
+            return RedirectToAction("ProfileSettings", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
         //
@@ -247,7 +255,7 @@ namespace redfoodie.Controllers
                 {
                     await SignInManager.SignInAsync(user, false, false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("ProfileSettings", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
             AddErrors(result);
             return View(model);
@@ -276,7 +284,7 @@ namespace redfoodie.Controllers
                     {
                         await SignInManager.SignInAsync(user, false, false);
                     }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                    return RedirectToAction("ProfileSettings", new { Message = ManageMessageId.SetPasswordSuccess });
                 }
                 AddErrors(result);
             }

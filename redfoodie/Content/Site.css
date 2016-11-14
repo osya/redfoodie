@@ -281,6 +281,7 @@ ul.bxslider li a {
     width: 100px;
 }
 .globalwidth {
+    width: 1024px;
     margin: 0 auto;
     position: relative;
 }
@@ -512,6 +513,154 @@ ul.bxslider li a {
     z-index: 9999;
 }
 
+.front-form textarea {
+    resize: vertical;
+}
+
+.front-form input:hover,.front-form textarea:hover {
+    background-color: transparent;
+}
+
+.front-form label {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.front-form .error {
+    color: red;
+    font-size: 13px;
+}
+
+.front-form .error ul {
+    margin-bottom: -20px;
+}
+
+.front-form [type=checkbox] {
+    display: block!important;
+    visibility: hidden;
+    width: auto;
+    float: left;
+    margin-left: -20px;
+}
+
+.front-form [type=checkbox]:before {
+    font-family: 'redfoodie';
+    content: "\e60d";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    visibility: visible;
+    font-size: 17px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.front-form [type=checkbox]:checked:before {
+    color: red;
+    content: "\e60e";
+}
+
+.front-form .dropdown {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.front-form .form-filed {
+    width: 495px;
+    display: inline-block;
+    margin: 20px 15px;
+    vertical-align: top;
+}
+
+.front-form .form-filed:nth-child(odd) {
+    margin-left: 0;
+}
+
+.front-form .form-filed:nth-child(even) {
+    margin-right: 0;
+}
+
+.front-form .dropdown .selectize-input {
+    background-color: #e5e5e3!important;
+    width: 100%;
+    border: 1px solid #e5e5e3!important;
+    outline: none!important;
+    -webkit-transition: background .4s ease;
+    -moz-transition: background .4s ease;
+    -o-transition: background .4s ease;
+    transition: background .4s ease;
+    font-size: 12px;
+    padding: 13px 15px 14px;
+    outline: none!important;
+    box-shadow: none!important;
+    border-radius: 0!important;
+    vertical-align: middle;
+}
+
+.front-form .dropdown .selectize-dropdown {
+    border-radius: 0;
+    margin: 0;
+}
+
+.front-form .dropdown .option.selected {
+    display: none;
+}
+
+.front-form .selectize-control.dropdown:hover,.dropdown:hover .selectize-input {
+    background-color: transparent!important;
+}
+
+.front-form [type=submit],.front-form .button {
+    border: none;
+    height: 55px;
+    width: 300px;
+    background: #D91E18;
+    border-radius: 11px;
+    letter-spacing: 2px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 1px;
+    -webkit-transition: background 3s ease-out;
+    -moz-transition: background .3s ease-out;
+    -o-transition: background .3s ease-out;
+    transition: background .3s ease-out;
+    display: block;
+    margin: 20px auto 50px;
+    outline: none!important;
+}
+
+.front-form [type=submit]:hover,.front-form .button:hover {
+    background: #ca4433;
+}
+
+.accordion .panel-heading {
+    background-color: transparent;
+}
+
+.accordion .panel-heading a {
+    text-decoration: none;
+    display: block;
+    color: #000;
+}
+
+.accordion ul {
+    margin-left: 20px;
+}
+
+.accordion ul li {
+    line-height: 25px;
+}
+
+.accordion button {
+    height: 31px!important;
+    width: 150px!important;
+    margin-bottom: 10px!important;
+    margin-left: 0!important;
+}
+
 .random-users .user-name a {
     color: #000;
     margin: 2px;
@@ -660,6 +809,10 @@ div.following a {
     line-height: 30px;
     border-top: 1px solid #b7b7b7;
     border-bottom: 1px solid #b7b7b7;
+}
+
+.no_marg_lft {
+    margin-left: 0!important;
 }
 
 .user-logout form {
@@ -874,6 +1027,20 @@ input[type="text"],input[type="password"],textarea {
 input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
     border-color: #d94a38!important;
 }
+
+.front-form input,.front-form select,.front-form textarea {
+    background-color: #e5e5e3;
+    width: 100%;
+    border: 1px solid #e5e5e3;
+    outline: none;
+    -webkit-transition: background .4s ease;
+    -moz-transition: background .4s ease;
+    -o-transition: background .4s ease;
+    transition: background .4s ease;
+    font-size: 12px;
+    padding: 15px;
+}
+
 a,a:focus {
     text-decoration: none;
     outline: none;
@@ -1520,6 +1687,11 @@ p {
     border-radius: 0!important;
 }
 
+.h20 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .width_300 {
     width: 550px;
 }
@@ -1786,8 +1958,35 @@ p {
     margin-top: 10px!important;
 }
 
+.pad_110 {
+    padding: 90px 0 30px;
+}
+
 .pad_0x17 {
     padding: 0 17px;
+}
+
+.pad_t12 {
+    padding-top: 12px;
+}
+
+.career_inner {
+    margin-top: 30px;
+}
+
+.career_inner .left_part {
+    width: 630px;
+    margin-bottom: 40px;
+}
+
+.career_inner .left_part h6 {
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: 600;
+}
+
+.career_inner .right_part {
+    width: 323px;
 }
 
 .user-dropdown {
@@ -1982,4 +2181,75 @@ p {
 }
 .create:hover {
     background: none repeat scroll 0 0 #C13828;
+}
+
+.settings .contact-form .btn-group {
+    width: 100%;
+}
+
+.settings .contact-form .btn-group .btn {
+    border-radius: 0;
+    padding: 4px 15px;
+}
+
+.settings .contact-form .btn-default {
+    border: 1px solid #B7B7B7;
+    width: 100%;
+}
+
+.settings .contact-form .btn-group .btn .caret {
+    background: url("../final/img/drop-cart.png") no-repeat scroll 0 0 rgba(0,0,0,0);
+    border: medium none;
+    float: right;
+    height: 7px;
+    margin-top: 8px;
+    width: 11px;
+}
+
+.settings .contact-form .btn-group .dropdown-menu {
+    border-radius: 0;
+}
+
+.settings .contact-form .dropdown-menu {
+    min-width: 100%;
+}
+
+.settings .contact-form .dropdown-menu li {
+    padding: 5px 20px;
+}
+
+.settings .contact-form .dropdown-menu li:hover {
+    background: none repeat scroll 0 0 #D91E18;
+}
+
+.settings .contact-form .dropdown-menu li:hover a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.settings .contact-form .btn.btn-large {
+    border-radius: 0;
+    font-size: 15px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.settings .right_part.cat_info {
+    padding: 0;
+}
+
+.settings .right_part {
+    width: 390px;
+}
+
+.settings .cat_info h3 {
+    padding: 20px 0 10px 25px!important;
+}
+
+.rate-red {
+    background-color: red;
+}
+
+.rate-grey {
+    background-color: gray;
 }

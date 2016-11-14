@@ -1,0 +1,59 @@
+﻿ .accordion {
+    margin-top: 72px;
+}
+
+.front-form .form-filed {
+    width: 290px;
+}
+.pop_wrapper .front-form .form-filed {
+    width: 100%;
+    margin: 5px 0;
+}
+.front-form .form-filed.odd {
+    margin-left:0;
+}
+
+.front-form .bd {
+    width: 90px;
+}
+.front-form [type=submit].main-btn {
+    margin-left: 0;
+}
+
+.front-form .small-btn {
+    margin-left: 0;
+    height: 31px!important;
+    margin-bottom: 10px!important;
+    background-color: #fff!important;
+    color: grey;
+    border: 1px solid #8d8d8d;
+    width: auto;
+    padding: 0 10px;
+}
+
+.front-form .small-btn:hover {
+    color: #000;
+}
+
+.errDate {
+    margin-bottom: -66px;
+}
+
+.dob {
+    position: relative;
+}
+
+.dob-sub {
+    position: absolute;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #e5e5e3 !important;
+    width: 100%;
+}
+
+.dob:hover .dob-sub, .dob:focus .dob-sub {
+    display: block !important;
+}
+.panel-body {
+    border-top: 1px solid #ddd;
+}

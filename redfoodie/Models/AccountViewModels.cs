@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace redfoodie.Models
@@ -130,9 +128,11 @@ namespace redfoodie.Models
 
     public class ForgotPasswordViewModel
     {
+        /// This property named "Username" instead of "Email" because to be able LastPass store all fields from all 
+        /// forms necessary to exists one form with only one input field with id/name "...user..."
         [Required]
         [EmailAddress]
         [Display(Name = "Email Address")]
-        public string Email { get; set; }
+        public string Username { get; set; }
     }
 }

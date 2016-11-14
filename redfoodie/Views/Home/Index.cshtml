@@ -1,327 +1,328 @@
-﻿@{
+﻿@model redfoodie.Models.HomeViewModel
+@{
     ViewBag.Title = "Home Page";
 }
-
-    <div class="globalwidth clearfix">
-        <div class="home-left">
-            <hgroup class="heading-01">
-                <h2 class="clr-red ">Best of Redfoodie: Amritsar</h2>
-                <p class="clr-grey">Recommended lists of good food and best restaurants in Amritsar</p>
-            </hgroup>
-            <div class="recommend-list clearfix">
-                <ul class="list-unstyled tabs">
-                    <li class="active" style="background-image: url('/Content/collections/imgs/5776ba6724553-Trending (1).png')">
-                        <a data-toggle="tab" class="collection_item" href="#trending">
+<div class="globalwidth clearfix">
+    <div class="home-left">
+        <hgroup class="heading-01">
+            <h2 class="clr-red ">Best of Redfoodie: Amritsar</h2>
+            <p class="clr-grey">Recommended lists of good food and best restaurants in Amritsar</p>
+        </hgroup>
+        <div class="recommend-list clearfix">
+            <ul class="list-unstyled tabs">
+                <li class="active" style="background-image: url('/Content/collections/imgs/5776ba6724553-Trending (1).png')">
+                    <a data-toggle="tab" class="collection_item" href="#trending">
+                        Trending
+                    </a>
+                </li>
+                <li style="background-image: url('/Content/collections/imgs/56a35f2df14d1-newl.png')">
+                    <a data-toggle="tab" class="collection_item" href="#newly-opened">
+                        Newly Opened
+                    </a>
+                </li>
+                <li style="background-image: url('/Content/collections/imgs/56a1c83e42b5e-Butter chicken 1.png')">
+                    <a data-toggle="tab" class="collection_item" href="#butter-chicken">
+                        Butter Chicken
+                    </a>
+                </li>
+                <li style="background-image: url('/Content/collections/imgs/57c739b40b9f7-mexican magic.png')">
+                    <a data-toggle="tab" class="collection_item" href="#mexican-magic">
+                        Mexican Magic
+                    </a>
+                </li>
+                <li style="background-image: url('/Content/collections/imgs/56a1c7eed5fe2-Cafe.png')">
+                    <a data-toggle="tab" class="collection_item" href="#cafes">
+                        Cafes
+                    </a>
+                </li>
+                <li style="background-image: url('/Content/collections/imgs/570958e5cf1dc-3.png')">
+                    <a data-toggle="tab" class="collection_item" href="#best-bars">
+                        Best Bars
+                    </a>
+                </li>
+                <li style="background-image: url('/Content/collections/imgs/5749b35f06569-tiny sheesha.png')">
+                    <a data-toggle="tab" class="collection_item" href="#sheesha-lounges">
+                        Sheesha Lounges
+                    </a>
+                </li>
+                <li style="background-image: url('/Content/collections/imgs/5749b50a6d74f-rooftop.png')">
+                    <a data-toggle="tab" class="collection_item" href="#rooftops">
+                        Rooftops
+                    </a>
+                </li>
+                <li class="more">
+                    <a class="collection_item" href="/list-collections">
+                        Browse all lists
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade    in active " id="trending">
+                    <div class="more">
+                        <a class="pull-left" href="/amritsar/lists/trending">
                             Trending
                         </a>
-                    </li>
-                    <li style="background-image: url('/Content/collections/imgs/56a35f2df14d1-newl.png')">
-                        <a data-toggle="tab" class="collection_item" href="#newly-opened">
-                            Newly Opened
-                        </a>
-                    </li>
-                    <li style="background-image: url('/Content/collections/imgs/56a1c83e42b5e-Butter chicken 1.png')">
-                        <a data-toggle="tab" class="collection_item" href="#butter-chicken">
-                            Butter Chicken
-                        </a>
-                    </li>
-                    <li style="background-image: url('/Content/collections/imgs/57c739b40b9f7-mexican magic.png')">
-                        <a data-toggle="tab" class="collection_item" href="#mexican-magic">
-                            Mexican Magic
-                        </a>
-                    </li>
-                    <li style="background-image: url('/Content/collections/imgs/56a1c7eed5fe2-Cafe.png')">
-                        <a data-toggle="tab" class="collection_item" href="#cafes">
-                            Cafes
-                        </a>
-                    </li>
-                    <li style="background-image: url('/Content/collections/imgs/570958e5cf1dc-3.png')">
-                        <a data-toggle="tab" class="collection_item" href="#best-bars">
-                            Best Bars
-                        </a>
-                    </li>
-                    <li style="background-image: url('/Content/collections/imgs/5749b35f06569-tiny sheesha.png')">
-                        <a data-toggle="tab" class="collection_item" href="#sheesha-lounges">
-                            Sheesha Lounges
-                        </a>
-                    </li>
-                    <li style="background-image: url('/Content/collections/imgs/5749b50a6d74f-rooftop.png')">
-                        <a data-toggle="tab" class="collection_item" href="#rooftops">
-                            Rooftops
-                        </a>
-                    </li>
-                    <li class="more">
-                        <a class="collection_item" href="/list-collections">
-                            Browse all lists
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade    in active " id="trending">
-                        <div class="more">
-                            <a class="pull-left" href="/amritsar/lists/trending">
-                                Trending
-                            </a>
-                            <a class="pull-right" href="/amritsar/lists/trending">See more »</a>
+                        <a class="pull-right" href="/amritsar/lists/trending">See more »</a>
+                    </div>
+                    <div class="recommend-item">
+                        <div class="pull-left">
+                            <a class="restaurant-img" href="/amritsar/kesar-da-dhaba-town-hall-amritsar"><img src="/Content/thumbs/business/kesar-da-dhaba-town-hall-amritsar/80x80_11111804_832349593516411_7568623543993868174_n-kesar-da-dhaba-town-hall-amritsar-79da7495d636e1dabd71e201a7bc648e.jpg"></a>
                         </div>
-                        <div class="recommend-item">
-                            <div class="pull-left">
-                                <a class="restaurant-img" href="/amritsar/kesar-da-dhaba-town-hall-amritsar"><img src="/Content/thumbs/business/kesar-da-dhaba-town-hall-amritsar/80x80_11111804_832349593516411_7568623543993868174_n-kesar-da-dhaba-town-hall-amritsar-79da7495d636e1dabd71e201a7bc648e.jpg"></a>
-                            </div>
-                            <div class="pull-left">
-                                <a class="restaurant-link" href="/amritsar/kesar-da-dhaba-town-hall-amritsar">Kesar Da Dhaba</a>
-                                <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/karthik-3143/profile"><img src="/Content/thumbs/user/karthik-3143/146x146_125a4bca7796238fb4df9a09acea103e71b49564.jpg"></a>
-                                    <span class="review-text">
-                                        I came here alone on my first day in Amritsar, looking for something affordable and delicious food. Kesar Da Dhaba is a ...
-                                    </span>
+                        <div class="pull-left">
+                            <a class="restaurant-link" href="/amritsar/kesar-da-dhaba-town-hall-amritsar">Kesar Da Dhaba</a>
+                            <span class="restaurant-review">
+                                <a class="review-reviewer-photo" href="/users/karthik-3143/profile"><img src="/Content/thumbs/user/karthik-3143/146x146_125a4bca7796238fb4df9a09acea103e71b49564.jpg"></a>
+                                <span class="review-text">
+                                    I came here alone on my first day in Amritsar, looking for something affordable and delicious food. Kesar Da Dhaba is a ...
                                 </span>
-                            </div>
-                            <span class="restaurant-rating">
-                                <p class="rateHigherHeart"> 92% </p>
                             </span>
                         </div>
-                        <div class="recommend-item">
-                            <div class="pull-left">
-                                <a class="restaurant-img" href="/amritsar/bharawan-da-dhaba-town-hall-amritsar"><img src="/Content/thumbs/business/bharawan-da-dhaba-town-hall-amritsar/80x80_13335580_850689478371009_1285615177655183737_n-bharawan-da-dhaba-town-hall-amritsar-34bf957b7eadeeb7d7e066a1a092963f.jpg"></a>
-                            </div>
-                            <div class="pull-left">
-                                <a class="restaurant-link" href="/amritsar/bharawan-da-dhaba-town-hall-amritsar">Bharawan Da Dhaba</a>
-                                <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/anamika-436/profile"><img src="/Content/thumbs/user/anamika-436/146x146_663cc4fe7e43ff00ba2a3c33cc01a6d59bddcfaa.jpg"></a>
-                                    <span class="review-text">
-                                        Fantastic food. Great taste. Worth every penny spent. I must say this place has been a great place for foodie lovers
-                                    </span>
+                        <span class="restaurant-rating">
+                            <p class="rateHigherHeart"> 92% </p>
+                        </span>
+                    </div>
+                    <div class="recommend-item">
+                        <div class="pull-left">
+                            <a class="restaurant-img" href="/amritsar/bharawan-da-dhaba-town-hall-amritsar"><img src="/Content/thumbs/business/bharawan-da-dhaba-town-hall-amritsar/80x80_13335580_850689478371009_1285615177655183737_n-bharawan-da-dhaba-town-hall-amritsar-34bf957b7eadeeb7d7e066a1a092963f.jpg"></a>
+                        </div>
+                        <div class="pull-left">
+                            <a class="restaurant-link" href="/amritsar/bharawan-da-dhaba-town-hall-amritsar">Bharawan Da Dhaba</a>
+                            <span class="restaurant-review">
+                                <a class="review-reviewer-photo" href="/users/anamika-436/profile"><img src="/Content/thumbs/user/anamika-436/146x146_663cc4fe7e43ff00ba2a3c33cc01a6d59bddcfaa.jpg"></a>
+                                <span class="review-text">
+                                    Fantastic food. Great taste. Worth every penny spent. I must say this place has been a great place for foodie lovers
                                 </span>
-                            </div>
-                            <span class="restaurant-rating">
-                                <p class="rateHigherHeart"> 96% </p>
                             </span>
                         </div>
-                        <div class="recommend-item">
-                            <div class="pull-left">
-                                <a class="restaurant-img" href="/amritsar/beera-chicken-house-white-avenue-amritsar"><img src="/Content/thumbs/business/beera-chicken-house-white-avenue-amritsar/80x80_10443385_285064841671459_7689177930821632313_n-beera-chicken-house-white-avenue-amritsar-1a06165745dd7616689fcf8a7ee49263.jpg"></a>
-                            </div>
-                            <div class="pull-left">
-                                <a class="restaurant-link" href="/amritsar/beera-chicken-house-white-avenue-amritsar">Beera Chicken House</a>
-                                <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/mani-singh-468/profile"><img src="/Content/thumbs/user/mani-singh-468/146x146_8f449e16dd10064b876d30b4007edc638299dbc3.jpg"></a>
-                                    <span class="review-text">
-                                        One of the best Chicken Tikka in Amritsar, while visiting Amritsar you cannot miss Beera Chicken.
-                                    </span>
+                        <span class="restaurant-rating">
+                            <p class="rateHigherHeart"> 96% </p>
+                        </span>
+                    </div>
+                    <div class="recommend-item">
+                        <div class="pull-left">
+                            <a class="restaurant-img" href="/amritsar/beera-chicken-house-white-avenue-amritsar"><img src="/Content/thumbs/business/beera-chicken-house-white-avenue-amritsar/80x80_10443385_285064841671459_7689177930821632313_n-beera-chicken-house-white-avenue-amritsar-1a06165745dd7616689fcf8a7ee49263.jpg"></a>
+                        </div>
+                        <div class="pull-left">
+                            <a class="restaurant-link" href="/amritsar/beera-chicken-house-white-avenue-amritsar">Beera Chicken House</a>
+                            <span class="restaurant-review">
+                                <a class="review-reviewer-photo" href="/users/mani-singh-468/profile"><img src="/Content/thumbs/user/mani-singh-468/146x146_8f449e16dd10064b876d30b4007edc638299dbc3.jpg"></a>
+                                <span class="review-text">
+                                    One of the best Chicken Tikka in Amritsar, while visiting Amritsar you cannot miss Beera Chicken.
                                 </span>
-                            </div>
-                            <span class="restaurant-rating">
-                                <p class="rateMiddleHeart"> 59% </p>
                             </span>
                         </div>
-                        <div class="recommend-item">
-                            <div class="pull-left">
-                                <a class="restaurant-img" href="/amritsar/shudh-restaurant-town-hall-amritsar"><img src="/Content/thumbs/business/shudh-restaurant-town-hall-amritsar/80x80_12042641_730827820357009_5533930776058197825_n-shudh-restaurant-town-hall-amritsar-99e9607c68707ed3b3f5ced6b5d580b1.jpg"></a>
-                            </div>
-                            <div class="pull-left">
-                                <a class="restaurant-link" href="/amritsar/shudh-restaurant-town-hall-amritsar">Shudh Restaurant</a>
-                                <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/792199504196263/profile"><img src="/Content/thumbs/user/792199504196263/146x146_701e002b21d8943219bc6394c0bab71c0273fd4a.jpg"></a>
-                                    <span class="review-text">
-                                        This is new for me to visit after Bharawan and Kesar in Amritsar.. I like the food and I can come again for Shahi Paneer...
-                                    </span>
+                        <span class="restaurant-rating">
+                            <p class="rateMiddleHeart"> 59% </p>
+                        </span>
+                    </div>
+                    <div class="recommend-item">
+                        <div class="pull-left">
+                            <a class="restaurant-img" href="/amritsar/shudh-restaurant-town-hall-amritsar"><img src="/Content/thumbs/business/shudh-restaurant-town-hall-amritsar/80x80_12042641_730827820357009_5533930776058197825_n-shudh-restaurant-town-hall-amritsar-99e9607c68707ed3b3f5ced6b5d580b1.jpg"></a>
+                        </div>
+                        <div class="pull-left">
+                            <a class="restaurant-link" href="/amritsar/shudh-restaurant-town-hall-amritsar">Shudh Restaurant</a>
+                            <span class="restaurant-review">
+                                <a class="review-reviewer-photo" href="/users/792199504196263/profile"><img src="/Content/thumbs/user/792199504196263/146x146_701e002b21d8943219bc6394c0bab71c0273fd4a.jpg"></a>
+                                <span class="review-text">
+                                    This is new for me to visit after Bharawan and Kesar in Amritsar.. I like the food and I can come again for Shahi Paneer...
                                 </span>
-                            </div>
-                            <span class="restaurant-rating">
-                                <p class="rateHighHeart"> 89% </p>
                             </span>
                         </div>
-                        <div class="recommend-item">
-                            <div class="pull-left">
-                                <a class="restaurant-img" href="/amritsar/makhan-fish-and-chicken-corner-basant-nagar-amritsar"><img src="/Content/thumbs/business/makhan-fish-and-chicken-corner-basant-nagar-amritsar/80x80_13312809_891385924304818_5667230047462664269.jpg"></a>
-                            </div>
-                            <div class="pull-left">
-                                <a class="restaurant-link" href="/amritsar/makhan-fish-and-chicken-corner-basant-nagar-amritsar">Makhan Fish and Chicken Corner</a>
-                                <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/kalki-1912/profile"><img src="/Content/thumbs/user/kalki-1912/146x146_489b42243d3b25094806a8bad87d482981c2d519.jpg"></a>
-                                    <span class="review-text">
-                                        I love Fish, so I figured I'd check this place out.  We had  fish it was so yummilious and soft that it melts in my  mou...
-                                    </span>
+                        <span class="restaurant-rating">
+                            <p class="rateHighHeart"> 89% </p>
+                        </span>
+                    </div>
+                    <div class="recommend-item">
+                        <div class="pull-left">
+                            <a class="restaurant-img" href="/amritsar/makhan-fish-and-chicken-corner-basant-nagar-amritsar"><img src="/Content/thumbs/business/makhan-fish-and-chicken-corner-basant-nagar-amritsar/80x80_13312809_891385924304818_5667230047462664269.jpg"></a>
+                        </div>
+                        <div class="pull-left">
+                            <a class="restaurant-link" href="/amritsar/makhan-fish-and-chicken-corner-basant-nagar-amritsar">Makhan Fish and Chicken Corner</a>
+                            <span class="restaurant-review">
+                                <a class="review-reviewer-photo" href="/users/kalki-1912/profile"><img src="/Content/thumbs/user/kalki-1912/146x146_489b42243d3b25094806a8bad87d482981c2d519.jpg"></a>
+                                <span class="review-text">
+                                    I love Fish, so I figured I'd check this place out.  We had  fish it was so yummilious and soft that it melts in my  mou...
                                 </span>
-                            </div>
-                            <span class="restaurant-rating">
-                                <p class="rateHigherHeart"> 92% </p>
                             </span>
                         </div>
-                        <div class="recommend-item">
-                            <div class="pull-left">
-                                <a class="restaurant-img" href="/amritsar/wtf-white-avenue-amritsar"><img src="/Content/thumbs/business/wtf-white-avenue-amritsar/80x80_10405653_784862508273425_7414421140844571462_n-wtf-white-avenue-amritsar-344ce2a1fbf196d01dfc5ce193d2a719.jpg"></a>
-                            </div>
-                            <div class="pull-left">
-                                <a class="restaurant-link" href="/amritsar/wtf-white-avenue-amritsar">Wtf</a>
-                                <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/998750473491222/profile"><img src="/Content/thumbs/user/998750473491222/146x146_6da35dfbeb02812fd13b8ba82d240d04e4a24fff.jpg"></a>
-                                    <span class="review-text">
-                                        a total fun place to hangout with friends. the food and the service is good. the best part of the place is that it can b...
-                                    </span>
+                        <span class="restaurant-rating">
+                            <p class="rateHigherHeart"> 92% </p>
+                        </span>
+                    </div>
+                    <div class="recommend-item">
+                        <div class="pull-left">
+                            <a class="restaurant-img" href="/amritsar/wtf-white-avenue-amritsar"><img src="/Content/thumbs/business/wtf-white-avenue-amritsar/80x80_10405653_784862508273425_7414421140844571462_n-wtf-white-avenue-amritsar-344ce2a1fbf196d01dfc5ce193d2a719.jpg"></a>
+                        </div>
+                        <div class="pull-left">
+                            <a class="restaurant-link" href="/amritsar/wtf-white-avenue-amritsar">Wtf</a>
+                            <span class="restaurant-review">
+                                <a class="review-reviewer-photo" href="/users/998750473491222/profile"><img src="/Content/thumbs/user/998750473491222/146x146_6da35dfbeb02812fd13b8ba82d240d04e4a24fff.jpg"></a>
+                                <span class="review-text">
+                                    a total fun place to hangout with friends. the food and the service is good. the best part of the place is that it can b...
                                 </span>
-                            </div>
-                            <span class="restaurant-rating">
-                                <p class="rateHighHeart"> 85% </p>
                             </span>
                         </div>
-                        <div class="recommend-item">
-                            <div class="pull-left">
-                                <a class="restaurant-img" href="/amritsar/collage-hyatt-amritsar-gt-road-amritsar"><img src="/Content/thumbs/business/collage-hyatt-amritsar-gt-road-amritsar/80x80_IMG-20150913-WA0004-collage-hyatt-amritsar-gt-road-amritsar-224338a65b3964b4eddc9838718ecd4b.jpg"></a>
-                            </div>
-                            <div class="pull-left">
-                                <a class="restaurant-link" href="/amritsar/collage-hyatt-amritsar-gt-road-amritsar">Collage - Hyatt Amritsar</a>
-                                <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/998750473491222/profile"><img src="/Content/thumbs/user/998750473491222/146x146_6da35dfbeb02812fd13b8ba82d240d04e4a24fff.jpg"></a>
-                                    <span class="review-text">
-                                        Great place. Ample space. High quality. Great service. Great food. High price. Great experience
-                                    </span>
+                        <span class="restaurant-rating">
+                            <p class="rateHighHeart"> 85% </p>
+                        </span>
+                    </div>
+                    <div class="recommend-item">
+                        <div class="pull-left">
+                            <a class="restaurant-img" href="/amritsar/collage-hyatt-amritsar-gt-road-amritsar"><img src="/Content/thumbs/business/collage-hyatt-amritsar-gt-road-amritsar/80x80_IMG-20150913-WA0004-collage-hyatt-amritsar-gt-road-amritsar-224338a65b3964b4eddc9838718ecd4b.jpg"></a>
+                        </div>
+                        <div class="pull-left">
+                            <a class="restaurant-link" href="/amritsar/collage-hyatt-amritsar-gt-road-amritsar">Collage - Hyatt Amritsar</a>
+                            <span class="restaurant-review">
+                                <a class="review-reviewer-photo" href="/users/998750473491222/profile"><img src="/Content/thumbs/user/998750473491222/146x146_6da35dfbeb02812fd13b8ba82d240d04e4a24fff.jpg"></a>
+                                <span class="review-text">
+                                    Great place. Ample space. High quality. Great service. Great food. High price. Great experience
                                 </span>
-                            </div>
-                            <span class="restaurant-rating">
-                                <p class="rateHighHeart"> 85% </p>
                             </span>
                         </div>
+                        <span class="restaurant-rating">
+                            <p class="rateHighHeart"> 85% </p>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="home-right">
-            <hgroup class="heading-01">
-                <h2 class="clr-red ">Perfect app you'll fall in love with</h2>
-            </hgroup>
-            <div class="clearfix">
-                <div class="pull-left" style="margin-right: 10px">
-                    <object data="/Content/collections/imgs/apple-iphone-5s.svg" width="78" type="image/svg+xml">
-                        <img src="/Content/collections/imgs/apple-iphone-5s.svg" width="78">
-                    </object>
-                </div>
-                <div>
-                    <p class="clr-grey">
-                        It's like carrying around 40000+ restaurants in the palm of your hand. No biceps required.
-                    </p>
-                    <a class="download_icon_container" href="https://geo.itunes.apple.com/us/app/redfoodie-find-food-restaurants/id1111345681?mt=8">
-                        <img src="/Content/collections/imgs/Download_on_the_App_Store_Badge_US-UK_135x40.svg">
-                    </a>
-                    <form id="subscription-form" class="subscrube-form" action="/subscribe" method="post">
-                        <div class="input-group">
-                            <input type="text" id="subscription_email" name="subscription[email]" required="required" class="form-control" placeholder="Email App Link">
-                            <input type="hidden" id="subscription__token" name="subscription[_token]" value="dfc89cbcbadf7c2a4097fed25e6000908c1dfbbe">
-                            <span class="input-group-btn bg-red">
-                                <button class="btn btn-default  bg-red" style="color: #fff;border-radius: 0;border-color: transparent" type="submit" title="Notify me">
-                                    <i class="fa fa-envelope-o"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
-                    <p id="subscription-notice">&nbsp;</p>
-                </div>
+    </div>
+    <div class="home-right">
+        <hgroup class="heading-01">
+            <h2 class="clr-red ">Perfect app you'll fall in love with</h2>
+        </hgroup>
+        <div class="clearfix">
+            <div class="pull-left" style="margin-right: 10px">
+                <object data="/Content/collections/imgs/apple-iphone-5s.svg" width="78" type="image/svg+xml">
+                    <img src="/Content/collections/imgs/apple-iphone-5s.svg" width="78">
+                </object>
             </div>
-            <hgroup class="heading-01" style="padding-top: 8px">
-                <h2 class="clr-red ">Explore by neighbourhoods</h2>
-            </hgroup>
-            <div class="neighbourhoods-list">
-                <ul class="list-unstyled clearfix">
-                    <li class="">
-                        <a href="/search?neighbourhoods=1328" title="GT Road">Gt road (41)</a>
-                    </li>
-                    <li class="">
-                        <a href="/search?neighbourhoods=1325" title="Basant Nagar">Basant nagar (13)</a>
-                    </li>
-                    <li class="">
-                        <a href="/search?neighbourhoods=1327" title="INA Colony">Ina colony (12)</a>
-                    </li>
-                    <li class="">
-                        <a href="/search?neighbourhoods=1326" title="White Avenue">White avenue (8)</a>
-                    </li>
-                    <li class="">
-                        <a href="/search?neighbourhoods=1332" title="Mall Road">Mall road (3)</a>
-                    </li>
-                </ul>
-                <ul class="list-unstyled clearfix even">
-                    <li class="even">
-                        <a href="/search?neighbourhoods=1324" title="Ranjit Avenue">Ranjit avenue (55)</a>
-                    </li>
-                    <li class="even">
-                        <a href="/search?neighbourhoods=1323" title="Town Hall">Town hall (22)</a>
-                    </li>
-                    <li class="even">
-                        <a href="/search?neighbourhoods=1329" title="Rani Ka Bagh">Rani ka bagh (13)</a>
-                    </li>
-                    <li class="even">
-                        <a href="/search?neighbourhoods=1331" title="Kabir Park">Kabir park (11)</a>
-                    </li>
-                    <li class="even">
-                        <a href="/search?neighbourhoods=1330" title="Lawrence Road">Lawrence road (7)</a>
-                    </li>
-                    <li class="even">
-                        <a href="/search?neighbourhoods=1333" title="Shastri Nagar">Shastri nagar (2)</a>
-                    </li>
-                </ul>
-                <a href="/list-neighbourhoods" class="more">See all neighbourhoods »</a>
+            <div>
+                <p class="clr-grey">
+                    It's like carrying around 40000+ restaurants in the palm of your hand. No biceps required.
+                </p>
+                <a class="download_icon_container" href="https://geo.itunes.apple.com/us/app/redfoodie-find-food-restaurants/id1111345681?mt=8">
+                    <img src="/Content/collections/imgs/Download_on_the_App_Store_Badge_US-UK_135x40.svg">
+                </a>
+                @using (Html.BeginForm("Subscribe", "Home", FormMethod.Post, new { id = "subscription-form", @class="subscrube-form" }))
+                {
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.SubscriptionEmail, new { htmlAttributes = new { id = "subscription_email", required = "required", @class = "form-control", placeholder = Html.DisplayNameFor(m => m.SubscriptionEmail) } })
+                        @Html.AntiForgeryToken()
+                        <span class="input-group-btn bg-red">
+                            <button class="btn btn-default  bg-red" style="color: #fff;border-radius: 0;border-color: transparent" type="submit" title="Notify me">
+                                <i class="fa fa-envelope-o"></i>
+                            </button>
+                        </span>
+                    </div>
+                }
+                <p id="subscription-notice">&nbsp;</p>
             </div>
-            <hgroup class="heading-01">
-                <h2 class="clr-red " style="">Explore by cuisine</h2>
-            </hgroup>
-            <div class="neighbourhoods-list">
-                <ul class="list-unstyled clearfix">
-                    <li class="">
-                        <a href="/search?tags=North+Indian">North indian</a>
-                    </li>
-                    <li class="">
-                        <a href="/search?tags=Fast+Food">Fast food</a>
-                    </li>
-                    <li class="">
-                        <a href="/search?tags=South+Indian">South indian</a>
-                    </li>
-                    <li class="">
-                        <a href="/search?tags=Street+Food">Street food</a>
-                    </li>
-                </ul>
-                <ul class="list-unstyled clearfix even">
-                    <li class="even">
-                        <a href="/search?tags=Chinese">Chinese</a>
-                    </li>
-                    <li class="even">
-                        <a href="/search?tags=Desserts">Desserts</a>
-                    </li>
-                    <li class="even">
-                        <a href="/search?tags=Mughlai">Mughlai</a>
-                    </li>
-                    <li class="even">
-                        <a href="/search?tags=Bakery">Bakery</a>
-                    </li>
-                </ul>
-                <a href="/list-cuisines" class="more">See all cuisine »</a>
-            </div>
+        </div>
+        <hgroup class="heading-01" style="padding-top: 8px">
+            <h2 class="clr-red ">Explore by neighbourhoods</h2>
+        </hgroup>
+        <div class="neighbourhoods-list">
+            <ul class="list-unstyled clearfix">
+                <li class="">
+                    <a href="/search?neighbourhoods=1328" title="GT Road">Gt road (41)</a>
+                </li>
+                <li class="">
+                    <a href="/search?neighbourhoods=1325" title="Basant Nagar">Basant nagar (13)</a>
+                </li>
+                <li class="">
+                    <a href="/search?neighbourhoods=1327" title="INA Colony">Ina colony (12)</a>
+                </li>
+                <li class="">
+                    <a href="/search?neighbourhoods=1326" title="White Avenue">White avenue (8)</a>
+                </li>
+                <li class="">
+                    <a href="/search?neighbourhoods=1332" title="Mall Road">Mall road (3)</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled clearfix even">
+                <li class="even">
+                    <a href="/search?neighbourhoods=1324" title="Ranjit Avenue">Ranjit avenue (55)</a>
+                </li>
+                <li class="even">
+                    <a href="/search?neighbourhoods=1323" title="Town Hall">Town hall (22)</a>
+                </li>
+                <li class="even">
+                    <a href="/search?neighbourhoods=1329" title="Rani Ka Bagh">Rani ka bagh (13)</a>
+                </li>
+                <li class="even">
+                    <a href="/search?neighbourhoods=1331" title="Kabir Park">Kabir park (11)</a>
+                </li>
+                <li class="even">
+                    <a href="/search?neighbourhoods=1330" title="Lawrence Road">Lawrence road (7)</a>
+                </li>
+                <li class="even">
+                    <a href="/search?neighbourhoods=1333" title="Shastri Nagar">Shastri nagar (2)</a>
+                </li>
+            </ul>
+            <a href="/list-neighbourhoods" class="more">See all neighbourhoods »</a>
+        </div>
+        <hgroup class="heading-01">
+            <h2 class="clr-red " style="">Explore by cuisine</h2>
+        </hgroup>
+        <div class="neighbourhoods-list">
+            <ul class="list-unstyled clearfix">
+                <li class="">
+                    <a href="/search?tags=North+Indian">North indian</a>
+                </li>
+                <li class="">
+                    <a href="/search?tags=Fast+Food">Fast food</a>
+                </li>
+                <li class="">
+                    <a href="/search?tags=South+Indian">South indian</a>
+                </li>
+                <li class="">
+                    <a href="/search?tags=Street+Food">Street food</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled clearfix even">
+                <li class="even">
+                    <a href="/search?tags=Chinese">Chinese</a>
+                </li>
+                <li class="even">
+                    <a href="/search?tags=Desserts">Desserts</a>
+                </li>
+                <li class="even">
+                    <a href="/search?tags=Mughlai">Mughlai</a>
+                </li>
+                <li class="even">
+                    <a href="/search?tags=Bakery">Bakery</a>
+                </li>
+            </ul>
+            <a href="/list-cuisines" class="more">See all cuisine »</a>
         </div>
     </div>
+</div>
 
-    @*<div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+@*<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>
-    </div>*@
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>*@
