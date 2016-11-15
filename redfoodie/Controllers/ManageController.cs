@@ -51,7 +51,7 @@ namespace redfoodie.Controllers
 
         //
         // GET: /Manage/ProfileSettings
-        public ActionResult ProfileSettings(ManageMessageId? message)
+        public async Task<ActionResult> ProfileSettings(ManageMessageId? message)
         {
 //            ViewBag.StatusMessage =
 //                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -62,14 +62,14 @@ namespace redfoodie.Controllers
 //                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
 //                : "";
 //
-//            var userId = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
             var model = new ProfileSettingsViewModel
             {
-                UserName = User.Identity.GetUserName()
-//                HasPassword = HasPassword(),
-//                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                UserName = User.Identity.GetUserName(),
+                HasPassword = HasPassword(),
+                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
 //                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-//                Logins = await UserManager.GetLoginsAsync(userId),
+//                Logins = await UserManager.GetLoginsAsync(userId)
 //                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
@@ -77,9 +77,14 @@ namespace redfoodie.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult ProfileSettings(ProfileSettingsViewModel model)
+        public async Task<JsonResult> ProfileSettings(ProfileSettingsViewModel model)
         {
-            return Json(JsonResponseFactory.SuccessResponse());
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            user.UserName = model.UserName;
+            var updateResult = await UserManager.UpdateAsync(user);
+            return Json(updateResult.Succeeded
+                    ? JsonResponseFactory.SuccessResponse()
+                    : JsonResponseFactory.ErrorResponse(updateResult.Errors));
         }
 
         public ActionResult ViewProfile()
@@ -105,7 +110,7 @@ namespace redfoodie.Controllers
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                 if (user != null)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await SignInManager.SignInAsync(user, false, false);
                 }
                 message = ManageMessageId.RemoveLoginSuccess;
             }

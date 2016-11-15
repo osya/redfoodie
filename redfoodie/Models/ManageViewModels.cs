@@ -15,7 +15,6 @@ namespace redfoodie.Models
         [Display(Name = "Select City")]
         public string City { get; set; }
 
-        [Required]
         [Display(Name = "Twitter Handle")]
         [Url]
         public string Twitter { get; set; }
@@ -30,7 +29,7 @@ namespace redfoodie.Models
 
         [Display(Name = "Phone Number")]
         [Phone]
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Display(Name = "Bio")]
         public string Bio { get; set; }
@@ -46,9 +45,8 @@ namespace redfoodie.Models
         [Display(Name = "Someone thanked my reviews / liked photos")]
         public bool ThanksFavoritemail { get; set; }
 
-        //        public bool HasPassword { get; set; }
-        //        public IList<UserLoginInfo> Logins { get; set; }
-        //        public string PhoneNumber { get; set; }
+        public bool HasPassword { get; set; }
+//        public IList<UserLoginInfo> Logins { get; set; }
         //        public bool TwoFactor { get; set; }
         //        public bool BrowserRemembered { get; set; }
     }

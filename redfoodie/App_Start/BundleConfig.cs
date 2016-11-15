@@ -38,6 +38,8 @@ namespace redfoodie
 
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                       "~/Scripts/Site.js"));
+            bundles.Add(new ScriptBundle("~/Content/js/noty").Include(
+                      "~/Scripts/jquery.noty.packaged.min.js"));
             bundles.Add(new ScriptBundle("~/Content/selectize/js").Include(
                       "~/Scripts/selectize.min.js"));
         }

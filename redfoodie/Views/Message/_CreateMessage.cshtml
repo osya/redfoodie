@@ -9,8 +9,7 @@
         @using (Ajax.BeginForm("Post", "Message", new {ViewBag.ReturnUrl}, new AjaxOptions {HttpMethod = "POST", OnBegin = "$('#message').loadingIcon('attach');", OnSuccess = "postSuccess"}, new {role = "form", id = "newform" }))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary("", new { @class = "text-danger", id = "post_message_errors" })
-            <div class="confirmation-message" id="message-port-confirmation" style="display: none;">Message sent</div>
+            <div id="alert"></div>
             <div class="messaging-top-area clearfix">
                 <div class="recipients" style="position: relative;">
                     @Html.LabelFor(m => m.To, new { @class = "caption", style = "font-weight: normal;margin-bottom:0;display:inline;" })
@@ -37,11 +36,19 @@
     function postSuccess(data) {
         $('#message').loadingIcon('detach');
         if (data.Success) {
-            $("#newform .confirmation-message").show();
+            $('#message #alert').noty({
+                text: 'Message sent',
+                dismissQueue: false,
+                timeout: 5000,
+                template: '<div class="noty_message confirmation-message" style="margin-bottom:0;"><span class="noty_text"></span></div>'
+            });
         } else {
-            $("#newform .confirmation-message").hide();
             // display errors
-            $("#newform .validation-summary-valid").text(data.ErrorMessage);
+            $('#message #alert').noty({
+                text: data.ErrorMessage,
+                dismissQueue: false,
+                template: '<div class="noty_message text-danger" style="margin-bottom:0;"><span class="noty_text"></span></div>'
+            });
         }
     }
 </script>
