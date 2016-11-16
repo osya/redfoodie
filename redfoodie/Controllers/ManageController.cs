@@ -69,6 +69,10 @@ namespace redfoodie.Controllers
                 UserName = User.Identity.GetUserName(),
                 Cities = Session["citiesList"] as SelectList,
                 SelectedCity = user.CityId,
+                Twitter = user.Twitter,
+                Facebook = user.Facebook,
+                Website = user.Website,
+                Bio = user.Bio,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
 //                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
@@ -88,6 +92,10 @@ namespace redfoodie.Controllers
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             user.UserName = model.UserName;
             user.CityId = model.SelectedCity;
+            user.Twitter = model.Twitter;
+            user.Facebook = model.Facebook;
+            user.Website = model.Website;
+            user.Bio = model.Bio;
             var updateResult = await UserManager.UpdateAsync(user);
             return Json(updateResult.Succeeded
                 ? JsonResponseFactory.SuccessResponse()

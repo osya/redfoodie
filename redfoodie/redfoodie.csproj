@@ -215,6 +215,22 @@
     <Compile Include="Migrations\201611160942323_Add FK to ApplicationUser.Designer.cs">
       <DependentUpon>201611160942323_Add FK to ApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611161150160_Add Twitter to ApplicationUser.cs" />
+    <Compile Include="Migrations\201611161150160_Add Twitter to ApplicationUser.Designer.cs">
+      <DependentUpon>201611161150160_Add Twitter to ApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611161215173_Add `Facebook` to ApplicationUser.cs" />
+    <Compile Include="Migrations\201611161215173_Add `Facebook` to ApplicationUser.Designer.cs">
+      <DependentUpon>201611161215173_Add `Facebook` to ApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611161218297_Add `Website` to ApplicationUser.cs" />
+    <Compile Include="Migrations\201611161218297_Add `Website` to ApplicationUser.Designer.cs">
+      <DependentUpon>201611161218297_Add `Website` to ApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611161222405_Add `Bio` to ApplicationUser.cs" />
+    <Compile Include="Migrations\201611161222405_Add `Bio` to ApplicationUser.Designer.cs">
+      <DependentUpon>201611161222405_Add `Bio` to ApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\InviteFriendsViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -415,6 +431,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611160942323_Add FK to ApplicationUser.resx">
       <DependentUpon>201611160942323_Add FK to ApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611161150160_Add Twitter to ApplicationUser.resx">
+      <DependentUpon>201611161150160_Add Twitter to ApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611161215173_Add `Facebook` to ApplicationUser.resx">
+      <DependentUpon>201611161215173_Add `Facebook` to ApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611161218297_Add `Website` to ApplicationUser.resx">
+      <DependentUpon>201611161218297_Add `Website` to ApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611161222405_Add `Bio` to ApplicationUser.resx">
+      <DependentUpon>201611161222405_Add `Bio` to ApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

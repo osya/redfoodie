@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -13,6 +14,14 @@ namespace redfoodie.Models
         [ForeignKey("City")]
         public int CityId { get; set; }
         public virtual City City { get; set; }
+
+        public string Twitter { get; set; }
+
+        public string Facebook { get; set; }
+
+        public string Website { get; set; }
+
+        public string Bio { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
