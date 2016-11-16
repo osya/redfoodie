@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201611161222405_Add `Bio` to ApplicationUser.Designer.cs">
       <DependentUpon>201611161222405_Add `Bio` to ApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611161228571_Add MaxLength to Bio.cs" />
+    <Compile Include="Migrations\201611161228571_Add MaxLength to Bio.Designer.cs">
+      <DependentUpon>201611161228571_Add MaxLength to Bio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\InviteFriendsViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -443,6 +447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611161222405_Add `Bio` to ApplicationUser.resx">
       <DependentUpon>201611161222405_Add `Bio` to ApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611161228571_Add MaxLength to Bio.resx">
+      <DependentUpon>201611161228571_Add MaxLength to Bio.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

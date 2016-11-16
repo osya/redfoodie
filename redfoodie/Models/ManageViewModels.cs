@@ -35,6 +35,7 @@ namespace redfoodie.Models
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Bio")]
+        [MaxLength(80)]
         public string Bio { get; set; }
 
         [Display(Name = "Username")]

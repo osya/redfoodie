@@ -212,6 +212,14 @@
     $(document)
         .ready(function($) {
             $('.dropdown').selectize();
+
+            $('#ispg_userbundle_edituser_bio').keyup(function (e) {
+                countChar(document.getElementById('ispg_userbundle_edituser_bio'));
+            });
+            function countChar(val) {
+                document.getElementById('charNum').innerText = val.value.length;
+            }
+            countChar(document.getElementById('ispg_userbundle_edituser_bio'));
         });
 
     function settingsSuccess(data) {
