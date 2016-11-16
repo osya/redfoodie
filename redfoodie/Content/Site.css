@@ -312,6 +312,9 @@ ul.bxslider li a {
     -o-transition: top .3s ease 0s;
     transition: top .3s ease 0s;
 }
+.container {
+    width: auto!important;
+}
 .icon {
     background-image: url(/Content/collections/imgs/sprite.png);
     background-repeat: no-repeat;
@@ -511,6 +514,10 @@ ul.bxslider li a {
     left: 50%;
     display: none;
     z-index: 9999;
+}
+
+.pop_wrapper .front-form input,.pop_wrapper .front-form select,.pop_wrapper .front-form textarea {
+    background-color: #fff;
 }
 
 .front-form textarea {
@@ -1697,6 +1704,9 @@ p {
 }
 .width_350 {
     width: 350px;
+}
+.width_400 {
+    width: 404px;
 }
 
 .profile-randoms {

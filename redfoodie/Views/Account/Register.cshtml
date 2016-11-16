@@ -17,7 +17,7 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            @using (Ajax.BeginForm("Register", "Account", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#Signup').loadingIcon('attach');", OnSuccess = "registerSuccess" }, new { role = "form", id = "register_form" }))
+            @using (Ajax.BeginForm("Register", "Account", new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#Signup').loadingIcon('attach');", OnSuccess = "registerSuccess" }, new { role = "form", id = "register_form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class = "text-danger" })
