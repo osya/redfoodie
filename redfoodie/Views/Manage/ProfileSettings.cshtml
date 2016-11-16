@@ -10,36 +10,36 @@
     {
         @Html.AntiForgeryToken()
         <div class="globalwidth clearfix pad_t12">
-            <div id="alert"></div>
+            <div id="upef_alert"></div>
             <div class="pull-left left_part contact-form no_marg_lft ">
                 <h3 class="h20">@ViewBag.Title</h3>
                 <div>
                     <div class="form-filed form-group">
-                        @Html.TextBoxFor(m => m.UserName, new {id = "ispg_userbundle_edituser_firstName", required = "required", placeholder = Html.DisplayNameFor(x => x.UserName), title = Html.DisplayNameFor(x => x.UserName)})
+                        @Html.TextBoxFor(m => m.UserName, new {id = "upef_UserName", required = "required", placeholder = Html.DisplayNameFor(x => x.UserName), title = Html.DisplayNameFor(x => x.UserName)})
                         @Html.ValidationMessagesFor(m => m.UserName, new {@class = "text-danger"})
                     </div>
                     <div class="form-filed">
-                        @Html.DropDownListFor(m => m.SelectedCity, Model.Cities, new {id = "ispg_userbundle_edituser_city", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.SelectedCity), placeholder = Html.DisplayNameFor(m => m.SelectedCity), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;"})
+                        @Html.DropDownListFor(m => m.SelectedCity, Model.Cities, new {id = "upef_SelectedCity", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.SelectedCity), placeholder = Html.DisplayNameFor(m => m.SelectedCity), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;"})
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.Twitter, new {htmlAttributes = new {id = "ispg_userbundle_edituser_twitter_handle", placeholder = Html.DisplayNameFor(x => x.Twitter), title = Html.DisplayNameFor(x => x.Twitter), autocomplete = "off"}})
+                        @Html.EditorFor(m => m.Twitter, new {htmlAttributes = new {id = "upef_Twitter", placeholder = Html.DisplayNameFor(x => x.Twitter), title = Html.DisplayNameFor(x => x.Twitter), autocomplete = "off"}})
                         @Html.ValidationMessagesFor(m => m.Twitter, new {@class = "text-danger"})
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.Facebook, new {htmlAttributes = new {id = "ispg_userbundle_edituser_facebook_url", placeholder = Html.DisplayNameFor(x => x.Facebook), title = Html.DisplayNameFor(x => x.Facebook), autocomplete = "off"}})
+                        @Html.EditorFor(m => m.Facebook, new {htmlAttributes = new {id = "upef_Facebook", placeholder = Html.DisplayNameFor(x => x.Facebook), title = Html.DisplayNameFor(x => x.Facebook), autocomplete = "off"}})
                         @Html.ValidationMessagesFor(m => m.Facebook, new {@class = "text-danger"})
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.Website, new {htmlAttributes = new {id = "ispg_userbundle_edituser_website", placeholder = Html.DisplayNameFor(x => x.Website), title = Html.DisplayNameFor(x => x.Website), autocomplete = "off"}})
+                        @Html.EditorFor(m => m.Website, new {htmlAttributes = new {id = "upef_Website", placeholder = Html.DisplayNameFor(x => x.Website), title = Html.DisplayNameFor(x => x.Website), autocomplete = "off"}})
                         @Html.ValidationMessagesFor(m => m.Website, new {@class = "text-danger"})
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.PhoneNumber, new {htmlAttributes = new {id = "ispg_userbundle_edituser_userPhone", placeholder = Html.DisplayNameFor(x => x.PhoneNumber), title = "Mobile Number", autocomplete = "off"}})
+                        @Html.EditorFor(m => m.PhoneNumber, new {htmlAttributes = new {id = "upef_PhoneNumber", placeholder = Html.DisplayNameFor(x => x.PhoneNumber), title = "Mobile Number", autocomplete = "off"}})
                         @Html.ValidationMessagesFor(m => m.PhoneNumber, new {@class = "text-danger"})
                     </div>
                 </div>
                 <div class="form-filed form-group" style="width: 612px">
-                    @Html.TextAreaFor(m => m.Bio, new {id = "ispg_userbundle_edituser_bio", placeholder = Html.DisplayNameFor(x => x.Bio), title = Html.DisplayNameFor(x => x.Bio)})
+                    @Html.TextAreaFor(m => m.Bio, new {id = "upef_Bio", placeholder = Html.DisplayNameFor(x => x.Bio), title = Html.DisplayNameFor(x => x.Bio)})
                     @Html.ValidationMessagesFor(m => m.Bio, new {@class = "text-danger"})
                     <p class="bio-limit pull-left">About yourself in 80 characters or less.</p>
                     <span class="error pull-right">Characters: <strong id="charNum">0</strong></span>
@@ -159,53 +159,6 @@
 @*             Uncomment the following block after you have set up two-factor authentication*@
 @*        *@
 @*        @*  *@
-@*            <dt>Phone Number:</dt>*@
-@*            <dd>*@
-@*                @(Model.PhoneNumber ?? "None")*@
-@*                @if (Model.PhoneNumber != null)*@
-@*                {*@
-@*                    <br />*@
-@*                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>*@
-@*                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))*@
-@*                    {*@
-@*                        @Html.AntiForgeryToken()*@
-@*                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>*@
-@*                    }*@
-@*                }*@
-@*                else*@
-@*                {*@
-@*                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")*@
-@*                }*@
-@*            </dd>*@
-@*        *@
-@*        <dt>Two-Factor Authentication:</dt>*@
-@*        <dd>*@
-@*            <p>*@
-@*                There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>*@
-@*                for details on setting up this ASP.NET application to support two-factor authentication.*@
-@*            </p>*@
-@*            @if (Model.TwoFactor)*@
-@*                {*@
-@*                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))*@
-@*                    {*@
-@*                        @Html.AntiForgeryToken()*@
-@*                        <text>Enabled*@
-@*                        <input type="submit" value="Disable" class="btn btn-link" />*@
-@*                        </text>*@
-@*                    }*@
-@*                }*@
-@*                else*@
-@*                {*@
-@*                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))*@
-@*                    {*@
-@*                        @Html.AntiForgeryToken()*@
-@*                        <text>Disabled*@
-@*                        <input type="submit" value="Enable" class="btn btn-link" />*@
-@*                        </text>*@
-@*                    }*@
-@*                }*@
-@*        </dd>*@
-@*    </dl>*@
 @*</div>*@
 @Scripts.Render("~/Content/selectize/js")
 <script>
@@ -213,19 +166,21 @@
         .ready(function($) {
             $('.dropdown').selectize();
 
-            $('#ispg_userbundle_edituser_bio').keyup(function (e) {
+            $('#upef_Bio').keyup(function (e) {
                 countChar(document.getElementById('ispg_userbundle_edituser_bio'));
             });
             function countChar(val) {
-                document.getElementById('charNum').innerText = val.value.length;
+                if ((val != null) && (val.value != null)) {
+                    document.getElementById('charNum').innerText = val.value.length;
+                }
             }
-            countChar(document.getElementById('ispg_userbundle_edituser_bio'));
+            countChar($("#upef_Bio")[0]);
         });
 
     function settingsSuccess(data) {
         $('#user_profile_edit_form').loadingIcon('detach');
         if (data.Success) {
-            $('#user_profile_edit_form #alert').noty({
+            $('#upef_alert').noty({
                 text: 'Your changes were saved successfully!',
                 dismissQueue: false,
                 timeout: 5000,
@@ -233,11 +188,20 @@
             });
         } else {
             // display errors
-            $('#user_profile_edit_form #alert').noty({
-                text: data.ErrorMessage,
-                dismissQueue: false,
-                template: '<div class="noty_message alert alert-danger" style="margin-bottom:0;margin-top: 6px;"><span class="noty_text"></span></div>'
-            });
+            for (var property in data.ModelState) {
+                if (data.ModelState.hasOwnProperty(property)) {
+                    if (!property) {
+                        $('#upef_alert').noty({
+                            text: data.ModelState[property].join(" "),
+                            dismissQueue: false,
+                            template: '<div class="noty_message alert alert-danger" style="margin-bottom:0;margin-top: 6px;"><span class="noty_text"></span></div>'
+                        });
+                    } else {
+                        $("#upef_" + property + "+span").text(data.ModelState[property].join(" "));
+                    }
+                }
+            }
+
         }
     }
 </script>

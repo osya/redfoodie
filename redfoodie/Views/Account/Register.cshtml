@@ -61,7 +61,7 @@
                         child.setAttribute("id", "login_errors");
                         child.innerText = data.ModelState[property].join(" ");
                         node.prepend(child);
-                    } else if (data.ModelState.hasOwnProperty(property)) {
+                    } else {
                         $("#Signup #" + property + "+span").text(data.ModelState[property].join(" "));
                     }
                 }
