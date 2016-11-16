@@ -207,6 +207,14 @@
     <Compile Include="Migrations\201611121401524_Drop Href column from City.Designer.cs">
       <DependentUpon>201611121401524_Drop Href column from City.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611160624477_Add ApplicationUser.City.cs" />
+    <Compile Include="Migrations\201611160624477_Add ApplicationUser.City.Designer.cs">
+      <DependentUpon>201611160624477_Add ApplicationUser.City.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611160942323_Add FK to ApplicationUser.cs" />
+    <Compile Include="Migrations\201611160942323_Add FK to ApplicationUser.Designer.cs">
+      <DependentUpon>201611160942323_Add FK to ApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\InviteFriendsViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -401,6 +409,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611121401524_Drop Href column from City.resx">
       <DependentUpon>201611121401524_Drop Href column from City.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611160624477_Add ApplicationUser.City.resx">
+      <DependentUpon>201611160624477_Add ApplicationUser.City.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611160942323_Add FK to ApplicationUser.resx">
+      <DependentUpon>201611160942323_Add FK to ApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

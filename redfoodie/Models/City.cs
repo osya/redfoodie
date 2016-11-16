@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace redfoodie.Models
@@ -11,5 +12,7 @@ namespace redfoodie.Models
         public int? ParentId { get; set; }
 
         public string Name { get; set; }
+
+        public virtual ICollection<ApplicationUser> ApplicationUser { get; set; }
     }
 }

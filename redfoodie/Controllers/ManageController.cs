@@ -63,9 +63,12 @@ namespace redfoodie.Controllers
 //                : "";
 //
             var userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             var model = new ProfileSettingsViewModel
             {
                 UserName = User.Identity.GetUserName(),
+                Cities = Session["citiesList"] as SelectList,
+                SelectedCity = user.CityId,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
 //                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
@@ -79,12 +82,16 @@ namespace redfoodie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> ProfileSettings(ProfileSettingsViewModel model)
         {
+            if (!ModelState.IsValid)
+                return Json(JsonResponseFactory.ErrorResponse(ModelState.Where(pair => pair.Value.Errors.Count > 0)
+                    .ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             user.UserName = model.UserName;
+            user.CityId = model.SelectedCity;
             var updateResult = await UserManager.UpdateAsync(user);
             return Json(updateResult.Succeeded
-                    ? JsonResponseFactory.SuccessResponse()
-                    : JsonResponseFactory.ErrorResponse(updateResult.Errors));
+                ? JsonResponseFactory.SuccessResponse()
+                : JsonResponseFactory.ErrorResponse(updateResult.Errors));
         }
 
         public ActionResult ViewProfile()

@@ -6,7 +6,7 @@
 }
 @Styles.Render("~/Content/settings/css")
 <div class="clearfix career_inner settings">
-    @using (Ajax.BeginForm("ProfileSettings", "Manage", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#user_profile_edit_form').loadingIcon('attach');", OnSuccess = "settingsSuccess" }, new {id = "user_profile_edit_form", @class = "fos_user_registration_register front-form"}))
+    @using (Ajax.BeginForm("ProfileSettings", "Manage", new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#user_profile_edit_form').loadingIcon('attach');", OnSuccess = "settingsSuccess" }, new {id = "user_profile_edit_form", @class = "fos_user_registration_register front-form"}))
     {
         @Html.AntiForgeryToken()
         <div class="globalwidth clearfix pad_t12">
@@ -19,11 +19,7 @@
                         @Html.ValidationMessagesFor(m => m.UserName, new {@class = "text-danger"})
                     </div>
                     <div class="form-filed">
-                        @{
-                            var selectList = ((List<City>) Session["cities"]).Select(x => new SelectListItem {Text = x.Name, Value = x.Id.ToString()}).ToList();
-                            selectList[0].Selected = true;
-                        }
-                        @Html.DropDownListFor(m => m.City, selectList, new {id = "ispg_userbundle_edituser_city", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.City), placeholder = Html.DisplayNameFor(m => m.City), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;"})
+                        @Html.DropDownListFor(m => m.SelectedCity, Model.Cities, new {id = "ispg_userbundle_edituser_city", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.SelectedCity), placeholder = Html.DisplayNameFor(m => m.SelectedCity), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;"})
                     </div>
                     <div class="form-filed form-group">
                         @Html.EditorFor(m => m.Twitter, new {htmlAttributes = new {id = "ispg_userbundle_edituser_twitter_handle", placeholder = Html.DisplayNameFor(x => x.Twitter), title = Html.DisplayNameFor(x => x.Twitter), autocomplete = "off"}})

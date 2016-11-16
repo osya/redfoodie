@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
@@ -11,9 +12,11 @@ namespace redfoodie.Models
         [Display(Name = "Full Name")]
         public string UserName { get; set; }
 
+        public SelectList Cities { get; set; }
+
         [Required]
         [Display(Name = "Select City")]
-        public string City { get; set; }
+        public int SelectedCity { get; set; }
 
         [Display(Name = "Twitter Handle")]
         [Url]
@@ -72,7 +75,7 @@ namespace redfoodie.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -91,7 +94,7 @@ namespace redfoodie.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 

@@ -27,14 +27,14 @@
                 <nav class="nav navbar-nav navbar-left">
                     <nav class="city-list">
                         <div class="city-box pull-left">
-                            @Session["currentCity"]<span class="fa fa-angle-down"></span>
+                            @(((City) Session["currentCity"]).Name)<span class="fa fa-angle-down"></span>
                             <div class="drop_menu " style="display: none">
                                 <ul class="list-unstyled">
                                     <li class="cat clearfix second-country">
                                         <div class="country_city_list">
-                                            @foreach (var city in (List<City>)Session["cities"])
+                                            @foreach (var city in (IEnumerable<SelectListItem>)Session["citiesList"])
                                             {
-                                                @Html.ActionLink(city.Name, "Index", "Home", new {city = city.Name }, null)
+                                                @Html.ActionLink(city.Text, "Index", "Home", new {cityId = city.Value }, null)
                                             }
                                         </div>
                                     </li>
