@@ -1,4 +1,5 @@
-﻿@model redfoodie.Models.InviteFriendsViewModel
+﻿@using redfoodie.Views
+@model redfoodie.Models.InviteFriendsViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -25,6 +26,7 @@
             <div class="input-group">
                 <span class="input-group-addon"><img src="/Content/collections/imgs/email-invite.svg" alt="Email Invite"></span>
                 @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class="form-control email-invite", placeholder=Html.DisplayNameFor(m => m.Email), autocomplete="off" } })
+                @Html.ValidationMessagesFor(m => m.Email, new { @class = "text-danger" })
                 <span class="input-group-btn">
                     <button class="btn btn-default  send-email-invite" type="button"><span>Send invite</span></button>
                 </span>
@@ -38,6 +40,7 @@
         <div class="socials-connects search">
             <div class="input-group">
                 @Html.TextBoxFor(m => m.SearchUsers, new {@class="form-control", placeholder=Html.DisplayNameFor(m => m.SearchUsers), id="searchUsers"})
+                @Html.ValidationMessagesFor(m => m.SearchUsers, new { @class = "text-danger" })
                 <span class="input-group-addon" id="search-redfoodies-button"><i class="redfood-icon redfood-invite-search clr-red"></i></span>
             </div>
             <div class="socials-connects-search-dpdwn" id="socials-connects-search-dpdwn" style="display: none;">

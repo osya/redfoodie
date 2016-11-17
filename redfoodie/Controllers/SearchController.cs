@@ -13,6 +13,7 @@ namespace redfoodie.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult Search(SearchViewModel model)
         {
+            // TODO: Implement logic
             return Json(ModelState.IsValid ? JsonResponseFactory.SuccessResponse() : JsonResponseFactory.ErrorResponse("Some error"));
         }
     }

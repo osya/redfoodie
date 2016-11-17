@@ -129,6 +129,15 @@ namespace redfoodie.Controllers
                 .ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult Deactivate(DeactivateViewModel model)
+        {
+            // TODO: Implement logic
+            return Json(ModelState.IsValid ? JsonResponseFactory.SuccessResponse() : 
+                JsonResponseFactory.ErrorResponse(ModelState.Where(pair => pair.Value.Errors.Count > 0).ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

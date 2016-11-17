@@ -1,0 +1,57 @@
+﻿@using redfoodie.Views
+@model redfoodie.Models.DeactivateViewModel
+@{
+    ViewBag.Title = "Profile Deactivation Request";
+}
+<div data-modal-content-container="1" data-modal-wrapper-class="width_400" class="hide" id="deactivate_account" style="display: block !important">
+    <section class="container main-content-area-spacer">
+        <section class="dashbord-box01 clearfix">
+            <div class="create-account pull-left user-account-edit front-form">
+                <h2>@ViewBag.Title</h2>
+                @using (Ajax.BeginForm("Deactivate", "Manage", new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#deactivate_account').loadingIcon('attach');", OnSuccess = "deactivateSuccess" }, new { id = "deactivate_account_form", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div id="da_alert"></div>
+                    <div class="form-filed">
+                        @Html.TextAreaFor(m => m.Reason, new { style = "resize:vertical;", id = "da_reason", name = "deactivate_account_reason" })
+                        @Html.ValidationMessagesFor(m => m.Reason, new { @class = "text-danger" })
+                    </div>
+                    <p class="clr-grey" style="line-height: 16px">
+                        Before you leave, please tell us why you'd like to deactivate your Redfoodie account.
+                        This information will help us improve. <span style="color: #aeaeae;">(optional)</span>
+                    </p>
+                    <button id="btn-account-deactivate" class="button small-btn"><span>Submit</span></button>
+                }
+            </div>
+        </section>
+    </section>
+</div>
+<script>
+    function deactivateSuccess(data) {
+        $('#deactivate_account').loadingIcon('detach');
+        if (data.Success) {
+            $('#da_alert').noty({
+                text: 'Your request has been successfully forwarded to Redfoodie',
+                dismissQueue: false,
+                timeout: 5000,
+                template: '<div class="noty_message confirmation-message" style="margin-bottom:0;margin-top:0;"><span class="noty_text"></span></div>'
+            });
+        }
+        else {
+            // display errors
+            for (var property in data.ModelState) {
+                if (data.ModelState.hasOwnProperty(property)) {
+                    if (!property) {
+                        $('#da_alert').noty({
+                            text: data.ModelState[property].join(" "),
+                            dismissQueue: false,
+                            template: '<div class="noty_message alert alert-danger" style="margin-bottom:0;margin-top: 0;"><span class="noty_text"></span></div>'
+                        });
+                    } else {
+                        $("#da_" + property + "+span").text(data.ModelState[property].join(" "));
+                    }
+                }
+            }
+        }
+    }
+</script>

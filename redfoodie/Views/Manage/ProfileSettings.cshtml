@@ -20,6 +20,7 @@
                     </div>
                     <div class="form-filed">
                         @Html.DropDownListFor(m => m.SelectedCity, Model.Cities, new {id = "upef_SelectedCity", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.SelectedCity), placeholder = Html.DisplayNameFor(m => m.SelectedCity), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;"})
+                        @Html.ValidationMessagesFor(m => m.SelectedCity, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed form-group">
                         @Html.EditorFor(m => m.Twitter, new {htmlAttributes = new {id = "upef_Twitter", placeholder = Html.DisplayNameFor(x => x.Twitter), title = Html.DisplayNameFor(x => x.Twitter), autocomplete = "off"}})

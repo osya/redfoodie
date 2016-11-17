@@ -368,6 +368,7 @@
     <Content Include="Views\Notification\SeeAll.cshtml" />
     <Content Include="Views\Manage\ViewProfile.cshtml" />
     <Content Include="Views\Manage\InviteFriends.cshtml" />
+    <Content Include="Views\Manage\_DeactivateAccount.cshtml" />
     <None Include="Views\ResetPasswordEmail.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
