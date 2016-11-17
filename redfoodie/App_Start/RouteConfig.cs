@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using redfoodie.Models;
 
 namespace redfoodie
 {
@@ -8,6 +9,13 @@ namespace redfoodie
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                "ShortUrl",
+                "{shortUrl}",
+                new { controller = "Manage", action = "ViewProfile" }
+            );
+
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",

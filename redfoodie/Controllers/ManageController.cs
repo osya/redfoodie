@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -138,9 +139,19 @@ namespace redfoodie.Controllers
                     .ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
         }
 
-        public ActionResult ViewProfile()
+        [AllowAnonymous]
+        public async Task<ActionResult> ViewProfile(string username, string shortUrl)
         {
-            return View();
+            if (username == null && shortUrl == null)
+            {
+                return View();
+            }
+            if (string.Equals(username, User.Identity.GetUserName()))
+                return View(new ViewProfileViewModel { UserName = username });
+            var dbContext = new ApplicationDbContext();
+            var userQ = dbContext.Users.Where(m => string.Equals(m.UserName, username) || string.Equals(m.ShortUrl, shortUrl));
+            if (!await userQ.AnyAsync() || (await userQ.CountAsync()) > 1) return View("Error");
+            return View(new ViewProfileViewModel { UserName = userQ.First().UserName });
         }
 
         public ActionResult InviteFriends()
@@ -174,9 +185,19 @@ namespace redfoodie.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Deactivate(DeactivateViewModel model)
+        public async Task<JsonResult> Deactivate(DeactivateViewModel model)
         {
-            // TODO: Implement logic
+            // TODO: Add removing from Roles, Logins, Users posts. Store model data (Reason) somewhere in database
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    var result = await UserManager.DeleteAsync(user);
+                    AddErrors(result);
+                }
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            }
             return Json(ModelState.IsValid ? JsonResponseFactory.SuccessResponse() : 
                 JsonResponseFactory.ErrorResponse(ModelState.Where(pair => pair.Value.Errors.Count > 0).ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
         }

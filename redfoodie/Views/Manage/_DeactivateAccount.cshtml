@@ -8,7 +8,7 @@
         <section class="dashbord-box01 clearfix">
             <div class="create-account pull-left user-account-edit front-form">
                 <h2>@ViewBag.Title</h2>
-                @using (Ajax.BeginForm("Deactivate", "Manage", new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#deactivate_account').loadingIcon('attach');", OnSuccess = "deactivateSuccess" }, new { id = "deactivate_account_form", role = "form" }))
+                @using (Ajax.BeginForm("Deactivate", "Manage", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#deactivate_account').loadingIcon('attach');", OnSuccess = "deactivateSuccess" }, new { id = "deactivate_account_form", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
                     <div id="da_alert"></div>
@@ -34,7 +34,8 @@
                 text: 'Your request has been successfully forwarded to Redfoodie',
                 dismissQueue: false,
                 timeout: 5000,
-                template: '<div class="noty_message confirmation-message" style="margin-bottom:0;margin-top:0;"><span class="noty_text"></span></div>'
+                template: '<div class="noty_message confirmation-message" style="margin-bottom:0;margin-top:0;"><span class="noty_text"></span></div>',
+                callback: { afterClose: function () { window.location.href = '@Url.Action("Index", "Home")'; } }
             });
         }
         else {

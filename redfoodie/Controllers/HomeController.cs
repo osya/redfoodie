@@ -29,7 +29,7 @@ namespace redfoodie.Controllers
                         if ((Session["currentCity"] == null) && User.Identity.IsAuthenticated)
                         {
                             var context = new ApplicationDbContext();
-                            Session["currentCity"] = context.Users.Find(User.Identity.GetUserId()).City;
+                            Session["currentCity"] = context.Users.Find(User.Identity.GetUserId())?.City;
                         }
                     }
 

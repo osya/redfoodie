@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Email me when";
 }
-@using (Ajax.BeginForm("NotificationSettings", "Manage", new AjaxOptions {HttpMethod = "POST", OnBegin = "$('#notification_settings_form').loadingIcon('attach');", OnSuccess = "notificationSettingsSuccess"}, new {id = "notification_settings_form", @class = "fos_user_registration_register front-form"}))
+@using (Ajax.BeginForm("NotificationSettings", "Manage", null, new AjaxOptions {HttpMethod = "POST", OnBegin = "$('#notification_settings_form').loadingIcon('attach');", OnSuccess = "notificationSettingsSuccess"}, new {id = "notification_settings_form", @class = "fos_user_registration_register front-form"}))
 {
     @Html.AntiForgeryToken()
     <div id="ns_alert"></div>

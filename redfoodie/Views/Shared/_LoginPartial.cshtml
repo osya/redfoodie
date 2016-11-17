@@ -14,8 +14,8 @@
                 <header class="user-details-wrapper user-details-wrapper-override">
                     <div class="user-details">
                         <div class="user-name">
-                            @Html.ActionLink(User.Identity.GetUserName() + "!", "ViewProfile", "Manage", null, null)
-                            @Html.ActionLink("View profile", "ViewProfile", "Manage", null, new { @class="sub-link" })
+                            @Html.ActionLink(User.Identity.GetUserName() + "!", "ViewProfile", "Manage", new { UserName = User.Identity.GetUserName() }, null)
+                            @Html.ActionLink("View profile", "ViewProfile", "Manage", new { UserName = User.Identity.GetUserName() }, new { @class="sub-link" })
                         </div>
                         <div class="user-invite">@Html.ActionLink("Invite friends", "InviteFriends", "Manage", null, null)</div>
                         <div class="user-settings">@Html.ActionLink("Settings", "ProfileSettings", "Manage", null, null)</div>

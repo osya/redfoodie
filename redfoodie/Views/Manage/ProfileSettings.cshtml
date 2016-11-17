@@ -7,7 +7,7 @@
 @Styles.Render("~/Content/settings/css")
 <div class="clearfix career_inner settings">
     <div class="globalwidth clearfix pad_t12">
-        @using (Ajax.BeginForm("ProfileSettings", "Manage", new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#user_profile_edit_form').loadingIcon('attach');", OnSuccess = "settingsSuccess" }, new { id = "user_profile_edit_form", @class = "fos_user_registration_register front-form" }))
+        @using (Ajax.BeginForm("ProfileSettings", "Manage", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#user_profile_edit_form').loadingIcon('attach');", OnSuccess = "settingsSuccess" }, new { id = "user_profile_edit_form", @class = "fos_user_registration_register front-form" }))
         {
             @Html.AntiForgeryToken()
             <div id="upef_alert"></div>

@@ -49,6 +49,14 @@ namespace redfoodie.Models
         public bool ThanksFavoritemail { get; set; }
     }
 
+    public class ViewProfileViewModel
+    {
+        [Required]
+        [Display(Name = "Full Name")]
+        [MinLength(4)]
+        public string UserName { get; set; }
+    }
+
     public class ShortUrlViewModel
     {
         [Display(Name = "Username")]
