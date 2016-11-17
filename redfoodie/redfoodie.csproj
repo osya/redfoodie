@@ -235,6 +235,10 @@
     <Compile Include="Migrations\201611161228571_Add MaxLength to Bio.Designer.cs">
       <DependentUpon>201611161228571_Add MaxLength to Bio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611170641536_Add Notification settings.cs" />
+    <Compile Include="Migrations\201611170641536_Add Notification settings.Designer.cs">
+      <DependentUpon>201611170641536_Add Notification settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\InviteFriendsViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -447,6 +451,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611161228571_Add MaxLength to Bio.resx">
       <DependentUpon>201611161228571_Add MaxLength to Bio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611170641536_Add Notification settings.resx">
+      <DependentUpon>201611170641536_Add Notification settings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

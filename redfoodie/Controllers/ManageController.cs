@@ -64,7 +64,10 @@ namespace redfoodie.Controllers
                 Facebook = user.Facebook,
                 Website = user.Website,
                 Bio = user.Bio,
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId)
+                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                FollowMail = user.FollowMail,
+                ReplyReviewmail = user.ReplyReviewmail,
+                ThanksFavoritemail = user.ThanksFavoritemail
             };
             return View(model);
         }
@@ -83,6 +86,9 @@ namespace redfoodie.Controllers
                 user.Website = model.Website;
                 user.PhoneNumber = model.PhoneNumber;
                 user.Bio = model.Bio;
+                user.FollowMail = model.FollowMail;
+                user.ReplyReviewmail = model.ReplyReviewmail;
+                user.ThanksFavoritemail = user.ThanksFavoritemail;
                 var updateResult = await UserManager.UpdateAsync(user);
 
                 if (updateResult.Succeeded)
