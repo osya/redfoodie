@@ -7,6 +7,7 @@ namespace redfoodie.Models
     {
         [Required]
         [Display(Name = "Full Name")]
+        [MinLength(4)]
         public string UserName { get; set; }
 
         public SelectList Cities { get; set; }
@@ -35,10 +36,28 @@ namespace redfoodie.Models
         [MaxLength(80)]
         public string Bio { get; set; }
 
-        [Display(Name = "Username")]
-        [Url]
+        /// <summary>
+        /// This property is here only for render _ShortUrl partial view
+        /// </summary>
         public string ShortUrl { get; set; }
 
+        /// <summary>
+        /// This property is here only for render _Notification Settings partial view
+        /// </summary>
+        public bool FollowMail { get; set; }
+        public bool ReplyReviewmail { get; set; }
+        public bool ThanksFavoritemail { get; set; }
+    }
+
+    public class ShortUrlViewModel
+    {
+        [Display(Name = "Username")]
+        [MinLength(4)]
+        public string ShortUrl { get; set; }
+    }
+
+    public class NotificationSettingsViewModel
+    {
         [Display(Name = "Someone follows me")]
         public bool FollowMail { get; set; }
         [Display(Name = "A restaurant owner replies to my review")]

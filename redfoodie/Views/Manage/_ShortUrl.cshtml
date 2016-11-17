@@ -1,0 +1,29 @@
+﻿@model ShortUrlViewModel
+@{
+    ViewBag.Title = "Username";
+}
+@using redfoodie.Models
+<div id="su_alert"></div>
+<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingshorturl">
+        <h4 class="panel-title">@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        @using (Ajax.BeginForm("ShortUrl", "Manage", new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#short_url_form').loadingIcon('attach');", OnSuccess = "shortUrlSuccess", UpdateTargetId = "short_url_form", InsertionMode = InsertionMode.ReplaceWith }, new { id = "short_url_form", @class = "fos_user_registration_register front-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Partial("_ShortUrlBody", new ShortUrlViewModel { ShortUrl = Model.ShortUrl })
+        }
+    </div>
+</div>
+<script>
+    function shortUrlSuccess() {
+        $('#short_url_form').loadingIcon('detach');
+        $('#su_alert').noty({
+            text: 'Your changes were saved successfully!',
+            dismissQueue: false,
+            timeout: 5000,
+            template: '<div class="noty_message alert alert-success" style="margin-bottom:0;margin-top:0;"><span class="noty_text"></span></div>'
+        });
+    }
+</script>

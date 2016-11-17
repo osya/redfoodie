@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201611170641536_Add Notification settings.Designer.cs">
       <DependentUpon>201611170641536_Add Notification settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611170706132_Add ShortUrl.cs" />
+    <Compile Include="Migrations\201611170706132_Add ShortUrl.Designer.cs">
+      <DependentUpon>201611170706132_Add ShortUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\InviteFriendsViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -373,6 +377,9 @@
     <Content Include="Views\Manage\ViewProfile.cshtml" />
     <Content Include="Views\Manage\InviteFriends.cshtml" />
     <Content Include="Views\Manage\_DeactivateAccount.cshtml" />
+    <Content Include="Views\Manage\_ShortUrl.cshtml" />
+    <Content Include="Views\Manage\_NotificationSettings.cshtml" />
+    <Content Include="Views\Manage\_ShortUrlBody.cshtml" />
     <None Include="Views\ResetPasswordEmail.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -454,6 +461,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611170641536_Add Notification settings.resx">
       <DependentUpon>201611170641536_Add Notification settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611170706132_Add ShortUrl.resx">
+      <DependentUpon>201611170706132_Add ShortUrl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

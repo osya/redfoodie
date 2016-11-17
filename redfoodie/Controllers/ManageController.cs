@@ -65,6 +65,7 @@ namespace redfoodie.Controllers
                 Website = user.Website,
                 Bio = user.Bio,
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                ShortUrl = user.ShortUrl,
                 FollowMail = user.FollowMail,
                 ReplyReviewmail = user.ReplyReviewmail,
                 ThanksFavoritemail = user.ThanksFavoritemail
@@ -86,9 +87,45 @@ namespace redfoodie.Controllers
                 user.Website = model.Website;
                 user.PhoneNumber = model.PhoneNumber;
                 user.Bio = model.Bio;
+                var updateResult = await UserManager.UpdateAsync(user);
+
+                if (updateResult.Succeeded)
+                {
+                    return Json(JsonResponseFactory.SuccessResponse());
+                }
+                AddErrors(updateResult);
+            }
+            return Json(JsonResponseFactory.ErrorResponse(ModelState.Where(pair => pair.Value.Errors.Count > 0)
+                    .ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ShortUrl(ShortUrlViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                user.ShortUrl = model.ShortUrl;
+                var updateResult = await UserManager.UpdateAsync(user);
+                if (!updateResult.Succeeded)
+                {
+                    AddErrors(updateResult);
+                }
+            }
+            return PartialView("_ShortUrlBody", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> NotificationSettings(NotificationSettingsViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                 user.FollowMail = model.FollowMail;
                 user.ReplyReviewmail = model.ReplyReviewmail;
-                user.ThanksFavoritemail = user.ThanksFavoritemail;
+                user.ThanksFavoritemail = model.ThanksFavoritemail;
                 var updateResult = await UserManager.UpdateAsync(user);
 
                 if (updateResult.Succeeded)

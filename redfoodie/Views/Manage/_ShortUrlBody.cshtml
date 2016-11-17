@@ -1,0 +1,19 @@
+﻿@using redfoodie.Views
+@model redfoodie.Models.ShortUrlViewModel
+@if (Model.ShortUrl == null)
+{
+    <p class="text-justify clr-grey" style="font-size: 12px">
+    You can now register a short url to your profile.
+    <br>You can set your profile URl only once.
+    </p>
+    <div class="input-group form-group">
+        <span class="input-group-addon">Redfoodie.com/</span>
+        @Html.EditorFor(m => m.ShortUrl, new { htmlAttributes = new { id = "su_shortUrl", @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ShortUrl), title = Html.DisplayNameFor(x => x.ShortUrl), autocomplete = "off", style = "background-color:white;" } })
+        @Html.ValidationMessagesFor(m => m.ShortUrl, new { @class = "text-danger" })
+    </div>
+    <button type="submit">Save</button>
+}
+else
+{
+    <a href="/@Model.ShortUrl">Redfoodie.com/@Model.ShortUrl</a>
+}

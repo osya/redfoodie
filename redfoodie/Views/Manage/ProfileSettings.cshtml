@@ -6,123 +6,73 @@
 }
 @Styles.Render("~/Content/settings/css")
 <div class="clearfix career_inner settings">
-    @using (Ajax.BeginForm("ProfileSettings", "Manage", new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#user_profile_edit_form').loadingIcon('attach');", OnSuccess = "settingsSuccess" }, new {id = "user_profile_edit_form", @class = "fos_user_registration_register front-form"}))
-    {
-        @Html.AntiForgeryToken()
-        <div class="globalwidth clearfix pad_t12">
+    <div class="globalwidth clearfix pad_t12">
+        @using (Ajax.BeginForm("ProfileSettings", "Manage", new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#user_profile_edit_form').loadingIcon('attach');", OnSuccess = "settingsSuccess" }, new { id = "user_profile_edit_form", @class = "fos_user_registration_register front-form" }))
+        {
+            @Html.AntiForgeryToken()
             <div id="upef_alert"></div>
             <div class="pull-left left_part contact-form no_marg_lft ">
                 <h3 class="h20">@ViewBag.Title</h3>
                 <div>
                     <div class="form-filed form-group">
-                        @Html.TextBoxFor(m => m.UserName, new {id = "upef_UserName", required = "required", placeholder = Html.DisplayNameFor(x => x.UserName), title = Html.DisplayNameFor(x => x.UserName)})
-                        @Html.ValidationMessagesFor(m => m.UserName, new {@class = "text-danger"})
+                        @Html.TextBoxFor(m => m.UserName, new { id = "upef_UserName", required = "required", placeholder = Html.DisplayNameFor(x => x.UserName), title = Html.DisplayNameFor(x => x.UserName) })
+                        @Html.ValidationMessagesFor(m => m.UserName, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed">
-                        @Html.DropDownListFor(m => m.SelectedCity, Model.Cities, new {id = "upef_SelectedCity", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.SelectedCity), placeholder = Html.DisplayNameFor(m => m.SelectedCity), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;"})
+                        @Html.DropDownListFor(m => m.SelectedCity, Model.Cities, new { id = "upef_SelectedCity", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.SelectedCity), placeholder = Html.DisplayNameFor(m => m.SelectedCity), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;" })
                         @Html.ValidationMessagesFor(m => m.SelectedCity, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.Twitter, new {htmlAttributes = new {id = "upef_Twitter", placeholder = Html.DisplayNameFor(x => x.Twitter), title = Html.DisplayNameFor(x => x.Twitter), autocomplete = "off"}})
-                        @Html.ValidationMessagesFor(m => m.Twitter, new {@class = "text-danger"})
+                        @Html.EditorFor(m => m.Twitter, new { htmlAttributes = new { id = "upef_Twitter", placeholder = Html.DisplayNameFor(x => x.Twitter), title = Html.DisplayNameFor(x => x.Twitter), autocomplete = "off" } })
+                        @Html.ValidationMessagesFor(m => m.Twitter, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.Facebook, new {htmlAttributes = new {id = "upef_Facebook", placeholder = Html.DisplayNameFor(x => x.Facebook), title = Html.DisplayNameFor(x => x.Facebook), autocomplete = "off"}})
-                        @Html.ValidationMessagesFor(m => m.Facebook, new {@class = "text-danger"})
+                        @Html.EditorFor(m => m.Facebook, new { htmlAttributes = new { id = "upef_Facebook", placeholder = Html.DisplayNameFor(x => x.Facebook), title = Html.DisplayNameFor(x => x.Facebook), autocomplete = "off" } })
+                        @Html.ValidationMessagesFor(m => m.Facebook, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.Website, new {htmlAttributes = new {id = "upef_Website", placeholder = Html.DisplayNameFor(x => x.Website), title = Html.DisplayNameFor(x => x.Website), autocomplete = "off"}})
-                        @Html.ValidationMessagesFor(m => m.Website, new {@class = "text-danger"})
+                        @Html.EditorFor(m => m.Website, new { htmlAttributes = new { id = "upef_Website", placeholder = Html.DisplayNameFor(x => x.Website), title = Html.DisplayNameFor(x => x.Website), autocomplete = "off" } })
+                        @Html.ValidationMessagesFor(m => m.Website, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.PhoneNumber, new {htmlAttributes = new {id = "upef_PhoneNumber", placeholder = Html.DisplayNameFor(x => x.PhoneNumber), title = "Mobile Number", autocomplete = "off"}})
-                        @Html.ValidationMessagesFor(m => m.PhoneNumber, new {@class = "text-danger"})
+                        @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { id = "upef_PhoneNumber", placeholder = Html.DisplayNameFor(x => x.PhoneNumber), title = "Mobile Number", autocomplete = "off" } })
+                        @Html.ValidationMessagesFor(m => m.PhoneNumber, new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-filed form-group" style="width: 612px">
-                    @Html.TextAreaFor(m => m.Bio, new {id = "upef_Bio", placeholder = Html.DisplayNameFor(x => x.Bio), title = Html.DisplayNameFor(x => x.Bio)})
-                    @Html.ValidationMessagesFor(m => m.Bio, new {@class = "text-danger"})
+                    @Html.TextAreaFor(m => m.Bio, new { id = "upef_Bio", placeholder = Html.DisplayNameFor(x => x.Bio), title = Html.DisplayNameFor(x => x.Bio) })
+                    @Html.ValidationMessagesFor(m => m.Bio, new { @class = "text-danger" })
                     <p class="bio-limit pull-left">About yourself in 80 characters or less.</p>
                     <span class="error pull-right">Characters: <strong id="charNum">0</strong></span>
                 </div>
                 <button type="submit" class="main-btn">Save changes</button>
             </div>
-            <!-- .cat_style_01 -->
-            <div class="right_part pull-right mgn_b24">
-                <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingshorturl">
-                            <h4 class="panel-title">Username</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p class="text-justify clr-grey" style="font-size: 12px">
-                                You can now register a short url to your profile.
-                                <br>You can set your profile URl only once.sho
-                            </p>
-                            <div class="input-group form-group">
-                                <span class="input-group-addon">Redfoodie.com/</span>
-                                @Html.EditorFor(m => m.ShortUrl, new {htmlAttributes = new {id = "ispg_userbundle_edituser_shortUrl", @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ShortUrl), title = Html.DisplayNameFor(x => x.ShortUrl), autocomplete = "off", style = "background-color:white;"}})
-                                @Html.ValidationMessagesFor(m => m.ShortUrl, new {@class = "text-danger"})
-                            </div>
-                            <button type="submit">Save</button>
-                        </div>
+        }
+            
+        <div class="right_part pull-right mgn_b24">
+            <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                @Html.Partial("_ShortUrl", new ShortUrlViewModel {ShortUrl = Model.ShortUrl})
+                @Html.Partial("_NotificationSettings", new NotificationSettingsViewModel { FollowMail = Model.FollowMail, ReplyReviewmail = Model.ReplyReviewmail, ThanksFavoritemail = Model.ThanksFavoritemail })
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingprivacy">
+                        <h4 class="panel-title">
+                            <a href="#change_password" class="clr-red" data-modal-link="1">Change Password</a>
+                        </h4>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingnotifications">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#notifications" aria-expanded="false" aria-controls="notifications">
-                                    Notifications preferences
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="notifications" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingnotifications">
-                            <div class="panel-body">
-                                <h4>Email me when </h4>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <label>
-                                            @Html.CheckBoxFor(m => m.FollowMail, new { id = "ispg_userbundle_edituser_followMail" })
-                                            <span>@Html.DisplayNameFor(m => m.FollowMail)</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            @Html.CheckBoxFor(m => m.ReplyReviewmail, new { id = "ispg_userbundle_edituser_replyReviewmail" })
-                                            <span>@Html.DisplayNameFor(m => m.ReplyReviewmail)</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            @Html.CheckBoxFor(m => m.ThanksFavoritemail, new { id = "ispg_userbundle_edituser_thanksFavoritemail" })
-                                            <span>@Html.DisplayNameFor(m => m.ThanksFavoritemail)</span>
-                                        </label>
-                                    </li>
-                                </ul>
-                                <button type="submit">Save</button>
-                            </div>
-                        </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingprivacy">
+                        <h4 class="panel-title" style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+                            <a href="#deactivate_account" class="clr-red" data-modal-link="1">Deactivate your account</a>
+                        </h4>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingprivacy">
-                            <h4 class="panel-title">
-                                <a href="#change_password" class="clr-red" data-modal-link="1">Change Password</a>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingprivacy">
-                            <h4 class="panel-title" style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
-                                <a href="#deactivate_account" class="clr-red" data-modal-link="1">Deactivate your account</a>
-                            </h4>
-                        </div>
-                        <div class="panel-body" style="border-top: none; padding-top: 0; padding-bottom: 0;">
-                            <p class="text-justify clr-grey" style="font-size: 10px;">Deactivating your account will disable your profile and remove your name and picture from most things you've shared on Redfoodie in 30 days.</p>
-                        </div>
+                    <div class="panel-body" style="border-top: none; padding-top: 0; padding-bottom: 0;">
+                        <p class="text-justify clr-grey" style="font-size: 10px;">Deactivating your account will disable your profile and remove your name and picture from most things you've shared on Redfoodie in 30 days.</p>
                     </div>
                 </div>
             </div>
         </div>
-    }
+    </div>
 </div>
 @Scripts.Render("~/Content/selectize/js")
 <script>

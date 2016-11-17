@@ -24,6 +24,8 @@ namespace redfoodie.Models
         [MaxLength(80)]
         public string Bio { get; set; }
 
+        public string ShortUrl { get; set; }
+
         public bool FollowMail { get; set; }
         
         public bool ReplyReviewmail { get; set; }
