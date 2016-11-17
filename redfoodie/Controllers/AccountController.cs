@@ -19,7 +19,6 @@ namespace redfoodie.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IAuthenticationManager _authManager;
 
         public AccountController()
         {
@@ -55,17 +54,7 @@ namespace redfoodie.Controllers
             }
         }
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return _authManager ?? HttpContext.GetOwinContext().Authentication;
-            }
-            set
-            {
-                _authManager = value;
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         //
         // POST: /Account/Login
@@ -130,8 +119,6 @@ namespace redfoodie.Controllers
                     return RedirectToLocal(model.ReturnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.Failure:
-                case SignInStatus.RequiresVerification:
                 default:
                     ModelState.AddModelError("", "Invalid code.");
                     return View(model);
@@ -356,7 +343,6 @@ namespace redfoodie.Controllers
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
-                case SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
@@ -385,7 +371,7 @@ namespace redfoodie.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = info.DefaultUserName, Email = info.Email ?? model.Email };
+                var user = new ApplicationUser { UserName = info.DefaultUserName, Email = info.Email ?? model.Email, CityId = ((City)Session["currentCity"]).Id };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
