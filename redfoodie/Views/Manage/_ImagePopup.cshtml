@@ -1,0 +1,121 @@
+﻿@model redfoodie.Models.ImagePopupViewModel
+@{
+    ViewBag.Title = "Edit Profile Image";
+}
+<div data-modal-content-container="1" data-modal-wrapper-class="width_380" class="hide" id="imagePopup">
+    <div id="pp_desc" class="width_462">
+        <div class="pad_0x17 join_form">
+            <h2>@ViewBag.Title</h2>
+            <p>
+                <div id="photo_upload" style="padding-bottom:5px;">
+                    @using (Ajax.BeginForm("UpdateProfilePicture", "Manage", null, new AjaxOptions { HttpMethod = "POST" }, new { enctype = "multipart/form-data", id = "image-upload" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div id="uu_alert"></div>
+                        @Html.LabelFor(m => m.UserFile)
+                        <div class="editor-field">
+                            @Html.TextBoxFor(m => m.UserFile, true, null, new { @class = "file-up", required = "true", type = "file", onchange = "onUserFileChanges(this, event);" } )
+                            @Html.ValidationMessageFor(m => m.UserFile)
+                        </div>
+                    }
+                    <div style="font-size:11px; line-height: 18px; margin-top: 24px; color: #aeaeae;">
+                        JPG/PNG formats only<br>Maximum size 5 MB<br>
+                        Greater than 250px in height and width
+                    </div>
+                </div>
+            </p>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/load-image")
+<script>
+    $("#image-upload").validate();
+
+    function imageUploadSuccess(data) {
+        $('#image-upload').loadingIcon('detach');
+        if (!data.Success) {
+            // display errors
+            for (var property in data.ModelState) {
+                if (data.ModelState.hasOwnProperty(property)) {
+                    $('#uu_alert')
+                        .noty({
+                            text: data.ModelState[property].join(" "),
+                            dismissQueue: false,
+                            template:
+                                '<div class="noty_message alert alert-danger" style="margin-bottom:0;margin-top:0;"><span class="noty_text"></span></div>'
+                        });
+                }
+            }
+        } else {
+            window.location.href = '@Url.Action("ViewProfile", "Manage")';
+        }
+    }
+
+    function onUserFileChanges(t, e) {
+        var valid = $("#image-upload").valid();
+        if (valid && (t.files[0].size <= 5242880) && (t.files[0].name.match(new RegExp("\\.(png|jpe?g)$", "i")))) {
+            loadImage(
+                e.target.files[0],
+                function(img) {
+                    if (img.type === "error") {
+                        $('#uu_alert')
+                            .noty({
+                                text: "Your browser does not support the URL or FileReader API",
+                                dismissQueue: false,
+                                timeout: 5000,
+                                template:
+                                    '<div class="noty_message alert alert-danger" style="margin-bottom:0;"><span class="noty_text"></span></div>'
+                            });
+                    } else {
+                        $('#image-upload').loadingIcon('attach');
+                        var form = $("#image-upload")[0];
+                        var xhr = new XMLHttpRequest();
+                        xhr.open(form.method, form.action);
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                imageUploadSuccess(JSON.parse(xhr.response));
+                            }
+                        };
+                        xhr.send(new FormData(form));
+                    }
+                },
+                { minWidth: 250, minHeight: 250, cover: true } // Options
+            );
+        } else {
+            if (!valid) {
+                $('#image-upload')
+                    .data("validator")
+                    .errorList.forEach(function(element) {
+                        $('#uu_alert')
+                            .noty({
+                                text: element.message,
+                                dismissQueue: false,
+                                timeout: 5000,
+                                template:
+                                    '<div class="noty_message alert alert-danger" style="margin-bottom:0;"><span class="noty_text"></span></div>'
+                            });
+                    });
+            }
+            if (t.files[0].size > 5242880)
+                $('#uu_alert')
+                    .noty({
+                        text: "Uploaded file size must be less then 5 mb",
+                        dismissQueue: false,
+                        timeout: 5000,
+                        template:
+                            '<div class="noty_message alert alert-danger" style="margin-bottom:0;"><span class="noty_text"></span></div>'
+                    });
+            if (!t.files[0].name.match(new RegExp("\\.(png|jpe?g)$", "i"))) {
+                $('#uu_alert')
+                    .noty({
+                        text: "Please enter a value with a valid extension",
+                        dismissQueue: false,
+                        timeout: 5000,
+                        template:
+                            '<div class="noty_message alert alert-danger" style="margin-bottom:0;"><span class="noty_text"></span></div>'
+                    });
+            }
+        }
+    }
+</script>

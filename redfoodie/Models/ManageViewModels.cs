@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web;
 using System.Web.Mvc;
 
 namespace redfoodie.Models
@@ -55,6 +56,8 @@ namespace redfoodie.Models
         [Display(Name = "Full Name")]
         [MinLength(4)]
         public string UserName { get; set; }
+
+        public string ImagePath { get; set; }
     }
 
     public class ShortUrlViewModel
@@ -97,5 +100,13 @@ namespace redfoodie.Models
     {
         [Display(Name = "Confirm new password")]
         public string Reason { get; set; }
+    }
+
+    public class ImagePopupViewModel
+    {
+        [Required]
+        [Display(Name = "Upload Picture")]
+        [HttpPostedFileExtensions(Extensions = "jpg,jpeg,png")]
+        public HttpPostedFileBase UserFile { get; set; }
     }
 }

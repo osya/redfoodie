@@ -13,7 +13,6 @@ namespace redfoodie.Controllers
         {
             if (Session != null)
             {
-                Session["currentCity"] = (cityId == null) && !User.Identity.IsAuthenticated ? Context.Cities.First(x => x.ParentId == null) : cityId != null ? Context.Cities.Find(cityId) : Session["currentCity"];
                 if ((cityId == null) && !User.Identity.IsAuthenticated)
                 {
                     Session["currentCity"] = Context.Cities.First(x => x.ParentId == null);
@@ -22,17 +21,15 @@ namespace redfoodie.Controllers
                 {
                     if (cityId != null)
                     {
-                        Context.Cities.Find(cityId);
+                        Session["currentCity"] = Context.Cities.Find(cityId);
                     }
                     else
                     {
                         if ((Session["currentCity"] == null) && User.Identity.IsAuthenticated)
                         {
-                            var context = new ApplicationDbContext();
-                            Session["currentCity"] = context.Users.Find(User.Identity.GetUserId())?.City;
+                            Session["currentCity"] = Context.Users.Find(User.Identity.GetUserId())?.City;
                         }
                     }
-
                 }
             }
             return View();

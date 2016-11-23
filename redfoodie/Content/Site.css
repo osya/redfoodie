@@ -1487,6 +1487,11 @@ p {
     font-weight: normal!important;
 }
 
+.profile-image {
+    cursor: pointer;
+    position: relative;
+}
+
 #image-uploading span {
     display: none;
     position: absolute;
@@ -1720,6 +1725,10 @@ p {
     color: #8d8d8d;
 }
 
+.profile-image:hover #image-uploading span {
+    display: block!important;
+}
+
 .profile-wrap .img-wrap {
     width: 155px;
     height: 155px;
@@ -1866,6 +1875,15 @@ p {
 .profile-dtail {
     border-bottom: 1px solid #e0e0e0;
     padding: 15px 0 10px;
+}
+
+.profile-image img {
+    width: 140px;
+    height: 140px;
+}
+
+.profile-dsc .profile-wrap {
+    padding: 20px 20px 10px;
 }
 
 .prof-dtail .nav-tabs li a {

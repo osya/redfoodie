@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -72,6 +74,12 @@ namespace redfoodie.Tests.Controllers
             var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
             var controller = new AccountController(UserManager, signInManager);
 
+            var mockControllerContext = new Mock<ControllerContext>();
+            var mockSession = new Mock<HttpSessionStateBase>();
+            mockSession.SetupGet(s => s["currentCity"]).Returns(new City { Id = 1, ParentId = null, Name = "Delhi NCR" });
+            mockControllerContext.Setup(p => p.HttpContext.Session).Returns(mockSession.Object);
+            controller.ControllerContext = mockControllerContext.Object;
+
             // Act
             var actual = await controller.Register(DummyModel);
 
@@ -89,6 +97,12 @@ namespace redfoodie.Tests.Controllers
             // Arrange
             var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
             var controller = new AccountController(UserManager, signInManager);
+
+            var mockControllerContext = new Mock<ControllerContext>();
+            var mockSession = new Mock<HttpSessionStateBase>();
+            mockSession.SetupGet(s => s["currentCity"]).Returns(new City { Id = 1, ParentId = null, Name = "Delhi NCR" });
+            mockControllerContext.Setup(p => p.HttpContext.Session).Returns(mockSession.Object);
+            controller.ControllerContext = mockControllerContext.Object;
 
             // Act
             var actual = await controller.Register(DummyModel);

@@ -14,14 +14,14 @@
             <div class="messaging-top-area clearfix">
                 <div class="recipients" style="position: relative;">
                     @Html.LabelFor(m => m.To, new { @class = "caption", style = "font-weight: normal;margin-bottom:0;display:inline;" })
-                    @Html.ListBoxFor(m => m.To, new List<SelectListItem>(), new { id = "ispg_appbundle_messagestype_sentTo", required = "required", data_placeholder = "Select Users", style = "width: 550px; margin-left: 10px;" })
+                    @Html.ListBoxFor(m => m.To, true, new List<SelectListItem>(), new { id = "ispg_appbundle_messagestype_sentTo", required = "required", data_placeholder = "Select Users", style = "width: 550px; margin-left: 10px;" })
                     @Html.ValidationMessagesFor(m => m.To, new { @class = "text-danger" })
                 </div>
                 <div class="clearfix"></div>
                 <div class="message-write">
                     @Html.LabelFor(m => m.Message, new { @class="caption", style= "font-weight: normal;margin-bottom:0;display:inline;" })
                     <div class="wmd-panel">
-                        @Html.TextAreaFor(m => m.Message, new { id = "ispg_appbundle_messagestype_message", name = "ispg_appbundle_messagestype[message]", required = "required" })
+                        @Html.TextAreaFor(m => m.Message, true, 2, 20, new { id = "ispg_appbundle_messagestype_message", name = "ispg_appbundle_messagestype[message]", required = "required" })
                         @Html.ValidationMessagesFor(m => m.Message, new { @class = "text-danger" })
                     </div>
                     <div class="compose-area clearfix">
@@ -36,6 +36,8 @@
 </div>
 @Scripts.Render("~/bundles/chosen")
 <script>
+    $("#newform").validate();
+
     function postSuccess(data) {
         $('#message').loadingIcon('detach');
         if (data.Success) {

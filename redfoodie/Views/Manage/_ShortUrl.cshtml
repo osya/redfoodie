@@ -17,6 +17,7 @@
     </div>
 </div>
 <script>
+    $("#short_url_form").validate();
     function shortUrlSuccess() {
         $('#short_url_form').loadingIcon('detach');
         $('#su_alert').noty({

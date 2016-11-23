@@ -20,19 +20,19 @@
                 <ul class="list-unstyled">
                     <li>
                         <label>
-                            @Html.CheckBoxFor(m => m.FollowMail, new {id = "ns_FollowMail"})
+                            @Html.CheckBoxFor(m => m.FollowMail, true, new {id = "ns_FollowMail"})
                             <span>@Html.DisplayNameFor(m => m.FollowMail)</span>
                         </label>
                     </li>
                     <li>
                         <label>
-                            @Html.CheckBoxFor(m => m.ReplyReviewmail, new {id = "ns_ReplyReviewmail"})
+                            @Html.CheckBoxFor(m => m.ReplyReviewmail, true, new {id = "ns_ReplyReviewmail"})
                             <span>@Html.DisplayNameFor(m => m.ReplyReviewmail)</span>
                         </label>
                     </li>
                     <li>
                         <label>
-                            @Html.CheckBoxFor(m => m.ThanksFavoritemail, new {id = "ns_ThanksFavoritemail"})
+                            @Html.CheckBoxFor(m => m.ThanksFavoritemail, true, new {id = "ns_ThanksFavoritemail"})
                             <span>@Html.DisplayNameFor(m => m.ThanksFavoritemail)</span>
                         </label>
                     </li>
@@ -43,6 +43,8 @@
     </div>
 }
 <script>
+    $("#notification_settings_form").validate();
+
     function notificationSettingsSuccess(data) {
         $('#notification_settings_form').loadingIcon('detach');
         if (data.Success) {

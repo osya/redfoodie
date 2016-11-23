@@ -10,13 +10,13 @@
     }
     <div class="msrch-mn">
         <div class="msrch-wrp1">
-            @Html.TextBoxFor(m => m.SearchTxt, null, new { id = "searchTxt", placeholder = Html.DisplayNameFor(m => m.SearchTxt), autocomplete = "off" })
+            @Html.TextBoxFor(m => m.SearchTxt, true, null, new { id = "searchTxt", placeholder = Html.DisplayNameFor(m => m.SearchTxt), autocomplete = "off" })
             @Html.ValidationMessagesFor(m => m.SearchTxt, new { @class = "text-danger" })
         </div>
         <!-- msrch-wrp1 -->
         <div class="msrch-wrp2">
             <div class="sel-cat" style="@(toolbarSearchBar ? "" : "width: 53px;line-height: 51px")"><i class=""></i></div>
-            @Html.TextBoxFor(m => m.SearchTxtLoc, null, new { id = "searchTxtLoc", placeholder = Html.DisplayNameFor(m => m.SearchTxtLoc), autocomplete = "off" })
+            @Html.TextBoxFor(m => m.SearchTxtLoc, true, null, new { id = "searchTxtLoc", placeholder = Html.DisplayNameFor(m => m.SearchTxtLoc), autocomplete = "off" })
             @Html.ValidationMessagesFor(m => m.SearchTxtLoc, new { @class = "text-danger" })
         </div>
         <!-- msrch-wrp1 -->

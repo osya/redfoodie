@@ -3,7 +3,7 @@
 {
     <div class="pull-right user-nav mgn_lft">
         <div class="header-after-login" data-toggle="dropdown">
-            <img src="/Content/collections/imgs/user.svg" height="146" width="146" alt="a " title="a ">
+            <img src=@Url.Content(Session["imageFileName"] as string ?? "/Content/collections/imgs/user.svg") height="146" width="146" alt=@User.Identity.GetUserName() title=@User.Identity.GetUserName()>
             <div class="button">
                 <span class="anim-top icon pos_relative"></span>
             </div>
@@ -25,10 +25,7 @@
                                 @Html.AntiForgeryToken()
                                 <a href="javascript:document.getElementById('logoutForm').submit()" class="anim-top pos_relative">Logout</a>
                             }
-
                         </div>
-                        
-
                     </div>
                 </header>
             </div>

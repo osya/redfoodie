@@ -10,37 +10,37 @@
         @using (Ajax.BeginForm("ProfileSettings", "Manage", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#user_profile_edit_form').loadingIcon('attach');", OnSuccess = "settingsSuccess" }, new { id = "user_profile_edit_form", @class = "fos_user_registration_register front-form" }))
         {
             @Html.AntiForgeryToken()
-            <div id="upef_alert"></div>
+            <div id="user_pef_alert"></div>
             <div class="pull-left left_part contact-form no_marg_lft ">
                 <h3 class="h20">@ViewBag.Title</h3>
                 <div>
                     <div class="form-filed form-group">
-                        @Html.TextBoxFor(m => m.UserName, new { id = "upef_UserName", required = "required", placeholder = Html.DisplayNameFor(x => x.UserName), title = Html.DisplayNameFor(x => x.UserName) })
+                        @Html.TextBoxFor(m => m.UserName, true, null, new { id = "user_pef_UserName", required = "required", placeholder = Html.DisplayNameFor(x => x.UserName), title = Html.DisplayNameFor(x => x.UserName) })
                         @Html.ValidationMessagesFor(m => m.UserName, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed">
-                        @Html.DropDownListFor(m => m.SelectedCity, Model.Cities, new { id = "upef_SelectedCity", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.SelectedCity), placeholder = Html.DisplayNameFor(m => m.SelectedCity), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;" })
+                        @Html.DropDownListFor(m => m.SelectedCity, true, Model.Cities, null, new { id = "user_pef_SelectedCity", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.SelectedCity), placeholder = Html.DisplayNameFor(m => m.SelectedCity), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;" })
                         @Html.ValidationMessagesFor(m => m.SelectedCity, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.Twitter, new { htmlAttributes = new { id = "upef_Twitter", placeholder = Html.DisplayNameFor(x => x.Twitter), title = Html.DisplayNameFor(x => x.Twitter), autocomplete = "off" } })
+                        @Html.TextBoxFor(m => m.Twitter, true, null, new { id = "user_pef_twitter", placeholder = Html.DisplayNameFor(x => x.Twitter), title = Html.DisplayNameFor(x => x.Twitter), autocomplete = "off", type = "url" })
                         @Html.ValidationMessagesFor(m => m.Twitter, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.Facebook, new { htmlAttributes = new { id = "upef_Facebook", placeholder = Html.DisplayNameFor(x => x.Facebook), title = Html.DisplayNameFor(x => x.Facebook), autocomplete = "off" } })
+                        @Html.TextBoxFor(m => m.Facebook, true, null, new { id = "user_pef_Facebook", placeholder = Html.DisplayNameFor(x => x.Facebook), title = Html.DisplayNameFor(x => x.Facebook), autocomplete = "off", type = "url" })
                         @Html.ValidationMessagesFor(m => m.Facebook, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.Website, new { htmlAttributes = new { id = "upef_Website", placeholder = Html.DisplayNameFor(x => x.Website), title = Html.DisplayNameFor(x => x.Website), autocomplete = "off" } })
+                        @Html.TextBoxFor(m => m.Website, true, null, new { id = "user_pef_Website", placeholder = Html.DisplayNameFor(x => x.Website), title = Html.DisplayNameFor(x => x.Website), autocomplete = "off", type = "url" })
                         @Html.ValidationMessagesFor(m => m.Website, new { @class = "text-danger" })
                     </div>
                     <div class="form-filed form-group">
-                        @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { id = "upef_PhoneNumber", placeholder = Html.DisplayNameFor(x => x.PhoneNumber), title = "Mobile Number", autocomplete = "off" } })
+                        @Html.TextBoxFor(m => m.PhoneNumber, true, null, new { id = "user_pef_PhoneNumber", placeholder = Html.DisplayNameFor(x => x.PhoneNumber), title = "Mobile Number", autocomplete = "off", type = "tel" })
                         @Html.ValidationMessagesFor(m => m.PhoneNumber, new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-filed form-group" style="width: 612px">
-                    @Html.TextAreaFor(m => m.Bio, new { id = "upef_Bio", placeholder = Html.DisplayNameFor(x => x.Bio), title = Html.DisplayNameFor(x => x.Bio) })
+                    @Html.TextAreaFor(m => m.Bio, true, 2, 20, new { id = "user_pef_Bio", placeholder = Html.DisplayNameFor(x => x.Bio), title = Html.DisplayNameFor(x => x.Bio), OnKeyUp = "countChar($('#user_pef_Bio')[0])" })
                     @Html.ValidationMessagesFor(m => m.Bio, new { @class = "text-danger" })
                     <p class="bio-limit pull-left">About yourself in 80 characters or less.</p>
                     <span class="error pull-right">Characters: <strong id="charNum">0</strong></span>
@@ -74,46 +74,47 @@
         </div>
     </div>
 </div>
-@Scripts.Render("~/Content/selectize/js")
-<script>
-    $(document).ready(function($) {
-        $('.dropdown').selectize();
+@section Scripts
+{
+    @Scripts.Render("~/Content/selectize/js")
+    <script>
+        $("#user_profile_edit_form").validate();
 
-        $('#upef_Bio').keyup(function (e) {
-            countChar(document.getElementById('ispg_userbundle_edituser_bio'));
-        });
         function countChar(val) {
             if ((val != null) && (val.value != null)) {
                 document.getElementById('charNum').innerText = val.value.length;
             }
         }
-        countChar($("#upef_Bio")[0]);  
-    });
+        $(document).ready(function ($) {
+            $('.dropdown').selectize();
+            countChar($("#user_pef_Bio")[0]);
+        });
 
-    function settingsSuccess(data) {
-        $('#user_profile_edit_form').loadingIcon('detach');
-        if (data.Success) {
-            $('#upef_alert').noty({
-                text: 'Your changes were saved successfully!',
-                dismissQueue: false,
-                timeout: 5000,
-                template: '<div class="noty_message alert alert-success" style="margin-bottom:0;margin-top: 6px;"><span class="noty_text"></span></div>'
-            });
-        } else {
-            // display errors
-            for (var property in data.ModelState) {
-                if (data.ModelState.hasOwnProperty(property)) {
-                    if (!property) {
-                        $('#upef_alert').noty({
-                            text: data.ModelState[property].join(" "),
-                            dismissQueue: false,
-                            template: '<div class="noty_message alert alert-danger" style="margin-bottom:0;margin-top: 6px;"><span class="noty_text"></span></div>'
-                        });
-                    } else {
-                        $("#upef_" + property + "+span").text(data.ModelState[property].join(" "));
+        function settingsSuccess(data) {
+            $('#user_profile_edit_form').loadingIcon('detach');
+            if (data.Success) {
+                $('#user_pef_alert').noty({
+                    text: 'Your changes were saved successfully!',
+                    dismissQueue: false,
+                    timeout: 5000,
+                    template: '<div class="noty_message alert alert-success" style="margin-bottom:0;margin-top: 6px;"><span class="noty_text"></span></div>'
+                });
+            } else {
+                // display errors
+                for (var property in data.ModelState) {
+                    if (data.ModelState.hasOwnProperty(property)) {
+                        if (!property) {
+                            $('#user_pef_alert').noty({
+                                text: data.ModelState[property].join(" "),
+                                dismissQueue: false,
+                                template: '<div class="noty_message alert alert-danger" style="margin-bottom:0;margin-top: 6px;"><span class="noty_text"></span></div>'
+                            });
+                        } else {
+                            $("#user_pef_" + property + "+span").text(data.ModelState[property].join(" "));
+                        }
                     }
                 }
             }
         }
-    }
-</script>
+    </script>
+}

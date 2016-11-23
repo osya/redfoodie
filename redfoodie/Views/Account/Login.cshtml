@@ -13,16 +13,17 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+            <div class="divi-new"><span>OR</span></div>
             @using (Ajax.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#login').loadingIcon('attach');", OnSuccess = "loginSuccess" }, new { role = "form", id = "login_form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary("", new { @class = "text-danger", id= "login_errors" })
+                @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.EditorFor(m => m.Email, new {htmlAttributes = new {@class = "form-control input-lg", placeholder = Html.DisplayNameFor(x => x.Email) }})
+                    @Html.TextBoxFor(m => m.Email, true, null, new {@class = "form-control input-lg", placeholder = Html.DisplayNameFor(x => x.Email), type="email" } )
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", placeholder = Html.DisplayNameFor(x => x.Password) })
+                    @Html.PasswordFor(m => m.Password, true, new { @class = "form-control input-lg", placeholder = Html.DisplayNameFor(x => x.Password) })
                     @Html.ValidationMessagesFor(m => m.Password, new { @class = "text-danger" })
                 </div>
                 <button type="submit" class="btn btn-lg btn-block form-submit-button" id="redfoodie-user-signin">
@@ -30,7 +31,7 @@
                 </button>
                 <div class="row">
                     <div class="col-md-6">
-                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.CheckBoxFor(m => m.RememberMe, true)
                         @Html.LabelFor(m => m.RememberMe, new { style = "font-weight: normal;" })
                     </div>
                     <div class="col-md-6">
@@ -46,6 +47,7 @@
     </div>
 </div>
 <script>
+    $("#login_form").validate();
     function loginSuccess(data) {
         $('#login').loadingIcon('detach');
         if (data.Success) {
@@ -58,7 +60,6 @@
                         var node = $("#login_form");
                         var child = document.createElement("span");
                         child.className = "text-danger validation-summary-errors";
-                        child.setAttribute("id", "login_errors");
                         child.innerText = data.ModelState[property].join(" ");
                         node.prepend(child);
                     } else if (data.ModelState.hasOwnProperty(property)) {

@@ -25,7 +25,7 @@
         <div class="socials-connects mail">
             <div class="input-group">
                 <span class="input-group-addon"><img src="/Content/collections/imgs/email-invite.svg" alt="Email Invite"></span>
-                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class="form-control email-invite", placeholder=Html.DisplayNameFor(m => m.Email), autocomplete="off" } })
+                @Html.TextBoxFor(m => m.Email, true, null, new { @class = "form-control email-invite", placeholder = Html.DisplayNameFor(m => m.Email), autocomplete = "off", type = "email" })
                 @Html.ValidationMessagesFor(m => m.Email, new { @class = "text-danger" })
                 <span class="input-group-btn">
                     <button class="btn btn-default  send-email-invite" type="button"><span>Send invite</span></button>
@@ -39,7 +39,7 @@
         <p class="clr-grey">Name or Redfoodie username</p>
         <div class="socials-connects search">
             <div class="input-group">
-                @Html.TextBoxFor(m => m.SearchUsers, new {@class="form-control", placeholder=Html.DisplayNameFor(m => m.SearchUsers), id="searchUsers"})
+                @Html.TextBoxFor(m => m.SearchUsers, true, null, new {@class="form-control", placeholder=Html.DisplayNameFor(m => m.SearchUsers), id="searchUsers"})
                 @Html.ValidationMessagesFor(m => m.SearchUsers, new { @class = "text-danger" })
                 <span class="input-group-addon" id="search-redfoodies-button"><i class="redfood-icon redfood-invite-search clr-red"></i></span>
             </div>
@@ -81,7 +81,7 @@
             </li>
             <li>
                 <figure class="user-photo">
-                    <a href="/users/raman-416/profile"><img src="/assets/images/default/profile/user/user.svg" height="146" width="146" alt="Raman " title="Raman "></a>
+                    <a href="/users/raman-416/profile"><img src=@Url.Content("/Content/collections/imgs/user.svg") height="146" width="146" alt="Raman " title="Raman "></a>
                 </figure>
                 <div class="user-name">
                     <a class="user-name" href="/users/raman-416/profile">Raman</a>
@@ -90,7 +90,7 @@
             </li>
             <li>
                 <figure class="user-photo">
-                    <a href="/users/111-417/profile"><img src="/assets/images/default/profile/user/user.svg" height="146" width="146" alt="111 " title="111 "></a>
+                    <a href="/users/111-417/profile"><img src=@Url.Content("/Content/collections/imgs/user.svg") height="146" width="146" alt="111 " title="111 "></a>
                 </figure>
                 <div class="user-name">
                     <a class="user-name" href="/users/111-417/profile">111</a>
@@ -99,7 +99,7 @@
             </li>
             <li>
                 <figure class="user-photo">
-                    <a href="/users/veggie-foodie-418/profile"><img src="/assets/images/default/profile/user/user.svg" height="146" width="146" alt="Veggie Foodie " title="Veggie Foodie "></a>
+                    <a href="/users/veggie-foodie-418/profile"><img src=@Url.Content("/Content/collections/imgs/user.svg") height="146" width="146" alt="Veggie Foodie " title="Veggie Foodie "></a>
                 </figure>
                 <div class="user-name">
                     <a class="user-name" href="/users/veggie-foodie-418/profile">Veggie Fo...</a>

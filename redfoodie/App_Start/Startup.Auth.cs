@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -60,7 +62,14 @@ namespace redfoodie
             {
                 AppId = WebConfigurationManager.AppSettings["Facebook:AppId"],
                 AppSecret = WebConfigurationManager.AppSettings["Facebook:AppSecret"],
-                Provider = new FacebookAuthenticationProvider()
+                Provider = new FacebookAuthenticationProvider
+                {
+                    OnAuthenticated = context =>
+                    {
+                        context.Identity.AddClaim(new Claim("urn:facebook:access_token", context.AccessToken, ClaimValueTypes.String, "Facebook"));
+                        return Task.FromResult(0);
+                    }
+                }
             };
             app.Use(typeof(MyFacebookAuthenticationMiddleware), app, fbOptions);
 

@@ -13,7 +13,7 @@
                     @Html.AntiForgeryToken()
                     <div id="da_alert"></div>
                     <div class="form-filed">
-                        @Html.TextAreaFor(m => m.Reason, new { style = "resize:vertical;", id = "da_reason", name = "deactivate_account_reason" })
+                        @Html.TextAreaFor(m => m.Reason, true, 2, 20, new { style = "resize:vertical;", id = "da_reason", name = "deactivate_account_reason" })
                         @Html.ValidationMessagesFor(m => m.Reason, new { @class = "text-danger" })
                     </div>
                     <p class="clr-grey" style="line-height: 16px">
@@ -27,6 +27,7 @@
     </section>
 </div>
 <script>
+    $("#deactivate_account_form").validate();
     function deactivateSuccess(data) {
         $('#deactivate_account').loadingIcon('detach');
         if (data.Success) {

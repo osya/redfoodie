@@ -1,237 +1,233 @@
 ﻿@using redfoodie.Models
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    @{
-        var toolbarSearchBar = Request.Url?.LocalPath != "/";
-    }
-    @Scripts.Render("~/bundles/jquery")
-    <header class="navbar-fixed-top skin main-header font_roman">
-        <div class="header-inside globalwidth clearfix">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink(" ", "Index", "Home", new { area = "" }, new { id = "logo", @class = "navbar-brand navbar-link redfood-icon redfood-redfoodie" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <nav class="nav navbar-nav navbar-left">
-                    <nav class="city-list">
-                        <div class="city-box pull-left">
-                            @(((City) Session["currentCity"])?.Name)<span class="fa fa-angle-down"></span>
-                            <div class="drop_menu " style="display: none">
-                                <ul class="list-unstyled">
-                                    <li class="cat clearfix second-country">
-                                        <div class="country_city_list">
-                                            @foreach (var city in (IEnumerable<SelectListItem>)Session["citiesList"])
-                                            {
-                                                @Html.ActionLink(city.Text, "Index", "Home", new {cityId = city.Value }, null)
-                                            }
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        @if (toolbarSearchBar)
-                        {
-                            <div class="pull-left quick-search">
-                                <div class="form-pane">
-                                    @Html.Partial("_SearchBar", new ViewDataDictionary { { "toolbarSearchBar", true } })
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        @{
+            var toolbarSearchBar = Request.Url?.LocalPath != "/";
+        }
+        @Scripts.Render("~/bundles/jquery")
+        <header class="navbar-fixed-top skin main-header font_roman">
+            <div class="header-inside globalwidth clearfix">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink(" ", "Index", "Home", new { area = "" }, new { id = "logo", @class = "navbar-brand navbar-link redfood-icon redfood-redfoodie" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <nav class="nav navbar-nav navbar-left">
+                        <nav class="city-list">
+                            <div class="city-box pull-left">
+                                @(((City) Session["currentCity"])?.Name)<span class="fa fa-angle-down"></span>
+                                <div class="drop_menu " style="display: none">
+                                    <ul class="list-unstyled">
+                                        <li class="cat clearfix second-country">
+                                            <div class="country_city_list">
+                                                @foreach (var city in (IEnumerable<SelectListItem>)Session["citiesList"])
+                                                {
+                                                    @Html.ActionLink(city.Text, "Index", "Home", new {cityId = city.Value }, null)
+                                                }
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                        }
+                            @if (toolbarSearchBar)
+                            {
+                                <div class="pull-left quick-search">
+                                    <div class="form-pane">
+                                        @Html.Partial("_SearchBar", new ViewDataDictionary { { "toolbarSearchBar", true } })
+                                    </div>
+                                </div>
+                            }
+                        </nav>
                     </nav>
-                </nav>
-                <nav class="nav navbar-nav pull-right">
-                    <nav class="header-user-container">
-                        @Html.Partial("_LoginPartial")
+                    <nav class="nav navbar-nav pull-right">
+                        <nav class="header-user-container">
+                            @Html.Partial("_LoginPartial")
+                        </nav>
                     </nav>
-                </nav>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- banner -->
-    @if (!toolbarSearchBar)
-    {
-        <section class="banner" role="banner" style="margin-top: 0">
-            <ul class="bxslider" style="padding: 0; display: block; list-style: none;">
-                <li>
-                    <a href="#" style="cursor: initial;">
-                        <div class="slide-contnet-wrap2"></div>
-                    </a>
-                </li>
-            </ul>
-        </section>
-        <!-- .banner -->
-         <section class="skin search_wrapper">
-            <div class="main-search ">
-                <div class="globalwidth s-form clearfix" style="border: none">
-                    <div class="form-pane home-pane-or" style="background: #000000; background: rgba(0, 0, 0, 0);">
-                        @Html.Partial("_SearchBar", new ViewDataDictionary { { "toolbarSearchBar", false } })
+        <!-- banner -->
+        @if (!toolbarSearchBar)
+        {
+            <section class="banner" role="banner" style="margin-top: 0">
+                <ul class="bxslider" style="padding: 0; display: block; list-style: none;">
+                    <li>
+                        <a href="#" style="cursor: initial;">
+                            <div class="slide-contnet-wrap2"></div>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- .banner -->
+             <section class="skin search_wrapper">
+                <div class="main-search ">
+                    <div class="globalwidth s-form clearfix" style="border: none">
+                        <div class="form-pane home-pane-or" style="background: #000000; background: rgba(0, 0, 0, 0);">
+                            @Html.Partial("_SearchBar", new ViewDataDictionary { { "toolbarSearchBar", false } })
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+            
+        @Scripts.Render("~/Content/js/noty")
+        @RenderBody()
+        
+        <footer id="footer" class="footer">
+            <div class="footer-1 clearfix ">
+                <div class="container">
+                    <div class="fr_top">
+                        <ul class="list-unstyled clearfix pull-left">
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li><a href="/business/new-restaurant">Add Restaurant</a></li>
+                            <li><a href="/advertise-with-us">Advertise</a></li>
+                            <li><a href="/jobs">Jobs</a></li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                    </div>
+                    <div class="social_wrapper pull-right">
+                        <a target="_blank" href="https://www.facebook.com/Redfoodiedotcom"><span class="fa facebook fa-facebook"></span></a>
+                        <a target="_blank" href="https://twitter.com/RedfoodieApp"><span class="twitter fa fa-twitter"></span></a>
+                        <a target="_blank" href="https://plus.google.com/+Redfoodiedotcom/"><span class="google fa fa-google-plus"></span></a>
                     </div>
                 </div>
             </div>
-        </section>
-    }
-            
-    @Scripts.Render("~/Content/js/noty")
-    @RenderBody()
-        
-    <footer id="footer" class="footer">
-        <div class="footer-1 clearfix ">
-            <div class="container">
-                <div class="fr_top">
-                    <ul class="list-unstyled clearfix pull-left">
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li><a href="/business/new-restaurant">Add Restaurant</a></li>
-                        <li><a href="/advertise-with-us">Advertise</a></li>
-                        <li><a href="/jobs">Jobs</a></li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                </div>
-                <div class="social_wrapper pull-right">
-                    <a target="_blank" href="https://www.facebook.com/Redfoodiedotcom"><span class="fa facebook fa-facebook"></span></a>
-                    <a target="_blank" href="https://twitter.com/RedfoodieApp"><span class="twitter fa fa-twitter"></span></a>
-                    <a target="_blank" href="https://plus.google.com/+Redfoodiedotcom/"><span class="google fa fa-google-plus"></span></a>
+            <div class="footer-2 clearfix ">
+                <div class="container">
+                    <div class="rights pull-left">
+                        &copy;2016 Valeriy Osipov. All rights reserved. <a href="/termsofservice">Terms</a> •<a href="/privacypolicy">Privacy</a>
+                    </div>
+                    <i class="redfood-icon redfood-bicycle" style="visibility: hidden"></i>
+                    <div class="rights pull-right">All trademarks are properties of their respective owners.</div>
                 </div>
             </div>
-        </div>
-        <div class="footer-2 clearfix ">
-            <div class="container">
-                <div class="rights pull-left">
-                    &copy;2016 Valeriy Osipov. All rights reserved. <a href="/termsofservice">Terms</a> •<a href="/privacypolicy">Privacy</a>
-                </div>
-                <i class="redfood-icon redfood-bicycle" style="visibility: hidden"></i>
-                <div class="rights pull-right">All trademarks are properties of their respective owners.</div>
-            </div>
-        </div>
-    </footer>
+        </footer>
     
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
-    <!-- ======================= flag widget ======================= -->
-    <div class="pop_wrapper">
-        <div class="pop-container-relative">
-            <a class="pop_close modal-popup-close redfood-icon redfood-cross"></a>
-            <div id="pp_desc" class="width_300">
-                <style>
-                    .fos_user_resetting_reset label{ margin-bottom: 15px;width: 155px;}
-                    .btn-primary {
-                        background-color: #D94A38;
-                        border-color: transparent; 
-                        border-radius: 0;
-                        color: #FFFFFF; margin-top: 10px;
-                    }
-                    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{background:#D94A38 !important;}
-                    #login_errors {
-                        color: red;
-                        border: 1px solid #FBEED5;
-                        padding: 0 15px 2px;
-                        margin-bottom: 6px;
-                        text-align: center;
-                    }
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/unobtrusive-ajax")
+        @Scripts.Render("~/bundles/bootstrap")
+        <!-- ======================= flag widget ======================= -->
+        <div class="pop_wrapper">
+            <div class="pop-container-relative">
+                <a class="pop_close modal-popup-close redfood-icon redfood-cross"></a>
+                <div id="pp_desc" class="width_300">
+                    <style>
+                        .fos_user_resetting_reset label{ margin-bottom: 15px;width: 155px;}
+                        .btn-primary {
+                            background-color: #D94A38;
+                            border-color: transparent; 
+                            border-radius: 0;
+                            color: #FFFFFF; margin-top: 10px;
+                        }
+                        .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{background:#D94A38 !important;}
 
-                    .submit {
-                        color: #FFFFFF;
-                        height: 29px;
-                        padding: 0 20px;
-                        background-color: #D94A38;
-                        border: medium none;
-                        cursor: pointer;
-                        font-size: 14px;
-                    }
+                        .submit {
+                            color: #FFFFFF;
+                            height: 29px;
+                            padding: 0 20px;
+                            background-color: #D94A38;
+                            border: medium none;
+                            cursor: pointer;
+                            font-size: 14px;
+                        }
 
-                    .confirmation-message {
-                        background-color: #DEDEDE;
-                        border: 1px solid #FBEED5;
-                        padding: 8px 12px 7px;
-                        margin-bottom: 20px;
-                    }
+                        .confirmation-message {
+                            background-color: #DEDEDE;
+                            border: 1px solid #FBEED5;
+                            padding: 8px 12px 7px;
+                            margin-bottom: 20px;
+                        }
 
-                    .join_form li label.error {
-                        color: red;
-                        font-size: 12px;
-                    }
+                        .join_form li label.error {
+                            color: red;
+                            font-size: 12px;
+                        }
 
-                    #ispg_appbundle_flagstype_message {
-                        margin-top: 10px;
-                    }
+                        #ispg_appbundle_flagstype_message {
+                            margin-top: 10px;
+                        }
 
-                    .comment-area textArea {
-                        width: 100%;
-                    }
+                        .comment-area textArea {
+                            width: 100%;
+                        }
 
-                    .comment-area {
-                        display: block;
-                        margin-bottom: 15px;
-                    }
+                        .comment-area {
+                            display: block;
+                            margin-bottom: 15px;
+                        }
 
-                    #ispg_appbundle_messagestype_message {
-                        resize: vertical;
-                    }
-                </style>
+                        #ispg_appbundle_messagestype_message {
+                            resize: vertical;
+                        }
+                    </style>
 
-                @Html.Partial("~/Views/Account/Register.cshtml", new RegisterViewModel())
-                @Html.Partial("~/Views/Account/Login.cshtml", new LoginViewModel())
-                @Html.Partial("~/Views/Account/ForgotPassword.cshtml", new ForgotPasswordViewModel())
-                @Html.Partial("~/Views/Message/_CreateMessage.cshtml", new MessagePostViewModel())
-                @Html.Partial("~/Views/Manage/ChangePassword.cshtml", new ChangePasswordViewModel()) 
-                @Html.Partial("~/Views/Manage/_DeactivateAccount.cshtml", new DeactivateViewModel())
-                
+                    @Html.Partial("~/Views/Account/Register.cshtml", new RegisterViewModel())
+                    @Html.Partial("~/Views/Account/Login.cshtml", new LoginViewModel())
+                    @Html.Partial("~/Views/Account/ForgotPassword.cshtml", new ForgotPasswordViewModel())
+                    @Html.Partial("~/Views/Message/_CreateMessage.cshtml", new MessagePostViewModel())
+                    @Html.Partial("~/Views/Manage/ChangePassword.cshtml", new ChangePasswordViewModel()) 
+                    @Html.Partial("~/Views/Manage/_DeactivateAccount.cshtml", new DeactivateViewModel())
+                    @Html.Partial("~/Views/Manage/_ImagePopup.cshtml", new ImagePopupViewModel())
+                </div>
             </div>
         </div>
-    </div>
  
-    <div id="fb-root"></div>
-    @Scripts.Render("~/Content/js")
-    @RenderSection("scripts", false)
+        <div id="fb-root"></div>
+        @Scripts.Render("~/Content/js")
+        @RenderSection("Scripts", false)
         
-    <script>
-        (function () {
-            var e = document.createElement('script');
-            e.src = document.location.protocol + "\/\/connect.facebook.net\/en_US\/all.js";
-            e.async = false;
-            document.getElementById('fb-root').appendChild(e);
-        }());
-        window.fbAsyncInit = function () {
-            window.FB.init({ "appId": "1116755848371978", "xfbml": true, "oauth": true, "status": false, "cookie": true, "logging": false });
-        };
+        <script>    
+            $("#logoutForm").validate();
+    
+            (function () {
+                var e = document.createElement('script');
+                e.src = document.location.protocol + "\/\/connect.facebook.net\/en_US\/all.js";
+                e.async = false;
+                document.getElementById('fb-root').appendChild(e);
+            }());
+            window.fbAsyncInit = function () {
+                window.FB.init({ "appId": "1116755848371978", "xfbml": true, "oauth": true, "status": false, "cookie": true, "logging": false });
+            };
 
-        // Script for FOSFacebookBundle
-        $(document).ready(function ($) {
-            $('.fb-button').on('click', function (event) {
-                event.preventDefault();
-                window.FB.login(function (response) {
-                    if (response.authResponse) {
-                        window.location = "/signin-facebook?accessToken=" + window.FB.getAuthResponse()['accessToken'] + "&expiresIn=" + window.FB.getAuthResponse()["expiresIn"];
-                    }
-                }, {scope: 'email,user_birthday,user_location'});
+            // Script for FOSFacebookBundle
+            $(document).ready(function ($) {
+                $('.fb-button').on('click', function (event) {
+                    event.preventDefault();
+                    window.FB.login(function (response) {
+                        if (response.authResponse) {
+                            window.location = "/signin-facebook?accessToken=" + window.FB.getAuthResponse()['accessToken'] + "&expiresIn=" + window.FB.getAuthResponse()["expiresIn"];
+                        }
+                    }, { scope: 'email,user_birthday,user_location,user_photos' });
+                });
             });
-        });
-        $('#msdpdwn1 li.sitem').click(function () {
-            var dicon = $(this).children("div").attr("data-icon");
-            var currClass = $('.sel-cat').children('i').attr('class');
-            if ($('#msdpdwn2').is(':hidden')) {
-                $('.msrch-wrp1 input').hide();
-                $('.msrch-wrp1 input').blur();
-                $('#msdpdwn1').hide();
+            $('#msdpdwn1 li.sitem').click(function () {
+                var dicon = $(this).children("div").attr("data-icon");
+                var currClass = $('.sel-cat').children('i').attr('class');
+                if ($('#msdpdwn2').is(':hidden')) {
+                    $('.msrch-wrp1 input').hide();
+                    $('.msrch-wrp1 input').blur();
+                    $('#msdpdwn1').hide();
 
-                $('#msdpdwn2').show();
-                $('.sel-cat').children('i').removeClass(currClass);
-                $('.sel-cat').children('i').attr({ "class": dicon });
-                $('#searchTxtLoc').focus();
-            }
-        });
-    </script>
-</body>
+                    $('#msdpdwn2').show();
+                    $('.sel-cat').children('i').removeClass(currClass);
+                    $('.sel-cat').children('i').attr({ "class": dicon });
+                    $('#searchTxtLoc').focus();
+                }
+            });
+        </script>
+    </body>
 </html>

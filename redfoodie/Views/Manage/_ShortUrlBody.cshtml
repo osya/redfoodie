@@ -8,7 +8,7 @@
     </p>
     <div class="input-group form-group">
         <span class="input-group-addon">Redfoodie.com/</span>
-        @Html.EditorFor(m => m.ShortUrl, new { htmlAttributes = new { id = "su_shortUrl", @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ShortUrl), title = Html.DisplayNameFor(x => x.ShortUrl), autocomplete = "off", style = "background-color:white;" } })
+        @Html.TextBoxFor(m => m.ShortUrl, true, null, new { id = "su_shortUrl", @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ShortUrl), title = Html.DisplayNameFor(x => x.ShortUrl), autocomplete = "off", style = "background-color:white;" })
         @Html.ValidationMessagesFor(m => m.ShortUrl, new { @class = "text-danger" })
     </div>
     <button type="submit">Save</button>

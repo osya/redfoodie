@@ -1,4 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -49,6 +52,8 @@ namespace redfoodie.Controllers
                 _userManager = value;
             }
         }
+
+        private string UserPath => Path.Combine("~/Content/thumbs/user/", User.Identity.GetUserName());
 
         //
         // GET: /Manage/ProfileSettings
@@ -142,16 +147,22 @@ namespace redfoodie.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ViewProfile(string username, string shortUrl)
         {
-            if (username == null && shortUrl == null)
-            {
-                return View();
-            }
-            if (string.Equals(username, User.Identity.GetUserName()))
-                return View(new ViewProfileViewModel { UserName = username });
             var dbContext = new ApplicationDbContext();
-            var userQ = dbContext.Users.Where(m => string.Equals(m.UserName, username) || string.Equals(m.ShortUrl, shortUrl));
-            if (!await userQ.AnyAsync() || (await userQ.CountAsync()) > 1) return View("Error");
-            return View(new ViewProfileViewModel { UserName = userQ.First().UserName });
+            ApplicationUser user;
+            if ((username != null) && string.Equals(username, User.Identity.GetUserName()))
+            {
+                user = await UserManager.FindByNameAsync(username);
+                return View(new ViewProfileViewModel { UserName = username, ImagePath = user.ImageFileName != null ? Path.Combine(UserPath, user.ImageFileName) : null });
+            }
+
+            // UserManager not used here because searching by ShortUrl
+            var username2 = username ?? User.Identity.GetUserName();
+            var userQ = dbContext.Users.Where(m => string.Equals(m.UserName, username2) || (shortUrl != null && string.Equals(m.ShortUrl, shortUrl)));
+            if (!await userQ.AnyAsync() || await userQ.CountAsync() > 1) return View("Error");
+            user = userQ.First();
+            var imagePath = Session["imageFileName"] as string ?? (user.ImageFileName != null
+                ? Path.Combine(UserPath, user.ImageFileName) : "/Content/collections/imgs/user.svg");
+            return View(new ViewProfileViewModel { UserName = user.UserName, ImagePath = imagePath });
         }
 
         public ActionResult InviteFriends()
@@ -181,6 +192,71 @@ namespace redfoodie.Controllers
             }
             return Json(JsonResponseFactory.ErrorResponse(ModelState.Where(pair => pair.Value.Errors.Count > 0)
                 .ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> UpdateProfilePicture(ImagePopupViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if ((model.UserFile.ContentLength > 0) && (model.UserFile.FileName != null))
+                {
+                    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    var updateResult = await UpdateProfilePicture(model.UserFile.FileName, model.UserFile.InputStream, user);
+                    if (updateResult.Succeeded)
+                    {
+                        return Json(JsonResponseFactory.SuccessResponse());
+                    }
+                    AddErrors(updateResult);
+                }
+                ModelState.AddModelError("", "ContentLength == 0 or FileName is null");
+            }
+            return Json(JsonResponseFactory.ErrorResponse(ModelState.Where(pair => pair.Value.Errors.Count > 0)
+                    .ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
+        }
+
+        internal async Task<IdentityResult> UpdateProfilePicture(string filename, Stream inputStream, ApplicationUser user)
+        {
+            // User.Identity.GetUserId() is null when this method called from ExternalLoginConfirmation. 
+            // Thats why UserPath property is not used here and `user` exists in method's parameters
+            var userPath = Path.Combine("~/Content/thumbs/user/", user.UserName);
+            var userPathLocal = Server.MapPath(userPath);
+            try
+            {
+                if (!Directory.Exists(userPathLocal))
+                {
+                    Directory.CreateDirectory(userPathLocal);
+                }
+            }
+            catch (IOException ioex)
+            {
+                //TODO: Add NLog here
+                Console.WriteLine(ioex.Message);
+            }
+
+            // Delete old file
+            if (user.ImageFileName != null)
+            {
+                var oldFilePath = Path.Combine(userPathLocal, user.ImageFileName);
+                if (System.IO.File.Exists(oldFilePath))
+                {
+                    System.IO.File.Delete(oldFilePath);
+                }
+            }
+
+            // Save new file
+            Debug.Assert(filename != null);
+            using (var fileStream = System.IO.File.Create(Path.Combine(userPathLocal, Path.GetFileName(filename))))
+            {
+                inputStream.CopyTo(fileStream);
+                fileStream.Close();
+            }
+            
+            user.ImageFileName = filename;
+            Session["imageFileName"] = Path.Combine(userPath, filename);
+            var updateResult = await UserManager.UpdateAsync(user);
+            return updateResult;
         }
 
         [HttpPost]

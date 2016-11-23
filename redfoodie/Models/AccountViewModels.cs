@@ -25,6 +25,7 @@ namespace redfoodie.Models
 
     public class SendCodeViewModel
     {
+        [Display(Name = "Select Two-Factor Authentication Provider:")]
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
         public string ReturnUrl { get; set; }

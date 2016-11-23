@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="jQuery.Validation.Unobtrusive.Native, Version=1.1.5809.17463, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jQuery.Validation.Unobtrusive.Native.MVC5.1.3.0\lib\net45\jQuery.Validation.Unobtrusive.Native.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -203,6 +211,7 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\Notification.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="HttpPostedFileExtensionsAttribute.cs" />
     <Compile Include="Migrations\201611121401524_Drop Href column from City.cs" />
     <Compile Include="Migrations\201611121401524_Drop Href column from City.Designer.cs">
       <DependentUpon>201611121401524_Drop Href column from City.cs</DependentUpon>
@@ -242,6 +251,10 @@
     <Compile Include="Migrations\201611170706132_Add ShortUrl.cs" />
     <Compile Include="Migrations\201611170706132_Add ShortUrl.Designer.cs">
       <DependentUpon>201611170706132_Add ShortUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611220720549_Add ImageFileName property.cs" />
+    <Compile Include="Migrations\201611220720549_Add ImageFileName property.Designer.cs">
+      <DependentUpon>201611220720549_Add ImageFileName property.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\InviteFriendsViewModel.cs" />
@@ -359,14 +372,13 @@
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.noty.packaged.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\load-image.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -380,6 +392,7 @@
     <Content Include="Views\Manage\_ShortUrl.cshtml" />
     <Content Include="Views\Manage\_NotificationSettings.cshtml" />
     <Content Include="Views\Manage\_ShortUrlBody.cshtml" />
+    <Content Include="Views\Manage\_ImagePopup.cshtml" />
     <None Include="Views\ResetPasswordEmail.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -463,6 +476,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611170706132_Add ShortUrl.resx">
       <DependentUpon>201611170706132_Add ShortUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611220720549_Add ImageFileName property.resx">
+      <DependentUpon>201611220720549_Add ImageFileName property.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

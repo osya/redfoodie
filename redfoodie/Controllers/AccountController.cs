@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using Facebook;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -379,6 +381,23 @@ namespace redfoodie.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, false, false);
+
+                        var claimsIdentity = await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+                        var claim = claimsIdentity?.FindFirst("urn:facebook:access_token");
+                        if (claim != null)
+                        {
+                            var facebook = new FacebookClient(claim.Value);
+                            var picture = ((JsonObject)facebook.Get("me?fields=picture"))["picture"];
+                            var url = (string)((JsonObject)((JsonObject)picture)["data"])["url"];
+                        
+                            using (var client = new HttpClient())
+                            {
+                                var filename = new Uri(url).Segments.Last();
+                                var imageStream = await client.GetStreamAsync(url);
+                                await new ManageController {ControllerContext = ControllerContext}.UpdateProfilePicture(filename, imageStream, user);
+                            }
+                        }
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
