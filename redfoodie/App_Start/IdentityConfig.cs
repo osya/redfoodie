@@ -52,6 +52,12 @@ namespace redfoodie
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
+            // Change UserValidator to be able to create Users with space in UserName
+            UserValidator = new UserValidator<ApplicationUser>(this)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = true
+            };
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)

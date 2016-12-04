@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,7 +12,7 @@ namespace redfoodie.Models
         [MinLength(4)]
         public string UserName { get; set; }
 
-        public SelectList Cities { get; set; }
+        public IEnumerable<SelectListItem> Cities { get; set; }
 
         [Required]
         [Display(Name = "Select City")]
@@ -52,12 +53,41 @@ namespace redfoodie.Models
 
     public class ViewProfileViewModel
     {
-        [Required]
-        [Display(Name = "Full Name")]
-        [MinLength(4)]
-        public string UserName { get; set; }
+        public ApplicationUser User { get; set; }
+        public int Likes { get; set; }
+        public int Dislikes { get; set; }
+        public int LikesPercent { get; set; }
+        public int DislikesPercent { get; set; }
+        public IEnumerable<RestaurantViewModel> LikesRestaurant { get; set; }
+        public IEnumerable<UserViewModel> SuggestedUsers { get; set; }
+        public ICollection<UserViewModel> Followers { get; set; }
+        public ICollection<UserViewModel> Followings { get; set; }
+    }
 
-        public string ImagePath { get; set; }
+    public class UserViewModel
+    {
+        public string Id { get; set; }
+        public virtual string UserName { get; set; }
+        public string ImageFullFileName { get; set; }
+        public bool Verified { get; set; }
+        public bool Follow { get; set; }
+    }
+
+    public class SuggestedUsersViewModel
+    {
+        public IEnumerable<UserViewModel> SuggestedUsers { get; set; }
+    }
+
+    public class InviteFriendsViewModel
+    {
+        [Display(Name = "Email address")]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Display(Name = "Find foodies on Redfoodie")]
+        public string SearchUsers { get; set; }
+
+        public IEnumerable<UserViewModel> SuggestedUsers { get; set; }
     }
 
     public class ShortUrlViewModel

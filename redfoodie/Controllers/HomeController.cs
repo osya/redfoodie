@@ -7,7 +7,13 @@ namespace redfoodie.Controllers
 {
     public class HomeController: Controller
     {
-        public ApplicationDbContext Context = new ApplicationDbContext();
+        private ApplicationDbContext _db;
+
+        public ApplicationDbContext Db
+        {
+            private get { return _db ?? (_db = new ApplicationDbContext()); }
+            set { _db = value; }
+        }
 
         public ActionResult Index(int? cityId = null)
         {
@@ -15,24 +21,47 @@ namespace redfoodie.Controllers
             {
                 if ((cityId == null) && !User.Identity.IsAuthenticated)
                 {
-                    Session["currentCity"] = Context.Cities.First(x => x.ParentId == null);
+                    Session["currentCity"] = Db.Cities.First();
                 }
                 else
                 {
                     if (cityId != null)
                     {
-                        Session["currentCity"] = Context.Cities.Find(cityId);
+                        Session["currentCity"] = Db.Cities.Find(cityId);
                     }
                     else
                     {
                         if ((Session["currentCity"] == null) && User.Identity.IsAuthenticated)
                         {
-                            Session["currentCity"] = Context.Users.Find(User.Identity.GetUserId())?.City;
+                            Session["currentCity"] = Db.Users.Find(User.Identity.GetUserId())?.City;
                         }
                     }
                 }
             }
-            return View();
+
+            ApplicationUser user = null;
+            if (Request.IsAuthenticated)
+            {
+                user = Db.Users.Find(User.Identity.GetUserId());
+            }
+
+            return View(new HomeViewModel
+            {
+                SuggestedUsers = Db.Users.OrderByDescending(m => m.Votes.Count)
+                        .Take(3)
+                        .ToArray()
+                        .Select(
+                            m =>
+                                new UserViewModel
+                                {
+                                    Id = m.Id,
+                                    UserName = m.UserName,
+                                    ImageFullFileName = m.ImageFullFileName,
+                                    Verified = m.Verified,
+                                    Follow = user != null && user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id))
+                                })
+                        .ToArray()
+            });
         }
 
         public ActionResult About()
@@ -52,6 +81,24 @@ namespace redfoodie.Controllers
         public JsonResult Subscribe()
         {
             return Json(JsonResponseFactory.SuccessResponse());
+        }
+
+        public ActionResult Verified()
+        {
+            return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_db != null)
+                {
+                    _db.Dispose();
+                    _db = null;
+                }
+            }
+            base.Dispose(disposing);
         }
     }
 }

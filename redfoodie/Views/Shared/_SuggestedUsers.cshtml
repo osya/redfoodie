@@ -1,0 +1,51 @@
+﻿@model redfoodie.Models.SuggestedUsersViewModel
+@{
+    ViewBag.Title = "Who to Follow";
+}
+@{
+    var action = ViewContext.RouteData.GetRequiredString("action");
+    var seeAll = action == "SeeAll";
+}
+@if (seeAll)
+{
+    <div class="panel-heading"><h4>@ViewBag.Title</h4></div>
+}
+else
+{
+    <h4>@ViewBag.Title</h4>
+}
+<div class="random-users @(seeAll ? "panel-body": string.Empty)">
+    @foreach (var user in Model.SuggestedUsers)
+    {
+        <div class="item clearfix">
+            <figure class="user-image pull-left">
+                <a href=@Url.Action("ViewProfile", "Manage", new { userId = user.Id })>
+                    <img src=@Url.Content(user.ImageFullFileName) height="146" width="146" alt="@user.UserName" title="@user.UserName">
+                </a>
+            </figure>
+            <div class="user-details pull-right">
+                <div class="user-name">
+                    <a href=@Url.Action("ViewProfile", "Manage", new { userId = user.Id })>
+                        <strong>@user.UserName</strong>
+                    </a>
+                    @if (user.Verified)
+                    {
+                        @Html.ActionLink("v", "Verified", "Home", null, new { data_original_title = "Verified Account", rel = "tooltip", @class = "verified" })
+                    }
+                </div>
+                <div class="clearfix user-rank">
+                    <div class="button followed @(user.Follow ? "following": "follow")" data-prototype="@user.UserName.ToLower()" data-follow-status=@(user.Follow? "follow": "unfollow")>
+                        @if (Request.IsAuthenticated)
+                        {
+                            @Ajax.ActionLink(user.Follow ? "Following" : "Follow", "Follow", "Manage", new { userId = user.Id }, new AjaxOptions { HttpMethod = "POST", OnBegin = "$(this).parent().loadingIcon('attach');", OnSuccess = "followSuccess" }, new { @class = "anim-top pos_relative" })
+                        }
+                        else
+                        {
+                            <a data-modal-link="1" class="anim-top pos_relative" href="#login" rel="login">Follow</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

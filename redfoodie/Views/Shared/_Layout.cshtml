@@ -27,14 +27,17 @@
                     <nav class="nav navbar-nav navbar-left">
                         <nav class="city-list">
                             <div class="city-box pull-left">
-                                @(((City) Session["currentCity"])?.Name)<span class="fa fa-angle-down"></span>
+                                @{
+                                    var currentCity = (City)Session["currentCity"];
+                                }
+                                @(currentCity?.Name)<span class="fa fa-angle-down"></span>
                                 <div class="drop_menu " style="display: none">
                                     <ul class="list-unstyled">
                                         <li class="cat clearfix second-country">
                                             <div class="country_city_list">
-                                                @foreach (var city in (IEnumerable<SelectListItem>)Session["citiesList"])
+                                                @foreach (var city in ((City[]) Session["citiesList"]).Where(m => m.Id != currentCity?.Id))
                                                 {
-                                                    @Html.ActionLink(city.Text, "Index", "Home", new {cityId = city.Value }, null)
+                                                    @Html.ActionLink(city.Name, "Index", "Home", new {cityId = city.Id}, null)
                                                 }
                                             </div>
                                         </li>
@@ -119,7 +122,6 @@
     
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/unobtrusive-ajax")
-        @Scripts.Render("~/bundles/bootstrap")
         <!-- ======================= flag widget ======================= -->
         <div class="pop_wrapper">
             <div class="pop-container-relative">
@@ -187,12 +189,13 @@
         </div>
  
         <div id="fb-root"></div>
+        @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/Content/js")
         @RenderSection("Scripts", false)
         
-        <script>    
+        <script>
             $("#logoutForm").validate();
-    
+
             (function () {
                 var e = document.createElement('script');
                 e.src = document.location.protocol + "\/\/connect.facebook.net\/en_US\/all.js";
@@ -213,7 +216,18 @@
                         }
                     }, { scope: 'email,user_birthday,user_location,user_photos' });
                 });
+                $('body').tooltip({
+                    selector: "[rel=tooltip]",
+                    placement: "bottom"
+                });
             });
+            function followSuccess(data) {
+                $(this).parent().loadingIcon('detach');
+                if (data.Success === true && "Object" in data && "Follow" in data.Object && data.Object["Follow"] != null) {
+                    $(this).text(data.Object["Follow"] === true ? "Following" : "Follow");
+                    $(this).parent().toggleClass("follow following");
+                }
+            }
             $('#msdpdwn1 li.sitem').click(function () {
                 var dicon = $(this).children("div").attr("data-icon");
                 var currClass = $('.sel-cat').children('i').attr('class');

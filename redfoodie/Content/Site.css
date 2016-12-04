@@ -5,6 +5,7 @@
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
+
    will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
@@ -1560,6 +1561,18 @@ p {
     background: #EDD614;
 }
 
+.rating-distribution ul li span {
+    width: 45px;
+    text-align: left;
+}
+
+.tab-content p {
+    margin: 0;
+    padding-top: 0;
+    text-align: left;
+    line-height: 17px;
+}
+
 .progress {
     height: 20px;
     margin-bottom: 20px;
@@ -1867,6 +1880,21 @@ p {
     height: 30px;
 }
 
+.user_profile_lkes .user-restaurant-review {
+    padding: 0!important;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.user_profile_lkes .user-like,.user-wishlist .user-like {
+    position: absolute;
+    font-size: 30px;
+    line-height: 40px;
+    right: 0;
+    top: 0;
+    color: #8d8d8d;
+}
+
 .no-networks {
     font-size: 13px;
     padding: 20px;
@@ -2040,30 +2068,25 @@ p {
     text-transform: lowercase;
 }
 
-.style-01 .user-details-wrapper .user-name a {
-    line-height: 20px;
-    font-weight: 600;
+.user-details-wrapper {
+    display: block;
+    float: left;
+    margin: 0;
+    width: 50%;
+    min-height: 90px;
+    overflow: auto;
 }
 
-.style-01 .user-details-wrapper .user-name {
-    font-size: 16px;
-    position: relative;
-    padding: 10px 20px;
-    font-size: 15px;
+.user-details-wrapper-override {
+    float: none!important;
+    margin: 0!important;
+    width: 100%!important;
 }
 
 .header-user-container .style-01 .user-details-wrapper .user-name a {
     line-height: 20px;
     font-weight: 600;
     display: block;
-}
-
-.style-01 .user-details-wrapper .user-name a.sub-link {
-    line-height: 16px;
-    font-weight: normal;
-    font-size: 13px!important;
-    display: block;
-    color: #8d8d8d!important;
 }
 
 .header-user-container a {
@@ -2078,7 +2101,34 @@ p {
     color: #fff!important;
 }
 
+.style-01 .user-details-wrapper .user-image img {
+    position: relative;
+    max-height: 73px;
+    max-width: 73px;
+}
 
+.style-01 .user-details-wrapper .user-name a {
+    font-size: 16px!important;
+    line-height: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    position: relative;
+}
+
+.style-01 .user-details-wrapper .user-name {
+    font-size: 16px;
+    position: relative;
+    padding: 10px 20px;
+    font-size: 15px;
+}
+
+.style-01 .user-details-wrapper .user-name a.sub-link {
+    line-height: 16px;
+    font-weight: normal;
+    font-size: 13px!important;
+    display: block;
+    color: #8d8d8d!important;
+}
 
 .arrow_box {
     background: url(/Content/collections/imgs/arrow_box.png) no-repeat;
@@ -2280,4 +2330,33 @@ p {
 
 .rate-grey {
     background-color: gray;
+}
+
+.restaurant-name {
+    font-weight: 600!important;
+    font-size: 14px!important;
+}
+
+.user-name {
+    text-transform: capitalize;
+}
+.restaurant-review-logo {
+    margin-right: 10px;
+}
+.restaurant-locality,.restaurant-locality a {
+    font-size: 12px!important;
+    color: #8d8d8d!important;
+}
+.verified {
+    font-style: normal;
+    color: #FFF!important;
+    font-size: 8px;
+    font-weight: 600;
+    background: #14a4d0;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 12px;
+    vertical-align: text-bottom;
+    padding: 0 4px;
 }

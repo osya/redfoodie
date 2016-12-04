@@ -18,6 +18,7 @@ namespace redfoodie.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -60,11 +61,11 @@ namespace redfoodie.Controllers
         public async Task<ActionResult> ProfileSettings()
         {
             var userId = User.Identity.GetUserId();
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var user = await UserManager.FindByIdAsync(userId);
             var model = new ProfileSettingsViewModel
             {
                 UserName = User.Identity.GetUserName(),
-                Cities = Session["citiesList"] as SelectList,
+                Cities = (Session["citiesList"] as City[])?.Select(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() }),
                 SelectedCity = user.CityId,
                 Twitter = user.Twitter,
                 Facebook = user.Facebook,
@@ -145,30 +146,88 @@ namespace redfoodie.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<ActionResult> ViewProfile(string username, string shortUrl)
-        {
-            var dbContext = new ApplicationDbContext();
+        public async Task<ActionResult> ViewProfile(string userId, string shortUrl)
+        {   
             ApplicationUser user;
-            if ((username != null) && string.Equals(username, User.Identity.GetUserName()))
+            Tuple<int, int, int, int, RestaurantViewModel[]> likes;
+            if (!string.IsNullOrEmpty(userId) && string.Equals(userId, User.Identity.GetUserId()))
             {
-                user = await UserManager.FindByNameAsync(username);
-                return View(new ViewProfileViewModel { UserName = username, ImagePath = user.ImageFileName != null ? Path.Combine(UserPath, user.ImageFileName) : null });
+                user = await UserManager.FindByIdAsync(userId);
+                likes = await CalculateLikes(user);
+                return View(new ViewProfileViewModel
+                {
+                    User = user,
+                    Likes = likes.Item1,
+                    Dislikes = likes.Item2,
+                    LikesPercent = likes.Item3,
+                    DislikesPercent = likes.Item4,
+                    LikesRestaurant = likes.Item5,
+                    SuggestedUsers = _db.Users.Where(m => !string.Equals(m.Id, user.Id)).OrderBy(m => Guid.NewGuid()).Take(4).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id))}).ToArray(),
+                    Followers = _db.Users.Where(u => u.Follows.Any(f => string.Equals(f.FollowUserId, user.Id) )).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray(),
+                    Followings = user.Follows.Select(m => m.FollowUser).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = true }).ToArray()
+                });
             }
 
             // UserManager not used here because searching by ShortUrl
-            var username2 = username ?? User.Identity.GetUserName();
-            var userQ = dbContext.Users.Where(m => string.Equals(m.UserName, username2) || (shortUrl != null && string.Equals(m.ShortUrl, shortUrl)));
+            var userQ = _db.Users.Where(m => (!string.IsNullOrEmpty(userId) && string.Equals(m.Id, userId)) || (!string.IsNullOrEmpty(shortUrl) && string.Equals(m.ShortUrl, shortUrl)));
             if (!await userQ.AnyAsync() || await userQ.CountAsync() > 1) return View("Error");
             user = userQ.First();
-            var imagePath = Session["imageFileName"] as string ?? (user.ImageFileName != null
-                ? Path.Combine(UserPath, user.ImageFileName) : "/Content/collections/imgs/user.svg");
-            return View(new ViewProfileViewModel { UserName = user.UserName, ImagePath = imagePath });
+            likes = await CalculateLikes(user);
+            return View(new ViewProfileViewModel { User = user, Likes = likes.Item1, Dislikes = likes.Item2, LikesPercent = likes.Item3, DislikesPercent = likes.Item4,
+                LikesRestaurant = likes.Item5,
+                SuggestedUsers = _db.Users.Where(m => m.Id != user.Id).OrderBy(m => Guid.NewGuid()).Take(4).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray(),
+                Followers = _db.Users.Where(u => u.Follows.Any(f => string.Equals(f.FollowUserId, user.Id))).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray(),
+                Followings = user.Follows.Select(m => m.User).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = true }).ToArray()
+            });
         }
 
-        public ActionResult InviteFriends()
+        public async Task<JsonResult> Follow(string userId)
         {
-            return View();
-        }        
+            var userQ = _db.Users.Where(m => string.Equals(m.Id, userId));
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (!await userQ.AnyAsync() || await userQ.CountAsync() > 1 || user == null) return Json(JsonResponseFactory.ErrorResponse("User not found or there are many users with these userName and Year of Birth")); ;
+            var followUser = userQ.First();
+
+            var follow = user.Follows.Any(m => string.Equals(m.FollowUserId, followUser.Id));
+            if (follow)
+            {
+                var rec = _db.Follows.First(m => string.Equals(m.FollowUserId, followUser.Id));
+                _db.Follows.Remove(rec);
+                await _db.SaveChangesAsync();
+                return Json(JsonResponseFactory.SuccessResponse(new {Follow = false} ));
+            }
+            user.Follows.Add(new Follow { FollowUserId = followUser.Id });
+            var updateResult = await UserManager.UpdateAsync(user);
+            return Json(updateResult.Succeeded ?
+                JsonResponseFactory.SuccessResponse(new { Follow = true }) :
+                JsonResponseFactory.ErrorResponse(new { Follow = false, updateResult.Errors }));
+        }
+
+        private async Task<Tuple<int, int, int, int, RestaurantViewModel[]>> CalculateLikes(ApplicationUser user)
+        {
+            var likesRestaurants = (await _db.Restaurants.Where(r => r.Votes.Any(v => v.Value && string.Equals(v.UserId, user.Id))).
+                ToArrayAsync()).Select(m => new RestaurantViewModel {Id = m.Id, Name = m.Name,
+                    Rate = (int)(m.Votes.Count(v => v.Value) * 100.0 / m.Votes.Count),
+                    ImageFileName = $"~/Content/thumbs/business/{m.UniqueName}/{m.ImageFileName}", UniqueName = m.UniqueName
+                }).ToArray();
+            var likes = likesRestaurants.Length;
+            var total = user.Votes.Count;
+            var dislikes = total - likes;
+            var likesPercent = (int) (likes * 100.0 / total);
+            var dislikesPercent = 100 - likesPercent;
+
+            return new Tuple<int, int, int, int, RestaurantViewModel[]>(likes, dislikes, likesPercent, dislikesPercent, likesRestaurants);
+        }
+
+        public async Task<ActionResult> InviteFriends()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+
+            return View(new InviteFriendsViewModel
+            {
+                SuggestedUsers = _db.Users.Where(m => !string.Equals(m.Id, user.Id)).OrderBy(m => Guid.NewGuid()).Take(8).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray()
+            });
+        }
 
         //
         // POST: /Manage/ChangePassword
@@ -220,8 +279,7 @@ namespace redfoodie.Controllers
         {
             // User.Identity.GetUserId() is null when this method called from ExternalLoginConfirmation. 
             // Thats why UserPath property is not used here and `user` exists in method's parameters
-            var userPath = Path.Combine("~/Content/thumbs/user/", user.UserName);
-            var userPathLocal = Server.MapPath(userPath);
+            var userPathLocal = Server.MapPath(user.UserPath);
             try
             {
                 if (!Directory.Exists(userPathLocal))
@@ -238,7 +296,7 @@ namespace redfoodie.Controllers
             // Delete old file
             if (user.ImageFileName != null)
             {
-                var oldFilePath = Path.Combine(userPathLocal, user.ImageFileName);
+                var oldFilePath = Server.MapPath(user.ImageFullFileName);
                 if (System.IO.File.Exists(oldFilePath))
                 {
                     System.IO.File.Delete(oldFilePath);
@@ -247,14 +305,14 @@ namespace redfoodie.Controllers
 
             // Save new file
             Debug.Assert(filename != null);
-            using (var fileStream = System.IO.File.Create(Path.Combine(userPathLocal, Path.GetFileName(filename))))
+            user.ImageFileName = filename;
+            using (var fileStream = System.IO.File.Create(Server.MapPath(user.ImageFullFileName)))
             {
                 inputStream.CopyTo(fileStream);
                 fileStream.Close();
             }
             
-            user.ImageFileName = filename;
-            Session["imageFileName"] = Path.Combine(userPath, filename);
+            Session["imageFileName"] = user.ImageFullFileName;
             var updateResult = await UserManager.UpdateAsync(user);
             return updateResult;
         }
@@ -278,14 +336,40 @@ namespace redfoodie.Controllers
                 JsonResponseFactory.ErrorResponse(ModelState.Where(pair => pair.Value.Errors.Count > 0).ToDictionary(pair => pair.Key, pair => pair.Value.Errors.Select(error => error.ErrorMessage))));
         }
 
+        /// <summary>
+        /// View all User's notifications
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ActionResult> SeeAll()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+ 
+            return View(new SuggestedUsersViewModel
+            {
+                SuggestedUsers = _db.Users.Where(m => !string.Equals(m.Id, user.Id)).OrderBy(m => Guid.NewGuid()).Take(4).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray()
+            });
+        }
+
         protected override void Dispose(bool disposing)
         {
-            if (disposing && _userManager != null)
+            if (disposing)
             {
-                _userManager.Dispose();
-                _userManager = null;
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                    _userManager = null;
+                }
+                if (_signInManager != null)
+                {
+                    _signInManager.Dispose();
+                    _userManager = null;
+                }
+                if (_db != null)
+                {
+                    _db.Dispose();
+                    _db = null;
+                }
             }
-
             base.Dispose(disposing);
         }
 

@@ -1,0 +1,31 @@
+﻿@model redfoodie.Models.SuggestedUsersViewModel
+<ul class="list-unstyled users-list-short">
+    @foreach (var user in Model.SuggestedUsers)
+            {
+        <li>
+            <figure class="user-photo">
+                <a href=@Url.Action("ViewProfile", "Manage", new { userId = user.Id })>
+                    <img src=@Url.Content(user.ImageFullFileName) height="146" width="146" alt="@user.UserName" title="@user.UserName">
+                </a>
+            </figure>
+            <div class="user-name">
+                @Html.ActionLink(user.UserName, "ViewProfile", "Manage", new { userId = user.Id }, new { @class = "user-name" })
+                @if (user.Verified)
+                {
+                    @Html.ActionLink("v", "Verified", "Home", null, new { data_original_title = "Verified Account", rel = "tooltip", @class = "verified", style = "font-size: 11px!important;" })
+                }
+            </div>
+            <div class="button followed @(user.Follow ? "following": "follow")" data-prototype="@user.UserName.ToLower()" data-follow-status=@(user.Follow? "follow": "unfollow")>
+                @if (Request.IsAuthenticated)
+                {
+                    @Ajax.ActionLink(user.Follow ? "Following" : "Follow", "Follow", "Manage", new { userId = user.Id }, new AjaxOptions { HttpMethod = "POST", OnBegin = "$(this).parent().loadingIcon('attach');", OnSuccess = "followSuccess" }, new { @class = "anim-top pos_relative" })
+                }
+                else
+                {
+                    <a data-modal-link="1" class="anim-top pos_relative" href="#login" rel="login">Follow</a>
+                }
+            </div>
+        </li>
+    }
+</ul>
+

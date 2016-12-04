@@ -1,0 +1,23 @@
+﻿@model redfoodie.Models.SuggestedUsersViewModel
+@{
+    ViewBag.Title = "Notifications";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/notification")
+<div class="globalwidth clearfix clearfix font_roman pad_110">
+    <div class="notify-left pull-left">
+        <h3>@ViewBag.Title</h3>
+        <div id="user-notification-wrapper">
+            <div class="Review_box emptyBox"><h5>No Notifications</h5></div>
+        </div>
+    </div>
+    <div class="notify-right pull-right">
+        <div class="panel panel-default">
+            @Html.Partial("_SuggestedUsers", Model)
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>@Html.ActionLink("Invite friends", "InviteFriends", "Manage", null, null)</h4></div>
+        </div>
+    </div>
+</div>
+

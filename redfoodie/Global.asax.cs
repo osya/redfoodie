@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -12,7 +13,7 @@ namespace redfoodie
         protected void Session_Start(object sender, EventArgs e)
         {
             var context = new ApplicationDbContext();
-            Session["citiesList"] = new SelectList(context.Cities, "Id", "Name");
+            Session["citiesList"] = context.Cities.ToArray();
         }
 
         protected void Application_Start()

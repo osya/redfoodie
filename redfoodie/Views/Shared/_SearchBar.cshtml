@@ -1,6 +1,6 @@
 ﻿@using redfoodie.Views
-@model redfoodie.Models.SearchViewModel
-@using (Ajax.BeginForm("Search", "Search", new { ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnBegin="searchBegin", OnSuccess = "searchSuccess" }, new { role = "form", id = "autoSuggestSearchForm" }))
+@model redfoodie.Models.RestaurantSearchViewModel
+@using (Ajax.BeginForm("Search", "Restaurant", new { ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnBegin="searchBegin", OnSuccess = "searchSuccess" }, new { role = "form", id = "autoSuggestSearchForm" }))
 {
     @Html.AntiForgeryToken()
     var toolbarSearchBar = (bool)ViewData["toolbarSearchBar"];

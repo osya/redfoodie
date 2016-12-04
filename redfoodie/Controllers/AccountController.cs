@@ -73,6 +73,8 @@ namespace redfoodie.Controllers
                 switch (result)
                 {
                     case SignInStatus.Success:
+                        var user = await UserManager.FindByEmailAsync(model.Email);
+                        Session["imageFileName"] = user.ImageFullFileName;
                         return Json(JsonResponseFactory.SuccessResponse());
 //                    case SignInStatus.LockedOut:
 //                        return View("Lockout");
@@ -340,6 +342,9 @@ namespace redfoodie.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var db = new ApplicationDbContext();
+                    var user = db.Users.First(u => string.Equals(u.UserName, loginInfo.DefaultUserName));
+                    Session["imageFileName"] = user.ImageFullFileName;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -397,7 +402,6 @@ namespace redfoodie.Controllers
                                 await new ManageController {ControllerContext = ControllerContext}.UpdateProfilePicture(filename, imageStream, user);
                             }
                         }
-
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -414,6 +418,7 @@ namespace redfoodie.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Session["imageFileName"] = null;
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
@@ -435,14 +440,12 @@ namespace redfoodie.Controllers
                     _userManager.Dispose();
                     _userManager = null;
                 }
-
                 if (_signInManager != null)
                 {
                     _signInManager.Dispose();
                     _signInManager = null;
                 }
             }
-
             base.Dispose(disposing);
         }
 

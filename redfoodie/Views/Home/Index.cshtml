@@ -1,4 +1,5 @@
-﻿@model redfoodie.Models.HomeViewModel
+﻿@using redfoodie.Models
+@model HomeViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -295,6 +296,10 @@
             </li>
         </ul>
         <a href="/list-cuisines" class="more">See all cuisine »</a>
+    </div>
+    <hgroup class="heading-01"><h2 class="clr-red ">Popular foodies</h2></hgroup>
+    <div class="clearfix">
+        @Html.Partial("_SuggestedUsersHoriz", new SuggestedUsersViewModel { SuggestedUsers = Model.SuggestedUsers })
     </div>
 </div>
 </div>

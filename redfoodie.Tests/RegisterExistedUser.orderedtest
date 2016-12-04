@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<OrderedTest name="orderedtest1" storage="e:\work\vsprojects\temp\redfoodie\redfoodie.tests\orderedtest1.orderedtest" id="7df57987-3a99-41ec-9f56-7d37c44fc9d0" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
-  <TestLinks>
-    <TestLink id="d5dc88d1-60ea-885f-babd-950c4d0a5631" name="RegisterByLoginPasswordTest" storage="bin\debug\redfoodie.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <TestLink id="c10f1673-88f6-cdca-2636-987f2729a53a" name="RegisterExistedUserByLoginPasswordTest" storage="bin\debug\redfoodie.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  </TestLinks>
-</OrderedTest>

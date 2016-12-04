@@ -1,6 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.SqlTypes;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -33,6 +37,21 @@ namespace redfoodie.Models
         public bool ThanksFavoritemail { get; set; }
 
         public string ImageFileName { get; set; }
+
+        public string UserPath
+            =>
+            Path.Combine("~/Content/thumbs/user/",
+                $"{UserName.Replace(" ", "-").ToLower()}{(Birthday != DateTime.MinValue ? $"-{Birthday.Year}" : string.Empty)}")
+            ;
+        public string ImageFullFileName => ImageFileName != null ? Path.Combine(UserPath, ImageFileName) : "/Content/collections/imgs/user.svg";
+
+        public DateTime Birthday { get; set; } = (DateTime)SqlDateTime.MinValue;
+
+        public bool Verified { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<Follow> Follows { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

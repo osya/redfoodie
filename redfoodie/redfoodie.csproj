@@ -85,6 +85,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.2\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RazorEngine, Version=3.9.1.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.9.1\lib\net45\RazorEngine.dll</HintPath>
       <Private>True</Private>
@@ -209,71 +213,57 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\JsonResponseFactory.cs" />
     <Compile Include="Controllers\MessageController.cs" />
-    <Compile Include="Controllers\Notification.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="HttpPostedFileExtensionsAttribute.cs" />
-    <Compile Include="Migrations\201611121401524_Drop Href column from City.cs" />
-    <Compile Include="Migrations\201611121401524_Drop Href column from City.Designer.cs">
-      <DependentUpon>201611121401524_Drop Href column from City.cs</DependentUpon>
+    <Compile Include="Migrations\201611240859241_Initial.cs" />
+    <Compile Include="Migrations\201611240859241_Initial.Designer.cs">
+      <DependentUpon>201611240859241_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611160624477_Add ApplicationUser.City.cs" />
-    <Compile Include="Migrations\201611160624477_Add ApplicationUser.City.Designer.cs">
-      <DependentUpon>201611160624477_Add ApplicationUser.City.cs</DependentUpon>
+    <Compile Include="Migrations\201611241210118_Add Restaurant UniqueName and ImageFileName.cs" />
+    <Compile Include="Migrations\201611241210118_Add Restaurant UniqueName and ImageFileName.Designer.cs">
+      <DependentUpon>201611241210118_Add Restaurant UniqueName and ImageFileName.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611160942323_Add FK to ApplicationUser.cs" />
-    <Compile Include="Migrations\201611160942323_Add FK to ApplicationUser.Designer.cs">
-      <DependentUpon>201611160942323_Add FK to ApplicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\201611241214325_Add Unique constraint.cs" />
+    <Compile Include="Migrations\201611241214325_Add Unique constraint.Designer.cs">
+      <DependentUpon>201611241214325_Add Unique constraint.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611161150160_Add Twitter to ApplicationUser.cs" />
-    <Compile Include="Migrations\201611161150160_Add Twitter to ApplicationUser.Designer.cs">
-      <DependentUpon>201611161150160_Add Twitter to ApplicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\201611302212401_Add Restaurant Location.cs" />
+    <Compile Include="Migrations\201611302212401_Add Restaurant Location.Designer.cs">
+      <DependentUpon>201611302212401_Add Restaurant Location.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611161215173_Add `Facebook` to ApplicationUser.cs" />
-    <Compile Include="Migrations\201611161215173_Add `Facebook` to ApplicationUser.Designer.cs">
-      <DependentUpon>201611161215173_Add `Facebook` to ApplicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\201612011758246_Add Places.cs" />
+    <Compile Include="Migrations\201612011758246_Add Places.Designer.cs">
+      <DependentUpon>201612011758246_Add Places.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611161218297_Add `Website` to ApplicationUser.cs" />
-    <Compile Include="Migrations\201611161218297_Add `Website` to ApplicationUser.Designer.cs">
-      <DependentUpon>201611161218297_Add `Website` to ApplicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\201612011826196_Make PlaceId not null.cs" />
+    <Compile Include="Migrations\201612011826196_Make PlaceId not null.Designer.cs">
+      <DependentUpon>201612011826196_Make PlaceId not null.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611161222405_Add `Bio` to ApplicationUser.cs" />
-    <Compile Include="Migrations\201611161222405_Add `Bio` to ApplicationUser.Designer.cs">
-      <DependentUpon>201611161222405_Add `Bio` to ApplicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\201612012050279_Add Birthday.cs" />
+    <Compile Include="Migrations\201612012050279_Add Birthday.Designer.cs">
+      <DependentUpon>201612012050279_Add Birthday.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611161228571_Add MaxLength to Bio.cs" />
-    <Compile Include="Migrations\201611161228571_Add MaxLength to Bio.Designer.cs">
-      <DependentUpon>201611161228571_Add MaxLength to Bio.cs</DependentUpon>
+    <Compile Include="Migrations\201612012229266_Add Verified.cs" />
+    <Compile Include="Migrations\201612012229266_Add Verified.Designer.cs">
+      <DependentUpon>201612012229266_Add Verified.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611170641536_Add Notification settings.cs" />
-    <Compile Include="Migrations\201611170641536_Add Notification settings.Designer.cs">
-      <DependentUpon>201611170641536_Add Notification settings.cs</DependentUpon>
+    <Compile Include="Migrations\201612021334328_Add Follow.cs" />
+    <Compile Include="Migrations\201612021334328_Add Follow.Designer.cs">
+      <DependentUpon>201612021334328_Add Follow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611170706132_Add ShortUrl.cs" />
-    <Compile Include="Migrations\201611170706132_Add ShortUrl.Designer.cs">
-      <DependentUpon>201611170706132_Add ShortUrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611220720549_Add ImageFileName property.cs" />
-    <Compile Include="Migrations\201611220720549_Add ImageFileName property.Designer.cs">
-      <DependentUpon>201611220720549_Add ImageFileName property.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Follow.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
-    <Compile Include="Models\InviteFriendsViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
-    <Compile Include="Models\SearchViewModel.cs" />
+    <Compile Include="Models\Place.cs" />
+    <Compile Include="Models\Vote.cs" />
+    <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationHandler.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationMiddleware.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Migrations\201608301336229_AddCity.cs" />
-    <Compile Include="Migrations\201608301336229_AddCity.Designer.cs">
-      <DependentUpon>201608301336229_AddCity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608312033453_Add Href to City.cs" />
-    <Compile Include="Migrations\201608312033453_Add Href to City.Designer.cs">
-      <DependentUpon>201608312033453_Add Href to City.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\City.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -281,11 +271,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608261348237_InitialCreate.cs" />
-    <Compile Include="Migrations\201608261348237_InitialCreate.Designer.cs">
-      <DependentUpon>201608261348237_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -293,6 +278,7 @@
     <Compile Include="MyFacebookMiddleware\Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TaskExtensions.cs" />
     <Compile Include="Views\ValidateMessagesFor.cs" />
@@ -332,12 +318,8 @@
     <Content Include="Content\thumbs\business\shudh-restaurant-town-hall-amritsar\80x80_12042641_730827820357009_5533930776058197825_n-shudh-restaurant-town-hall-amritsar-99e9607c68707ed3b3f5ced6b5d580b1.jpg" />
     <Content Include="Content\thumbs\business\wtf-white-avenue-amritsar\80x80_10405653_784862508273425_7414421140844571462_n-wtf-white-avenue-amritsar-344ce2a1fbf196d01dfc5ce193d2a719.jpg" />
     <Content Include="Content\thumbs\rf-loading.gif" />
-    <Content Include="Content\thumbs\user\792199504196263\146x146_701e002b21d8943219bc6394c0bab71c0273fd4a.jpg" />
-    <Content Include="Content\thumbs\user\998750473491222\146x146_6da35dfbeb02812fd13b8ba82d240d04e4a24fff.jpg" />
-    <Content Include="Content\thumbs\user\anamika-436\146x146_663cc4fe7e43ff00ba2a3c33cc01a6d59bddcfaa.jpg" />
     <Content Include="Content\thumbs\user\kalki-1912\146x146_489b42243d3b25094806a8bad87d482981c2d519.jpg" />
-    <Content Include="Content\thumbs\user\karthik-3143\146x146_125a4bca7796238fb4df9a09acea103e71b49564.jpg" />
-    <Content Include="Content\thumbs\user\mani-singh-468\146x146_8f449e16dd10064b876d30b4007edc638299dbc3.jpg" />
+    <Content Include="Content\viewprofile.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -385,7 +367,7 @@
     <Content Include="Scripts\selectize.min.js" />
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Notification\SeeAll.cshtml" />
+    <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="Views\Manage\ViewProfile.cshtml" />
     <Content Include="Views\Manage\InviteFriends.cshtml" />
     <Content Include="Views\Manage\_DeactivateAccount.cshtml" />
@@ -393,6 +375,8 @@
     <Content Include="Views\Manage\_NotificationSettings.cshtml" />
     <Content Include="Views\Manage\_ShortUrlBody.cshtml" />
     <Content Include="Views\Manage\_ImagePopup.cshtml" />
+    <Content Include="Views\Home\Verified.cshtml" />
+    <Content Include="Views\Manage\SeeAll.cshtml" />
     <None Include="Views\ResetPasswordEmail.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -425,10 +409,15 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Message\_CreateMessage.cshtml" />
     <Content Include="Views\Shared\_SearchBar.cshtml" />
+    <Content Include="Views\Restaurant\Index.cshtml" />
+    <Content Include="Views\Restaurant\Details.cshtml" />
+    <Content Include="Views\Shared\_SuggestedUsers.cshtml" />
+    <Content Include="Views\Shared\_SuggestedUsersHoriz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Search\" />
+    <Folder Include="Content\thumbs\user\satinder-1911\" />
+    <Folder Include="Content\thumbs\user\vforvictory-1978\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -438,47 +427,32 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608261348237_InitialCreate.resx">
-      <DependentUpon>201608261348237_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611240859241_Initial.resx">
+      <DependentUpon>201611240859241_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608301336229_AddCity.resx">
-      <DependentUpon>201608301336229_AddCity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611241210118_Add Restaurant UniqueName and ImageFileName.resx">
+      <DependentUpon>201611241210118_Add Restaurant UniqueName and ImageFileName.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608312033453_Add Href to City.resx">
-      <DependentUpon>201608312033453_Add Href to City.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611241214325_Add Unique constraint.resx">
+      <DependentUpon>201611241214325_Add Unique constraint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611121401524_Drop Href column from City.resx">
-      <DependentUpon>201611121401524_Drop Href column from City.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611302212401_Add Restaurant Location.resx">
+      <DependentUpon>201611302212401_Add Restaurant Location.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611160624477_Add ApplicationUser.City.resx">
-      <DependentUpon>201611160624477_Add ApplicationUser.City.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612011758246_Add Places.resx">
+      <DependentUpon>201612011758246_Add Places.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611160942323_Add FK to ApplicationUser.resx">
-      <DependentUpon>201611160942323_Add FK to ApplicationUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612011826196_Make PlaceId not null.resx">
+      <DependentUpon>201612011826196_Make PlaceId not null.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611161150160_Add Twitter to ApplicationUser.resx">
-      <DependentUpon>201611161150160_Add Twitter to ApplicationUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612012050279_Add Birthday.resx">
+      <DependentUpon>201612012050279_Add Birthday.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611161215173_Add `Facebook` to ApplicationUser.resx">
-      <DependentUpon>201611161215173_Add `Facebook` to ApplicationUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612012229266_Add Verified.resx">
+      <DependentUpon>201612012229266_Add Verified.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611161218297_Add `Website` to ApplicationUser.resx">
-      <DependentUpon>201611161218297_Add `Website` to ApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611161222405_Add `Bio` to ApplicationUser.resx">
-      <DependentUpon>201611161222405_Add `Bio` to ApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611161228571_Add MaxLength to Bio.resx">
-      <DependentUpon>201611161228571_Add MaxLength to Bio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611170641536_Add Notification settings.resx">
-      <DependentUpon>201611170641536_Add Notification settings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611170706132_Add ShortUrl.resx">
-      <DependentUpon>201611170706132_Add ShortUrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611220720549_Add ImageFileName property.resx">
-      <DependentUpon>201611220720549_Add ImageFileName property.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612021334328_Add Follow.resx">
+      <DependentUpon>201612021334328_Add Follow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

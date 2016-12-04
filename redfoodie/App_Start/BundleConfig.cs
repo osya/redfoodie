@@ -37,6 +37,8 @@ namespace redfoodie
             bundles.Add(new StyleBundle("~/Content/invite").Include("~/Content/invite.css"));
             bundles.Add(new StyleBundle("~/Content/settings/css").Include(
                 "~/Content/settings.css", "~/Content/selectize.bootstrap3.css"));
+            bundles.Add(new StyleBundle("~/Content/viewprofile/css").Include(
+                "~/Content/viewprofile.css"));
 
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                       "~/Scripts/Site.js"));

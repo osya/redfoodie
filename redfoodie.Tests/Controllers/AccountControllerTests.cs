@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -67,25 +66,31 @@ namespace redfoodie.Tests.Controllers
         }
         private static readonly RegisterViewModel DummyModel = new RegisterViewModel { Email = "my_email@ya.ru", UserName = "my_fullname", Password = "Aa123#" };
 
+        private static ControllerContext ControllerContext
+        {
+            get
+            {
+                var mockControllerContext = new Mock<ControllerContext>();
+                var mockSession = new Mock<HttpSessionStateBase>();
+                mockSession.SetupGet(s => s["currentCity"]).Returns(new City { Id = 1, Name = "Delhi NCR" });
+                mockControllerContext.Setup(p => p.HttpContext.Session).Returns(mockSession.Object);
+                return mockControllerContext.Object;
+            }
+        }
+
         [TestMethod]
         public async Task RegisterByLoginPasswordTest()
         {
             // Arrange
             var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
-            var controller = new AccountController(UserManager, signInManager);
-
-            var mockControllerContext = new Mock<ControllerContext>();
-            var mockSession = new Mock<HttpSessionStateBase>();
-            mockSession.SetupGet(s => s["currentCity"]).Returns(new City { Id = 1, ParentId = null, Name = "Delhi NCR" });
-            mockControllerContext.Setup(p => p.HttpContext.Session).Returns(mockSession.Object);
-            controller.ControllerContext = mockControllerContext.Object;
+            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
 
             // Act
             var actual = await controller.Register(DummyModel);
 
             // Assert
-            Debug.Assert(actual != null, "actual != null");
-            Assert.AreEqual(true, actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+            Assert.IsNotNull(actual);
+            Assert.IsTrue((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
 
             var user = UserManager.FindByName(DummyModel.UserName);
             Assert.AreEqual(DummyModel.UserName, user.UserName);
@@ -96,20 +101,14 @@ namespace redfoodie.Tests.Controllers
         {
             // Arrange
             var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
-            var controller = new AccountController(UserManager, signInManager);
-
-            var mockControllerContext = new Mock<ControllerContext>();
-            var mockSession = new Mock<HttpSessionStateBase>();
-            mockSession.SetupGet(s => s["currentCity"]).Returns(new City { Id = 1, ParentId = null, Name = "Delhi NCR" });
-            mockControllerContext.Setup(p => p.HttpContext.Session).Returns(mockSession.Object);
-            controller.ControllerContext = mockControllerContext.Object;
+            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
 
             // Act
             var actual = await controller.Register(DummyModel);
 
             // Assert
-            Debug.Assert(actual != null, "result != null");
-            Assert.AreEqual(false, actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+            Assert.IsNotNull(actual);
+            Assert.IsFalse((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
 
             var modelState = actual.Data.GetType().GetProperty("ModelState").GetValue(actual.Data, null);
             foreach (var el in (System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>)
@@ -125,15 +124,15 @@ namespace redfoodie.Tests.Controllers
         {
             // Arrange
             var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
-            var controller = new AccountController(UserManager, signInManager);
+            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
             var loginVm = new LoginViewModel { Email = DummyModel.Email, Password = DummyModel.Password};
 
             // Act
             var actual = await controller.Login(loginVm);
 
             // Assert
-            Debug.Assert(actual != null, "result != null");
-            Assert.AreEqual(true, actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+            Assert.IsNotNull(actual);
+            Assert.IsTrue((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
         }
 
         [TestMethod]
@@ -141,15 +140,15 @@ namespace redfoodie.Tests.Controllers
         {
             // Arrange
             var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
-            var controller = new AccountController(UserManager, signInManager);
+            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
             var loginVm = new LoginViewModel { Email = DummyModel.Email, Password = string.Empty };
 
             // Act
             var actual = await controller.Login(loginVm);
 
             // Assert
-            Debug.Assert(actual != null, "result != null");
-            Assert.AreEqual(false, actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+            Assert.IsNotNull(actual);
+            Assert.IsFalse((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
         }
     }
 }

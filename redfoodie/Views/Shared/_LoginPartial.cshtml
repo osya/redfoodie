@@ -3,7 +3,7 @@
 {
     <div class="pull-right user-nav mgn_lft">
         <div class="header-after-login" data-toggle="dropdown">
-            <img src=@Url.Content(Session["imageFileName"] as string ?? "/Content/collections/imgs/user.svg") height="146" width="146" alt=@User.Identity.GetUserName() title=@User.Identity.GetUserName()>
+            <img src=@Url.Content(Session["imageFileName"] as string ?? "/Content/collections/imgs/user.svg") height="146" width="146" alt="@User.Identity.GetUserName()" title="@User.Identity.GetUserName()">
             <div class="button">
                 <span class="anim-top icon pos_relative"></span>
             </div>
@@ -14,13 +14,13 @@
                 <header class="user-details-wrapper user-details-wrapper-override">
                     <div class="user-details">
                         <div class="user-name">
-                            @Html.ActionLink(User.Identity.GetUserName() + "!", "ViewProfile", "Manage", new { UserName = User.Identity.GetUserName() }, null)
-                            @Html.ActionLink("View profile", "ViewProfile", "Manage", new { UserName = User.Identity.GetUserName() }, new { @class="sub-link" })
+                            @Html.ActionLink(User.Identity.GetUserName() + "!", "ViewProfile", "Manage", new { userId = User.Identity.GetUserId() }, null)
+                            @Html.ActionLink("View profile", "ViewProfile", "Manage", new { userId = User.Identity.GetUserId() }, new { @class="sub-link" })
                         </div>
                         <div class="user-invite">@Html.ActionLink("Invite friends", "InviteFriends", "Manage", null, null)</div>
                         <div class="user-settings">@Html.ActionLink("Settings", "ProfileSettings", "Manage", null, null)</div>
                         <div class="user-logout">
-                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <a href="javascript:document.getElementById('logoutForm').submit()" class="anim-top pos_relative">Logout</a>
@@ -34,7 +34,7 @@
     </div>
     <div class="pull-right header-notifications blk_style mgn_lft">
         <div class="button">
-            <a href="@Url.Action("SeeAll", "Notification")"><i class="fa fa-bell-o clr-grey"></i></a>
+            <a href="@Url.Action("SeeAll", "Manage")"><i class="fa fa-bell-o clr-grey"></i></a>
         </div>
     </div>
     <div class="pull-right header-messages blk_style mgn_lft">
