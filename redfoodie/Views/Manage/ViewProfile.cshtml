@@ -237,19 +237,19 @@
                 {
                     <div class="clearfix user-restaurant-review">
                         <figure class="user-image pull-left  restaurant-review-logo">
-                            <a href=@Url.Action("Details", "Restaurant", new {uniqueName = restaurant.UniqueName})>
-                                <img src=@Url.Content(restaurant.ImageFileName) alt="@restaurant.Name" title="@restaurant.Name">
+                            <a href=@Url.Action("Details", "Restaurant", new { restaurantId = restaurant.Id })>
+                                <img src=@Url.Content(restaurant.ImageFullFileName) alt="@restaurant.Name" title="@restaurant.Name">
                             </a>
                         </figure>
-                        <div class="user-details">f
+                        <div class="user-details">
                             <div class="user-name">
-                                @Html.ActionLink(@restaurant.Name, "Details", "Restaurant", new { uniqueName = restaurant.UniqueName }, new { @class="restaurant-name" })
+                                @Html.ActionLink(@restaurant.Name, "Details", "Restaurant", new { restaurantId = restaurant.Id }, new { @class="restaurant-name" })
                             </div>
                             <div class="user-stats">
                                 <span class="user-stat restaurant-locality">
-                                            <a href="/search?neighbourhoods=373">Saket</a>,
-                                            <a href="/search?city=13">Delhi NCR</a>
-                                        </span>
+                                    @Html.ActionLink(restaurant.Place.Name, "Index", "Restaurant", new {placeId = restaurant.Place.Id}, null),
+                                    @Html.ActionLink(restaurant.Place.City.Name, "Index", "Restaurant", new { cityId = restaurant.Place.City.Id }, null),
+                                </span>
                             </div>
                             <div class="user-stats user-like restaurant-rating" data-prototype="cuisines">
                                 <p class=@(restaurant.Rate > 80 ? "rateHigherHeart" : restaurant.Rate > 60 ? "rateHighHeart" : restaurant.Rate > 40 ? "rateMiddleHeart" : restaurant.Rate > 20 ? "rateLowHeart" : "rateLowerHeart")>@restaurant.Rate%</p>

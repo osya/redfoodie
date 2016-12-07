@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace redfoodie.Models
 {
@@ -18,8 +19,9 @@ namespace redfoodie.Models
         public string Name { get; set; }
         public int Rate { get; set; }
         [MaxLength(255)]
-        public string ImageFileName { get; set; }
+        public string ImageFullFileName { get; set; }
         [MaxLength(255)]
-        public string UniqueName { get; set; }
+        public Place Place { get; set; }
+        public ICollection<Cuisine> Cuisines { get; set; }
     }
 }

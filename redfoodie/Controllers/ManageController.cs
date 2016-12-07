@@ -54,8 +54,6 @@ namespace redfoodie.Controllers
             }
         }
 
-        private string UserPath => Path.Combine("~/Content/thumbs/user/", User.Identity.GetUserName());
-
         //
         // GET: /Manage/ProfileSettings
         public async Task<ActionResult> ProfileSettings()
@@ -153,6 +151,7 @@ namespace redfoodie.Controllers
             if (!string.IsNullOrEmpty(userId) && string.Equals(userId, User.Identity.GetUserId()))
             {
                 user = await UserManager.FindByIdAsync(userId);
+                if (user == null) return View("Error");
                 likes = await CalculateLikes(user);
                 return View(new ViewProfileViewModel
                 {
@@ -162,8 +161,8 @@ namespace redfoodie.Controllers
                     LikesPercent = likes.Item3,
                     DislikesPercent = likes.Item4,
                     LikesRestaurant = likes.Item5,
-                    SuggestedUsers = _db.Users.Where(m => !string.Equals(m.Id, user.Id)).OrderBy(m => Guid.NewGuid()).Take(4).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id))}).ToArray(),
-                    Followers = _db.Users.Where(u => u.Follows.Any(f => string.Equals(f.FollowUserId, user.Id) )).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray(),
+                    SuggestedUsers = (await _db.Users.Where(m => !string.Equals(m.Id, user.Id)).OrderBy(m => Guid.NewGuid()).Take(4).ToArrayAsync()).Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray(),
+                    Followers = (await _db.Users.Where(u => u.Follows.Any(f => string.Equals(f.FollowUserId, user.Id))).ToArrayAsync()).Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray(),
                     Followings = user.Follows.Select(m => m.FollowUser).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = true }).ToArray()
                 });
             }
@@ -172,11 +171,18 @@ namespace redfoodie.Controllers
             var userQ = _db.Users.Where(m => (!string.IsNullOrEmpty(userId) && string.Equals(m.Id, userId)) || (!string.IsNullOrEmpty(shortUrl) && string.Equals(m.ShortUrl, shortUrl)));
             if (!await userQ.AnyAsync() || await userQ.CountAsync() > 1) return View("Error");
             user = userQ.First();
+            if (user == null) return View("Error");  
             likes = await CalculateLikes(user);
-            return View(new ViewProfileViewModel { User = user, Likes = likes.Item1, Dislikes = likes.Item2, LikesPercent = likes.Item3, DislikesPercent = likes.Item4,
+            return View(new ViewProfileViewModel
+            {
+                User = user,
+                Likes = likes.Item1,
+                Dislikes = likes.Item2,
+                LikesPercent = likes.Item3,
+                DislikesPercent = likes.Item4,
                 LikesRestaurant = likes.Item5,
-                SuggestedUsers = _db.Users.Where(m => m.Id != user.Id).OrderBy(m => Guid.NewGuid()).Take(4).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray(),
-                Followers = _db.Users.Where(u => u.Follows.Any(f => string.Equals(f.FollowUserId, user.Id))).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray(),
+                SuggestedUsers = (await _db.Users.Where(m => m.Id != user.Id).OrderBy(m => Guid.NewGuid()).Take(4).ToArrayAsync()).Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray(),
+                Followers = (await _db.Users.Where(u => u.Follows.Any(f => string.Equals(f.FollowUserId, user.Id))).ToArrayAsync()).Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray(),
                 Followings = user.Follows.Select(m => m.User).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = true }).ToArray()
             });
         }
@@ -208,7 +214,7 @@ namespace redfoodie.Controllers
             var likesRestaurants = (await _db.Restaurants.Where(r => r.Votes.Any(v => v.Value && string.Equals(v.UserId, user.Id))).
                 ToArrayAsync()).Select(m => new RestaurantViewModel {Id = m.Id, Name = m.Name,
                     Rate = (int)(m.Votes.Count(v => v.Value) * 100.0 / m.Votes.Count),
-                    ImageFileName = $"~/Content/thumbs/business/{m.UniqueName}/{m.ImageFileName}", UniqueName = m.UniqueName
+                    ImageFullFileName = m.ImageFullFileName, Place = m.Place
                 }).ToArray();
             var likes = likesRestaurants.Length;
             var total = user.Votes.Count;

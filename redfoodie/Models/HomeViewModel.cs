@@ -10,5 +10,9 @@ namespace redfoodie.Models
         public string SubscriptionEmail { get; set; }
 
         public IEnumerable<UserViewModel> SuggestedUsers { get; set; }
+        public IEnumerable<Cuisine> CuisinesOdd { get; set; }
+        public IEnumerable<Cuisine> CuisinesEven { get; set; }
+        public IEnumerable<Place> PlacesOdd { get; set; }
+        public IEnumerable<Place> PlacesEven { get; set; }
     }
 }

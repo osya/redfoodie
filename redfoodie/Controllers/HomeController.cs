@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using redfoodie.Models;
@@ -15,25 +17,32 @@ namespace redfoodie.Controllers
             set { _db = value; }
         }
 
-        public ActionResult Index(int? cityId = null)
+        public async Task<ActionResult> Index(string cityId = null)
         {
+            var currentCityId = cityId;
             if (Session != null)
             {
-                if ((cityId == null) && !User.Identity.IsAuthenticated)
+                if (string.IsNullOrEmpty(cityId) && !User.Identity.IsAuthenticated)
                 {
-                    Session["currentCity"] = Db.Cities.First();
+                    var currentCity = Db.Cities.First();
+                    Session["currentCity"] = currentCity;
+                    currentCityId = currentCity.Id;
                 }
                 else
                 {
-                    if (cityId != null)
+                    if (!string.IsNullOrEmpty(cityId))
                     {
-                        Session["currentCity"] = Db.Cities.Find(cityId);
+                        var currentCity = Db.Cities.Find(cityId);
+                        Session["currentCity"] = currentCity;
+                        currentCityId = currentCity.Id;
                     }
                     else
                     {
                         if ((Session["currentCity"] == null) && User.Identity.IsAuthenticated)
                         {
-                            Session["currentCity"] = Db.Users.Find(User.Identity.GetUserId())?.City;
+                            var currentCity = Db.Users.Find(User.Identity.GetUserId()).City;
+                            Session["currentCity"] = currentCity;
+                            currentCityId = currentCity.Id;
                         }
                     }
                 }
@@ -45,11 +54,12 @@ namespace redfoodie.Controllers
                 user = Db.Users.Find(User.Identity.GetUserId());
             }
 
+            var places = await Db.Places.Where(p => p.CityId == currentCityId && p.Restaurants.Any()).OrderByDescending(o => o.Restaurants.Count).Take(11).ToArrayAsync();
             return View(new HomeViewModel
             {
-                SuggestedUsers = Db.Users.OrderByDescending(m => m.Votes.Count)
+                SuggestedUsers = (await Db.Users.OrderByDescending(m => m.Votes.Count)
                         .Take(3)
-                        .ToArray()
+                        .ToArrayAsync())
                         .Select(
                             m =>
                                 new UserViewModel
@@ -60,7 +70,11 @@ namespace redfoodie.Controllers
                                     Verified = m.Verified,
                                     Follow = user != null && user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id))
                                 })
-                        .ToArray()
+                        .ToArray(),
+                CuisinesOdd = new[] { await Db.Cuisines.FindAsync("NorthIndian"), await Db.Cuisines.FindAsync("FastFood"), await Db.Cuisines.FindAsync("SouthIndian"), await Db.Cuisines.FindAsync("StreetFood") },
+                CuisinesEven = new[] { await Db.Cuisines.FindAsync("Chinese"), await Db.Cuisines.FindAsync("Desserts"), await Db.Cuisines.FindAsync("Mughlai"), await Db.Cuisines.FindAsync("Bakery") },
+                PlacesOdd = places.Where((c, i) => i % 2 != 0).ToArray(),
+                PlacesEven = places.Where((c, i) => i % 2 == 0).ToArray()
             });
         }
 
@@ -86,6 +100,14 @@ namespace redfoodie.Controllers
         public ActionResult Verified()
         {
             return View();
+        }
+
+        public async Task<ActionResult> PlacesList()
+        {
+            var currentCity = Session["currentCity"] as City;
+            var places = await Db.Places.Where(p => p.CityId == currentCity.Id && p.Restaurants.Any()).ToArrayAsync();
+            var alphaPlaces = places.GroupBy(g => g.Name[0]).ToDictionary(t => t.Key, t => t.ToArray());
+            return View(alphaPlaces);
         }
 
         protected override void Dispose(bool disposing)

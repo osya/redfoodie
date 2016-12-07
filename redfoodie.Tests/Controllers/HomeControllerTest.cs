@@ -31,13 +31,13 @@ namespace redfoodie.Tests.Controllers
 
         private static City[] Cities => new[]
         {
-            new City {Id = 1, Name = "Delhi NCR"},
-            new City {Id = 2, Name = "Amritsar"},
-            new City {Id = 3, Name = "Chandigarh"},
-            new City {Id = 4, Name = "Jaipur"},
-            new City {Id = 5, Name = "Ludhiana"},
-            new City {Id = 6, Name = "Mumbai"},
-            new City {Id = 7, Name = "Pune"}
+            new City {Id = "DelhiNCR", Name = "Delhi NCR"},
+            new City {Id = "Amritsar", Name = "Amritsar"},
+            new City {Id = "Chandigarh", Name = "Chandigarh"},
+            new City {Id = "Jaipur", Name = "Jaipur"},
+            new City {Id = "Ludhiana", Name = "Ludhiana"},
+            new City {Id = "Mumbai", Name = "Mumbai"},
+            new City {Id = "Pune", Name = "Pune"}
         };
 
         private static ApplicationDbContext Db {
@@ -98,7 +98,7 @@ namespace redfoodie.Tests.Controllers
                 mockCities.As<IQueryable<City>>().Setup(m => m.Expression).Returns(citiesQueriableList.Expression);
                 mockCities.As<IQueryable<City>>().Setup(m => m.ElementType).Returns(citiesQueriableList.ElementType);
                 mockCities.As<IQueryable<City>>().Setup(m => m.GetEnumerator()).Returns(citiesQueriableList.GetEnumerator());
-                mockCities.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => Cities.FirstOrDefault(d => d.Id == (int)ids[0]));
+                mockCities.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => Cities.FirstOrDefault(d => Equals(d.Id, ids[0])));
 
                 return new ApplicationDbContext { Users = mockUsers.Object, Cities = mockCities.Object };
             }
@@ -129,27 +129,27 @@ namespace redfoodie.Tests.Controllers
         }
 
         [TestMethod]
-        public void Index()
+        public async void Index()
         {
             // Arrange
             var controller = new HomeController { ControllerContext = ControllerContext, Db = Db};
 
             // Act
-            var result = controller.Index() as ViewResult;
+            var result = await controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
-        public void ChangeCity()
+        public async void ChangeCity()
         {
             // Arrange
             var controller = new HomeController { ControllerContext = ControllerContext, Db = Db };
             var curCity = Cities[Rnd.Next(Cities.Length)];
 
             // Act
-            var result = controller.Index(curCity.Id) as ViewResult;
+            var result = await controller.Index(curCity.Id) as ViewResult;
             
             // Assert
             Assert.IsNotNull(controller.HttpContext.Session);

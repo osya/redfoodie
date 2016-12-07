@@ -7,13 +7,13 @@ namespace redfoodie.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddPlaces : IMigrationMetadata
+    public sealed partial class MakePlaceIdInt : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPlaces));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(MakePlaceIdInt));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612011758246_Add Places"; }
+            get { return "201612071350300_Make Place Id Int"; }
         }
         
         string IMigrationMetadata.Source

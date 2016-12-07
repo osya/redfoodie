@@ -2360,3 +2360,88 @@ p {
     vertical-align: text-bottom;
     padding: 0 4px;
 }
+.claim_inner .left_part h6,.review_inner .left_part h6,.rest_list_inner .left_part h6 {
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: 600;
+}
+
+.searchResultContainer {
+    margin-top: 50px;
+}
+
+.searchCard {
+    margin: 0;
+    margin-bottom: 25px;
+    padding: 0;
+}
+
+.searchCard div {
+    margin-bottom: 5px;
+    padding: 0;
+}
+
+.searchBusinesName {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.searchBusinesData {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.searchBusinesData a,.searchBusinesData a:focus,.searchBusinesData a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.searchBusinesRupee {
+    font-size: 14px;
+    color: green;
+}
+
+.searchBusinesRupee strong {
+    font-size: 14px;
+    padding-left: 4px;
+}
+
+.searchUserImage {
+    font-size: 12px;
+}
+
+.searchUserImage a {
+    float: left;
+    margin-right: 5px;
+}
+
+.searchHeart {
+    text-align: center;
+}
+
+.searchHeart span {
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    bottom: 12px;
+    position: relative;
+    display: block;
+    text-align: center;
+    width: 170px;
+}
+
+.searchHeart div {
+    text-align: right;
+    margin-left: 60px;
+    height: 30px;
+    padding-left: 0!important;
+    font-size: 18px!important;
+    background-size: 20px 17px!important;
+    background-position: left top 3px!important;
+    width: 60px;
+}
+
+.searchHeart div.greyHeart {
+    text-align: center!important;
+    padding-left: 25px!important;
+}

@@ -72,7 +72,7 @@ namespace redfoodie.Tests.Controllers
             {
                 var mockControllerContext = new Mock<ControllerContext>();
                 var mockSession = new Mock<HttpSessionStateBase>();
-                mockSession.SetupGet(s => s["currentCity"]).Returns(new City { Id = 1, Name = "Delhi NCR" });
+                mockSession.SetupGet(s => s["currentCity"]).Returns(new City { Id = "DelhiNCR", Name = "Delhi NCR" });
                 mockControllerContext.Setup(p => p.HttpContext.Session).Returns(mockSession.Object);
                 return mockControllerContext.Object;
             }

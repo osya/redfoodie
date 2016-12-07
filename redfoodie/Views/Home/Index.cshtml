@@ -205,7 +205,7 @@
             <a class="download_icon_container" href="https://geo.itunes.apple.com/us/app/redfoodie-find-food-restaurants/id1111345681?mt=8">
                 <img src="/Content/collections/imgs/Download_on_the_App_Store_Badge_US-UK_135x40.svg">
             </a>
-            @using (Html.BeginForm("Subscribe", "Home", FormMethod.Post, new { id = "subscription-form", @class="subscrube-form" }))
+            @using (Html.BeginForm("Subscribe", "Home", FormMethod.Post, new { id = "subscription-form", @class = "subscrube-form" }))
             {
                 <div class="input-group">
                     @Html.TextBoxFor(m => m.SubscriptionEmail, true, null, new { id = "subscription_email", required = "required", @class = "form-control", placeholder = Html.DisplayNameFor(m => m.SubscriptionEmail), type = "email" })
@@ -225,77 +225,45 @@
     </hgroup>
     <div class="neighbourhoods-list">
         <ul class="list-unstyled clearfix">
-            <li class="">
-                <a href="/search?neighbourhoods=1328" title="GT Road">Gt road (41)</a>
-            </li>
-            <li class="">
-                <a href="/search?neighbourhoods=1325" title="Basant Nagar">Basant nagar (13)</a>
-            </li>
-            <li class="">
-                <a href="/search?neighbourhoods=1327" title="INA Colony">Ina colony (12)</a>
-            </li>
-            <li class="">
-                <a href="/search?neighbourhoods=1326" title="White Avenue">White avenue (8)</a>
-            </li>
-            <li class="">
-                <a href="/search?neighbourhoods=1332" title="Mall Road">Mall road (3)</a>
-            </li>
+            @foreach (var place in Model.PlacesOdd)
+            {
+                <li class="">
+                    @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new { placeId = place.Id }, new { title = place.Name })
+                </li>
+            }
         </ul>
         <ul class="list-unstyled clearfix even">
-            <li class="even">
-                <a href="/search?neighbourhoods=1324" title="Ranjit Avenue">Ranjit avenue (55)</a>
-            </li>
-            <li class="even">
-                <a href="/search?neighbourhoods=1323" title="Town Hall">Town hall (22)</a>
-            </li>
-            <li class="even">
-                <a href="/search?neighbourhoods=1329" title="Rani Ka Bagh">Rani ka bagh (13)</a>
-            </li>
-            <li class="even">
-                <a href="/search?neighbourhoods=1331" title="Kabir Park">Kabir park (11)</a>
-            </li>
-            <li class="even">
-                <a href="/search?neighbourhoods=1330" title="Lawrence Road">Lawrence road (7)</a>
-            </li>
-            <li class="even">
-                <a href="/search?neighbourhoods=1333" title="Shastri Nagar">Shastri nagar (2)</a>
-            </li>
+            @foreach (var place in Model.PlacesEven)
+            {
+                <li class="even">
+                    @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new { placeId = place.Id }, new { title = place.Name })
+                </li>
+            }
         </ul>
-        <a href="/list-neighbourhoods" class="more">See all neighbourhoods »</a>
+        @Html.ActionLink("See all neighbourhoods »", "PlacesList", "Home", null, new { @class="more" })
     </div>
     <hgroup class="heading-01">
         <h2 class="clr-red " style="">Explore by cuisine</h2>
     </hgroup>
     <div class="neighbourhoods-list">
         <ul class="list-unstyled clearfix">
-            <li class="">
-                <a href="/search?tags=North+Indian">North indian</a>
-            </li>
-            <li class="">
-                <a href="/search?tags=Fast+Food">Fast food</a>
-            </li>
-            <li class="">
-                <a href="/search?tags=South+Indian">South indian</a>
-            </li>
-            <li class="">
-                <a href="/search?tags=Street+Food">Street food</a>
-            </li>
+            @foreach (var cuisine in Model.CuisinesOdd)
+            {
+                <li class="">
+                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new { cuisineId = cuisine.Id }, null)
+                </li>
+
+            }
         </ul>
         <ul class="list-unstyled clearfix even">
-            <li class="even">
-                <a href="/search?tags=Chinese">Chinese</a>
-            </li>
-            <li class="even">
-                <a href="/search?tags=Desserts">Desserts</a>
-            </li>
-            <li class="even">
-                <a href="/search?tags=Mughlai">Mughlai</a>
-            </li>
-            <li class="even">
-                <a href="/search?tags=Bakery">Bakery</a>
-            </li>
+            @foreach (var cuisine in Model.CuisinesEven)
+            {
+                <li class="">
+                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new { cuisineId = cuisine.Id }, null)
+                </li>
+            }
         </ul>
-        <a href="/list-cuisines" class="more">See all cuisine »</a>
+        @Html.ActionLink("See all cuisine »", "CuisinesList", "Restaurant", null, new { @class="more" })
     </div>
     <hgroup class="heading-01"><h2 class="clr-red ">Popular foodies</h2></hgroup>
     <div class="clearfix">

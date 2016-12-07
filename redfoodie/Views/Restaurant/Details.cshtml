@@ -1,4 +1,4 @@
-﻿@model redfoodie.Models.Restaurant
+﻿@model redfoodie.Models.RestaurantViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -12,11 +12,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.City.Name)
+            @Html.DisplayNameFor(model => model.Place.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.City.Name)
+            @Html.DisplayFor(model => model.Place.Name)
         </dd>
 
         <dt>
@@ -28,27 +28,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UniqueName)
+            @Html.DisplayNameFor(model => model.ImageFullFileName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UniqueName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageFileName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageFileName)
+            @Html.DisplayFor(model => model.ImageFullFileName)
         </dd>
 
     </dl>

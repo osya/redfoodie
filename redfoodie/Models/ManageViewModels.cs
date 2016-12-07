@@ -16,7 +16,7 @@ namespace redfoodie.Models
 
         [Required]
         [Display(Name = "Select City")]
-        public int SelectedCity { get; set; }
+        public string SelectedCity { get; set; }
 
         [Display(Name = "Twitter Handle")]
         [Url]

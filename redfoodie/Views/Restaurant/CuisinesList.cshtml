@@ -1,0 +1,34 @@
+﻿@model IEnumerable<redfoodie.Models.Cuisine>
+@{
+    ViewBag.Title = "All Cuisines";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="globalwidth ">
+    <div class="clearfix" style="margin-top: 110px">
+        <h3>@ViewBag.Title</h3>
+    </div>
+</div>
+<div style="background-color: #f0f0f0;    overflow: hidden;    margin-top: 10px;    padding-bottom: 80px;">
+    <div class="globalwidth">
+        <ul class="list-unstyled list-couisines">
+            @foreach (var cuisine in Model)
+            {
+                <li>
+                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new { cuisineId = cuisine.Id }, null)
+                </li>
+            }
+        </ul>
+        <style>
+            .list-couisines li {
+                width: 25%;
+                margin: 8px 0;
+                float: left;
+            }
+
+            .list-couisines a {
+                color: #000;
+                font-weight: 600;
+            }
+        </style>
+    </div>
+</div>

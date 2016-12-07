@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Enums.NET, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7ea1c1650d506225, processorArchitecture=MSIL">
+      <HintPath>..\packages\Enums.NET.1.0.0\lib\net45\Enums.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
       <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
       <Private>True</Private>
@@ -215,43 +219,16 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="HttpPostedFileExtensionsAttribute.cs" />
-    <Compile Include="Migrations\201611240859241_Initial.cs" />
-    <Compile Include="Migrations\201611240859241_Initial.Designer.cs">
-      <DependentUpon>201611240859241_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201612071052275_Initial.cs" />
+    <Compile Include="Migrations\201612071052275_Initial.Designer.cs">
+      <DependentUpon>201612071052275_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611241210118_Add Restaurant UniqueName and ImageFileName.cs" />
-    <Compile Include="Migrations\201611241210118_Add Restaurant UniqueName and ImageFileName.Designer.cs">
-      <DependentUpon>201611241210118_Add Restaurant UniqueName and ImageFileName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611241214325_Add Unique constraint.cs" />
-    <Compile Include="Migrations\201611241214325_Add Unique constraint.Designer.cs">
-      <DependentUpon>201611241214325_Add Unique constraint.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611302212401_Add Restaurant Location.cs" />
-    <Compile Include="Migrations\201611302212401_Add Restaurant Location.Designer.cs">
-      <DependentUpon>201611302212401_Add Restaurant Location.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612011758246_Add Places.cs" />
-    <Compile Include="Migrations\201612011758246_Add Places.Designer.cs">
-      <DependentUpon>201612011758246_Add Places.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612011826196_Make PlaceId not null.cs" />
-    <Compile Include="Migrations\201612011826196_Make PlaceId not null.Designer.cs">
-      <DependentUpon>201612011826196_Make PlaceId not null.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612012050279_Add Birthday.cs" />
-    <Compile Include="Migrations\201612012050279_Add Birthday.Designer.cs">
-      <DependentUpon>201612012050279_Add Birthday.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612012229266_Add Verified.cs" />
-    <Compile Include="Migrations\201612012229266_Add Verified.Designer.cs">
-      <DependentUpon>201612012229266_Add Verified.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612021334328_Add Follow.cs" />
-    <Compile Include="Migrations\201612021334328_Add Follow.Designer.cs">
-      <DependentUpon>201612021334328_Add Follow.cs</DependentUpon>
+    <Compile Include="Migrations\201612071350300_Make Place Id Int.cs" />
+    <Compile Include="Migrations\201612071350300_Make Place Id Int.Designer.cs">
+      <DependentUpon>201612071350300_Make Place Id Int.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\Follow.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -299,6 +276,10 @@
     <Content Include="Content\collections\imgs\bg-1px-grey-divi-09f48aedcf909eaa3eadfef0d8f9ffa1.png" />
     <Content Include="Content\collections\imgs\email-invite.svg" />
     <Content Include="Content\collections\imgs\facebook-invite.svg" />
+    <Content Include="Content\collections\imgs\heart--big-dark-red.png" />
+    <Content Include="Content\collections\imgs\heart-big-dark-orange.png" />
+    <Content Include="Content\collections\imgs\heart-big-light-orange.png" />
+    <Content Include="Content\collections\imgs\heart-big-light-red.png" />
     <Content Include="Content\collections\imgs\invite.svg" />
     <Content Include="Content\collections\imgs\message.svg" />
     <Content Include="Content\collections\imgs\sprite.png" />
@@ -377,6 +358,7 @@
     <Content Include="Views\Manage\_ImagePopup.cshtml" />
     <Content Include="Views\Home\Verified.cshtml" />
     <Content Include="Views\Manage\SeeAll.cshtml" />
+    <Content Include="Views\Home\PlacesList.cshtml" />
     <None Include="Views\ResetPasswordEmail.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -413,6 +395,7 @@
     <Content Include="Views\Restaurant\Details.cshtml" />
     <Content Include="Views\Shared\_SuggestedUsers.cshtml" />
     <Content Include="Views\Shared\_SuggestedUsersHoriz.cshtml" />
+    <Content Include="Views\Restaurant\CuisinesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -427,32 +410,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611240859241_Initial.resx">
-      <DependentUpon>201611240859241_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612071052275_Initial.resx">
+      <DependentUpon>201612071052275_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611241210118_Add Restaurant UniqueName and ImageFileName.resx">
-      <DependentUpon>201611241210118_Add Restaurant UniqueName and ImageFileName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611241214325_Add Unique constraint.resx">
-      <DependentUpon>201611241214325_Add Unique constraint.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611302212401_Add Restaurant Location.resx">
-      <DependentUpon>201611302212401_Add Restaurant Location.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612011758246_Add Places.resx">
-      <DependentUpon>201612011758246_Add Places.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612011826196_Make PlaceId not null.resx">
-      <DependentUpon>201612011826196_Make PlaceId not null.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612012050279_Add Birthday.resx">
-      <DependentUpon>201612012050279_Add Birthday.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612012229266_Add Verified.resx">
-      <DependentUpon>201612012229266_Add Verified.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612021334328_Add Follow.resx">
-      <DependentUpon>201612021334328_Add Follow.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612071350300_Make Place Id Int.resx">
+      <DependentUpon>201612071350300_Make Place Id Int.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
