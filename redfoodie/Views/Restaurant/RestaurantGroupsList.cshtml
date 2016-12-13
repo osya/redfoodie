@@ -1,0 +1,37 @@
+﻿@model IEnumerable<redfoodie.Models.RestaurantGroupViewModel>
+@{
+    ViewBag.Title = "RestaurantGroupsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="globalwidth ">
+    <div class="clearfix font_roman pad_110">
+        <h3>Guiding you to good food &amp; best restaurants in Delhi NCR</h3>
+        <p class="clr-grey">Discover where to eat in Delhi NCR. By locals, for everyone.</p>
+        <div class="recommend-list all clearfix">
+            <ul class="list-unstyled tabs" style="text-align: justify;width: 100%">
+                @{
+                    var i = 0;
+                }
+                @foreach (var group in Model)
+                {
+                    <li style="background-image: url('@group.ImageFullFileName'); @(i++ >= 13? "margin-left: 4.6%;": null)">
+                        @Html.ActionLink(group.Name, "Index", "Restaurant", new { groupId = group.Id }, new { @class = "collection_item" })
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<style>
+    .recommend-list.all li {
+        display: inline-block;
+        width: 30%;
+        margin: 10px 0;
+        border: 1px solid transparent;
+        border-radius: 5px;
+    }
+
+    .recommend-list {
+        border: none;
+    }
+</style>

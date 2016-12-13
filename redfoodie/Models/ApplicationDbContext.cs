@@ -31,6 +31,30 @@ namespace redfoodie.Models
 
         protected override void Seed(ApplicationDbContext context)
         {
+            var restaurantGroups = new Dictionary<string, string>
+            {
+                {"Trending", "5776ba6724553-Trending (1).png"},
+                {"Opening Soon", "57f2153c1d87f-opeening soon (1).png"},
+                {"Newly Opened", "56a35f2df14d1-newl.png"},
+                {"Butter Chicken", "56a1c83e42b5e-Butter chicken 1.png"},
+                {"Cafes", "56a1c7eed5fe2-Cafe.png"},
+                {"Student Favorites", "5809b1aa6175d-student (1).png"},
+                {"Best Bars", "570958e5cf1dc-3.png"},
+                {"Best Biryani", "5809b15a9e4d6-biryani (1).png"},
+                {"15% OFF", "580fbd8f1debb-222 (1).png"},
+                {"Date Night", "57ca9f185d54a-NW.png"},
+                {"Rooftops", "5749b50a6d74f-rooftop.png"},
+                {"Mexican Magic", "57c739b40b9f7-mexican magic.png"},
+                {"Best Bakeries", "56a1c8547c8d4-Bakery 1.png"},
+                {"Luxury Dining", "56a1c8f921dbd-Luxury dining.png"},
+                {"Gourmet pizza", "56a1c904aa2aa-Pizza.png"}
+            };
+            foreach(var group in restaurantGroups)
+            {
+                context.RestaurantGroups.Add(new RestaurantGroup { Id = GetStringId(group.Key), Name = group.Key, ImageFileName = group.Value });
+            }
+            context.SaveChanges();
+
             var cuisineList = new[]
             {
                 "Afghani", "African", "American", "Arabian", "Asian", "Assamese", "Bakery", "Bengali", "Beverages",
@@ -63,7 +87,7 @@ namespace redfoodie.Models
                         "Defence colony", "Delhi cantt.", "Delhi university - gt...", "Dilshad garden", "Dlf cyber city",
                         "Dlf phase 1", "Dlf phase 2", "Dlf phase 3", "Dlf phase 4", "Dlf phase 5", "Dr. zakir hussain mar...", "Dwarka",
                         "East of kailash", "East patel nagar", "Friends colony", "Geeta colony", "Geetanjali enclave",
-                        "Gole market", "Golf course road", "Govind puram", "Greater kailash (gk)...", "Greater noida", "Green park", "Gtb nagar", "Gujranwala town", "Hauz khas",
+                        "Gole market", "Golf course road", "Govind puram", "Greater kailash (gk) 1", "Greater kailash (gk) 2", "Greater kailash (gk) 3", "Greater noida", "Green park", "Gtb nagar", "Gujranwala town", "Hauz khas",
                         "Hauz khas village", "Igi airport", "Inderlok", "India gate", "Indirapuram", "Indraprastha",
                         "Indraprastha colony", "Ip extension", "Jail road", "Jama masjid", "Janakpuri", "Jangpura", "Janpath",
                         "Jasola", "Jnu", "Jor bagh", "Kailash colony", "Kalkaji", "Kamla nagar", "Kapashera", "Karampura",
@@ -117,15 +141,7 @@ namespace redfoodie.Models
                 context.Cities.Add(new City { Id = cityId, Name = city.Key });
                 foreach (var place in city.Value)
                 {
-                    try
-                    {
-                        context.Places.Add(new Place {Name = place, CityId = cityId});
-                    }
-                    catch (Exception ex)
-                    {
-                        ;
-                    }
-
+                    context.Places.Add(new Place {Name = place, CityId = cityId});
                 }
             }
             context.SaveChanges();
@@ -133,27 +149,132 @@ namespace redfoodie.Models
             var restaurants = new Dictionary<string, Dictionary<string, Restaurant[]>>
             {
                 { "DelhiNCR", new Dictionary<string, Restaurant[]>
-                {
-                    {"Chanakyapuri", new[] {
-                        new Restaurant {
-                        Name = "Capital Kitchen - Taj Palace Hotel",
-                        ImageFileName = "80x80_14925471_10157806793365085_6999532131779578556_n-capital-kitchen-taj-palace-hotel-chanakyapuri-dff0fe8246e5b1b39279454475cc1.jpg",
-                        Location = CreatePoint(28.59196, 77.188775),
-                        Cuisines = new[] { context.Cuisines.Find("Asian"), context.Cuisines.Find("European"), context.Cuisines.Find("NorthIndian") }
-                    }  } },
-                    { "Saket", new [] {new Restaurant {
-                        Name = "Yum Yum Cha",
-                        ImageFileName = "80x80_review-yum-yum-cha-saket-new-delhi-32fa6ed732ce57d247948973624bfccc.jpg",
-                        Location = CreatePoint(28.528877090780124, 77.21914628051763),
-                        Cuisines = new [] { context.Cuisines.Find("Chinese"), context.Cuisines.Find("Japanese") }
-                    } } },
-                    { "Dwarka", new [] {new Restaurant {
-                        Name = "Biryani Blues",
-                        ImageFileName = "80x80_11042949_611278912305865_7781689162808340120_n-biryani-blues-sector-11-67defe9453e5ac16b7cad1107155a399.jpg",
-                        Location = CreatePoint(28.374221, 77.320361),
-                        Cuisines = new [] { context.Cuisines.Find("Biryani"), context.Cuisines.Find("Hyderabadi") }
-                    } } }
-                } }
+                    {
+                        {
+                            "Rajouri garden", new []
+                            {
+                                new Restaurant
+                                {
+                                    Name = "Qubitos - The Terrace Cafe",
+                                    ImageFileName = "80x80_11817061_1621696381420078_8140013992622206840_n-qubitos-the-terrace-cafe-rajouri-garden-new-delhi-d7b7dd458721ce20daa4f4debad204b.jpg",
+                                    Location = CreatePoint(28.636326,77.12610700000005),
+                                    Cuisines = new[] { context.Cuisines.Find("Chinese"), context.Cuisines.Find("European"), context.Cuisines.Find("Mexican"), context.Cuisines.Find("NorthIndian"), context.Cuisines.Find("Thai") },
+                                    Groups = new[] {context.RestaurantGroups.Find("Rooftops") }
+                                }
+                            }
+                        }
+                        ,{
+                            "Greater kailash (gk) 2", new []
+                            {
+                                new Restaurant
+                                {
+                                    Name = "Starbucks",
+                                    ImageFileName = "80x80_150079_640496632666436_630408467_n-starbucks-greater-kailash-gk-2-new-delhi-be1ed8d6948346071d744a4e73ee79e7.jpg",
+                                    Location = CreatePoint(28.535360000000004,77.24210240370485),
+                                    Cuisines = new[] { context.Cuisines.Find("Cafe") },
+                                    Groups = new[] {context.RestaurantGroups.Find("Cafes") }
+                                }
+                            }
+                        }
+                        ,{
+                            "Safdarjung", new []
+                            {
+                                new Restaurant
+                                {
+                                    Name = "Rajinder Da Dhaba",
+                                    ImageFileName = "80x80_Rajinder-rajinder-da-dhaba-safdarjung-new-delhi-2f2f7259314f2cdd48b0d5df9e200d92.jpg",
+                                    Location = CreatePoint(28.56564230243836,77.19939769289022),
+                                    Cuisines = new[] { context.Cuisines.Find("Mughlai"), context.Cuisines.Find("NorthIndian") },
+                                    Groups = new[] {context.RestaurantGroups.Find("ButterChicken") }
+                                }
+                            }
+                        }
+                        ,{
+                            "Sardar patel marg", new[]
+                            {
+                                new Restaurant
+                                {
+                                    Name = "Bukhara - ITC Maurya",
+                                    ImageFileName = "80x80_photo259174768231688715-bukhara-itc-maurya-sardar-patel-marg-new-delhi-229aa203fd19ffeef1127eb57e025806.jpg",
+                                    Location = CreatePoint(28.59671111966005,77.17371255693047),
+                                    Cuisines = new[] { context.Cuisines.Find("NorthIndian") },
+                                    Groups = new[] {context.RestaurantGroups.Find("Trending") }
+                                }
+                            }
+                        },
+                        { "gurgaon", new []
+                            {
+                                new Restaurant
+                                {
+                                    Name = "The Wine Company",
+                                    ImageFileName = "80x80_850632371_12812670517538516307-the-wine-company-dlf-cyber-city-gurgaon-d836a0b29b3f97ed84c146391a903fd5.jpg",
+                                    Location = CreatePoint(28.496189943024365, 77.08889253743439),
+                                    Cuisines = new[] { context.Cuisines.Find("European"), context.Cuisines.Find("Italian") },
+                                    Groups = new[] {context.RestaurantGroups.Find("Trending"), context.RestaurantGroups.Find("BestBars") }
+                                }
+                            }
+                        },
+                        { "Connaught place", new[] 
+                            {
+                                new Restaurant {
+                                    Name = "Rodeo",
+                                    ImageFileName = "80x80_IMG_20151201_151221098-rodeo-connaught-place-new-delhi-4e709125ffc4499be0f99fd7e683b5c9.jpg",
+                                    Location = CreatePoint(28.633100127829337, 77.21808030608213),
+                                    Cuisines = new[] { context.Cuisines.Find("Continental"), context.Cuisines.Find("Italian"), context.Cuisines.Find("Mexican"), context.Cuisines.Find("NorthIndian"), context.Cuisines.Find("TexMex") },
+                                    Groups = new[] {context.RestaurantGroups.Find("Trending"), context.RestaurantGroups.Find("MexicanMagic") }
+                                }
+                            }
+                        },
+                        { "Chanakyapuri", new[] 
+                            {
+                                new Restaurant
+                                {
+                                    Name = "Capital Kitchen - Taj Palace Hotel",
+                                    ImageFileName = "80x80_14925471_10157806793365085_6999532131779578556_n-capital-kitchen-taj-palace-hotel-chanakyapuri-dff0fe8246e5b1b39279454475cc1.jpg",
+                                    Location = CreatePoint(28.59196, 77.188775),
+                                    Cuisines = new[] { context.Cuisines.Find("Asian"), context.Cuisines.Find("European"), context.Cuisines.Find("NorthIndian") }
+                                }
+                            }
+                        },
+                        { "Saket", new [] 
+                            {
+                                new Restaurant
+                                {
+                                    Name = "Big Chill",
+                                    ImageFileName = "80x80_IMG_20150503_151819739-big-chill-saket-new-delhi-f768d40df32020adb9b502c674a7597b.jpg",
+                                    Location = CreatePoint(28.528271920975754,77.21789698482507),
+                                    Cuisines = new [] { context.Cuisines.Find("Continental"), context.Cuisines.Find("Desserts"), context.Cuisines.Find("Italian") },
+                                    Groups = new[] {context.RestaurantGroups.Find("Trending") }
+                                },
+                                new Restaurant
+                                {
+                                    Name = "Yum Yum Cha",
+                                    ImageFileName = "80x80_review-yum-yum-cha-saket-new-delhi-32fa6ed732ce57d247948973624bfccc.jpg",
+                                    Location = CreatePoint(28.528877090780124, 77.21914628051763),
+                                    Cuisines = new [] { context.Cuisines.Find("Chinese"), context.Cuisines.Find("Japanese") }
+                                }
+                            }
+                        },
+                        { "Dwarka", new [] 
+                            {
+                                new Restaurant
+                                {Name = "Indus Express - Vivanta by Taj",
+                                    ImageFileName = "80x80_Indus_Express_4x3-03%20(1)-indus-express-vivanta-by-taj-dwarka-new-delhi-03dd0896262d68be8af69065f854c5a0.jpg",
+                                    Location = CreatePoint(28.558566986896484,77.06312557476463),
+                                    Cuisines = new [] { context.Cuisines.Find("Mughlai"), context.Cuisines.Find("North Indian") },
+                                    Groups = new[] { context.RestaurantGroups.Find("NewlyOpened"), context.RestaurantGroups.Find("15Off") }
+                                },
+                                new Restaurant
+                                {
+                                    Name = "Biryani Blues",
+                                    ImageFileName = "80x80_11042949_611278912305865_7781689162808340120_n-biryani-blues-sector-11-67defe9453e5ac16b7cad1107155a399.jpg",
+                                    Location = CreatePoint(28.374221, 77.320361),
+                                    Cuisines = new [] { context.Cuisines.Find("Biryani"), context.Cuisines.Find("Hyderabadi") }
+                                }
+                            }
+                        }
+                    }
+                }
             };
 
             foreach (var item in restaurants)
@@ -189,7 +310,16 @@ namespace redfoodie.Models
             {
                 foreach (var restaurant in context.Restaurants.Local)
                 {
-                    context.Votes.Add(new Vote { ApplicationUser = user, Restaurant = restaurant, Value = Rnd.NextDouble() >= 0.5 });
+                    if (Rnd.NextDouble() >= 0.5)
+                    {
+                        context.Votes.Add(new Vote
+                        {
+                            ApplicationUser = user,
+                            Restaurant = restaurant,
+                            Value = Rnd.NextDouble() >= 0.5,
+                            ReviewText = $"Some review of {restaurant.Name} by {user.UserName}"
+                        });
+                    }
                 }
             }
             context.SaveChanges();
@@ -206,6 +336,7 @@ namespace redfoodie.Models
         public DbSet<Vote> Votes { get; set; }
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Cuisine> Cuisines { get; set; }
+        public DbSet<RestaurantGroup> RestaurantGroups { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

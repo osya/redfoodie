@@ -67,8 +67,7 @@ namespace redfoodie.Controllers
                         predicate);
         }
 
-        // GET: Restaurants
-        public async Task<ActionResult> Index(string cuisineId, string cityId, int? placeId = null)
+        private async Task<IEnumerable<RestaurantViewModel>> Search(string cuisineId = null, string cityId = null, string groupId = null, int? placeId = null, int? count = null)
         {
             var rParam = Expression.Parameter(typeof(Restaurant), "r");
             var filterLambda = placeId != null
@@ -94,24 +93,62 @@ namespace redfoodie.Controllers
                 var cParam = Expression.Parameter(typeof(Cuisine), "c");
                 var anyPredicatExpr = Expression.Call(
                     null,
-                    typeof(string).GetMethod("Equals", new[] {typeof(string), typeof(string)}),
+                    typeof(string).GetMethod("Equals", new[] { typeof(string), typeof(string) }),
                     Expression.Property(cParam, "Id"),
                     Expression.Constant(cuisineId));
 
                 var cuiPredicate = Expression.Lambda(anyPredicatExpr, cParam);
                 var cuiExpr = CallAny(Expression.Property(rParam, "Cuisines"), cuiPredicate);
                 var cuiLambda = Expression.Lambda<Func<Restaurant, bool>>(cuiExpr, rParam);
-                filterLambda = placeId != null || !string.IsNullOrEmpty(cityId) ? 
+                filterLambda = placeId != null || !string.IsNullOrEmpty(cityId) ?
                     Expression.Lambda<Func<Restaurant, bool>>(Expression.AndAlso(filterLambda.Body, cuiLambda.Body), rParam) : cuiLambda;
             }
 
-            var restaurants = await _db.Restaurants.Where(filterLambda).Include(r => r.Cuisines).ToArrayAsync();
-            var model = restaurants.Select(r => new RestaurantViewModel {Id = r.Id, Name = r.Name, ImageFullFileName = r.ImageFullFileName, Place = r.Place, Cuisines = r.Cuisines });
+            if (!string.IsNullOrEmpty(groupId))
+            {
+                var gParam = Expression.Parameter(typeof(RestaurantGroup), "g");
+                var anyPredicatExpr = Expression.Call(
+                    null,
+                    typeof(string).GetMethod("Equals", new[] { typeof(string), typeof(string) }),
+                    Expression.Property(gParam, "Id"),
+                    Expression.Constant(groupId));
 
+                var groupPredicate = Expression.Lambda(anyPredicatExpr, gParam);
+                var groupExpr = CallAny(Expression.Property(rParam, "Groups"), groupPredicate);
+                var groupLambda = Expression.Lambda<Func<Restaurant, bool>>(groupExpr, rParam);
+                filterLambda = placeId != null || !string.IsNullOrEmpty(cityId) || !string.IsNullOrEmpty(cuisineId) ?
+                    Expression.Lambda<Func<Restaurant, bool>>(Expression.AndAlso(filterLambda.Body, groupLambda.Body), rParam) :
+                    groupLambda;
+            }
+
+            var restaurants = _db.Restaurants.Where(filterLambda).Include(r => r.Cuisines).Include(r => r.Groups);
+            if (count != null)
+                restaurants = restaurants.Take((int)count);
+
+            return (await restaurants.ToArrayAsync()).Select(
+                    r =>
+                        new RestaurantViewModel
+                        {
+                            Id = r.Id,
+                            Name = r.Name,
+                            ImageFullFileName = r.ImageFullFileName,
+                            Place = new PlaceViewModel { Id = r.Place.Id, Name = r.Place.Name, City = new CityViewModel { Id = r.Place.City.Id, Name = r.Place.City.Name } },
+                            Cuisines = r.Cuisines.Select(c => new CuisineViewModel { Name = c.Name }).ToArray(),
+                            Groups = r.Groups.Select(g => new RestaurantGroupViewModel { Id = g.Id, Name = g.Name}).ToArray(),
+                            Votes = r.Votes.Select(v => new VoteViewModel { ReviewText = v.ReviewText, ApplicationUser = new UserViewModel { Id = v.ApplicationUser.Id, UserName = v.ApplicationUser.UserName, ImageFullFileName = v.ApplicationUser.ImageFullFileName, ReviewsCount = v.ApplicationUser.Votes.Count } }).OrderByDescending(o => o.ApplicationUser.ReviewsCount).ToArray(),
+                            PercentRate = r.PercentRate
+                        }).OrderByDescending(o => o.PercentRate);
+        }
+
+        // GET: Restaurants
+        public async Task<ActionResult> Index(string cuisineId, string cityId, string groupId, int? placeId = null)
+        {
+            var currentCityId = cityId ?? (Session["currentCity"] as City)?.Id;
+            var model = await Search(cuisineId, currentCityId, groupId, placeId);
 
             // Creating ViewBag.Title
             var sb = new StringBuilder();
-            sb.Append("Restaurants");
+            sb.Append(!string.IsNullOrEmpty(groupId) ? $"{_db.RestaurantGroups.Find(groupId).Name} restaurants" : "Restaurants");
             if (!string.IsNullOrEmpty(cuisineId))
             {
                 sb.Append($" with {_db.Cuisines.Find(cuisineId).Name}");
@@ -120,9 +157,14 @@ namespace redfoodie.Controllers
             {
                 sb.Append($" in {_db.Places.Find(placeId).Name} place");
             }
-            else if (!string.IsNullOrEmpty(cityId))
+            else if (!string.IsNullOrEmpty(currentCityId))
             {
-                sb.Append($" in {_db.Cities.Find(cityId).Name} city");
+                var cityName = string.IsNullOrEmpty(cityId) ||
+                               (!string.IsNullOrEmpty(cityId) &&
+                                string.Equals(cityId, (Session["currentCity"] as City)?.Id))
+                    ? (Session["currentCity"] as City)?.Name
+                    : _db.Cities.Find(cityId).Name;
+                sb.Append($" in {cityName} city");
             }
             else
             {
@@ -130,6 +172,18 @@ namespace redfoodie.Controllers
             }
             ViewBag.Title = sb.ToString();
 
+            return View(model);
+        }
+
+        public async Task<JsonResult> Group(string groupId, int? count = null)
+        {
+            return Json(JsonResponseFactory.SuccessResponse(await Search(groupId: groupId, count: count)), JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult>RestaurantGroupsList()
+        {
+            var model =
+                (await _db.RestaurantGroups.ToArrayAsync()).Select(r => new RestaurantGroupViewModel {Id = r.Id, Name = r.Name, ImageFullFileName = r.ImageFullFileName }).ToArray();
             return View(model);
         }
 
@@ -156,7 +210,12 @@ namespace redfoodie.Controllers
             {
                 return HttpNotFound();
             }
-            return View(new RestaurantViewModel { Id = restaurant.Id, Name = restaurant.Name, ImageFullFileName = restaurant.ImageFullFileName, Place = restaurant.Place });
+            return View(new RestaurantViewModel
+            {
+                Id = restaurant.Id, Name = restaurant.Name, ImageFullFileName = restaurant.ImageFullFileName, Place = new PlaceViewModel { Id = restaurant.Place.Id, Name = restaurant.Place.Name, City = new CityViewModel { Id = restaurant.Place.City.Id, Name = restaurant.Place.City.Name } },
+                Groups = restaurant.Groups.Select(g => new RestaurantGroupViewModel { Id = g.Id, Name = g.Name}).ToArray(),
+                Votes = restaurant.Votes.Select(v => new VoteViewModel { ReviewText = v.ReviewText, ApplicationUser = new UserViewModel { Id = v.ApplicationUser.Id, UserName = v.ApplicationUser.UserName, ImageFullFileName = v.ApplicationUser.ImageFullFileName } }).ToArray()
+            });
         }
 
         protected override void Dispose(bool disposing)

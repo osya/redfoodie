@@ -40,7 +40,7 @@ namespace redfoodie.Models
 
         public string UserPath
             =>
-            Path.Combine("~/Content/thumbs/user/",
+            Path.Combine("/Content/thumbs/user/",
                 $"{UserName.Replace(" ", "-").ToLower()}{(Birthday != DateTime.MinValue ? $"-{Birthday.Year}" : string.Empty)}")
             ;
         public string ImageFullFileName => ImageFileName != null ? Path.Combine(UserPath, ImageFileName) : "/Content/collections/imgs/user.svg";

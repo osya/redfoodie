@@ -56,34 +56,6 @@
       <HintPath>..\packages\jQuery.Validation.Unobtrusive.Native.MVC5.1.3.0\lib\net45\jQuery.Validation.Unobtrusive.Native.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -227,12 +199,29 @@
     <Compile Include="Migrations\201612071350300_Make Place Id Int.Designer.cs">
       <DependentUpon>201612071350300_Make Place Id Int.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612080818404_Add Restaurant Groups.cs" />
+    <Compile Include="Migrations\201612080818404_Add Restaurant Groups.Designer.cs">
+      <DependentUpon>201612080818404_Add Restaurant Groups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612111103452_Rename Review to ReviewText.cs" />
+    <Compile Include="Migrations\201612111103452_Rename Review to ReviewText.Designer.cs">
+      <DependentUpon>201612111103452_Rename Review to ReviewText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612122229528_Add Restaurant Group Image.cs" />
+    <Compile Include="Migrations\201612122229528_Add Restaurant Group Image.Designer.cs">
+      <DependentUpon>201612122229528_Add Restaurant Group Image.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612131321243_Add MaxLength for ImageFilename.cs" />
+    <Compile Include="Migrations\201612131321243_Add MaxLength for ImageFilename.Designer.cs">
+      <DependentUpon>201612131321243_Add MaxLength for ImageFilename.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\Follow.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\Place.cs" />
+    <Compile Include="Models\RestaurantGroup.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="MyFacebookMiddleware\MyFacebookAuthenticationHandler.cs" />
@@ -270,7 +259,15 @@
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
     <Content Include="Content\chosen.min.css" />
-    <Content Include="Content\collections\imgs\5776ba6724553-Trending %281%29.png" />
+    <Content Include="Content\thumbs\restaurant_groups\56a1c7eed5fe2-Cafe.png" />
+    <Content Include="Content\thumbs\restaurant_groups\56a1c83e42b5e-Butter chicken 1.png" />
+    <Content Include="Content\thumbs\restaurant_groups\56a1c8547c8d4-Bakery 1.png" />
+    <Content Include="Content\thumbs\restaurant_groups\56a1c8f921dbd-Luxury dining.png" />
+    <Content Include="Content\thumbs\restaurant_groups\56a1c904aa2aa-Pizza.png" />
+    <Content Include="Content\thumbs\restaurant_groups\56a35f2df14d1-newl.png" />
+    <Content Include="Content\thumbs\restaurant_groups\570958e5cf1dc-3.png" />
+    <Content Include="Content\thumbs\restaurant_groups\5749b50a6d74f-rooftop.png" />
+    <Content Include="Content\thumbs\restaurant_groups\5776ba6724553-Trending %281%29.png" />
     <Content Include="Content\collections\imgs\apple-iphone-5s.svg" />
     <Content Include="Content\collections\imgs\arrow_box.png" />
     <Content Include="Content\collections\imgs\bg-1px-grey-divi-09f48aedcf909eaa3eadfef0d8f9ffa1.png" />
@@ -280,6 +277,7 @@
     <Content Include="Content\collections\imgs\heart-big-dark-orange.png" />
     <Content Include="Content\collections\imgs\heart-big-light-orange.png" />
     <Content Include="Content\collections\imgs\heart-big-light-red.png" />
+    <Content Include="Content\collections\imgs\heart-big-yellow.png" />
     <Content Include="Content\collections\imgs\invite.svg" />
     <Content Include="Content\collections\imgs\message.svg" />
     <Content Include="Content\collections\imgs\sprite.png" />
@@ -288,6 +286,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\invite.css" />
     <Content Include="Content\notification.css" />
+    <Content Include="Content\restaurant-details.css" />
     <Content Include="Content\selectize.bootstrap3.css" />
     <Content Include="Content\settings.css" />
     <Content Include="Content\thumbs\banners\1280x600_5749bf6e284c1-fd.png" />
@@ -298,16 +297,20 @@
     <Content Include="Content\thumbs\business\makhan-fish-and-chicken-corner-basant-nagar-amritsar\80x80_13312809_891385924304818_5667230047462664269.jpg" />
     <Content Include="Content\thumbs\business\shudh-restaurant-town-hall-amritsar\80x80_12042641_730827820357009_5533930776058197825_n-shudh-restaurant-town-hall-amritsar-99e9607c68707ed3b3f5ced6b5d580b1.jpg" />
     <Content Include="Content\thumbs\business\wtf-white-avenue-amritsar\80x80_10405653_784862508273425_7414421140844571462_n-wtf-white-avenue-amritsar-344ce2a1fbf196d01dfc5ce193d2a719.jpg" />
+    <Content Include="Content\thumbs\restaurant_groups\57c739b40b9f7-mexican magic.png" />
+    <Content Include="Content\thumbs\restaurant_groups\57ca9f185d54a-NW.png" />
+    <Content Include="Content\thumbs\restaurant_groups\57f2153c1d87f-opeening soon %281%29.png" />
+    <Content Include="Content\thumbs\restaurant_groups\5809b15a9e4d6-biryani %281%29.png" />
+    <Content Include="Content\thumbs\restaurant_groups\5809b1aa6175d-student %281%29.png" />
+    <Content Include="Content\thumbs\restaurant_groups\580fbd8f1debb-222 %281%29.png" />
     <Content Include="Content\thumbs\rf-loading.gif" />
     <Content Include="Content\thumbs\user\kalki-1912\146x146_489b42243d3b25094806a8bad87d482981c2d519.jpg" />
-    <Content Include="Content\viewprofile.css" />
+    <Content Include="Content\view-profile.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\ai.0.22.19-build00125.js" />
-    <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -347,6 +350,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\selectize.min.js" />
     <Content Include="Scripts\Site.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="Views\Manage\ViewProfile.cshtml" />
@@ -359,6 +364,7 @@
     <Content Include="Views\Home\Verified.cshtml" />
     <Content Include="Views\Manage\SeeAll.cshtml" />
     <Content Include="Views\Home\PlacesList.cshtml" />
+    <Content Include="Scripts\underscore.min.map" />
     <None Include="Views\ResetPasswordEmail.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -396,6 +402,7 @@
     <Content Include="Views\Shared\_SuggestedUsers.cshtml" />
     <Content Include="Views\Shared\_SuggestedUsersHoriz.cshtml" />
     <Content Include="Views\Restaurant\CuisinesList.cshtml" />
+    <Content Include="Views\Restaurant\RestaurantGroupsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -415,6 +422,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612071350300_Make Place Id Int.resx">
       <DependentUpon>201612071350300_Make Place Id Int.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612080818404_Add Restaurant Groups.resx">
+      <DependentUpon>201612080818404_Add Restaurant Groups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612111103452_Rename Review to ReviewText.resx">
+      <DependentUpon>201612111103452_Rename Review to ReviewText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612122229528_Add Restaurant Group Image.resx">
+      <DependentUpon>201612122229528_Add Restaurant Group Image.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612131321243_Add MaxLength for ImageFilename.resx">
+      <DependentUpon>201612131321243_Add MaxLength for ImageFilename.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

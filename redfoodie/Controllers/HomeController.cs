@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -7,6 +8,7 @@ using redfoodie.Models;
 
 namespace redfoodie.Controllers
 {
+    [AllowAnonymous]
     public class HomeController: Controller
     {
         private ApplicationDbContext _db;
@@ -24,7 +26,7 @@ namespace redfoodie.Controllers
             {
                 if (string.IsNullOrEmpty(cityId) && !User.Identity.IsAuthenticated)
                 {
-                    var currentCity = Db.Cities.First();
+                    var currentCity = Db.Cities.Find("DElhiNCR");
                     Session["currentCity"] = currentCity;
                     currentCityId = currentCity.Id;
                 }
@@ -40,9 +42,9 @@ namespace redfoodie.Controllers
                     {
                         if ((Session["currentCity"] == null) && User.Identity.IsAuthenticated)
                         {
-                            var currentCity = Db.Users.Find(User.Identity.GetUserId()).City;
+                            var currentCity = Db.Users.Find(User.Identity.GetUserId())?.City;
                             Session["currentCity"] = currentCity;
-                            currentCityId = currentCity.Id;
+                            currentCityId = currentCity?.Id;
                         }
                     }
                 }
@@ -55,6 +57,16 @@ namespace redfoodie.Controllers
             }
 
             var places = await Db.Places.Where(p => p.CityId == currentCityId && p.Restaurants.Any()).OrderByDescending(o => o.Restaurants.Count).Take(11).ToArrayAsync();
+            var rgKeys = new List<string>
+            {
+                "Trending",
+                "NewlyOpened",
+                "ButterChicken",
+                "MexicanMagic",
+                "Cafes",
+                "BestBars",
+                "Rooftops"
+            };
             return View(new HomeViewModel
             {
                 SuggestedUsers = (await Db.Users.OrderByDescending(m => m.Votes.Count)
@@ -74,7 +86,13 @@ namespace redfoodie.Controllers
                 CuisinesOdd = new[] { await Db.Cuisines.FindAsync("NorthIndian"), await Db.Cuisines.FindAsync("FastFood"), await Db.Cuisines.FindAsync("SouthIndian"), await Db.Cuisines.FindAsync("StreetFood") },
                 CuisinesEven = new[] { await Db.Cuisines.FindAsync("Chinese"), await Db.Cuisines.FindAsync("Desserts"), await Db.Cuisines.FindAsync("Mughlai"), await Db.Cuisines.FindAsync("Bakery") },
                 PlacesOdd = places.Where((c, i) => i % 2 != 0).ToArray(),
-                PlacesEven = places.Where((c, i) => i % 2 == 0).ToArray()
+                PlacesEven = places.Where((c, i) => i % 2 == 0).ToArray(),
+                RestaurantGroups = rgKeys.Select(key => Db.RestaurantGroups.Find(key)).Select(restaurantGroup => new RestaurantGroupViewModel
+                {
+                    Id = restaurantGroup.Id,
+                    Name = restaurantGroup.Name,
+                    ImageFullFileName = restaurantGroup.ImageFullFileName
+                }).ToArray()
             });
         }
 

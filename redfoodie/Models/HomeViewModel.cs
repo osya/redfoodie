@@ -14,5 +14,6 @@ namespace redfoodie.Models
         public IEnumerable<Cuisine> CuisinesEven { get; set; }
         public IEnumerable<Place> PlacesOdd { get; set; }
         public IEnumerable<Place> PlacesEven { get; set; }
+        public IEnumerable<RestaurantGroupViewModel> RestaurantGroups { get; set; }
     }
 }

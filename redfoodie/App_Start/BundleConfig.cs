@@ -24,6 +24,9 @@ namespace redfoodie
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/underscore").Include(
+                      "~/Scripts/underscore.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/chosen").Include(
                       "~/Scripts/chosen.jquery.js"));
 
@@ -38,7 +41,9 @@ namespace redfoodie
             bundles.Add(new StyleBundle("~/Content/settings/css").Include(
                 "~/Content/settings.css", "~/Content/selectize.bootstrap3.css"));
             bundles.Add(new StyleBundle("~/Content/viewprofile/css").Include(
-                "~/Content/viewprofile.css"));
+                "~/Content/view-profile.css"));
+            bundles.Add(new StyleBundle("~/Content/restaurant-details/css").Include(
+                "~/Content/restaurant-details.css"));
 
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                       "~/Scripts/Site.js"));

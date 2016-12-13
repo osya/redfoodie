@@ -213,8 +213,9 @@ namespace redfoodie.Controllers
         {
             var likesRestaurants = (await _db.Restaurants.Where(r => r.Votes.Any(v => v.Value && string.Equals(v.UserId, user.Id))).
                 ToArrayAsync()).Select(m => new RestaurantViewModel {Id = m.Id, Name = m.Name,
-                    Rate = (int)(m.Votes.Count(v => v.Value) * 100.0 / m.Votes.Count),
-                    ImageFullFileName = m.ImageFullFileName, Place = m.Place
+                    PercentRate = m.PercentRate,
+                    ImageFullFileName = m.ImageFullFileName, Place = new PlaceViewModel { Id = m.Place.Id, Name = m.Place.Name, City = new CityViewModel { Id = m.Place.City.Id, Name = m.Place.City.Name } },
+                    Votes = m.Votes.Select(v => new VoteViewModel { ReviewText = v.ReviewText, ApplicationUser = new UserViewModel { Id = v.ApplicationUser.Id, UserName = v.ApplicationUser.UserName, ImageFullFileName = v.ApplicationUser.ImageFullFileName } }).ToArray()
                 }).ToArray();
             var likes = likesRestaurants.Length;
             var total = user.Votes.Count;

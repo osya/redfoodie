@@ -18,6 +18,6 @@ namespace redfoodie.Models
 
         public bool Value { get; set; }
 
-        public string Review { get; set; }
+        public string ReviewText { get; set; }
     }
 }

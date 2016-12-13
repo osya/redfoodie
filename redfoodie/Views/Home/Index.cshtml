@@ -11,180 +11,32 @@
     </hgroup>
     <div class="recommend-list clearfix">
         <ul class="list-unstyled tabs">
-            <li class="active" style="background-image: url('/Content/collections/imgs/5776ba6724553-Trending (1).png')">
-                <a data-toggle="tab" class="collection_item" href="#trending">
-                    Trending
+            @{
+                var firstGroup = Model.RestaurantGroups.First();
+            }
+            <li style="background-image: url('@firstGroup.ImageFullFileName')" class="active">
+                <a data-toggle="tab" class="collection_item" href=@($"#{firstGroup.Id}")>
+                    @firstGroup.Name
                 </a>
             </li>
-            <li style="background-image: url('/Content/collections/imgs/56a35f2df14d1-newl.png')">
-                <a data-toggle="tab" class="collection_item" href="#newly-opened">
-                    Newly Opened
-                </a>
-            </li>
-            <li style="background-image: url('/Content/collections/imgs/56a1c83e42b5e-Butter chicken 1.png')">
-                <a data-toggle="tab" class="collection_item" href="#butter-chicken">
-                    Butter Chicken
-                </a>
-            </li>
-            <li style="background-image: url('/Content/collections/imgs/57c739b40b9f7-mexican magic.png')">
-                <a data-toggle="tab" class="collection_item" href="#mexican-magic">
-                    Mexican Magic
-                </a>
-            </li>
-            <li style="background-image: url('/Content/collections/imgs/56a1c7eed5fe2-Cafe.png')">
-                <a data-toggle="tab" class="collection_item" href="#cafes">
-                    Cafes
-                </a>
-            </li>
-            <li style="background-image: url('/Content/collections/imgs/570958e5cf1dc-3.png')">
-                <a data-toggle="tab" class="collection_item" href="#best-bars">
-                    Best Bars
-                </a>
-            </li>
-            <li style="background-image: url('/Content/collections/imgs/5749b35f06569-tiny sheesha.png')">
-                <a data-toggle="tab" class="collection_item" href="#sheesha-lounges">
-                    Sheesha Lounges
-                </a>
-            </li>
-            <li style="background-image: url('/Content/collections/imgs/5749b50a6d74f-rooftop.png')">
-                <a data-toggle="tab" class="collection_item" href="#rooftops">
-                    Rooftops
-                </a>
-            </li>
+            @foreach (var group in Model.RestaurantGroups.Skip(1))
+            {
+                <li style="background-image: url('@group.ImageFullFileName')">
+                    <a data-toggle="tab" class="collection_item" href=@($"#{group.Id}")>
+                        @group.Name
+                    </a>
+                </li>
+            }
             <li class="more">
-                <a class="collection_item" href="/list-collections">
-                    Browse all lists
-                </a>
+                @Html.ActionLink("Browse all lists", "RestaurantGroupsList", "Restaurant", null, new { @class = "collection_item" })
             </li>
         </ul>
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade    in active " id="trending">
-                <div class="more">
-                    <a class="pull-left" href="/amritsar/lists/trending">
-                        Trending
-                    </a>
-                    <a class="pull-right" href="/amritsar/lists/trending">See more »</a>
-                </div>
-                <div class="recommend-item">
-                    <div class="pull-left">
-                        <a class="restaurant-img" href="/amritsar/kesar-da-dhaba-town-hall-amritsar"><img src="/Content/thumbs/business/kesar-da-dhaba-town-hall-amritsar/80x80_11111804_832349593516411_7568623543993868174_n-kesar-da-dhaba-town-hall-amritsar-79da7495d636e1dabd71e201a7bc648e.jpg"></a>
-                    </div>
-                    <div class="pull-left">
-                        <a class="restaurant-link" href="/amritsar/kesar-da-dhaba-town-hall-amritsar">Kesar Da Dhaba</a>
-                        <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/karthik-3143/profile"><img src="/Content/thumbs/user/karthik-3143/146x146_125a4bca7796238fb4df9a09acea103e71b49564.jpg"></a>
-                                    <span class="review-text">
-                                        I came here alone on my first day in Amritsar, looking for something affordable and delicious food. Kesar Da Dhaba is a ...
-                                    </span>
-                                </span>
-                    </div>
-                    <span class="restaurant-rating">
-                                <p class="rateHigherHeart"> 92% </p>
-                            </span>
-                </div>
-                <div class="recommend-item">
-                    <div class="pull-left">
-                        <a class="restaurant-img" href="/amritsar/bharawan-da-dhaba-town-hall-amritsar"><img src="/Content/thumbs/business/bharawan-da-dhaba-town-hall-amritsar/80x80_13335580_850689478371009_1285615177655183737_n-bharawan-da-dhaba-town-hall-amritsar-34bf957b7eadeeb7d7e066a1a092963f.jpg"></a>
-                    </div>
-                    <div class="pull-left">
-                        <a class="restaurant-link" href="/amritsar/bharawan-da-dhaba-town-hall-amritsar">Bharawan Da Dhaba</a>
-                        <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/anamika-436/profile"><img src="/Content/thumbs/user/anamika-436/146x146_663cc4fe7e43ff00ba2a3c33cc01a6d59bddcfaa.jpg"></a>
-                                    <span class="review-text">
-                                        Fantastic food. Great taste. Worth every penny spent. I must say this place has been a great place for foodie lovers
-                                    </span>
-                                </span>
-                    </div>
-                    <span class="restaurant-rating">
-                                <p class="rateHigherHeart"> 96% </p>
-                            </span>
-                </div>
-                <div class="recommend-item">
-                    <div class="pull-left">
-                        <a class="restaurant-img" href="/amritsar/beera-chicken-house-white-avenue-amritsar"><img src="/Content/thumbs/business/beera-chicken-house-white-avenue-amritsar/80x80_10443385_285064841671459_7689177930821632313_n-beera-chicken-house-white-avenue-amritsar-1a06165745dd7616689fcf8a7ee49263.jpg"></a>
-                    </div>
-                    <div class="pull-left">
-                        <a class="restaurant-link" href="/amritsar/beera-chicken-house-white-avenue-amritsar">Beera Chicken House</a>
-                        <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/mani-singh-468/profile"><img src="/Content/thumbs/user/mani-singh-468/146x146_8f449e16dd10064b876d30b4007edc638299dbc3.jpg"></a>
-                                    <span class="review-text">
-                                        One of the best Chicken Tikka in Amritsar, while visiting Amritsar you cannot miss Beera Chicken.
-                                    </span>
-                                </span>
-                    </div>
-                    <span class="restaurant-rating">
-                                <p class="rateMiddleHeart"> 59% </p>
-                            </span>
-                </div>
-                <div class="recommend-item">
-                    <div class="pull-left">
-                        <a class="restaurant-img" href="/amritsar/shudh-restaurant-town-hall-amritsar"><img src="/Content/thumbs/business/shudh-restaurant-town-hall-amritsar/80x80_12042641_730827820357009_5533930776058197825_n-shudh-restaurant-town-hall-amritsar-99e9607c68707ed3b3f5ced6b5d580b1.jpg"></a>
-                    </div>
-                    <div class="pull-left">
-                        <a class="restaurant-link" href="/amritsar/shudh-restaurant-town-hall-amritsar">Shudh Restaurant</a>
-                        <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/792199504196263/profile"><img src="/Content/thumbs/user/792199504196263/146x146_701e002b21d8943219bc6394c0bab71c0273fd4a.jpg"></a>
-                                    <span class="review-text">
-                                        This is new for me to visit after Bharawan and Kesar in Amritsar.. I like the food and I can come again for Shahi Paneer...
-                                    </span>
-                                </span>
-                    </div>
-                    <span class="restaurant-rating">
-                                <p class="rateHighHeart"> 89% </p>
-                            </span>
-                </div>
-                <div class="recommend-item">
-                    <div class="pull-left">
-                        <a class="restaurant-img" href="/amritsar/makhan-fish-and-chicken-corner-basant-nagar-amritsar"><img src="/Content/thumbs/business/makhan-fish-and-chicken-corner-basant-nagar-amritsar/80x80_13312809_891385924304818_5667230047462664269.jpg"></a>
-                    </div>
-                    <div class="pull-left">
-                        <a class="restaurant-link" href="/amritsar/makhan-fish-and-chicken-corner-basant-nagar-amritsar">Makhan Fish and Chicken Corner</a>
-                        <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/kalki-1912/profile"><img src="/Content/thumbs/user/kalki-1912/146x146_489b42243d3b25094806a8bad87d482981c2d519.jpg"></a>
-                                    <span class="review-text">
-                                        I love Fish, so I figured I'd check this place out.  We had  fish it was so yummilious and soft that it melts in my  mou...
-                                    </span>
-                                </span>
-                    </div>
-                    <span class="restaurant-rating">
-                                <p class="rateHigherHeart"> 92% </p>
-                            </span>
-                </div>
-                <div class="recommend-item">
-                    <div class="pull-left">
-                        <a class="restaurant-img" href="/amritsar/wtf-white-avenue-amritsar"><img src="/Content/thumbs/business/wtf-white-avenue-amritsar/80x80_10405653_784862508273425_7414421140844571462_n-wtf-white-avenue-amritsar-344ce2a1fbf196d01dfc5ce193d2a719.jpg"></a>
-                    </div>
-                    <div class="pull-left">
-                        <a class="restaurant-link" href="/amritsar/wtf-white-avenue-amritsar">Wtf</a>
-                        <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/998750473491222/profile"><img src="/Content/thumbs/user/998750473491222/146x146_6da35dfbeb02812fd13b8ba82d240d04e4a24fff.jpg"></a>
-                                    <span class="review-text">
-                                        a total fun place to hangout with friends. the food and the service is good. the best part of the place is that it can b...
-                                    </span>
-                                </span>
-                    </div>
-                    <span class="restaurant-rating">
-                                <p class="rateHighHeart"> 85% </p>
-                            </span>
-                </div>
-                <div class="recommend-item">
-                    <div class="pull-left">
-                        <a class="restaurant-img" href="/amritsar/collage-hyatt-amritsar-gt-road-amritsar"><img src="/Content/thumbs/business/collage-hyatt-amritsar-gt-road-amritsar/80x80_IMG-20150913-WA0004-collage-hyatt-amritsar-gt-road-amritsar-224338a65b3964b4eddc9838718ecd4b.jpg"></a>
-                    </div>
-                    <div class="pull-left">
-                        <a class="restaurant-link" href="/amritsar/collage-hyatt-amritsar-gt-road-amritsar">Collage - Hyatt Amritsar</a>
-                        <span class="restaurant-review">
-                                    <a class="review-reviewer-photo" href="/users/998750473491222/profile"><img src="/Content/thumbs/user/998750473491222/146x146_6da35dfbeb02812fd13b8ba82d240d04e4a24fff.jpg"></a>
-                                    <span class="review-text">
-                                        Great place. Ample space. High quality. Great service. Great food. High price. Great experience
-                                    </span>
-                                </span>
-                    </div>
-                    <span class="restaurant-rating">
-                                <p class="rateHighHeart"> 85% </p>
-                            </span>
-                </div>
-            </div>
+            <div role="tabpanel" class="tab-pane fade in active" id="@Model.RestaurantGroups.First().Id"></div>
+            @foreach (var group in Model.RestaurantGroups.Skip(1))
+            {
+                <div role="tabpanel" class="tab-pane fade" id="@group.Id"></div>
+            }
         </div>
     </div>
 </div>
@@ -211,10 +63,10 @@
                     @Html.TextBoxFor(m => m.SubscriptionEmail, true, null, new { id = "subscription_email", required = "required", @class = "form-control", placeholder = Html.DisplayNameFor(m => m.SubscriptionEmail), type = "email" })
                     @Html.AntiForgeryToken()
                     <span class="input-group-btn bg-red">
-                                <button class="btn btn-default  bg-red" style="color: #fff;border-radius: 0;border-color: transparent" type="submit" title="Notify me">
-                                    <i class="fa fa-envelope-o"></i>
-                                </button>
-                            </span>
+                        <button class="btn btn-default  bg-red" style="color: #fff;border-radius: 0;border-color: transparent" type="submit" title="Notify me">
+                            <i class="fa fa-envelope-o"></i>
+                        </button>
+                    </span>
                 </div>
             }
             <p id="subscription-notice">&nbsp;</p>
@@ -274,7 +126,94 @@
 
 @section Scripts
 {
+    <script id="recommend-item-template" type="text/template">
+        <div class="recommend-item">
+            <div class="pull-left">
+                <a class="restaurant-img" href="/Restaurant/Details?restaurantId=<%= Id %>"><img src="<%= ImageFullFileName %>"/></a>
+            </div>
+            <div class="pull-left">
+                <a class="restaurant-link" href="/Restaurant/Details?restaurantId=<%= Id %>"><%= Name %></a>
+                <% if (Votes.length > 0) { %>
+                <span class="restaurant-review">
+                    <a class="review-reviewer-photo" href="Manage/ViewProfile?userId=<%= Votes[0].ApplicationUser.Id %>">
+                        <img src="<%= Votes[0].ApplicationUser.ImageFullFileName %>" />
+                    </a>
+                    <span class="review-text">
+                        <%=  (Votes[0].ReviewText.length > 120 ? Votes[0].ReviewText.substr(0,120)+'...' : Votes[0].ReviewText)  %>
+                    </span>
+                </span>
+                <% } %>
+            </div>
+            <span class="restaurant-rating">
+                <% if (PercentRate == -1 ) { %>
+                <% var percentRateColor = 'grey' %>
+                <% } %>
+                <% if (PercentRate < 30 && PercentRate > 0) { %>
+                <% var percentRateColor = 'rateLower' %>
+                <% } %>
+                <% if (PercentRate < 50 && PercentRate > 29) { %>
+                <% var percentRateColor = 'rateLow' %>
+                <% } %>
+                <% if (PercentRate < 70 && PercentRate > 49) { %>
+                <% var percentRateColor = 'rateMiddle' %>
+                <% } %>
+                <% if (PercentRate < 90 && PercentRate > 69) { %>
+                <% var percentRateColor = 'rateHigh' %>
+                <% } %>
+                <% if (PercentRate > 89) { %>
+                <% var percentRateColor = 'rateHigher' %>
+                <% } %>
+                <p class="<%= percentRateColor %>Heart"><% if (PercentRate > 0) { %> <%= PercentRate %>% <% } else { %> &mdash; <% } %></p>
+            </span>
+        </div>
+    </script>
+    <script id="recommend-title-template" type="text/template">
+        <div class="more">
+            <a class="pull-left" href="/Restaurant?groupId=<%= slug %>"><%= name %></a>
+            <a class="pull-right" href="/Restaurant?groupId=<%= slug %>">See more &raquo;</a>
+        </div>
+    </script>
     <script>
         $("#subscription-form").validate();
-    </script>   
+        $(document)
+            .ready(function() {
+                var recommendTitleTemplate = _.template($('#recommend-title-template').html());
+                var recommendItemTemplate = _.template($('#recommend-item-template').html());
+                function getRecommend() {
+                    var tabContent = $('.tab-pane.active'), collName = tabContent.attr('id');
+                    if (tabContent.text().length > 0) {
+                        return;
+                    }
+                    tabContent.loadingIcon('attach');
+                    $.ajax({
+                        url: '@Url.Action("Group", "Restaurant")',
+                        type: 'GET',
+                        dataType: 'json',
+//                        contentType: 'application/json; charset=utf-8',
+                        // we set cache: false because GET requests are often cached by browsers
+                        // IE is particularly aggressive in that respect
+                        cache: false,
+                        data: { groupId: collName, count: 8 },
+                        success: function(data) {
+                            $('#' + collName).loadingIcon('detach');
+                            tabContent.append(recommendTitleTemplate({
+                                slug: collName,
+                                name: $('.active a[data-toggle="tab"]').text()
+                            }));
+                            for (var item in data.Object) {
+                                if (data.Object.hasOwnProperty(item)) {
+                                    tabContent.append(recommendItemTemplate(data.Object[item]));
+                                }
+                            }
+                        }
+                    });
+                }
+                getRecommend();
+                $('a.collection_item[data-toggle="tab"]')
+                    .on('shown.bs.tab',
+                        function(e) {
+                            getRecommend(recommendTitleTemplate);
+                        });
+            });
+    </script>
 }

@@ -71,6 +71,10 @@ namespace redfoodie.Models
         public string ImageFullFileName { get; set; }
         public bool Verified { get; set; }
         public bool Follow { get; set; }
+        /// <summary>
+        /// Number of reviews by this user
+        /// </summary>
+        public int ReviewsCount { get; set; }
     }
 
     public class SuggestedUsersViewModel

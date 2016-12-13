@@ -1316,11 +1316,35 @@ a:hover {
     background-position: left center;
     background-repeat: no-repeat;
 }
+.rateLowerHeart {
+    color: #f39c12;
+    background: url(/Content/collections/imgs/heart-big-yellow.png) no-repeat left center;
+    background-size: 13px 11px;
+    padding-left: 15px;
+}
 .rateLowerHeart.bigHeart {
     background-size: 45px 37px;
     background-image: url(/Content/collections/imgs/heart-big-yellow.png);
     background-position: left center;
     background-repeat: no-repeat;
+}
+.headerTag {
+    font-family: Open sans;
+    font-size: 11px;
+    background-color: #D6F9FF;
+    color: #4d8d9b;
+    border-radius: 2px;
+    border: solid 1px #3ce6ce;
+    padding: 0 10px;
+    margin-right: 7px;
+    position: relative;
+    bottom: 6px;
+}
+
+.headerTag:hover,.headerTag:focus {
+    background-color: #d6ffeb;
+    cursor: pointer;
+    border-color: #b6fad3;
 }
 #subscription-notice {
     padding-top: 8px;
@@ -2444,4 +2468,9 @@ p {
 .searchHeart div.greyHeart {
     text-align: center!important;
     padding-left: 25px!important;
+}
+:after,:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
