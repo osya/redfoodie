@@ -1,4 +1,5 @@
-﻿@model IEnumerable<redfoodie.Models.Cuisine>
+﻿@using redfoodie.Models
+@model IEnumerable<Cuisine>
 @{
     ViewBag.Title = "All Cuisines";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,7 +15,7 @@
             @foreach (var cuisine in Model)
             {
                 <li>
-                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new { cuisineId = cuisine.Id }, null)
+                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new RestaurantSearchViewModel { CuisineId = cuisine.Id }, null)
                 </li>
             }
         </ul>

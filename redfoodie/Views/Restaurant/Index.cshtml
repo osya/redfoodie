@@ -27,7 +27,7 @@
                             <div>
                                 @foreach (var group in restaurant.Groups)
                                 {
-                                    <a href=@Url.Action("Index", "Restaurant", new { groupId = group.Id }, null)><span class="headerTag">@group.Name</span></a>
+                                    <a href=@Url.Action("Index", "Restaurant", new RestaurantSearchViewModel{ GroupId = group.Id }, null)><span class="headerTag">@group.Name</span></a>
                                 }
                             </div>
                         </div>

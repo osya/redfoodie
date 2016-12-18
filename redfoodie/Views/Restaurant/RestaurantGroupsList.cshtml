@@ -1,4 +1,5 @@
-﻿@model IEnumerable<redfoodie.Models.RestaurantGroupViewModel>
+﻿@using redfoodie.Models
+@model IEnumerable<RestaurantGroupViewModel>
 @{
     ViewBag.Title = "RestaurantGroupsList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,7 +16,7 @@
                 @foreach (var group in Model)
                 {
                     <li style="background-image: url('@group.ImageFullFileName'); @(i++ >= 13? "margin-left: 4.6%;": null)">
-                        @Html.ActionLink(group.Name, "Index", "Restaurant", new { groupId = group.Id }, new { @class = "collection_item" })
+                        @Html.ActionLink(group.Name, "Index", "Restaurant", new RestaurantSearchViewModel { GroupId = group.Id }, new { @class = "collection_item" })
                     </li>
                 }
             </ul>

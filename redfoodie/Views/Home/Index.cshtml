@@ -80,7 +80,7 @@
             @foreach (var place in Model.PlacesOdd)
             {
                 <li class="">
-                    @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new { placeId = place.Id }, new { title = place.Name })
+                    @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new RestaurantSearchViewModel { PlaceId = place.Id }, new { title = place.Name })
                 </li>
             }
         </ul>
@@ -88,7 +88,7 @@
             @foreach (var place in Model.PlacesEven)
             {
                 <li class="even">
-                    @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new { placeId = place.Id }, new { title = place.Name })
+                    @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new RestaurantSearchViewModel { PlaceId = place.Id }, new { title = place.Name })
                 </li>
             }
         </ul>
@@ -102,7 +102,7 @@
             @foreach (var cuisine in Model.CuisinesOdd)
             {
                 <li class="">
-                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new { cuisineId = cuisine.Id }, null)
+                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new RestaurantSearchViewModel { CuisineId = cuisine.Id }, null)
                 </li>
 
             }
@@ -111,7 +111,7 @@
             @foreach (var cuisine in Model.CuisinesEven)
             {
                 <li class="">
-                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new { cuisineId = cuisine.Id }, null)
+                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new RestaurantSearchViewModel { CuisineId = cuisine.Id }, null)
                 </li>
             }
         </ul>
@@ -186,10 +186,9 @@
                     }
                     tabContent.loadingIcon('attach');
                     $.ajax({
-                        url: '@Url.Action("Group", "Restaurant")',
+                        url: '@Url.Action("SearchBusiness", "Restaurant")',
                         type: 'GET',
                         dataType: 'json',
-//                        contentType: 'application/json; charset=utf-8',
                         // we set cache: false because GET requests are often cached by browsers
                         // IE is particularly aggressive in that respect
                         cache: false,

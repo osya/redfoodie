@@ -10,6 +10,11 @@ namespace redfoodie.Models
 
         [Display(Name = "Type Location Name")]
         public string SearchTxtLoc { get; set; }
+
+        public string CuisineId { get; set; }
+        public string CityId { get; set; }
+        public string GroupId { get; set; }
+        public int? PlaceId { get; set; }
     }
 
 
@@ -62,5 +67,24 @@ namespace redfoodie.Models
                     ? "rateMiddleHeart"
                     : PercentRate >= 30 ? "rateLowHeart" : "rateLowerHeart";
         public ICollection<RestaurantGroupViewModel> Groups { get; set; }
+    }
+
+    public enum SerpItemType
+    {
+        Business,
+        Neighbourhood,
+        Districts,
+        Area,
+        Cuisine
+    }
+    public class SerpItem
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        /// <summary>
+        /// Field PlaceName used for SerpItemType.Business
+        /// </summary>
+        public string PlaceName { get; set; }
     }
 }

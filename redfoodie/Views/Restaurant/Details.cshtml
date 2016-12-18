@@ -1,4 +1,5 @@
-﻿@model redfoodie.Models.RestaurantViewModel
+﻿@using redfoodie.Models
+@model RestaurantViewModel
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -238,14 +239,12 @@
             <div class="row restaurant-header-row">
                 <div class="col-md-8 restaurant-header-row-item">
                     <div class="restaurant-header-row-item-inline ">
-                        <a class="business-name" href="/delhi-ncr/rodeo-connaught-place-new-delhi">
-                            Rodeo
-                        </a>
+                        @Html.ActionLink(Model.Name, "Details", "Restaurant", new { restaurantId = Model.Id }, new { @class = "business-name" })
                     </div>
                     <div class="restaurant-header-row-item-inline">
                         @foreach (var group in Model.Groups)
                         {
-                            <a href=@Url.Action("Index", "Restaurant", new { groupId = group.Id }, null)><span class="headerTag">@group.Name</span></a>
+                            <a href=@Url.Action("Index", "Restaurant", new RestaurantSearchViewModel { GroupId = group.Id }, null)><span class="headerTag">@group.Name</span></a>
                         }
                     </div>
                 </div>

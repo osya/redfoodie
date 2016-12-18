@@ -1,4 +1,5 @@
-﻿@model Dictionary<char, redfoodie.Models.Place[]>
+﻿@using redfoodie.Models
+@model Dictionary<char, Place[]>
 @{
     ViewBag.Title = "Explore By Neighbourhoods";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,7 +20,7 @@
                     @foreach (var place in item.Value)
                     {
                         <li>
-                            @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new { placeId = place.Id }, new { title = place.Name })
+                            @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new RestaurantSearchViewModel { PlaceId = place.Id }, new { title = place.Name })
                         </li>
                     }
                 </ul>

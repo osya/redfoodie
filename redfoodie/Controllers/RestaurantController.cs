@@ -67,7 +67,17 @@ namespace redfoodie.Controllers
                         predicate);
         }
 
-        private async Task<IEnumerable<RestaurantViewModel>> Search(string cuisineId = null, string cityId = null, string groupId = null, int? placeId = null, int? count = null)
+        /// <summary>
+        /// Search of Restaurants by different filters
+        /// </summary>
+        /// <param name="cuisineId"></param>
+        /// <param name="cityId"></param>
+        /// <param name="groupId"></param>
+        /// <param name="placeId"></param>
+        /// <param name="count"></param>
+        /// <param name="searchWord"></param>
+        /// <returns></returns>
+        private IQueryable<Restaurant> _SearchBusiness(string cuisineId = null, string cityId = null, string groupId = null, int? placeId = null, int? count = null, string searchWord = null)
         {
             var rParam = Expression.Parameter(typeof(Restaurant), "r");
             var filterLambda = placeId != null
@@ -121,11 +131,41 @@ namespace redfoodie.Controllers
                     groupLambda;
             }
 
+            if (!string.IsNullOrEmpty(searchWord))
+            {
+                var keywordExpr = Expression.Call(
+                    Expression.Property(rParam, "Name"),
+                    typeof(string).GetMethod("Contains", new[] { typeof(string) }),
+                    Expression.Constant(searchWord));
+                var keywordLambda = Expression.Lambda<Func<Restaurant, bool>>(keywordExpr, rParam);
+                filterLambda = placeId != null || !string.IsNullOrEmpty(cityId) || !string.IsNullOrEmpty(cuisineId) || !string.IsNullOrEmpty(groupId) ?
+                    Expression.Lambda<Func<Restaurant, bool>>(Expression.AndAlso(filterLambda.Body, keywordLambda.Body), rParam) :
+                    keywordLambda;
+            }
+
             var restaurants = _db.Restaurants.Where(filterLambda).Include(r => r.Cuisines).Include(r => r.Groups);
             if (count != null)
                 restaurants = restaurants.Take((int)count);
 
-            return (await restaurants.ToArrayAsync()).Select(
+            return restaurants;
+        }
+
+        /// <summary>
+        /// It is in separate methid to avoid Implicitly captured closure warning
+        /// </summary>
+        /// <param name="searchWord"></param>
+        /// <returns></returns>
+        private IQueryable<Cuisine> _searchCuisines(string searchWord)
+        {
+            return _db.Cuisines.Where(c => c.Name.Contains(searchWord));
+        }
+
+        // GET: Restaurants
+        public async Task<ActionResult> Index(RestaurantSearchViewModel modelIn)
+        {
+            // TODO: In case of "Detect current location" searchTxtLoc value passed here, but not processed. Because it is not PlaceId. It shold be somehow matched to PlaceId, but it is messy
+            var currentCityId = modelIn.CityId ?? (Session["currentCity"] as City)?.Id;
+            var model = (await _SearchBusiness(modelIn.CuisineId, currentCityId, modelIn.GroupId, modelIn.PlaceId).ToArrayAsync()).Select(
                     r =>
                         new RestaurantViewModel
                         {
@@ -138,32 +178,25 @@ namespace redfoodie.Controllers
                             Votes = r.Votes.Select(v => new VoteViewModel { ReviewText = v.ReviewText, ApplicationUser = new UserViewModel { Id = v.ApplicationUser.Id, UserName = v.ApplicationUser.UserName, ImageFullFileName = v.ApplicationUser.ImageFullFileName, ReviewsCount = v.ApplicationUser.Votes.Count } }).OrderByDescending(o => o.ApplicationUser.ReviewsCount).ToArray(),
                             PercentRate = r.PercentRate
                         }).OrderByDescending(o => o.PercentRate);
-        }
-
-        // GET: Restaurants
-        public async Task<ActionResult> Index(string cuisineId, string cityId, string groupId, int? placeId = null)
-        {
-            var currentCityId = cityId ?? (Session["currentCity"] as City)?.Id;
-            var model = await Search(cuisineId, currentCityId, groupId, placeId);
 
             // Creating ViewBag.Title
             var sb = new StringBuilder();
-            sb.Append(!string.IsNullOrEmpty(groupId) ? $"{_db.RestaurantGroups.Find(groupId).Name} restaurants" : "Restaurants");
-            if (!string.IsNullOrEmpty(cuisineId))
+            sb.Append(!string.IsNullOrEmpty(modelIn.GroupId) ? $"{_db.RestaurantGroups.Find(modelIn.GroupId).Name} restaurants" : "Restaurants");
+            if (!string.IsNullOrEmpty(modelIn.CuisineId))
             {
-                sb.Append($" with {_db.Cuisines.Find(cuisineId).Name}");
+                sb.Append($" with {_db.Cuisines.Find(modelIn.CuisineId).Name}");
             }
-            if (placeId != null)
+            if (modelIn.PlaceId != null)
             {
-                sb.Append($" in {_db.Places.Find(placeId).Name} place");
+                sb.Append($" in {_db.Places.Find(modelIn.PlaceId).Name}");
             }
             else if (!string.IsNullOrEmpty(currentCityId))
             {
-                var cityName = string.IsNullOrEmpty(cityId) ||
-                               (!string.IsNullOrEmpty(cityId) &&
-                                string.Equals(cityId, (Session["currentCity"] as City)?.Id))
+                var cityName = string.IsNullOrEmpty(modelIn.CityId) ||
+                               (!string.IsNullOrEmpty(modelIn.CityId) &&
+                                string.Equals(modelIn.CityId, (Session["currentCity"] as City)?.Id))
                     ? (Session["currentCity"] as City)?.Name
-                    : _db.Cities.Find(cityId).Name;
+                    : _db.Cities.Find(modelIn.CityId).Name;
                 sb.Append($" in {cityName} city");
             }
             else
@@ -175,9 +208,57 @@ namespace redfoodie.Controllers
             return View(model);
         }
 
-        public async Task<JsonResult> Group(string groupId, int? count = null)
+        public async Task<JsonResult> SearchBusiness(string cityId = null, string groupId = null, int? count = null, string searchWord = null)
         {
-            return Json(JsonResponseFactory.SuccessResponse(await Search(groupId: groupId, count: count)), JsonRequestBehavior.AllowGet);
+            var currentCityId = cityId ?? (Session["currentCity"] as City)?.Id;
+            var restaurants = (await _SearchBusiness(cityId: currentCityId, groupId: groupId, count: count, searchWord: searchWord).ToArrayAsync()).Select(
+                    r =>
+                        new RestaurantViewModel
+                        {
+                            Id = r.Id,
+                            Name = r.Name,
+                            ImageFullFileName = r.ImageFullFileName,
+                            Place = new PlaceViewModel { Id = r.Place.Id, Name = r.Place.Name, City = new CityViewModel { Id = r.Place.City.Id, Name = r.Place.City.Name } },
+                            Cuisines = r.Cuisines.Select(c => new CuisineViewModel { Name = c.Name }).ToArray(),
+                            Groups = r.Groups.Select(g => new RestaurantGroupViewModel { Id = g.Id, Name = g.Name }).ToArray(),
+                            Votes = r.Votes.Select(v => new VoteViewModel { ReviewText = v.ReviewText, ApplicationUser = new UserViewModel { Id = v.ApplicationUser.Id, UserName = v.ApplicationUser.UserName, ImageFullFileName = v.ApplicationUser.ImageFullFileName, ReviewsCount = v.ApplicationUser.Votes.Count } }).OrderByDescending(o => o.ApplicationUser.ReviewsCount).ToArray(),
+                            PercentRate = r.PercentRate
+                        }).OrderByDescending(o => o.PercentRate);
+
+            return Json(JsonResponseFactory.SuccessResponse(restaurants), JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> SearchByKeyword(string searchWord = null, string cityId = null, string groupId = null, string type = null)
+        {
+            var currentCityId = cityId ?? (Session["currentCity"] as City)?.Id;
+            var places = _db.Places.Where(r => r.Name.Contains(searchWord) && string.Equals(r.City.Id, currentCityId))
+                .Select(p => new SerpItem
+                {
+                    Id = p.Id.ToString(),
+                    Name = p.Name,
+                    Type = SerpItemType.Neighbourhood.ToString(),
+                    PlaceName = string.Empty
+                });
+
+            var res = await (string.Equals(type, "loc") ? places : 
+                places
+                .Union(_SearchBusiness(cityId: currentCityId, searchWord: searchWord, groupId: groupId).Select(r => new SerpItem
+                    {
+                        Id = r.Id.ToString(),
+                        Name = r.Name,
+                        Type = SerpItemType.Business.ToString(),
+                        PlaceName = r.Place.Name
+                    }))
+                .Union(_searchCuisines(searchWord).Select(c => new SerpItem
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        Type = SerpItemType.Cuisine.ToString(),
+                        PlaceName = string.Empty
+                    }))
+                ).ToArrayAsync();
+
+            return Json(JsonResponseFactory.SuccessResponse(res), JsonRequestBehavior.AllowGet);
         }
 
         public async Task<ActionResult>RestaurantGroupsList()
@@ -192,14 +273,6 @@ namespace redfoodie.Controllers
             var model = _db.Cuisines.ToArray();
             return View(model);
         }
-
-        //        [HttpPost]
-        //        [ValidateAntiForgeryToken]
-        //        public JsonResult Search(RestaurantSearchViewModel model)
-        //        {
-        //            // TODO: Implement logic. Отдельный контроллер для поиска, видимо, нужен, так как он будет возвращать возможно JSON
-        //            return Json(ModelState.IsValid ? JsonResponseFactory.SuccessResponse() : JsonResponseFactory.ErrorResponse("Some error"));
-        //        }
 
         // GET: Restaurants/Details/5
         public async Task<ActionResult> Details(int restaurantId)

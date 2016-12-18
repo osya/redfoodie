@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Geocoding.Google;
 using Microsoft.AspNet.Identity;
 using redfoodie.Models;
 
@@ -26,7 +27,7 @@ namespace redfoodie.Controllers
             {
                 if (string.IsNullOrEmpty(cityId) && !User.Identity.IsAuthenticated)
                 {
-                    var currentCity = Db.Cities.Find("DElhiNCR");
+                    var currentCity = Db.Cities.Find("DelhiNCR");
                     Session["currentCity"] = currentCity;
                     currentCityId = currentCity.Id;
                 }
@@ -46,6 +47,10 @@ namespace redfoodie.Controllers
                             Session["currentCity"] = currentCity;
                             currentCityId = currentCity?.Id;
                         }
+                        else
+                        {
+                            currentCityId = (Session["currentCity"] as City)?.Id;
+                        }
                     }
                 }
             }
@@ -57,6 +62,20 @@ namespace redfoodie.Controllers
             }
 
             var places = await Db.Places.Where(p => p.CityId == currentCityId && p.Restaurants.Any()).OrderByDescending(o => o.Restaurants.Count).Take(11).ToArrayAsync();
+            if (Session != null)
+            {
+                Session["popularLocations"] =
+                    places.Take(5)
+                        .Select(
+                            p =>
+                                new PlaceViewModel
+                                {
+                                    Id = p.Id,
+                                    Name = p.Name,
+                                    City = new CityViewModel { Id = p.City.Id, Name = p.City.Name }
+                                }).ToArray();
+            }
+
             var rgKeys = new List<string>
             {
                 "Trending",
@@ -126,6 +145,28 @@ namespace redfoodie.Controllers
             var places = await Db.Places.Where(p => p.CityId == currentCity.Id && p.Restaurants.Any()).ToArrayAsync();
             var alphaPlaces = places.GroupBy(g => g.Name[0]).ToDictionary(t => t.Key, t => t.ToArray());
             return View(alphaPlaces);
+        }
+
+        public async Task<JsonResult> ReverseGeocode(double latitude, double longitude)
+        {
+            var geocoder = new GoogleGeocoder();
+            var locRev = (await geocoder.ReverseGeocodeAsync(latitude, longitude))
+                .Where(a => a.Type == GoogleAddressType.Political)
+                .LastOrDefault(a => a.Components.Any(c => c.Types.First() == GoogleAddressType.Locality))
+                ?.Components?.Take(2)?.Select(c => c.LongName);
+            if (locRev == null) return Json(JsonResponseFactory.ErrorResponse("City not found"), JsonRequestBehavior.AllowGet);
+            var locArr = locRev.ToArray();
+            var cityId = locArr[1].Replace("New Delhi", "DelhiNCR");
+            var placeName = locArr[0];
+            var place = await Db.Cities.Where(c => string.Equals(c.Id, cityId))
+                .Select(
+                    c =>
+                        new PlaceViewModel
+                        {
+                            Name = placeName,
+                            City = new CityViewModel {Id = c.Id, Name = c.Name}
+                        }).FirstOrDefaultAsync();            
+            return Json(place != null? JsonResponseFactory.SuccessResponse(place): JsonResponseFactory.ErrorResponse("City not found"), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

@@ -247,8 +247,8 @@
                             </div>
                             <div class="user-stats">
                                 <span class="user-stat restaurant-locality">
-                                    @Html.ActionLink(restaurant.Place.Name, "Index", "Restaurant", new {placeId = restaurant.Place.Id}, null),
-                                    @Html.ActionLink(restaurant.Place.City.Name, "Index", "Restaurant", new { cityId = restaurant.Place.City.Id }, null),
+                                    @Html.ActionLink(restaurant.Place.Name, "Index", "Restaurant", new RestaurantSearchViewModel { PlaceId = restaurant.Place.Id}, null),
+                                    @Html.ActionLink(restaurant.Place.City.Name, "Index", "Restaurant", new RestaurantSearchViewModel { CityId = restaurant.Place.City.Id }, null),
                                 </span>
                             </div>
                             <div class="user-stats user-like restaurant-rating" data-prototype="cuisines">
