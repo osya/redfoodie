@@ -135,7 +135,7 @@
                 <a class="restaurant-link" href="/Restaurant/Details?restaurantId=<%= Id %>"><%= Name %></a>
                 <% if (Votes.length > 0) { %>
                 <span class="restaurant-review">
-                    <a class="review-reviewer-photo" href="Manage/ViewProfile?userId=<%= Votes[0].ApplicationUser.Id %>">
+                    <a class="review-reviewer-photo" href="/Manage/ViewProfile?userId=<%= Votes[0].ApplicationUser.Id %>">
                         <img src="<%= Votes[0].ApplicationUser.ImageFullFileName %>" />
                     </a>
                     <span class="review-text">

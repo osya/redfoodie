@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Spatial;
 
 namespace redfoodie.Models
 {
@@ -67,6 +68,7 @@ namespace redfoodie.Models
                     ? "rateMiddleHeart"
                     : PercentRate >= 30 ? "rateLowHeart" : "rateLowerHeart";
         public ICollection<RestaurantGroupViewModel> Groups { get; set; }
+        public DbGeography Location { get; set; }
     }
 
     public enum SerpItemType

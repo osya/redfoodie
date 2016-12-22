@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using redfoodie.Models;
+using RazorEngine;
+using RazorEngine.Templating;
 
 namespace redfoodie.Controllers
 {
@@ -236,6 +238,27 @@ namespace redfoodie.Controllers
             });
         }
 
+        public async Task<JsonResult> SendInvitationEmail(InviteFriendsViewModel model)
+        {
+            var emailService = new EmailService();
+
+            string body;
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var userModel = new UserViewModel { Id = user.Id, UserName = user.UserName, ImageFullFileName = user.ImageFullFileName };
+            using (var sr = new StreamReader(Server.MapPath("\\Views\\InvitationEmail.cshtml")))
+            {
+                var source = sr.ReadToEnd();
+                body = Engine.Razor.RunCompile(source, "InvitationEmail", typeof(UserViewModel), userModel);
+            }
+            await emailService.SendAsync(new IdentityMessage
+            {
+                Destination = model.Email,
+                Subject = "E mail Invitation From Redfoodie",
+                Body = body
+            });
+            return Json(JsonResponseFactory.SuccessResponse("Ok"));
+        }
+
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
@@ -355,6 +378,13 @@ namespace redfoodie.Controllers
             {
                 SuggestedUsers = _db.Users.Where(m => !string.Equals(m.Id, user.Id)).OrderBy(m => Guid.NewGuid()).Take(4).ToArray().Select(m => new UserViewModel { Id = m.Id, UserName = m.UserName, ImageFullFileName = m.ImageFullFileName, Verified = m.Verified, Follow = user.Follows.Any(f => string.Equals(f.FollowUserId, m.Id)) }).ToArray()
             });
+        }
+    
+        public async Task<JsonResult> SearchUsers(InviteFriendsViewModel model)
+        {
+            var users = (await _db.Users.Where(u => u.UserName.Contains(model.SearchUsers)).ToArrayAsync()).Select(u => new UserViewModel { Id = u.Id, UserName = u.UserName, ImageFullFileName = u.ImageFullFileName }).ToArray();
+
+            return Json(JsonResponseFactory.SuccessResponse(users));
         }
 
         protected override void Dispose(bool disposing)

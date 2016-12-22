@@ -1,0 +1,83 @@
+﻿@model redfoodie.Models.UserViewModel
+@{
+    var baseUri = new Uri("http://myredfoodie.com:8080");
+ // ReSharper disable once UseStringInterpolation
+    var profileUri = new Uri(baseUri, string.Format("/Manage/ViewProfile?userId={0}", Model.Id));
+}
+
+<div data-x-div-type="html" xmlns="http://www.w3.org/1999/xhtml">
+    <div data-x-div-type="body" style="background-color: #eeeeee;margin: 0px;padding: 0px;background-color: #eeeeee">
+        ,
+        <table cellpadding="0" cellspacing="0" width="100%" style="background-color: #eeeeee">
+            <tbody>
+                <tr style="background-color: #363636">
+                    <td align="center" valign="middle">
+                        <table border="0" cellpadding="0" cellspacing="0" width="542">
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px" align="left" valign="middle" width="129">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIoAAAAYCAIAAACqS/J7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NkQ3NzgyRjA2MjQ5MTFFM0I4QzFENDlGQkU0RDhDRTAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NkQ3NzgyRjE2MjQ5MTFFM0I4QzFENDlGQkU0RDhDRTAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2RDc3ODJFRTYyNDkxMUUzQjhDMUQ0OUZCRTREOENFMCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2RDc3ODJFRjYyNDkxMUUzQjhDMUQ0OUZCRTREOENFMCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvDXnqUAAA6mSURBVHja7Npp0JfTGwfwykP2fV9DdhFJdkUIkSUGJUtkGcOYxtIwQwwvLMPERGMwxiiMJcaSxp41WyGksmdfQ5ZSPs/vyzW/8a7Hf/68cF7cc//Ofc51ruV7bed52nfv3r2lpeW3336bO3eul3bt2rVvDD/nzZu3UGN4mT9/focOHSyzIOsXXnjhH374Yckll5wzZ4717RZwIFsbUfYTzfmNYRLxOY2xyCKLWBBOfPL85ZdfvCyxxBI//fSTje3+iYHDYpU26ArzxaEFZvDmExGiurYdtNAaa6xhP/kXXXRRL6Eb7aM+rzEcaTIv2Rbm6M6zDaeWvWPpmCpkscEAmcSDlTGhl7mNYYFPsU0bYPE/GZG6mW3vgXV0WEbKS5v5bIk3DBgwoE+fPksttVQz6ZyX92nTpr344osPPPDAzz//bJKyYkKqbAM0CgHolLG33HLLM888E/GRI0c+9dRT5n/99VfzHHTffffdeeed11tvPT9pBCd33nnnjBkzsv3/PxJmTj311N69ez/66KOjRo369ttvibPYYouZ3GGHHfA/YsQIusIhYdsG4j/MQ/KTTjqpLExx3v+i9DXXXLNnz56777778OHDP/zww8UXX5zumC26XlA1hXgcglTeBasDDjhg/fXXB4599tnnpZdeIlvHjh2tJPDBBx8cOYsZHF500UX/VHCjou23375///7sdOihhz744IO0waEPO+ywAw88kDHI8uyzzz755JPESUBqo3ns79SpUwWuH3/88auvvgqck42WW265pZdeOp609dZbn3322cOGDaO78gBwXtDjg4CAwIjLxja+cuIEDVx16dKlb9++iQ+WQYbgRhevv/76P2WbMBaIJP3QjzQMspW8qZG1fCXp3+GzJahM/vcyadKkK6+8MhpMWl5llVVgoVevXolC22677Xbbbcej4+PR7II6bwlmpCKIYcpFYjlG2mijjeJeZsaPH3/zzTd7N/PWW2/9nZj+94NbVSupCzg6bh977DFmW2GFFfjN888/T4Epptp+UGk2euEW77//fuqoyP/BBx/MnDlTBbHhhhtGa5tvvjnzVC0XV/PCz1IBZkSGrMmzQNBszoqNIVhVgxdmqLLHC4Hffffd2NVXwmex4SwKMh/MOt1Xz2bDVzJPzpMnQieRIPNmmuvJ8GlNtJ+fFTYKRiWIDH3xxRdLliJQc8UbIinkbMSbd+emPC7IZlLwQMGuzz//vCX4ba5J7Bc9Uoog5+unn346depUmTmihjNPtFBceeWVd9lll2222WaDDTZAevbs2aAtNz7yyCMKh+SncJkn5tZee+1u3bpREOJvvPHG22+/LTiE0RjGvFgnlu66666xh0977bUXYH788ceIm8Fk4i1vRm311Ve3UoqeMmXKE088MXHixNgjgTTKIg5077TTTrjdZJNNYi3cArv1X3zxRQrFVKroxxKB5rrrrit8ffTRR88999zXX3/9/fffNystEBTlTjnlFMzg8Kqrrkp5VbVP8revxGdvFF599dUJEyZYHEhRF4gPHjy4c+fOwuMZZ5zR8peqPJkg9W4gRt22pc6OpqKXeINYJ3UzTIGahVZbbbVejXHZZZeBQFCcgLbWWmsde+yxSgz8VR56+umn77jjjsAzOYZGLrzwQoBoVoFsrChyxFlnnUUqBx1xxBEDBw6MmQOdlVZaiV33228/ReY111zz5ZdfQkNaKPwzNm7XWWed4pa8ojdWGRW3iZkxpPXWyP+DBg1CtjTDiko1lojhA4IEOkXN/vvvb3LvvfemdBVm1GWX6obe0SkZWQInttx3331Y/e677wIIILjnnnucgmZLYTPAiSelHzTDMPS4xRZbbLrppnFAHvPmm2+yljACtueddx5ER8vffPONM/x0sBkg5aTnnnsurKV8oHTllnRSxyU4cL6iX1EomS+UE75S4jtC6PD1uOOOY56s9xSTbadr4plhoWWWWeaCCy6wHrc27rbbbkyeAJWgjavll18+3G622WbiEm5lXyJHLQyjpo3WCsdUbJk4Vh1IIoTBg6N6hSjKsTFqe+655+mnnx5EooNVTyBOD8eiZORtCc5mdtxxR+aZPHlyS4X+vNijNLQiLmIIAkIBx8wy3CsZfWWGE044YcUVV0zGGj169MMPP8zVrD/kkENYFGddu3alpptuuilh/ZhjjoltDLi2HqPiBjOzXPw1tRzmKMskd2G82Mb6Z555RnjBA4FVtAlE77zzzvXXXw/+lmH18MMPh0o6slHDhDF7kTrxxBNjeNxaT4pZs2YJWXCttYhprRFS6MhKYRPevQSpMp+wZhmyPvHRujVIYKiizgw9xGkMiuKysY1YcuONN/Iq66kIq+iQ96CDDkJcTIYtKxWosN4Kyua6K2kfkBNMk12ThBI9Xn755UsuuUSeCPcO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">
+                                    </td>
+                                    <td style="padding: 15px 0px" align="right" valign="middle" width="490">
+                                        <a href="https://www.facebook.com/Redfoodiedotcom" style="padding-right: 5px" target="_blank" tabindex="-1" rel="external">
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAZCAYAAAArK+5dAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3RkE2MjU5NkEwM0NFMzExOUY3RkQ1MTdGQjBGMkM1MSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpEODUwNDkyMzYyNUMxMUUzOTFGOUNDN0U3MDY2QTA2NSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpEODUwNDkyMjYyNUMxMUUzOTFGOUNDN0U3MDY2QTA2NSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjIzMEZDRDJBQUMzQ0UzMTE5RjdGRDUxN0ZCMEYyQzUxIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjdGQTYyNTk2QTAzQ0UzMTE5RjdGRDUxN0ZCMEYyQzUxIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+LDEpVQAAAdBJREFUeNq0lr9LQlEUx8+zn5iLIhZSOQopFRE6NDhagy7tQkuLQ1sN/QFSY4uDBE6NBm3aEghFQ1KL4FAOOZRCQkVRZLfveTwjwvfuzfQLH7g8zj3fy3333HM1IQRJZAOzYB6MG9+eQBmcg1fL2WxgghvsgnthrhdwAGbM8nT6aAOboCnU9QEywCEzsIMj0b0ugc/MYAjkxf91CyY7GeyI3ukMDHBezThFc+ACDFgdiGKxSIVCgVqtFkWjUYpEIlbhG2CvvfpD2ZLK5bIIh8MiFArpZLNZ2ZQ7MDoIFy+IyYqhUqnoi3G73ZROp8npdMqmcM3EuYiWZVtTrVapVCrpY03T9HG9XicFxdhgURbFCfP5vD5uNBqUSqWoVqupGCywwZQsyu/3E/ZfH/PWJBIJCgQCKgbTbGCXRQWDwe8T43K5KJlM6v9CQWNs8Ej9U5MNrvtocMMGp300OOM64OPxDBxWkR6Ph1Bg5PV6/2KQa1fynui9roDWNpj44/2vopXft+kq+OxR8oxZw9nuQfJjMGzVMreMFtiN9sGIrCczS0b7U1UdrKk2/Z/NPw5yJgfgDZyAdaOXd8yjKbyL2m8jH5cD4Np5MG6Ad9nELwEGAGcPtpU6/yfYAAAAAElFTkSuQmCC">
+                                        </a><a href="https://www.twitter.com/RedfoodieApp" target="_blank" tabindex="-1" rel="external">
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAZCAYAAAArK+5dAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3RkE2MjU5NkEwM0NFMzExOUY3RkQ1MTdGQjBGMkM1MSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGNTg3QUZCMzYyNUMxMUUzOTUzRkJFMTM2QUIxNzg3NiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGNTg3QUZCMjYyNUMxMUUzOTUzRkJFMTM2QUIxNzg3NiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjIzMEZDRDJBQUMzQ0UzMTE5RjdGRDUxN0ZCMEYyQzUxIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjdGQTYyNTk2QTAzQ0UzMTE5RjdGRDUxN0ZCMEYyQzUxIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+v3ilnAAAAkpJREFUeNqslk2IUlEUx897ry9nZiNEk1EN6MqQilA3gTK6KaHEgkBctWnZTl20dJULBV3JMOBGF0IzEIgMKrQLN1Ibd7lpM4Y4YGoa2u1ceU/kde99byb/8JPn/Tj/e6/ec55ECAEDych95CGyq7b9RDpIC/klnE0NOFxH0kiP8DVBysg9XhxWo4wkkDNiXnPkANkxMthCPpKL6wuyxzO4jJyQ/9d35DbL4D3ZnD4jyrrBA/UcTWswGJDFYiEa8nbd4NhsYBo0mUySYDBIWq2WaOgpco0Gv8VbfTqdJolEgnS73VVbpVIhXq93ic/nI/V6XWTyil6iJ4jCuiOhUAhwlRCLxSCXy8FoNIJisbjqn06nkEqloN/v867ZM2rgFl3C+XwOeCxQKpUgEon8E4yaZLNZqFary7E6PaIGd3gGLpcLAoHA6vtwOGSOazab0Ol0QJIkfdfdS/ixJUol0Wh0uYNGo8Edk8/nwePxsLq26Q6GrKPR5HQ6weFwgCzLzOB+v58XnOqM7uCbvlVbLZ04Ho9hMpkAK+tarVaIx+OiA+hKOPEFPnzQ76BcLkOhUIDZbMacabPZIJPJgN1uFxnkqcE2PpwiO/pe+qPWajVot9vQ6/VAUZTlqt1uN4TDYbBYLEa1ZF+7yTmyeX1FJM3g5jnzvxk91WfTl8ifDQU/4BWcdxsITpPTFVHJTJ43da/pELlqVJMpj9XyZ1Y/kNdmi/568X+OHHH+ADPkE/JGreXMOJKJ9yLt3WgPuYHQ2z9QM8Bvo4l/BRgA3R6gNyBBcDQAAAAASUVORK5CYII=">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table><table style="background-color: #d94a39;border-radius: 5px;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px" width="542"><tbody><tr><td style="font-family: Gotham, Helvetica, sans-serif;font-size: 18px;font-weight: bold;color: #fff;padding: 10px" align="center">Friend Invitation From Redfoodie!</td></tr></tbody></table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table style="font-family: Arial,Helvetica, sans-serif" align="center" cellpadding="0" cellspacing="0" width="500">
+            <tbody>
+                <tr>
+                    <td style="background: #eaeaea;background-color: #eaeaea" align="left" valign="top">
+                        <table style="background: #ffffff;padding: 0 0 25px;background-color: #ffffff" align="center" cellpadding="0" cellspacing="0" width="500">
+                            <tbody>
+                                <tr>
+                                    <td style="font-family: Arial, Helvetica Neue;padding: 10px 20px" align="left" valign=" top">
+                                        <span style="font-size: 14px;color: #5b5b5b;vertical-align: middle;display: block;padding: 15px 0px;border-bottom: 1px solid #e4e4e4">
+                                            <center>
+                                                <a href="@profileUri" target="_blank" tabindex="-1" rel="external">
+                                                    <img src="@(new Uri(baseUri, Model.ImageFullFileName))" alt="@Model.UserName" title="@Model.UserName">
+                                                </a>
+                                            </center>
+                                            <center>You have been invited to Redfoodie by <a href="@profileUri" style="color: #D94A38;font-size: 25px;font-weight: 600;text-decoration: none" target="_blank" tabindex="-1" rel="external">@Model.UserName</a></center>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="top">
+                                        <span style="font-size: 14px;color: #5b5b5b;display: block;line-height: 40px">
+                                            You can follow @Model.UserName by visiting their 
+                                            <a href="@profileUri" style="color: #D94A38;font-size: 14px;font-weight: 600;text-decoration: none" target="_blank" tabindex="-1" rel="external">profile</a>, and get their activity updates.
+                                        </span><table style="font-family: Arial, Helvetica Neue" border="0" cellpadding="0" cellspacing="0" width="541">
+                                            <tbody>
+                                                <tr style="padding: 10px 20px">
+                                                    <td style="font-family: Arial, Helvetica Neue" align="center" valign=" top">
+                                                        <a href="@profileUri" style="background: #db4a39;color: #fff;padding: 5px 10px;display: block;width: 235px;text-decoration: none;font-size: 14px;font-weight: bold" target="_blank" tabindex="-1" rel="external">View Profile</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size: 12px;color: #2a2a28" align="center" height="35" valign="middle">
+                        <center>© 2014. Redfoodie Pvt. Ltd. All rights reserved. Redfoodie</center>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

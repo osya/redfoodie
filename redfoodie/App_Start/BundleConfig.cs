@@ -44,7 +44,8 @@ namespace redfoodie
                 "~/Content/view-profile.css"));
             bundles.Add(new StyleBundle("~/Content/restaurant-details/css").Include(
                 "~/Content/restaurant-details.css"));
-
+            bundles.Add(new ScriptBundle("~/Content/restaurant-details/js").Include(
+                "~/Scripts/utilities.js"));
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                       "~/Scripts/Site.js"));
             bundles.Add(new ScriptBundle("~/Content/js/noty").Include(

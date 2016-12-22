@@ -20,7 +20,7 @@ namespace redfoodie
             {
                 Content =
                 {
-                    From = new Address {Name = "Redfoodie", Email = "restaurants@sparkpostbox.com"},
+                    From = new Address {Name = "Redfoodie", Email = "restaurants@vosipov.com"},
                     Subject = message.Subject,
                     Html = message.Body
                 }

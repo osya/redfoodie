@@ -287,7 +287,8 @@ namespace redfoodie.Controllers
             {
                 Id = restaurant.Id, Name = restaurant.Name, ImageFullFileName = restaurant.ImageFullFileName, Place = new PlaceViewModel { Id = restaurant.Place.Id, Name = restaurant.Place.Name, City = new CityViewModel { Id = restaurant.Place.City.Id, Name = restaurant.Place.City.Name } },
                 Groups = restaurant.Groups.Select(g => new RestaurantGroupViewModel { Id = g.Id, Name = g.Name}).ToArray(),
-                Votes = restaurant.Votes.Select(v => new VoteViewModel { ReviewText = v.ReviewText, ApplicationUser = new UserViewModel { Id = v.ApplicationUser.Id, UserName = v.ApplicationUser.UserName, ImageFullFileName = v.ApplicationUser.ImageFullFileName } }).ToArray()
+                Votes = restaurant.Votes.Select(v => new VoteViewModel { ReviewText = v.ReviewText, ApplicationUser = new UserViewModel { Id = v.ApplicationUser.Id, UserName = v.ApplicationUser.UserName, ImageFullFileName = v.ApplicationUser.ImageFullFileName } }).ToArray(),
+                Location = restaurant.Location
             });
         }
 

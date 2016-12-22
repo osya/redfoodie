@@ -24,30 +24,36 @@
             <p class="clr-grey">We'll only import your contacts, and won't send any invites at this step</p>
         </div>
         <div class="socials-connects mail">
-            <div class="input-group">
-                <span class="input-group-addon"><img src="/Content/collections/imgs/email-invite.svg" alt="Email Invite"></span>
-                @Html.TextBoxFor(m => m.Email, true, null, new { @class = "form-control email-invite", placeholder = Html.DisplayNameFor(m => m.Email), autocomplete = "off", type = "email" })
-                @Html.ValidationMessagesFor(m => m.Email, new { @class = "text-danger" })
-                <span class="input-group-btn">
-                    <button class="btn btn-default  send-email-invite" type="button"><span>Send invite</span></button>
-                </span>
-            </div>
-            <p class="clr-grey">Just so you know: We never email your contacts without your say so.</p>
+            @using (Ajax.BeginForm("SendInvitationEmail", "Manage", null, new AjaxOptions {HttpMethod = "POST", OnBegin = "$('.send-email-invite').loadingIcon('attach');", OnSuccess = "sendInvitationEmailSuccess",}))
+            {
+                <div class="input-group">
+                    <span class="input-group-addon"><img src="/Content/collections/imgs/email-invite.svg" alt="Email Invite"></span>
+                    @Html.TextBoxFor(m => m.Email, true, null, new {@class = "form-control email-invite", placeholder = Html.DisplayNameFor(m => m.Email), autocomplete = "off", type = "email", id = "emailAddress"})
+                    @Html.ValidationMessagesFor(m => m.Email, new {@class = "text-danger"})
+                    <span class="input-group-btn">
+                        <button class="btn btn-default send-email-invite" type="submit"><span>Send invite</span></button>
+                    </span>
+                </div>
+                <p class="clr-grey">Just so you know: We never email your contacts without your say so.</p>
+            }
         </div>
     </div>
 
     <div class="clearfix bdr_btm" style="padding: 20px 0">
-        <p class="clr-grey">Name or Redfoodie username</p>
-        <div class="socials-connects search">
-            <div class="input-group">
-                @Html.TextBoxFor(m => m.SearchUsers, true, null, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.SearchUsers), id = "searchUsers" })
-                @Html.ValidationMessagesFor(m => m.SearchUsers, new { @class = "text-danger" })
-                <span class="input-group-addon" id="search-redfoodies-button"><i class="redfood-icon redfood-invite-search clr-red"></i></span>
+        @using (Ajax.BeginForm("SearchUsers", "Manage", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('.search-redfoodies-button').loadingIcon('attach');", OnSuccess = "searchUsersSuccess"}, new { id = "search-users" }))
+        {
+            <p class="clr-grey">Name or Redfoodie username</p>
+            <div class="socials-connects search">
+                <div class="input-group">
+                    @Html.TextBoxFor(m => m.SearchUsers, true, null, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.SearchUsers), name = "searchWord" })
+                    @Html.ValidationMessagesFor(m => m.SearchUsers, new { @class = "text-danger" })
+                    <span class="input-group-addon" id="search-redfoodies-button" type="submit"><i class="redfood-icon redfood-invite-search clr-red"></i></span>
+                </div>
+                <div class="socials-connects-search-dpdwn" id="socials-connects-search-dpdwn" style="display: none;">
+                    <ul></ul>
+                </div>
             </div>
-            <div class="socials-connects-search-dpdwn" id="socials-connects-search-dpdwn" style="display: none;">
-                <ul></ul>
-            </div>
-        </div>
+        }
     </div>
 
     <div style="padding: 20px 0">
@@ -55,3 +61,60 @@
         @Html.Partial("_SuggestedUsersHoriz", new SuggestedUsersViewModel {SuggestedUsers = Model.SuggestedUsers})
     </div>
 </div>
+@section Scripts
+{
+    <script id="users_search_template" type="text/template">
+    <li>
+        <a class="import-user-contact-from-search" href="/Manage/ViewProfile?userId=<%= Id %>">
+            <img src="<%= ImageFullFileName %>" height="39" width="39" alt="<%= UserName %>" title="<%= UserName %>"/>
+            <% print(UserName); %>
+        </a>
+    </li>
+</script>
+    <script>
+        $(document).ready(function($) {
+            $('#search-redfoodies-button').click(function() {
+                $("#search-users").submit();
+            });
+            $("#SearchUsers").keyup(function (e) {
+                if (e.keyCode === 40 || e.keyCode === 38 || e.which === 40 || e.which === 38) {
+                    return;
+                }
+                if ($(this).val().length > 2) {
+                    $("#search-users").submit();
+                }
+            });
+        });
+        function sendInvitationEmailSuccess(data) {
+            $('.send-email-invite').loadingIcon('detach');
+            if (data.Success) {
+                $('#reset_form #alert').noty({
+                    text: 'Mail Sent!',
+                    dismissQueue: false,
+                    timeout: 5000,
+                    template:
+                        '<div class="noty_message confirmation-message" style="margin-bottom:0;"><span class="noty_text"></span></div>'
+                });
+            } else {
+                $("#reset_form #Username +span").text(data.ErrorMessage);
+            }
+        }
+
+        function searchUsersSuccess(data) {
+            $('.search-redfoodies-button').loadingIcon('detach');
+
+            window.listing_template_redfoodies = _.template($('#users_search_template').html());
+            if (data.Object.length === 0) {
+                $('#socials-connects-search-dpdwn').hide();
+            } else {
+                $('#socials-connects-search-dpdwn').show();
+            }
+
+            $('#socials-connects-search-dpdwn ul').html('');
+            for (var i = 0; i < data.Object.length; i++) {
+                var listingTemplateContent = window.listing_template_redfoodies(data.Object[i]);
+                $('#socials-connects-search-dpdwn ul').append(listingTemplateContent);
+            }
+        }
+    </script>
+}
