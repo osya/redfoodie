@@ -3,13 +3,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="clearfix pad_30 cms_wrapper  career_inner ">
+@* ReSharper disable UnknownCssClass *@
+<div class="clearfix pad_30 cms_wrapper career_inner">
     <div class="globalwidth clearfix pad_t12">
-        <div class="clearfix font_roman verified_inner">
+        <div class="clearfix verified_inner">
             <div class="globalwidth clearfix pad_t12">
                 <div class="pull-left pad_40">
                     <h5><strong>@ViewBag.Title</strong></h5>
-
                     <p>
                         <strong>What is a verified account?</strong><br>
                         Any account with a blue verified badge on their Redfoodie profile is a verified account.&nbsp;
@@ -25,9 +25,10 @@
                         You can't really contact anyone at Redfoodie. The only way is to keep writing great and unbiased reviews so that you stand out with your account in comparison to others.&nbsp;
                     </p>
 
-                    <p>If you have any queries, please get in touch with us at <u>verify@redfoodie.com</u></p>
+                    <p>If you have any queries, please get in touch with us at <p style="text-decoration: underline;">verify@redfoodie.com</p>
 
                     <div class="verified_contnt">&nbsp;</div>
+                    @* ReSharper restore UnknownCssClass *@
                 </div>
             </div>
         </div>

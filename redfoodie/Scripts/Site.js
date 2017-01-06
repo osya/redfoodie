@@ -8,10 +8,10 @@
             dismissQueue: true
         };
         b.timeout = e === "error" ? 5000 : 2000;
-        if (typeof d != "undefined" && d === true) {
+        if (typeof d !== "undefined" && d === true) {
             b.timeout = false;
         }
-        if (a != null && a.length > 0) {
+        if (a && a.length > 0) {
             b = {
                 text: c,
                 type: e,
@@ -21,14 +21,14 @@
             };
             a.noty(b);
         } else {
-            if (typeof noty != "undefined") {
+            if (typeof noty !== "undefined") {
                 noty(b);
             }
         }
     },
     logging: true,
     log: function (a) {
-        if (typeof console != "undefined" && utils.logging) {
+        if (typeof console !== "undefined" && utils.logging) {
             console.log(a);
         }
     },
@@ -54,10 +54,10 @@
     }
 };
 (function (a) {
-    a.fn.loadingIcon = function (c) {
+    a.fn.loadingIcon = function(c) {
         var b = this;
         c = c === "attach" ? "attach" : "detach";
-        b.each(function () {
+        b.each(function() {
             if (c === "attach") {
                 a("body").css("cursor", "progress");
                 var e = a(this).width();
@@ -72,8 +72,8 @@
                 a(this).children().show();
             }
         });
-        return b
-    }
+        return b;
+    };
 })(jQuery);
 $(document).ready(function () {
     $(document).on("click", "[data-modal-link=1]", function (f) {
@@ -116,26 +116,25 @@ $(document).ready(function () {
 jQuery.fn.highlight = function (b) {
     function a(e, j) {
         var l = 0;
-        if (e.nodeType == 3) {
+        if (e.nodeType === 3) {
             var k = e.data.toUpperCase().indexOf(j);
             if (k >= 0) {
                 var h = document.createElement("span");
                 h.className = "highlight";
                 var f = e.splitText(k);
-                var c = f.splitText(j.length);
                 var d = f.cloneNode(true);
                 h.appendChild(d);
                 f.parentNode.replaceChild(h, f);
                 l = 1;
             }
         } else {
-            if (e.nodeType == 1 && e.childNodes && !/(script|style)/i.test(e.tagName)) {
+            if (e.nodeType === 1 && e.childNodes && !/(script|style)/i.test(e.tagName)) {
                 for (var g = 0; g < e.childNodes.length; ++g) {
                     g += a(e.childNodes[g], j);
                 }
             }
         }
-        return l
+        return l;
     }
 
     return this.length && b && b.length

@@ -3,7 +3,8 @@
     ViewBag.Title = "Edit Profile Image";
 }
 <div data-modal-content-container="1" data-modal-wrapper-class="width_380" class="hide" id="imagePopup">
-    <div id="pp_desc" class="width_462">
+    <div id="pp_desc">
+        @* ReSharper disable once UnknownCssClass *@
         <div class="pad_0x17 join_form">
             <h2>@ViewBag.Title</h2>
             <p>
@@ -13,10 +14,9 @@
                         @Html.AntiForgeryToken()
                         <div id="uu_alert"></div>
                         @Html.LabelFor(m => m.UserFile)
-                        <div class="editor-field">
-                            @Html.TextBoxFor(m => m.UserFile, true, null, new { @class = "file-up", required = "true", type = "file", onchange = "onUserFileChanges(this, event);" } )
-                            @Html.ValidationMessageFor(m => m.UserFile)
-                        </div>
+                        @Html.TextBoxFor(m => m.UserFile, true, null, new { @class = "file-up", required = "true", type = "file", onchange = "onUserFileChanges(this, event);" } )
+                        @Html.ValidationMessageFor(m => m.UserFile)
+                        
                     }
                     <div style="font-size:11px; line-height: 18px; margin-top: 24px; color: #aeaeae;">
                         JPG/PNG formats only<br>Maximum size 5 MB<br>

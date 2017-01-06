@@ -4,70 +4,74 @@
 @{
     ViewBag.Title = "Profile Details";
 }
-@Styles.Render("~/Content/settings/css")
+@Styles.Render("~/bundles/settings/css")
+@* ReSharper disable UnknownCssClass *@
 <div class="clearfix career_inner settings">
     <div class="globalwidth clearfix pad_t12">
-        @using (Ajax.BeginForm("ProfileSettings", "Manage", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#user_profile_edit_form').loadingIcon('attach');", OnSuccess = "settingsSuccess" }, new { id = "user_profile_edit_form", @class = "fos_user_registration_register front-form" }))
+        @using (Ajax.BeginForm("ProfileSettings", "Manage", null, new AjaxOptions {HttpMethod = "POST", OnBegin = "$('#user_profile_edit_form').loadingIcon('attach');", OnSuccess = "settingsSuccess"}, new {id = "user_profile_edit_form", @class = "fos_user_registration_register front-form"}))
         {
             @Html.AntiForgeryToken()
             <div id="user_pef_alert"></div>
-            <div class="pull-left left_part contact-form no_marg_lft ">
+            <div class="pull-left left_part contact-form no_marg_lft">
                 <h3 class="h20">@ViewBag.Title</h3>
                 <div>
                     <div class="form-filed form-group">
-                        @Html.TextBoxFor(m => m.UserName, true, null, new { id = "user_pef_UserName", required = "required", placeholder = Html.DisplayNameFor(x => x.UserName), title = Html.DisplayNameFor(x => x.UserName) })
-                        @Html.ValidationMessagesFor(m => m.UserName, new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.UserName, true, null, new {id = "user_pef_UserName", required = "required", placeholder = Html.DisplayNameFor(x => x.UserName), title = Html.DisplayNameFor(x => x.UserName)})
+                        @Html.ValidationMessagesFor(m => m.UserName, new {@class = "text-danger"})
                     </div>
                     <div class="form-filed">
-                        @Html.DropDownListFor(m => m.SelectedCity, true, Model.Cities, null, new { id = "user_pef_SelectedCity", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.SelectedCity), placeholder = Html.DisplayNameFor(m => m.SelectedCity), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;" })
-                        @Html.ValidationMessagesFor(m => m.SelectedCity, new { @class = "text-danger" })
+                        @Html.DropDownListFor(m => m.SelectedCity, true, Model.Cities, null, new {id = "user_pef_SelectedCity", required = "required", @class = "dropdown selectized", title = Html.DisplayNameFor(m => m.SelectedCity), placeholder = Html.DisplayNameFor(m => m.SelectedCity), data_sc_user_basic_details = "1", tabindex = "-1", style = "display: none;"})
+                        @Html.ValidationMessagesFor(m => m.SelectedCity, new {@class = "text-danger"})
                     </div>
                     <div class="form-filed form-group">
-                        @Html.TextBoxFor(m => m.Twitter, true, null, new { id = "user_pef_twitter", placeholder = Html.DisplayNameFor(x => x.Twitter), title = Html.DisplayNameFor(x => x.Twitter), autocomplete = "off", type = "url" })
-                        @Html.ValidationMessagesFor(m => m.Twitter, new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.Twitter, true, null, new {id = "user_pef_twitter", placeholder = Html.DisplayNameFor(x => x.Twitter), title = Html.DisplayNameFor(x => x.Twitter), autocomplete = "off", type = "url"})
+                        @Html.ValidationMessagesFor(m => m.Twitter, new {@class = "text-danger"})
                     </div>
                     <div class="form-filed form-group">
-                        @Html.TextBoxFor(m => m.Facebook, true, null, new { id = "user_pef_Facebook", placeholder = Html.DisplayNameFor(x => x.Facebook), title = Html.DisplayNameFor(x => x.Facebook), autocomplete = "off", type = "url" })
-                        @Html.ValidationMessagesFor(m => m.Facebook, new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.Facebook, true, null, new {id = "user_pef_Facebook", placeholder = Html.DisplayNameFor(x => x.Facebook), title = Html.DisplayNameFor(x => x.Facebook), autocomplete = "off", type = "url"})
+                        @Html.ValidationMessagesFor(m => m.Facebook, new {@class = "text-danger"})
                     </div>
                     <div class="form-filed form-group">
-                        @Html.TextBoxFor(m => m.Website, true, null, new { id = "user_pef_Website", placeholder = Html.DisplayNameFor(x => x.Website), title = Html.DisplayNameFor(x => x.Website), autocomplete = "off", type = "url" })
-                        @Html.ValidationMessagesFor(m => m.Website, new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.Website, true, null, new {id = "user_pef_Website", placeholder = Html.DisplayNameFor(x => x.Website), title = Html.DisplayNameFor(x => x.Website), autocomplete = "off", type = "url"})
+                        @Html.ValidationMessagesFor(m => m.Website, new {@class = "text-danger"})
                     </div>
                     <div class="form-filed form-group">
-                        @Html.TextBoxFor(m => m.PhoneNumber, true, null, new { id = "user_pef_PhoneNumber", placeholder = Html.DisplayNameFor(x => x.PhoneNumber), title = "Mobile Number", autocomplete = "off", type = "tel" })
-                        @Html.ValidationMessagesFor(m => m.PhoneNumber, new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.PhoneNumber, true, null, new {id = "user_pef_PhoneNumber", placeholder = Html.DisplayNameFor(x => x.PhoneNumber), title = "Mobile Number", autocomplete = "off", type = "tel"})
+                        @Html.ValidationMessagesFor(m => m.PhoneNumber, new {@class = "text-danger"})
                     </div>
                 </div>
                 <div class="form-filed form-group" style="width: 612px">
-                    @Html.TextAreaFor(m => m.Bio, true, 2, 20, new { id = "user_pef_Bio", placeholder = Html.DisplayNameFor(x => x.Bio), title = Html.DisplayNameFor(x => x.Bio), OnKeyUp = "countChar($('#user_pef_Bio')[0])" })
-                    @Html.ValidationMessagesFor(m => m.Bio, new { @class = "text-danger" })
-                    <p class="bio-limit pull-left">About yourself in 80 characters or less.</p>
+                    @Html.TextAreaFor(m => m.Bio, true, 2, 20, new {id = "user_pef_Bio", placeholder = Html.DisplayNameFor(x => x.Bio), title = Html.DisplayNameFor(x => x.Bio), OnKeyUp = "countChar($('#user_pef_Bio')[0])"})
+                    @Html.ValidationMessagesFor(m => m.Bio, new {@class = "text-danger"})
+                    <p class="pull-left">About yourself in 80 characters or less.</p>
                     <span class="error pull-right">Characters: <strong id="charNum">0</strong></span>
                 </div>
                 <button type="submit" class="main-btn">Save changes</button>
             </div>
         }
-            
-        <div class="right_part pull-right mgn_b24">
+
+        <div class="right_part pull-right">
             <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
                 @Html.Partial("_ShortUrl", new ShortUrlViewModel {ShortUrl = Model.ShortUrl})
-                @Html.Partial("_NotificationSettings", new NotificationSettingsViewModel { FollowMail = Model.FollowMail, ReplyReviewmail = Model.ReplyReviewmail, ThanksFavoritemail = Model.ThanksFavoritemail })
+                @Html.Partial("_NotificationSettings", new NotificationSettingsViewModel {FollowMail = Model.FollowMail, ReplyReviewmail = Model.ReplyReviewmail, ThanksFavoritemail = Model.ThanksFavoritemail})
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingprivacy">
+                    <div class="panel-heading" role="tab">
                         <h4 class="panel-title">
+                            @* ReSharper disable Html.IdNotResolved *@
                             <a href="#change_password" class="clr-red" data-modal-link="1">Change Password</a>
                         </h4>
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingprivacy">
+                    <div class="panel-heading" role="tab">
                         <h4 class="panel-title" style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
                             <a href="#deactivate_account" class="clr-red" data-modal-link="1">Deactivate your account</a>
+                            @* ReSharper restore Html.IdNotResolved *@
                         </h4>
                     </div>
                     <div class="panel-body" style="border-top: none; padding-top: 0; padding-bottom: 0;">
                         <p class="text-justify clr-grey" style="font-size: 10px;">Deactivating your account will disable your profile and remove your name and picture from most things you've shared on Redfoodie in 30 days.</p>
+                        @* ReSharper restore UnknownCssClass *@
                     </div>
                 </div>
             </div>
@@ -76,7 +80,7 @@
 </div>
 @section Scripts
 {
-    @Scripts.Render("~/Content/selectize/js")
+    @Scripts.Render("~/bundles/selectize/js")
     <script>
         $("#user_profile_edit_form").validate();
 

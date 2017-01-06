@@ -256,13 +256,17 @@
   <ItemGroup>
     <Content Include="AppSettingsSecrets.config" />
     <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\chosen-sprite%402x.png" />
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
-    <Content Include="Content\chosen.min.css" />
+    <Content Include="Content\collections\imgs\Download_on_the_App_Store_Badge_US-UK_135x40.svg" />
+    <Content Include="Content\css\invite.css" />
+    <Content Include="Content\css\notification.css" />
+    <Content Include="Content\css\restaurant-details.css" />
+    <Content Include="Content\css\settings.css" />
+    <Content Include="Content\css\Site.css" />
+    <Content Include="Content\css\view-profile.css" />
     <Content Include="Content\thumbs\restaurant_groups\56a1c7eed5fe2-Cafe.png" />
     <Content Include="Content\thumbs\restaurant_groups\56a1c83e42b5e-Butter chicken 1.png" />
     <Content Include="Content\thumbs\restaurant_groups\56a1c8547c8d4-Bakery 1.png" />
@@ -287,12 +291,11 @@
     <Content Include="Content\collections\imgs\sprite.png" />
     <Content Include="Content\collections\imgs\user.svg" />
     <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\invite.css" />
-    <Content Include="Content\notification.css" />
-    <Content Include="Content\restaurant-details.css" />
+    <Content Include="Content\restaurant-details.less" />
     <Content Include="Content\selectize.bootstrap3.css" />
-    <Content Include="Content\settings.css" />
+    <Content Include="Content\notification.less" />
+    <Content Include="Content\invite.less" />
+    <None Include="Content\settings.less" />
     <Content Include="Content\thumbs\banners\1280x600_5749bf6e284c1-fd.png" />
     <Content Include="Content\thumbs\business\beera-chicken-house-white-avenue-amritsar\80x80_10443385_285064841671459_7689177930821632313_n-beera-chicken-house-white-avenue-amritsar-1a06165745dd7616689fcf8a7ee49263.jpg" />
     <Content Include="Content\thumbs\business\bharawan-da-dhaba-town-hall-amritsar\80x80_13335580_850689478371009_1285615177655183737_n-bharawan-da-dhaba-town-hall-amritsar-34bf957b7eadeeb7d7e066a1a092963f.jpg" />
@@ -309,20 +312,16 @@
     <Content Include="Content\thumbs\restaurant_groups\580fbd8f1debb-222 %281%29.png" />
     <Content Include="Content\thumbs\rf-loading.gif" />
     <Content Include="Content\thumbs\user\kalki-1912\146x146_489b42243d3b25094806a8bad87d482981c2d519.jpg" />
-    <Content Include="Content\view-profile.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="fonts\redfoodie.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
@@ -331,28 +330,30 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2" />
     <Content Include="fonts\MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.woff2" />
-    <Content Include="fonts\proxima-nova-regular.otf" />
+    <Content Include="Content\Site.less" />
+    <Content Include="package.json" />
+    <Content Include="Content\view-profile.less" />
+    <None Include="packman.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="gulpfile.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery.noty.packaged.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\js\selectize.js" />
+    <Content Include="Scripts\js\jquery.noty.packaged.js" />
+    <Content Include="Scripts\selectize.js" />
     <Content Include="Scripts\load-image.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\selectize.min.js" />
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\underscore.js" />
-    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\utilities.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="SqlServerTypes\readme.htm" />
@@ -366,7 +367,6 @@
     <Content Include="Views\Home\Verified.cshtml" />
     <Content Include="Views\Manage\SeeAll.cshtml" />
     <Content Include="Views\Home\PlacesList.cshtml" />
-    <Content Include="Scripts\underscore.min.map" />
     <Content Include="Views\InvitationEmail.cshtml" />
     <None Include="Views\ResetPasswordEmail.cshtml" />
     <Content Include="Web.config">
@@ -417,7 +417,6 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612071052275_Initial.resx">

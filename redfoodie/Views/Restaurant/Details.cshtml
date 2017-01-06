@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var googleApiKey = WebConfigurationManager.AppSettings["Google:ApiKey"];
 }
-@Styles.Render("~/Content/restaurant-details/css")
+@Styles.Render("~/bundles/restaurant-details/css")
 
 <script id="business-reviews-template" type="text/template">
     <div>
@@ -304,12 +304,12 @@
                 <a href="/businessPage/delhi-ncr/rodeo-connaught-place-new-delhi/allPhotos" style="">
                     See all <br><span id="countPhotos">39</span> photos
                 </a>
-                <img width="470" height="470" src="/uploads/thumbs/business/rodeo-connaught-place-new-delhi/307x240_13403239_1262083583803508_7514078302375201812_o-rodeo-connaught-place-new-delhi-752be5f2c28e63a5bf6822270f076d4e.jpg">
+                <img width="470" height="470" src="/uploads/thumbs/business/rodeo-connaught-place-new-delhi/307x240_13403239_1262083583803508_7514078302375201812_o-rodeo-connaught-place-new-delhi-752be5f2c28e63a5bf6822270f076d4e.jpg" alt="@Model.Name">
             </div>
             <div class="lastSlider">
                 <a href="javascript:void(0)" id="download-photo" style="">
                     <p class="cameraBorder">
-                        <img src="/redfoodie/img/galleryCamera.png">
+                        <img src="/redfoodie/img/galleryCamera.png"/>
                     </p>
                 </a>
             </div>
@@ -3494,11 +3494,11 @@
                 })
                 .on("shown.bs.modal",
                     function() {
-                        google.maps.event.trigger(gMap, "resize");
-                        gMap.setCenter(new google.maps.LatLng(@Model.Location.Latitude, @Model.Location.Longitude));
+                        window.google.maps.event.trigger(gMap, "resize");
+                        gMap.setCenter(new window.google.maps.LatLng(@Model.Location.Latitude, @Model.Location.Longitude));
                     });
         }
     </script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=@googleApiKey&libraries=places&callback=initMap" async defer></script>
-    @Scripts.Render("~/Content/restaurant-details/js")
+    @Scripts.Render("~/bundles/restaurant-details/js")
 }

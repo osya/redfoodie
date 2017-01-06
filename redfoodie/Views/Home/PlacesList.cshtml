@@ -4,63 +4,65 @@
     ViewBag.Title = "Explore By Neighbourhoods";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="globalwidth ">
+@* ReSharper disable UnknownCssClass *@
+<div class="globalwidth">
     <div class="clearfix" style="margin-top: 110px">
         <h3>@ViewBag.Title</h3>
     </div>
 </div>
 <div style="background-color: #f0f0f0;    overflow: hidden;    margin-top: 10px;padding-bottom: 80px">
     <div class="globalwidth">
-    <ul class="list-unstyled list-neighbourhoods">
-        @foreach (var item in Model)
-        {
-            <li>
-                <span>@item.Key</span>
-                <ul class="list-unstyled">
-                    @foreach (var place in item.Value)
-                    {
-                        <li>
-                            @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new RestaurantSearchViewModel { PlaceId = place.Id }, new { title = place.Name })
-                        </li>
-                    }
-                </ul>
-            </li>
-        }
-    </ul>
+        @* ReSharper restore UnknownCssClass *@
+        <ul class="list-unstyled list-neighbourhoods">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <span>@item.Key</span>
+                    <ul class="list-unstyled">
+                        @foreach (var place in item.Value)
+                        {
+                            <li>
+                                @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new RestaurantSearchViewModel {PlaceId = place.Id}, new {title = place.Name})
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
         <style>
             .list-neighbourhoods {
                 padding-left: 100px;
             }
 
-                .list-neighbourhoods > li {
-                    clear: both;
-                }
+            .list-neighbourhoods > li {
+                clear: both;
+            }
 
-                    .list-neighbourhoods > li > ul {
-                        overflow: hidden;
-                        margin-top: 30px;
-                    }
+            .list-neighbourhoods > li > ul {
+                overflow: hidden;
+                margin-top: 30px;
+            }
 
-                .list-neighbourhoods ul > li {
-                    width: 25%;
-                    margin: 9px 0;
-                    float: left;
-                }
+            .list-neighbourhoods ul > li {
+                width: 25%;
+                margin: 9px 0;
+                float: left;
+            }
 
-                .list-neighbourhoods a {
-                    color: #000;
-                    font-weight: 600;
-                }
+            .list-neighbourhoods a {
+                color: #000;
+                font-weight: 600;
+            }
 
-                .list-neighbourhoods > li > span {
-                    font-size: 24px;
-                    float: left;
-                    display: block;
-                    margin-left: -100px;
-                    font-weight: 600;
-                    color: grey;
-                    line-height: 37px;
-                }
+            .list-neighbourhoods > li > span {
+                font-size: 24px;
+                float: left;
+                display: block;
+                margin-left: -100px;
+                font-weight: 600;
+                color: grey;
+                line-height: 37px;
+            }
         </style>
     </div>
 </div>

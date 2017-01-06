@@ -59,6 +59,7 @@ namespace redfoodie.Models
     {
         [Required]
         public string CallbackUrl { get; set; }
+        public string Username { get; set; }
     }
 
     public class LoginViewModel

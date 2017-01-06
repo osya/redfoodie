@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>@ViewBag.Title - My ASP.NET Application</title>
-        @Styles.Render("~/Content/css")
+        @Styles.Render("~/bundles/css")
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
@@ -13,7 +13,8 @@
             var toolbarSearchBar = Request.Url?.LocalPath != "/";
         }
         @Scripts.Render("~/bundles/jquery")
-        <header class="navbar-fixed-top skin main-header font_roman">
+        <header class="navbar-fixed-top skin main-header">
+            @* ReSharper disable once UnknownCssClass *@
             <div class="header-inside globalwidth clearfix">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,7 +34,7 @@
                                 @(currentCity?.Name)<span class="fa fa-angle-down"></span>
                                 <div class="drop_menu " style="display: none">
                                     <ul class="list-unstyled">
-                                        <li class="cat clearfix second-country">
+                                        <li class="clearfix">
                                             <div class="country_city_list">
                                                 @foreach (var city in ((City[]) Session["citiesList"]).Where(m => m.Id != currentCity?.Id))
                                                 {
@@ -87,7 +88,7 @@
             </section>
         }
             
-        @Scripts.Render("~/Content/js/noty")
+        @Scripts.Render("~/bundles/js/noty")
         @RenderBody()
         
         <footer id="footer" class="footer">
@@ -125,6 +126,7 @@
         <!-- ======================= flag widget ======================= -->
         <div class="pop_wrapper">
             <div class="pop-container-relative">
+                @* ReSharper disable once UnknownCssClass *@
                 <a class="pop_close modal-popup-close redfood-icon redfood-cross"></a>
                 <div id="pp_desc" class="width_300">
                     <style>
@@ -191,7 +193,7 @@
         <div id="fb-root"></div>
         @Scripts.Render("~/bundles/underscore")
         @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/Content/js")
+        @Scripts.Render("~/bundles/js")
         @RenderSection("Scripts", false)
         
         <script>

@@ -3,125 +3,127 @@
 @{
     ViewBag.Title = "Home Page";
 }
+@* ReSharper disable UnknownCssClass *@
 <div class="globalwidth clearfix">
-<div class="home-left">
-    <hgroup class="heading-01">
-        <h2 class="clr-red ">Best of Redfoodie: Amritsar</h2>
-        <p class="clr-grey">Recommended lists of good food and best restaurants in Amritsar</p>
-    </hgroup>
-    <div class="recommend-list clearfix">
-        <ul class="list-unstyled tabs">
-            @{
-                var firstGroup = Model.RestaurantGroups.First();
-            }
-            <li style="background-image: url('@firstGroup.ImageFullFileName')" class="active">
-                <a data-toggle="tab" class="collection_item" href=@($"#{firstGroup.Id}")>
-                    @firstGroup.Name
-                </a>
-            </li>
-            @foreach (var group in Model.RestaurantGroups.Skip(1))
-            {
-                <li style="background-image: url('@group.ImageFullFileName')">
-                    <a data-toggle="tab" class="collection_item" href=@($"#{group.Id}")>
-                        @group.Name
+    <div class="home-left">
+        <div class="heading-01">
+            <h2 class="clr-red">Best of Redfoodie: Amritsar</h2>
+            <p class="clr-grey">Recommended lists of good food and best restaurants in Amritsar</p>
+        </div>
+        <div class="recommend-list clearfix">
+            <ul class="list-unstyled tabs">
+                @{
+                    var firstGroup = Model.RestaurantGroups.First();
+                }
+                <li style="background-image: url('@firstGroup.ImageFullFileName')" class="active">
+                    <a data-toggle="tab" class="collection_item" href=@($"#{firstGroup.Id}")>
+                        @firstGroup.Name
                     </a>
                 </li>
-            }
-            <li class="more">
-                @Html.ActionLink("Browse all lists", "RestaurantGroupsList", "Restaurant", null, new { @class = "collection_item" })
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="@Model.RestaurantGroups.First().Id"></div>
-            @foreach (var group in Model.RestaurantGroups.Skip(1))
-            {
-                <div role="tabpanel" class="tab-pane fade" id="@group.Id"></div>
-            }
+                @foreach (var group in Model.RestaurantGroups.Skip(1))
+                {
+                    <li style="background-image: url('@group.ImageFullFileName')">
+                        <a data-toggle="tab" class="collection_item" href=@($"#{group.Id}")>
+                            @group.Name
+                        </a>
+                    </li>
+                }
+                <li class="more">
+                    @Html.ActionLink("Browse all lists", "RestaurantGroupsList", "Restaurant", null, new {@class = "collection_item"})
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="@Model.RestaurantGroups.First().Id"></div>
+                @foreach (var group in Model.RestaurantGroups.Skip(1))
+                {
+                    <div role="tabpanel" class="tab-pane fade" id="@group.Id"></div>
+                }
+            </div>
         </div>
     </div>
-</div>
-<div class="home-right">
-    <hgroup class="heading-01">
-        <h2 class="clr-red ">Perfect app you'll fall in love with</h2>
-    </hgroup>
-    <div class="clearfix">
-        <div class="pull-left" style="margin-right: 10px">
-            <object data="/Content/collections/imgs/apple-iphone-5s.svg" width="78" type="image/svg+xml">
-                <img src="/Content/collections/imgs/apple-iphone-5s.svg" width="78">
-            </object>
+    <div class="home-right">
+        <hgroup class="heading-01">
+            <h2 class="clr-red">Perfect app you'll fall in love with</h2>
+        </hgroup>
+        <div class="clearfix">
+            <div class="pull-left" style="margin-right: 10px">
+                <object data="/Content/collections/imgs/apple-iphone-5s.svg" width="78" type="image/svg+xml"></object>
+            </div>
+            <div>
+                <p class="clr-grey">
+                    It's like carrying around 40000+ restaurants in the palm of your hand. No biceps required.
+                </p>
+                <a class="download_icon_container" href="https://geo.itunes.apple.com/us/app/redfoodie-find-food-restaurants/id1111345681?mt=8">
+                    <img src="/Content/collections/imgs/Download_on_the_App_Store_Badge_US-UK_135x40.svg" alt="AppStore"/>
+                </a>
+                @using (Html.BeginForm("Subscribe", "Home", FormMethod.Post, new {id = "subscription-form", @class = "subscrube-form"}))
+                {
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.SubscriptionEmail, true, null, new {id = "subscription_email", required = "required", @class = "form-control", placeholder = Html.DisplayNameFor(m => m.SubscriptionEmail), type = "email"})
+                        @Html.AntiForgeryToken()
+                        <span class="input-group-btn bg-red">
+                            <button class="btn btn-default  bg-red" style="color: #fff; border-radius: 0; border-color: transparent" type="submit" title="Notify me">
+                                <i class="fa fa-envelope-o"></i>
+                            </button>
+                        </span>
+                    </div>
+                }
+                <p id="subscription-notice">&nbsp;</p>
+            </div>
         </div>
-        <div>
-            <p class="clr-grey">
-                It's like carrying around 40000+ restaurants in the palm of your hand. No biceps required.
-            </p>
-            <a class="download_icon_container" href="https://geo.itunes.apple.com/us/app/redfoodie-find-food-restaurants/id1111345681?mt=8">
-                <img src="/Content/collections/imgs/Download_on_the_App_Store_Badge_US-UK_135x40.svg">
-            </a>
-            @using (Html.BeginForm("Subscribe", "Home", FormMethod.Post, new { id = "subscription-form", @class = "subscrube-form" }))
-            {
-                <div class="input-group">
-                    @Html.TextBoxFor(m => m.SubscriptionEmail, true, null, new { id = "subscription_email", required = "required", @class = "form-control", placeholder = Html.DisplayNameFor(m => m.SubscriptionEmail), type = "email" })
-                    @Html.AntiForgeryToken()
-                    <span class="input-group-btn bg-red">
-                        <button class="btn btn-default  bg-red" style="color: #fff;border-radius: 0;border-color: transparent" type="submit" title="Notify me">
-                            <i class="fa fa-envelope-o"></i>
-                        </button>
-                    </span>
-                </div>
-            }
-            <p id="subscription-notice">&nbsp;</p>
+        <hgroup class="heading-01" style="padding-top: 8px">
+            <h2 class="clr-red">Explore by neighbourhoods</h2>
+        </hgroup>
+        <div class="neighbourhoods-list">
+            <ul class="list-unstyled clearfix">
+                @foreach (var place in Model.PlacesOdd)
+                {
+                    <li class="">
+                        @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new RestaurantSearchViewModel {PlaceId = place.Id}, new {title = place.Name})
+                    </li>
+                }
+            </ul>
+            <ul class="list-unstyled clearfix even">
+                @foreach (var place in Model.PlacesEven)
+                {
+                    <li class="even">
+                        @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new RestaurantSearchViewModel {PlaceId = place.Id}, new {title = place.Name})
+                    </li>
+                }
+            </ul>
+            @Html.ActionLink("See all neighbourhoods »", "PlacesList", "Home", null, new {@class = "more"})
         </div>
-    </div>
-    <hgroup class="heading-01" style="padding-top: 8px">
-        <h2 class="clr-red ">Explore by neighbourhoods</h2>
-    </hgroup>
-    <div class="neighbourhoods-list">
-        <ul class="list-unstyled clearfix">
-            @foreach (var place in Model.PlacesOdd)
-            {
-                <li class="">
-                    @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new RestaurantSearchViewModel { PlaceId = place.Id }, new { title = place.Name })
-                </li>
-            }
-        </ul>
-        <ul class="list-unstyled clearfix even">
-            @foreach (var place in Model.PlacesEven)
-            {
-                <li class="even">
-                    @Html.ActionLink($"{place.Name} ({place.Restaurants.Count})", "Index", "Restaurant", new RestaurantSearchViewModel { PlaceId = place.Id }, new { title = place.Name })
-                </li>
-            }
-        </ul>
-        @Html.ActionLink("See all neighbourhoods »", "PlacesList", "Home", null, new { @class="more" })
-    </div>
-    <hgroup class="heading-01">
-        <h2 class="clr-red " style="">Explore by cuisine</h2>
-    </hgroup>
-    <div class="neighbourhoods-list">
-        <ul class="list-unstyled clearfix">
-            @foreach (var cuisine in Model.CuisinesOdd)
-            {
-                <li class="">
-                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new RestaurantSearchViewModel { CuisineId = cuisine.Id }, null)
-                </li>
+        <hgroup class="heading-01">
+            <h2 class="clr-red " style="">Explore by cuisine</h2>
+        </hgroup>
+        <div class="neighbourhoods-list">
+            <ul class="list-unstyled clearfix">
+                @foreach (var cuisine in Model.CuisinesOdd)
+                {
+                    <li class="">
+                        @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new RestaurantSearchViewModel {CuisineId = cuisine.Id}, null)
+                    </li>
 
-            }
-        </ul>
-        <ul class="list-unstyled clearfix even">
-            @foreach (var cuisine in Model.CuisinesEven)
-            {
-                <li class="">
-                    @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new RestaurantSearchViewModel { CuisineId = cuisine.Id }, null)
-                </li>
-            }
-        </ul>
-        @Html.ActionLink("See all cuisine »", "CuisinesList", "Restaurant", null, new { @class="more" })
+                }
+            </ul>
+            <ul class="list-unstyled clearfix even">
+                @foreach (var cuisine in Model.CuisinesEven)
+                {
+                    <li class="">
+                        @Html.ActionLink(cuisine.Name, "Index", "Restaurant", new RestaurantSearchViewModel {CuisineId = cuisine.Id}, null)
+                    </li>
+                }
+            </ul>
+            @Html.ActionLink("See all cuisine »", "CuisinesList", "Restaurant", null, new {@class = "more"})
+        </div>
+        <hgroup class="heading-01">
+            <h2 class="clr-red ">Popular foodies</h2>
+        </hgroup>
+        @* ReSharper restore UnknownCssClass *@
+        <div class="clearfix">
+            @Html.Partial("_SuggestedUsersHoriz", new SuggestedUsersViewModel {SuggestedUsers = Model.SuggestedUsers})
+        </div>
     </div>
-    <hgroup class="heading-01"><h2 class="clr-red ">Popular foodies</h2></hgroup>
-    <div class="clearfix">
-        @Html.Partial("_SuggestedUsersHoriz", new SuggestedUsersViewModel { SuggestedUsers = Model.SuggestedUsers })
-    </div>
-</div>
 </div>
 
 @section Scripts
@@ -163,7 +165,7 @@
                 <% if (PercentRate > 89) { %>
                 <% var percentRateColor = 'rateHigher' %>
                 <% } %>
-                <p class="<%= percentRateColor %>Heart"><% if (PercentRate > 0) { %> <%= PercentRate %>% <% } else { %> &mdash; <% } %></p>
+                <span class="<%= percentRateColor %>Heart"><% if (PercentRate > 0) { %> <%= PercentRate %>% <% } else { %> &mdash; <% } %></span>
             </span>
         </div>
     </script>
@@ -210,7 +212,7 @@
                 getRecommend();
                 $('a.collection_item[data-toggle="tab"]')
                     .on('shown.bs.tab',
-                        function(e) {
+                        function() {
                             getRecommend(recommendTitleTemplate);
                         });
             });

@@ -4,8 +4,9 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Styles.Render("~/Content/invite")
-<div class="globalwidth clearfix invite">
+@Styles.Render("~/bundles/invite")
+@* ReSharper disable UnknownCssClass *@
+<div class="globalwidth clearfix">
     <h2 style="text-align: center">
         Get free food vouchers and invites to foodie meet-ups every month by inviting
         your friends to Redfoodie!
@@ -15,15 +16,15 @@
         <img src="/Content/collections/imgs/invite.svg" alt="Invite">
     </div>
     <p class="clr-grey">Invite whoever's missing ask your frinds to join you on Redfoodie</p>
-    <div class="clearfix bdr_btm" style="padding: 20px 0">
-        <div class="socials-connects fb">
+    <div class="clearfix" style="padding: 20px 0">
+        <div class="socials-connects">
             <div class="input-group">
                 <span class="input-group-addon"><img src="/Content/collections/imgs/facebook-invite.svg" alt="Facebook Invite"></span>
                 <button class="form-control btn btn-default clr-grey" type="button">Connect with Facebook</button>
             </div>
             <p class="clr-grey">We'll only import your contacts, and won't send any invites at this step</p>
         </div>
-        <div class="socials-connects mail">
+        <div class="socials-connects">
             @using (Ajax.BeginForm("SendInvitationEmail", "Manage", null, new AjaxOptions {HttpMethod = "POST", OnBegin = "$('.send-email-invite').loadingIcon('attach');", OnSuccess = "sendInvitationEmailSuccess",}))
             {
                 <div class="input-group">
@@ -39,14 +40,14 @@
         </div>
     </div>
 
-    <div class="clearfix bdr_btm" style="padding: 20px 0">
+    <div class="clearfix" style="padding: 20px 0">
         @using (Ajax.BeginForm("SearchUsers", "Manage", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('.search-redfoodies-button').loadingIcon('attach');", OnSuccess = "searchUsersSuccess"}, new { id = "search-users" }))
         {
             <p class="clr-grey">Name or Redfoodie username</p>
             <div class="socials-connects search">
                 <div class="input-group">
-                    @Html.TextBoxFor(m => m.SearchUsers, true, null, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.SearchUsers), name = "searchWord" })
-                    @Html.ValidationMessagesFor(m => m.SearchUsers, new { @class = "text-danger" })
+                    @Html.TextBoxFor(m => m.SearchUsers, true, null, new {@class = "form-control", placeholder = Html.DisplayNameFor(m => m.SearchUsers), name = "searchWord"})
+                    @Html.ValidationMessagesFor(m => m.SearchUsers, new {@class = "text-danger"})
                     <span class="input-group-addon" id="search-redfoodies-button" type="submit"><i class="redfood-icon redfood-invite-search clr-red"></i></span>
                 </div>
                 <div class="socials-connects-search-dpdwn" id="socials-connects-search-dpdwn" style="display: none;">
@@ -58,6 +59,7 @@
 
     <div style="padding: 20px 0">
         <p class="clr-grey">Suggested Redfoodie to follow</p>
+        @* ReSharper restore UnknownCssClass *@
         @Html.Partial("_SuggestedUsersHoriz", new SuggestedUsersViewModel {SuggestedUsers = Model.SuggestedUsers})
     </div>
 </div>
@@ -88,12 +90,13 @@
         function sendInvitationEmailSuccess(data) {
             $('.send-email-invite').loadingIcon('detach');
             if (data.Success) {
-                $('#reset_form #alert').noty({
+                noty({
                     text: 'Mail Sent!',
                     dismissQueue: false,
                     timeout: 5000,
                     template:
-                        '<div class="noty_message confirmation-message" style="margin-bottom:0;"><span class="noty_text"></span></div>'
+                        '<div class="noty_message confirmation-message" style="margin-bottom:0;"><span class="noty_text"></span></div>',
+                    layout: 'top'
                 });
             } else {
                 $("#reset_form #Username +span").text(data.ErrorMessage);

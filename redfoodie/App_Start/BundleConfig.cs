@@ -30,28 +30,34 @@ namespace redfoodie
             bundles.Add(new ScriptBundle("~/bundles/chosen").Include(
                       "~/Scripts/chosen.jquery.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css", 
-                      "~/Content/site.css",
+                      "~/Content/css/Site.css",
                       "~/Content/chosen.css"));
 
-            bundles.Add(new StyleBundle("~/Content/notification").Include("~/Content/notification.css"));
-            bundles.Add(new StyleBundle("~/Content/invite").Include("~/Content/invite.css"));
-            bundles.Add(new StyleBundle("~/Content/settings/css").Include(
-                "~/Content/settings.css", "~/Content/selectize.bootstrap3.css"));
-            bundles.Add(new StyleBundle("~/Content/viewprofile/css").Include(
-                "~/Content/view-profile.css"));
-            bundles.Add(new StyleBundle("~/Content/restaurant-details/css").Include(
-                "~/Content/restaurant-details.css"));
-            bundles.Add(new ScriptBundle("~/Content/restaurant-details/js").Include(
+            bundles.Add(new StyleBundle("~/bundles/notification").Include("~/Content/css/notification.css"));
+            bundles.Add(new StyleBundle("~/bundles/invite").Include("~/Content/css/invite.css"));
+            bundles.Add(new StyleBundle("~/bundles/settings/css").Include(
+                "~/Content/css/settings.css", "~/Content/selectize.bootstrap3.css"));
+            bundles.Add(new StyleBundle("~/bundles/view-profile/css").Include(
+                "~/Content/css/view-profile.css"));
+            bundles.Add(new StyleBundle("~/bundles/restaurant-details/css").Include(
+                "~/Content/css/restaurant-details.css"));
+            bundles.Add(new ScriptBundle("~/bundles/restaurant-details/js").Include(
                 "~/Scripts/utilities.js"));
-            bundles.Add(new ScriptBundle("~/Content/js").Include(
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
                       "~/Scripts/Site.js"));
-            bundles.Add(new ScriptBundle("~/Content/js/noty").Include(
-                      "~/Scripts/jquery.noty.packaged.min.js"));
-            bundles.Add(new ScriptBundle("~/Content/selectize/js").Include(
-                      "~/Scripts/selectize.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/js/noty").Include(
+                      "~/Scripts/js/jquery.noty.packaged.js"));
+            bundles.Add(new ScriptBundle("~/bundles/selectize/js").Include(
+                      "~/Scripts/selectize.js"));
+
+            #if DEBUG   
+                BundleTable.EnableOptimizations = false;
+            #else
+                BundleTable.EnableOptimizations = true;
+            #endif
         }
     }
 }

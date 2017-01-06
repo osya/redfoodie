@@ -4,35 +4,32 @@
     ViewBag.Title = "Create Message";
 }
 <div data-modal-content-container="1" data-modal-wrapper-class="width_300" id="message">
-    <div class="messaging-wrap">
-        <h2>@ViewBag.Title</h2>
+    <h2>@ViewBag.Title</h2>
         
-        @using (Ajax.BeginForm("Post", "Message", new {ViewBag.ReturnUrl}, new AjaxOptions {HttpMethod = "POST", OnBegin = "$('#message').loadingIcon('attach');", OnSuccess = "postSuccess"}, new {role = "form", id = "newform" }))
-        {
-            @Html.AntiForgeryToken()
-            <div id="alert"></div>
-            <div class="messaging-top-area clearfix">
-                <div class="recipients" style="position: relative;">
-                    @Html.LabelFor(m => m.To, new { @class = "caption", style = "font-weight: normal;margin-bottom:0;display:inline;" })
-                    @Html.ListBoxFor(m => m.To, true, new List<SelectListItem>(), new { id = "ispg_appbundle_messagestype_sentTo", required = "required", data_placeholder = "Select Users", style = "width: 550px; margin-left: 10px;" })
-                    @Html.ValidationMessagesFor(m => m.To, new { @class = "text-danger" })
-                </div>
-                <div class="clearfix"></div>
-                <div class="message-write">
-                    @Html.LabelFor(m => m.Message, new { @class="caption", style= "font-weight: normal;margin-bottom:0;display:inline;" })
-                    <div class="wmd-panel">
-                        @Html.TextAreaFor(m => m.Message, true, 2, 20, new { id = "ispg_appbundle_messagestype_message", name = "ispg_appbundle_messagestype[message]", required = "required" })
-                        @Html.ValidationMessagesFor(m => m.Message, new { @class = "text-danger" })
-                    </div>
-                    <div class="compose-area clearfix">
-                        <span class="sentmsg" data-send="1">
-                            <button class="btn bg-red compose send-btn" type="submit" style="color: #fff"><span>Send</span></button>
-                        </span>
-                    </div>
-                </div>
+    @using (Ajax.BeginForm("Post", "Message", new {ViewBag.ReturnUrl}, new AjaxOptions {HttpMethod = "POST", OnBegin = "$('#message').loadingIcon('attach');", OnSuccess = "postSuccess"}, new {role = "form", id = "newform" }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="alert"></div>
+        <div class="clearfix">
+            <div style="position: relative;">
+                @Html.LabelFor(m => m.To, new { @class = "caption", style = "font-weight: normal;margin-bottom:0;display:inline;" })
+                @Html.ListBoxFor(m => m.To, true, new List<SelectListItem>(), new { id = "ispg_appbundle_messagestype_sentTo", required = "required", data_placeholder = "Select Users", style = "width: 550px; margin-left: 10px;" })
+                @Html.ValidationMessagesFor(m => m.To, new { @class = "text-danger" })
             </div>
-        }
-    </div>
+            <div class="clearfix"></div>
+            @Html.LabelFor(m => m.Message, new { @class="caption", style= "font-weight: normal;margin-bottom:0;display:inline;" })
+            <div class="wmd-panel">
+                @Html.TextAreaFor(m => m.Message, true, 2, 20, new { id = "ispg_appbundle_messagestype_message", name = "ispg_appbundle_messagestype[message]", required = "required" })
+                @Html.ValidationMessagesFor(m => m.Message, new { @class = "text-danger" })
+            </div>
+            <div class="compose-area clearfix">
+                @* ReSharper disable once UnknownCssClass *@
+                <span class="sentmsg" data-send="1">
+                    <button class="btn bg-red" type="submit" style="color: #fff"><span>Send</span></button>
+                </span>
+            </div>
+        </div>
+    }
 </div>
 @Scripts.Render("~/bundles/chosen")
 <script>

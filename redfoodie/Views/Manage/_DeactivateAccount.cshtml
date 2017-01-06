@@ -4,23 +4,25 @@
     ViewBag.Title = "Profile Deactivation Request";
 }
 <div data-modal-content-container="1" data-modal-wrapper-class="width_400" class="hide" id="deactivate_account" style="display: block !important">
-    <section class="container main-content-area-spacer">
-        <section class="dashbord-box01 clearfix">
-            <div class="create-account pull-left user-account-edit front-form">
+    <section class="container">
+        <section class="clearfix">
+            @* ReSharper disable UnknownCssClass *@
+            <div class="pull-left front-form">
                 <h2>@ViewBag.Title</h2>
                 @using (Ajax.BeginForm("Deactivate", "Manage", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#deactivate_account').loadingIcon('attach');", OnSuccess = "deactivateSuccess" }, new { id = "deactivate_account_form", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
                     <div id="da_alert"></div>
                     <div class="form-filed">
-                        @Html.TextAreaFor(m => m.Reason, true, 2, 20, new { style = "resize:vertical;", id = "da_reason", name = "deactivate_account_reason" })
-                        @Html.ValidationMessagesFor(m => m.Reason, new { @class = "text-danger" })
+                        @Html.TextAreaFor(m => m.Reason, true, 2, 20, new {style = "resize:vertical;", id = "da_reason", name = "deactivate_account_reason"})
+                        @Html.ValidationMessagesFor(m => m.Reason, new {@class = "text-danger"})
                     </div>
                     <p class="clr-grey" style="line-height: 16px">
                         Before you leave, please tell us why you'd like to deactivate your Redfoodie account.
                         This information will help us improve. <span style="color: #aeaeae;">(optional)</span>
                     </p>
-                    <button id="btn-account-deactivate" class="button small-btn"><span>Submit</span></button>
+                    <button id="btn-account-deactivate" class="button"><span>Submit</span></button>
+                    @* ReSharper restore UnknownCssClass *@
                 }
             </div>
         </section>

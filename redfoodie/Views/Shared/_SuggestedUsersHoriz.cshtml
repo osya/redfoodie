@@ -16,6 +16,7 @@
                 }
             </div>
             <div class="button followed @(user.Follow ? "following": "follow")" data-prototype="@user.UserName.ToLower()" data-follow-status=@(user.Follow? "follow": "unfollow")>
+                @* ReSharper disable once Html.IdNotResolved *@
                 @if (Request.IsAuthenticated)
                 {
                     @Ajax.ActionLink(user.Follow ? "Following" : "Follow", "Follow", "Manage", new { userId = user.Id }, new AjaxOptions { HttpMethod = "POST", OnBegin = "$(this).parent().loadingIcon('attach');", OnSuccess = "followSuccess" }, new { @class = "anim-top pos_relative" })

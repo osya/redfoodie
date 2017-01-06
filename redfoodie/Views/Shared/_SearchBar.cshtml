@@ -50,8 +50,9 @@
     </div>
     <!-- msrch-dpdwn -->
     <div class="msrch-dpdwn" id="msdpdwn2">
+        @* ReSharper disable once UnknownCssClass *@
         <div class="sitem allOfCity">All of @((Session["currentCity"] as City)?.Name)</div>
-        <div class="locauto shareLocation" data-icon="i" onclick="geoFindMe();">
+        <div class="locauto" data-icon="i" onclick="geoFindMe();">
             Detect Current Location<span style="margin-left: @(toolbarSearchBar ? "108" : "97")px;">@if (!toolbarSearchBar)
             {<i></i>}</span>
             @if (toolbarSearchBar)
@@ -285,7 +286,8 @@
         }
     });
     $(document).keydown(function (e) {
-        var focusedEle = '';
+        // ReSharper disable once AssignedValueIsNeverUsed
+        var focusedEle = "";
         if ($('#searchTxt').is(':focus') || $('#searchTxtLoc').is(':focus')) {
             if (e.keyCode === 40) {
                 if ($("div.msrch-dpdwn:visible li.active").length) {
@@ -334,7 +336,7 @@
                 longitude: longitude
             }, function (data) {
                 var result = data.Object;
-                if (!$.isEmptyObject(result)) {e
+                if (!$.isEmptyObject(result)) {
                     console.log("cityID" + CITY_ID);
                     console.log("=" + result["City"]["Id"]);
 //                    Includes used here instead of == because ReverseGeocoder() returns "Delhi", but "DElhiNCR" used in this app

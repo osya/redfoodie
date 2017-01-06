@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Log in";
 }
+@* ReSharper disable UnknownCssClass *@
 <div data-modal-content-container="1" data-modal-wrapper-class="width_350" class="hide login_wrapper" id="login">
     <h3 class="form-signin-heading">@ViewBag.Title</h3>
     <div class="row facebook-link-storage">
@@ -35,6 +36,7 @@
                         @Html.LabelFor(m => m.RememberMe, new { style = "font-weight: normal;" })
                     </div>
                     <div class="col-md-6">
+                        @* ReSharper disable once Html.IdNotResolved *@
                         <a style = "font-size: 15px;" data-modal-link="1" href="#Forgot-Password">Forgot password?</a>
                     </div>
                 </div>
@@ -42,7 +44,9 @@
         </div>
     </div>
     <hr class="login_wrapper_hr">
+    @* ReSharper restore UnknownCssClass *@
     <div class="row">
+        @* ReSharper disable once Html.IdNotResolved *@
         <a data-modal-link="1" href="#Signup">Sign up now »</a>
     </div>
 </div>

@@ -1,0 +1,11 @@
+{
+    "version": "1.0.0",
+    "name": "asp.net",
+    "private": true,
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-less": "3.3.0",
+    "gulp-postcss": "6.2.0",
+    "autoprefixer": "6.6.0"
+  }
+}

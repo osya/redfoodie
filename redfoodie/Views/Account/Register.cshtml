@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Sign Up";
 }
+@* ReSharper disable UnknownCssClass *@
 <div id="Signup" data-modal-content-container="1" data-modal-wrapper-class="width_350" class="hide login_wrapper">
     <h3 class="form-signin-heading">@ViewBag.Title</h3>
     <div class="row facebook-link-storage">
@@ -40,7 +41,9 @@
         </div>
     </div>
     <hr class="login_wrapper_hr">
+    @* ReSharper restore UnknownCssClass *@
     <div class="row">
+        @* ReSharper disable once Html.IdNotResolved *@
         Already have an account? <a data-modal-link="1" href="#login">Log in now »</a>
     </div>
 </div>

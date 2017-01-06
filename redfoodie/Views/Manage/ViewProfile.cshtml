@@ -4,11 +4,13 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Styles.Render("~/Content/view-profile/css")
-<div class="clearfix font_roman pad_110 globalwidth clearfix">
+@Styles.Render("~/bundles/view-profile/css")
+@* ReSharper disable UnknownCssClass *@
+<div class="clearfix pad_110 globalwidth clearfix">
 <div class="profile-left pull-left">
     <div class="img-wrap" style="margin: 0 auto;">
         <div class="profile-image">
+            @* ReSharper disable Html.IdNotResolved *@
             <a data-modal-link="1" href="#imagePopup" id="image-uploading"><img src="@Url.Content(Model.User.ImageFullFileName)" height="146" width="146" alt="@Model.User.UserName" title="@Model.User.UserName"><span>Change Profile Image</span></a>
         </div>
     </div>
@@ -16,7 +18,7 @@
         <div class="profile-info">
             <a class="name" href="#" data-sc-user-profile="username" title="@Model.User.UserName">@Model.User.UserName</a>
             <div class="profile-dtail">
-                <span class="fa fa-map-marker tooltipclass" data-toggle="tooltip" data-original-title="home location" style="margin: 0;font-size: 18px;"></span>
+                <span class="fa fa-map-marker" data-toggle="tooltip" data-original-title="home location" style="margin: 0; font-size: 18px;"></span>
                 <span>@Model.User.City.Name</span>
                 <div class="links clearfix style-01">
                     @if (Request.IsAuthenticated)
@@ -67,8 +69,8 @@
                 </ul>
             </div>
             <div class="profile-wrap">
-                <div class="profile-dtail" style="border-bottom:none; padding-top: 20px">
-                    <span class="fa fa-clock-o tooltipclass" data-toggle="tooltip" data-original-title="Started using Redfoodie Nov 08, 2016"></span><span style="vertical-align: top;">Redfoodie since Nov 2016</span>
+                <div class="profile-dtail" style="border-bottom: none; padding-top: 20px">
+                    <span class="fa fa-clock-o" data-toggle="tooltip" data-original-title="Started using Redfoodie Nov 08, 2016"></span><span style="vertical-align: top;">Redfoodie since Nov 2016</span>
                 </div>
             </div>
         </div>
@@ -77,10 +79,10 @@
 <div class="profile-center pull-left">
 <div class="prof-dtail clearfix ">
 <div class="nav-top">
-    <ul class="nav nav-tabs rest_tab clearfix user-tabs  nav-justified">
+    <ul class="nav nav-tabs rest_tab clearfix nav-justified">
         <li class="active"><a data-toggle="tab" href="#reviews"><strong>0</strong><br>Review</a></li>
         <li><a data-toggle="tab" href="#photos" data-hasclicked="false"><strong>0</strong><br>Photos</a></li>
-        <li><a data-toggle="tab" data-hasclicked="false" href="#networks"><strong class="follower-count">@Model.Followers.Count</strong><br>Followers</a></li>
+        <li><a data-toggle="tab" data-hasclicked="false" href="#networks"><strong>@Model.Followers.Count</strong><br>Followers</a></li>
         <li><a data-toggle="tab" data-hasclicked="false" href="#wishlist"><strong>0</strong><br>Bookmarks</a></li>
         <li><a data-toggle="tab" data-hasclicked="false" href="#likes"><strong>@Model.Likes</strong><br>Likes</a></li>
         <li><a data-toggle="tab" data-hasclicked="false" href="#stats"><strong>0</strong><br>Points</a></li>
@@ -94,14 +96,14 @@
 <div id="reviews" class="tab-pane fade in active">
     <div class="top-head clearfix">
         <span class="pull-left large" style="color: #8D8D8D;"></span>
-        <div class="pull-right small reviews-small">
+        <div class="pull-right small">
             <a href="#overview-reviews" data-toggle="tab" id="user-reviews" class="active">ReviewTextTexts<span class="arrow_box"></span></a>
             <a href="#overview-ratings" data-toggle="tab" data-hasclicked="false" id="user-ratings">Likes/Dislikes<span class="arrow_box"></span></a>
         </div>
     </div>
 
     <div class="tab-content">
-        <div id="overview-reviews" class="tab-pane user-reviews-all active" style="min-height:200px;">
+        <div id="overview-reviews" class="tab-pane active" style="min-height:200px;">
 
             <div class="" id="user-restaurant-review-listing">
                 <div class="no-networks">
@@ -114,7 +116,7 @@
 
         <div id="overview-ratings" class="tab-pane">
 
-            <div class="profile_networks-2 user-ratings-all clearfix" style="min-height:200px;">
+            <div class="profile_networks-2 clearfix" style="min-height:200px;">
                 <div id="user-restaurant-rating-listing" class="profile-dsc">
                 </div>
                 <div class="load_more" style="display:block;float:left;width:100%;padding:20px;">
@@ -128,34 +130,34 @@
 <div id="networks" class="tab-pane fade">
     <div class="top-head clearfix">
         <span class="pull-left large" style="color: #8D8D8D;">User Networks</span>
-        <div class="pull-right small networks-small">
+        <div class="pull-right small ">
             <a href="#network-user-followers" data-toggle="tab" id="user-profile-followers" class="active">Followers @Model.Followers.Count<span class="arrow_box"></span></a>
             <a href="#network-user-following" data-toggle="tab" data-hasclicked="false" id="user-profile-followings">Followings @Model.Followings.Count<span class="arrow_box"></span></a>
         </div>
     </div>
     <div class="user-networks tab-content">
-        <div class="tab-pane active" id="network-user-followers">
+        <div class="tab-pane active">
             <div class="profile_networks-1  clearfix" id="network-user-followers" style="height:200px;padding: 10px 20px">
                 <div class="profile_followers style-01" style="display: block;">
                     @foreach (var user in Model.Followers)
                     {
                         <div class="user-details-wrapper">
                             <figure class="user-image">
-                                <a href=@Url.Action("ViewProfile", "Manage", new { userId = user.Id })>
+                                <a href=@Url.Action("ViewProfile", "Manage", new {userId = user.Id})>
                                     <img src=@Url.Content(user.ImageFullFileName) alt="@user.UserName" title="@user.UserName">
                                 </a>
                             </figure>
                             <div class="user-details">
                                 <div class="user-name">
-                                    <a title=@user.UserName href=@Url.Action("ViewProfile", "Manage", new { userId = user.Id })>
+                                    <a title=@user.UserName href=@Url.Action("ViewProfile", "Manage", new {userId = user.Id})>
                                         @user.UserName
                                     </a>
                                 </div>
                                 <div class="clearfix user-rank">
-                                    <div class="button pull-left followed @(user.Follow ? "following": "follow")" data-prototype="@user.UserName.ToLower()" data-follow-status=@(user.Follow? "follow": "unfollow")>
+                                    <div class="button pull-left followed @(user.Follow ? "following" : "follow")" data-prototype="@user.UserName.ToLower()" data-follow-status=@(user.Follow ? "follow" : "unfollow")>
                                         @if (Request.IsAuthenticated)
                                         {
-                                            @Ajax.ActionLink(user.Follow ? "Following" : "Follow", "Follow", "Manage", new { userId = user.Id }, new AjaxOptions { HttpMethod = "POST", OnBegin = "$(this).parent().loadingIcon('attach');", OnSuccess = "followSuccess" }, new { @class = "anim-top pos_relative" })
+                                            @Ajax.ActionLink(user.Follow ? "Following" : "Follow", "Follow", "Manage", new {userId = user.Id}, new AjaxOptions {HttpMethod = "POST", OnBegin = "$(this).parent().loadingIcon('attach');", OnSuccess = "followSuccess"}, new {@class = "anim-top pos_relative"})
                                         }
                                         else
                                         {
@@ -179,25 +181,26 @@
                     {
                         <div class="user-details-wrapper">
                             <figure class="user-image pull-left">
-                                <a href=@Url.Action("ViewProfile", "Manage", new { userId = user.Id })>
+                                <a href=@Url.Action("ViewProfile", "Manage", new {userId = user.Id})>
                                     <img src=@Url.Content(user.ImageFullFileName) alt="@user.UserName" title="@user.UserName">
                                 </a>
                             </figure>
                             <div class="user-details">
                                 <div class="user-name">
-                                    <a title="@user.UserName" href=@Url.Action("ViewProfile", "Manage", new { userId = user.Id })>
-                                            @user.UserName
+                                    <a title="@user.UserName" href=@Url.Action("ViewProfile", "Manage", new {userId = user.Id})>
+                                        @user.UserName
                                     </a>
                                 </div>
                                 <div class="clearfix user-rank">
-                                    <div class="button pull-left followed @(user.Follow ? "following": "follow")" data-prototype="@user.UserName.ToLower()" data-follow-status=@(user.Follow? "follow": "unfollow")>
+                                    <div class="button pull-left followed @(user.Follow ? "following" : "follow")" data-prototype="@user.UserName.ToLower()" data-follow-status=@(user.Follow ? "follow" : "unfollow")>
                                         @if (Request.IsAuthenticated)
                                         {
-                                            @Ajax.ActionLink(user.Follow ? "Following" : "Follow", "Follow", "Manage", new { userId = user.Id }, new AjaxOptions { HttpMethod = "POST", OnBegin = "$(this).parent().loadingIcon('attach');", OnSuccess = "followSuccess" }, new { @class = "anim-top pos_relative" })
+                                            @Ajax.ActionLink(user.Follow ? "Following" : "Follow", "Follow", "Manage", new {userId = user.Id}, new AjaxOptions {HttpMethod = "POST", OnBegin = "$(this).parent().loadingIcon('attach');", OnSuccess = "followSuccess"}, new {@class = "anim-top pos_relative"})
                                         }
                                         else
                                         {
                                             <a data-modal-link="1" class="anim-top pos_relative" href="#login" rel="login">Follow</a>
+                                            @* ReSharper restore Html.IdNotResolved *@
                                         }
                                     </div>
                                 </div>
@@ -219,7 +222,7 @@
     <div>
         <div class="user-photos-container clearfix" id="user-photos" style="/*width: 681px;*/height: 300px; padding: 20px 10px">
 
-            <ul id="user_profile_photos" class="restaurant-review-images list-unstyled photo_thumb clearfix"></ul>
+            <ul id="user_profile_photos" class="list-unstyled photo_thumb clearfix"></ul>
 
             <div class="load_more" style="display: block; float: left; width: 100%">
                 <a class="btn anim-top mgn_t10" style="display: none;"> LOAD MORE <span class="load-more-count"></span></a>
@@ -230,37 +233,35 @@
 </div>
 
 <div id="likes" class="tab-pane fade">
-    <div class="user-favorites">
-        <div class="user-likes clearfix" id="user-likes" style="height: 300px; padding: 20px">
-            <div class="user_profile_lkes" style="display: block;">
-                @foreach (var restaurant in Model.LikesRestaurant)
-                {
-                    <div class="clearfix user-restaurant-review">
-                        <figure class="user-image pull-left  restaurant-review-logo">
-                            <a href=@Url.Action("Details", "Restaurant", new { restaurantId = restaurant.Id })>
-                                <img src=@Url.Content(restaurant.ImageFullFileName) alt="@restaurant.Name" title="@restaurant.Name">
-                            </a>
-                        </figure>
-                        <div class="user-details">
-                            <div class="user-name">
-                                @Html.ActionLink(@restaurant.Name, "Details", "Restaurant", new { restaurantId = restaurant.Id }, new { @class="restaurant-name" })
-                            </div>
-                            <div class="user-stats">
-                                <span class="user-stat restaurant-locality">
-                                    @Html.ActionLink(restaurant.Place.Name, "Index", "Restaurant", new RestaurantSearchViewModel { PlaceId = restaurant.Place.Id}, null),
-                                    @Html.ActionLink(restaurant.Place.City.Name, "Index", "Restaurant", new RestaurantSearchViewModel { CityId = restaurant.Place.City.Id }, null),
-                                </span>
-                            </div>
-                            <div class="user-stats user-like restaurant-rating" data-prototype="cuisines">
-                                <p class=@restaurant.HeartClass>@restaurant.PercentRate%</p>
-                            </div>
+    <div class="user-likes clearfix" id="user-likes" style="height: 300px; padding: 20px">
+        <div class="user_profile_lkes" style="display: block;">
+            @foreach (var restaurant in Model.LikesRestaurant)
+            {
+                <div class="clearfix user-restaurant-review">
+                    <figure class="user-image pull-left  restaurant-review-logo">
+                        <a href=@Url.Action("Details", "Restaurant", new { restaurantId = restaurant.Id })>
+                            <img src=@Url.Content(restaurant.ImageFullFileName) alt="@restaurant.Name" title="@restaurant.Name">
+                        </a>
+                    </figure>
+                    <div class="user-details">
+                        <div class="user-name">
+                            @Html.ActionLink(@restaurant.Name, "Details", "Restaurant", new { restaurantId = restaurant.Id }, new { @class="restaurant-name" })
+                        </div>
+                        <div class="user-stats">
+                            <span class="user-stat restaurant-locality">
+                                @Html.ActionLink(restaurant.Place.Name, "Index", "Restaurant", new RestaurantSearchViewModel {PlaceId = restaurant.Place.Id}, null),
+                                @Html.ActionLink(restaurant.Place.City.Name, "Index", "Restaurant", new RestaurantSearchViewModel {CityId = restaurant.Place.City.Id}, null),
+                            </span>
+                        </div>
+                        <div class="user-stats user-like restaurant-rating" data-prototype="cuisines">
+                            <p class=@restaurant.HeartClass>@restaurant.PercentRate%</p>
                         </div>
                     </div>
-                }
-            </div>
-            <div class="load_more" style="display: block; float: left; width: 100%">
-                <a class="btn anim-top mgn_t10" style="display: none;"> LOAD MORE <span class="load-more-count"></span></a>
-            </div>
+                </div>
+            }
+        </div>
+        <div class="load_more" style="display: block; float: left; width: 100%">
+            <a class="btn anim-top mgn_t10" style="display: none;"> LOAD MORE <span class="load-more-count"></span></a>
         </div>
     </div>
 </div>
@@ -274,14 +275,15 @@
 </div>
 <div id="myModalRF">
     <div aria-hidden="false" aria-labelledby="mySmallModalLabel" role="dialog" tabindex="-1" class="modal fade myModalRF-BP in" style="display: none;">
+        @* ReSharper restore UnknownCssClass *@
         <div class="modal-dialog modal-sm" style="width: 285px;">
             <div class="modal-content" style="border-radius: 0;">
 
                 <div class="modal-header">
                     <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                    <h4 id="mySmallModalLabel" class="modal-title">People who useful this</h4>
+                    <h4 class="modal-title">People who useful this</h4>
                 </div>
-                <div class="modal-body clearfix pad_t12" style="max-height: 300px;overflow: auto;">
+                <div class="modal-body clearfix pad_t12" style="max-height: 300px; overflow: auto;">
 
                 </div>
             </div><!-- /.modal-content -->
@@ -295,7 +297,7 @@
 
                 <div class="modal-header">
                     <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                    <h3 id="mySmallModalLabel" class="modal-title">Edit your review</h3>
+                    <h3 class="modal-title">Edit your review</h3>
                 </div>
                 <div class="modal-body clearfix pad_t12">
                 </div>
@@ -309,7 +311,7 @@
     <script>
         $(document).ready(function($) {
             $('.profile-dtail .tooltipclass').tooltip({ 'placement': 'bottom' });
-            $('#user-profile-followings').on('click', function (e) {
+            $('#user-profile-followings').on('click', function () {
                 $(this).addClass('active');
                 $('.networks-small').find('a').not('#' + $(this).attr('id')).removeClass('active');
             });

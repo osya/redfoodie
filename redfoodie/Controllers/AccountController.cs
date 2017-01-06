@@ -234,7 +234,7 @@ namespace redfoodie.Controllers
             string body;
             using (var sr = new StreamReader(Server.MapPath("\\Views\\ResetPasswordEmail.cshtml")))
             {
-                body = Engine.Razor.RunCompile(sr.ReadToEnd(), "ResetPasswordEmail", typeof(ForgootPasswordEmailViewModel), new ForgootPasswordEmailViewModel { CallbackUrl = callbackUrl});
+                body = Engine.Razor.RunCompile(sr.ReadToEnd(), "ResetPasswordEmail", typeof(ForgootPasswordEmailViewModel), new ForgootPasswordEmailViewModel { CallbackUrl = callbackUrl, Username = user.UserName});
             }
             await UserManager.SendEmailAsync(user.Id, "Redfoodie Password Reset", body);
             return Json(JsonResponseFactory.SuccessResponse());

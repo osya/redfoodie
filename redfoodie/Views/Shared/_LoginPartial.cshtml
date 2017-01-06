@@ -44,8 +44,9 @@
         <div class="user-dropdown dropdown-menu">
             <div class="arrow_box"></div>
             <div class="">
+                @* ReSharper disable once Html.IdNotResolved *@
                 <a data-modal-link="1" class="message-popup-link clr-grey" href="#message" rel="message">New message</a>
-                <div style="max-height: 296.85px; text-align: center;padding: 10px " class="tabContents">
+                <div style="max-height: 296.85px; text-align: center; padding: 10px;">
                     <img src="/Content/collections/imgs/message.svg" style="width: 75%;height:100%;display: block;margin: 20px auto" alt="message">
                     <strong>Send messages to your friends!</strong><br>
                     Plan dine-out, swap ideas and share your best discoveries.
@@ -57,7 +58,9 @@
 else
 {
     <ul class="nav nav-pills">
+        @* ReSharper disable Html.IdNotResolved *@
         <li><a data-modal-link="1" class="navbar-link" href="#login" rel="login" id="user-login">Login</a></li>       
         <li><a data-modal-link="1" class="navbar-link" href="#Signup" id="registerLink">Sign up</a></li>       
+        @* ReSharper restore Html.IdNotResolved *@
     </ul>
 }

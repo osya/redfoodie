@@ -1,0 +1,18 @@
+{
+  "packages": {
+    "jquery-noty": {
+      "path": "Scripts",
+      "version": "2.3.11",
+      "files": [
+        "packaged/jquery.noty.packaged.js"
+      ]
+    },
+    "selectize.js": {
+      "path": "Scripts",
+      "version": "0.12.4",
+      "files": [
+        "js/selectize.js"
+      ]
+    }
+  }
+}
