@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -32,7 +31,7 @@ namespace redfoodie
             };
             transmission.Recipients.Add(recipient);
 
-            var client = new Client(WebConfigurationManager.AppSettings["SparkPost:Password"]);
+            var client = new Client(Environment.GetEnvironmentVariable("Redfoodie_SparkPost_Password"));
             return client.Transmissions.Send(transmission);
         }
     }

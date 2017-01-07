@@ -1,10 +1,9 @@
-﻿@using System.Web.Configuration
-@using redfoodie.Models
+﻿@using redfoodie.Models
 @model RestaurantViewModel
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var googleApiKey = WebConfigurationManager.AppSettings["Google:ApiKey"];
+    var googleApiKey = Environment.GetEnvironmentVariable("Redfoodie_Google_ApiKey");
 }
 @Styles.Render("~/bundles/restaurant-details/css")
 

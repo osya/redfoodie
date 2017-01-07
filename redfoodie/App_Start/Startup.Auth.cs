@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -60,8 +59,8 @@ namespace redfoodie
 
             var fbOptions = new FacebookAuthenticationOptions
             {
-                AppId = WebConfigurationManager.AppSettings["Facebook:AppId"],
-                AppSecret = WebConfigurationManager.AppSettings["Facebook:AppSecret"],
+                AppId = Environment.GetEnvironmentVariable("Redfoodie_Facebook_AppId"),
+                AppSecret = Environment.GetEnvironmentVariable("Redfoodie_Facebook_AppSecret"),
                 Provider = new FacebookAuthenticationProvider
                 {
                     OnAuthenticated = context =>
