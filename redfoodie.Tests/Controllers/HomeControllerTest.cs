@@ -129,7 +129,7 @@ namespace redfoodie.Tests.Controllers
                 var cuisinesQueriableList = Commons.CuisineList.Select(c => new Cuisine { Id = Commons.GetStringId(c), Name = c }).AsQueryable();
 
                 // Force DbSet to return the IQueryable members of our converted list object as its data source
-                var mockCuisines = new Mock<DbSet<Cuisine>>();
+//                var mockCuisines = new Mock<DbSet<Cuisine>>();
 //                mockCuisines.As<IDbAsyncEnumerable<Cuisine>>().Setup(m => m.GetAsyncEnumerator())
 //                    .Returns(new AsyncEnumerator<Cuisine>(cuisinesQueriableList.GetEnumerator()));
 //                mockCuisines.As<IQueryable<Cuisine>>().Setup(m => m.Provider)
