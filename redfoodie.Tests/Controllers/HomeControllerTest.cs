@@ -103,14 +103,14 @@ namespace redfoodie.Tests.Controllers
 
                 // Force DbSet to return the IQueryable members of our converted list object as its data source
                 var mockCities = new Mock<DbSet<City>>();
-                mockCities.As<IDbAsyncEnumerable<City>>().Setup(m => m.GetAsyncEnumerator())
-                    .Returns(new AsyncEnumerator<City>(citiesQueriableList.GetEnumerator()));
-                mockCities.As<IQueryable<City>>().Setup(m => m.Provider)
-                    .Returns(new AsyncQueryProvider<City>(citiesQueriableList.Provider));
-                mockCities.As<IQueryable<City>>().Setup(m => m.Expression).Returns(citiesQueriableList.Expression);
-                mockCities.As<IQueryable<City>>().Setup(m => m.ElementType).Returns(citiesQueriableList.ElementType);
-                mockCities.As<IQueryable<City>>().Setup(m => m.GetEnumerator()).Returns(citiesQueriableList.GetEnumerator());
-                mockCities.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => Cities.FirstOrDefault(d => Equals(d.Id, ids[0])));
+//                mockCities.As<IDbAsyncEnumerable<City>>().Setup(m => m.GetAsyncEnumerator())
+//                    .Returns(new AsyncEnumerator<City>(citiesQueriableList.GetEnumerator()));
+//                mockCities.As<IQueryable<City>>().Setup(m => m.Provider)
+//                    .Returns(new AsyncQueryProvider<City>(citiesQueriableList.Provider));
+//                mockCities.As<IQueryable<City>>().Setup(m => m.Expression).Returns(citiesQueriableList.Expression);
+//                mockCities.As<IQueryable<City>>().Setup(m => m.ElementType).Returns(citiesQueriableList.ElementType);
+//                mockCities.As<IQueryable<City>>().Setup(m => m.GetEnumerator()).Returns(citiesQueriableList.GetEnumerator());
+//                mockCities.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => Cities.FirstOrDefault(d => Equals(d.Id, ids[0])));
 
 //                // Create a list of places
 //                var placesQueriableList = Places.AsQueryable();
