@@ -98,33 +98,33 @@ namespace redfoodie.Tests.Controllers
                 mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.ElementType).Returns(usersQueriableList.ElementType);
                 mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.GetEnumerator()).Returns(usersQueriableList.GetEnumerator());
 
-//                // Create a list of cities
-//                var citiesQueriableList = Cities.AsQueryable();
-//
-//                // Force DbSet to return the IQueryable members of our converted list object as its data source
-//                var mockCities = new Mock<DbSet<City>>();
-//                mockCities.As<IDbAsyncEnumerable<City>>().Setup(m => m.GetAsyncEnumerator())
-//                    .Returns(new AsyncEnumerator<City>(citiesQueriableList.GetEnumerator()));
-//                mockCities.As<IQueryable<City>>().Setup(m => m.Provider)
-//                    .Returns(new AsyncQueryProvider<City>(citiesQueriableList.Provider));
-//                mockCities.As<IQueryable<City>>().Setup(m => m.Expression).Returns(citiesQueriableList.Expression);
-//                mockCities.As<IQueryable<City>>().Setup(m => m.ElementType).Returns(citiesQueriableList.ElementType);
-//                mockCities.As<IQueryable<City>>().Setup(m => m.GetEnumerator()).Returns(citiesQueriableList.GetEnumerator());
-//                mockCities.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => Cities.FirstOrDefault(d => Equals(d.Id, ids[0])));
-//
-//                // Create a list of places
-//                var placesQueriableList = Places.AsQueryable();
-//
-//                // Force DbSet to return the IQueryable members of our converted list object as its data source
-//                var mockPlaces = new Mock<DbSet<Place>>();
-//                mockPlaces.As<IDbAsyncEnumerable<Place>>().Setup(m => m.GetAsyncEnumerator())
-//                    .Returns(new AsyncEnumerator<Place>(placesQueriableList.GetEnumerator()));
-//                mockPlaces.As<IQueryable<Place>>().Setup(m => m.Provider)
-//                    .Returns(new AsyncQueryProvider<Place>(placesQueriableList.Provider));
-//                mockPlaces.As<IQueryable<Place>>().Setup(m => m.Expression).Returns(placesQueriableList.Expression);
-//                mockPlaces.As<IQueryable<Place>>().Setup(m => m.ElementType).Returns(placesQueriableList.ElementType);
-//                mockPlaces.As<IQueryable<Place>>().Setup(m => m.GetEnumerator()).Returns(placesQueriableList.GetEnumerator());
-//
+                // Create a list of cities
+                var citiesQueriableList = Cities.AsQueryable();
+
+                // Force DbSet to return the IQueryable members of our converted list object as its data source
+                var mockCities = new Mock<DbSet<City>>();
+                mockCities.As<IDbAsyncEnumerable<City>>().Setup(m => m.GetAsyncEnumerator())
+                    .Returns(new AsyncEnumerator<City>(citiesQueriableList.GetEnumerator()));
+                mockCities.As<IQueryable<City>>().Setup(m => m.Provider)
+                    .Returns(new AsyncQueryProvider<City>(citiesQueriableList.Provider));
+                mockCities.As<IQueryable<City>>().Setup(m => m.Expression).Returns(citiesQueriableList.Expression);
+                mockCities.As<IQueryable<City>>().Setup(m => m.ElementType).Returns(citiesQueriableList.ElementType);
+                mockCities.As<IQueryable<City>>().Setup(m => m.GetEnumerator()).Returns(citiesQueriableList.GetEnumerator());
+                mockCities.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => Cities.FirstOrDefault(d => Equals(d.Id, ids[0])));
+
+                // Create a list of places
+                var placesQueriableList = Places.AsQueryable();
+
+                // Force DbSet to return the IQueryable members of our converted list object as its data source
+                var mockPlaces = new Mock<DbSet<Place>>();
+                mockPlaces.As<IDbAsyncEnumerable<Place>>().Setup(m => m.GetAsyncEnumerator())
+                    .Returns(new AsyncEnumerator<Place>(placesQueriableList.GetEnumerator()));
+                mockPlaces.As<IQueryable<Place>>().Setup(m => m.Provider)
+                    .Returns(new AsyncQueryProvider<Place>(placesQueriableList.Provider));
+                mockPlaces.As<IQueryable<Place>>().Setup(m => m.Expression).Returns(placesQueriableList.Expression);
+                mockPlaces.As<IQueryable<Place>>().Setup(m => m.ElementType).Returns(placesQueriableList.ElementType);
+                mockPlaces.As<IQueryable<Place>>().Setup(m => m.GetEnumerator()).Returns(placesQueriableList.GetEnumerator());
+
 //                // Create a list of cuisines
 //                var cuisinesQueriableList = Commons.CuisineList.Select(c => new Cuisine { Id = Commons.GetStringId(c), Name = c }).AsQueryable();
 //
