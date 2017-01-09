@@ -138,18 +138,18 @@ namespace redfoodie.Tests.Controllers
                 mockCuisines.As<IQueryable<Cuisine>>().Setup(m => m.ElementType).Returns(cuisinesQueriableList.ElementType);
                 mockCuisines.As<IQueryable<Cuisine>>().Setup(m => m.GetEnumerator()).Returns(cuisinesQueriableList.GetEnumerator());
 
-                // Create a list of restaurant groups
-                var restaurantGroupsQueriableList = Commons.RestaurantGroups.Select(g => new RestaurantGroup { Id = Commons.GetStringId(g.Key), Name = g.Key, ImageFileName = g.Value }).AsQueryable();
-
-                // Force DbSet to return the IQueryable members of our converted list object as its data source
-                var mockRestaurantGroups = new Mock<DbSet<RestaurantGroup>>();
-                mockRestaurantGroups.As<IDbAsyncEnumerable<RestaurantGroup>>().Setup(m => m.GetAsyncEnumerator())
-                    .Returns(new AsyncEnumerator<RestaurantGroup>(restaurantGroupsQueriableList.GetEnumerator()));
-                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.Provider)
-                    .Returns(new AsyncQueryProvider<RestaurantGroup>(restaurantGroupsQueriableList.Provider));
-                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.Expression).Returns(restaurantGroupsQueriableList.Expression);
-                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.ElementType).Returns(restaurantGroupsQueriableList.ElementType);
-                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.GetEnumerator()).Returns(restaurantGroupsQueriableList.GetEnumerator());
+//                // Create a list of restaurant groups
+//                var restaurantGroupsQueriableList = Commons.RestaurantGroups.Select(g => new RestaurantGroup { Id = Commons.GetStringId(g.Key), Name = g.Key, ImageFileName = g.Value }).AsQueryable();
+//
+//                // Force DbSet to return the IQueryable members of our converted list object as its data source
+//                var mockRestaurantGroups = new Mock<DbSet<RestaurantGroup>>();
+//                mockRestaurantGroups.As<IDbAsyncEnumerable<RestaurantGroup>>().Setup(m => m.GetAsyncEnumerator())
+//                    .Returns(new AsyncEnumerator<RestaurantGroup>(restaurantGroupsQueriableList.GetEnumerator()));
+//                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.Provider)
+//                    .Returns(new AsyncQueryProvider<RestaurantGroup>(restaurantGroupsQueriableList.Provider));
+//                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.Expression).Returns(restaurantGroupsQueriableList.Expression);
+//                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.ElementType).Returns(restaurantGroupsQueriableList.ElementType);
+//                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.GetEnumerator()).Returns(restaurantGroupsQueriableList.GetEnumerator());
 
 //                return new ApplicationDbContext { Users = mockUsers.Object, Cities = mockCities.Object, Places = mockPlaces.Object, Cuisines = mockCuisines.Object, RestaurantGroups = mockRestaurantGroups.Object };
                 return null;
