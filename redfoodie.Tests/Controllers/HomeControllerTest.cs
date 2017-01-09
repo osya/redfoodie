@@ -139,7 +139,7 @@ namespace redfoodie.Tests.Controllers
 //                mockCuisines.As<IQueryable<Cuisine>>().Setup(m => m.GetEnumerator()).Returns(cuisinesQueriableList.GetEnumerator());
 
 //                // Create a list of restaurant groups
-//                var restaurantGroupsQueriableList = Commons.RestaurantGroups.Select(g => new RestaurantGroup { Id = Commons.GetStringId(g.Key), Name = g.Key, ImageFileName = g.Value }).AsQueryable();
+                var restaurantGroupsQueriableList = Commons.RestaurantGroups.Select(g => new RestaurantGroup { Id = Commons.GetStringId(g.Key), Name = g.Key, ImageFileName = g.Value }).AsQueryable();
 //
 //                // Force DbSet to return the IQueryable members of our converted list object as its data source
 //                var mockRestaurantGroups = new Mock<DbSet<RestaurantGroup>>();
