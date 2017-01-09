@@ -78,8 +78,7 @@ namespace redfoodie.Tests.Controllers
             }
         }
 
-        [TestMethod]
-        public async Task RegisterByLoginPasswordTest()
+        private static async Task RegisterByLoginPasswordTest()
         {
             // Arrange
             var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
@@ -96,8 +95,7 @@ namespace redfoodie.Tests.Controllers
             Assert.AreEqual(DummyModel.UserName, user.UserName);
         }
 
-        [TestMethod]
-        public async Task RegisterExistedUserByLoginPasswordTest()
+        private static async Task RegisterExistedUserByLoginPasswordTest()
         {
             // Arrange
             var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
@@ -119,8 +117,7 @@ namespace redfoodie.Tests.Controllers
             }
         }
 
-        [TestMethod]
-        public async Task LoginTest()
+        private static async Task LoginTest()
         {
             // Arrange
             var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
@@ -135,8 +132,7 @@ namespace redfoodie.Tests.Controllers
             Assert.IsTrue((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
         }
 
-        [TestMethod]
-        public async Task LoginTestWithFailPassword()
+        private static async Task LoginTestWithFailPassword()
         {
             // Arrange
             var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
@@ -149,6 +145,15 @@ namespace redfoodie.Tests.Controllers
             // Assert
             Assert.IsNotNull(actual);
             Assert.IsFalse((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+        }
+
+        [TestMethod]
+        public async Task LoginByLoginPasswordTest()
+        {
+            await RegisterByLoginPasswordTest();
+            await LoginTest();
+            await LoginTestWithFailPassword();
+            await RegisterExistedUserByLoginPasswordTest();
         }
     }
 }

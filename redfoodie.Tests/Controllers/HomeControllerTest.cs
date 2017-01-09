@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using commons;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using redfoodie.Controllers;
 using redfoodie.Models;
@@ -18,6 +19,22 @@ namespace redfoodie.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
+        private static readonly List<City> Cities = new List<City>();
+        private static readonly List<Place> Places = new List<Place>();
+
+        public HomeControllerTest()
+        {
+            foreach (var city in Commons.CitiesPlaces)
+            {
+                var cityId = Commons.GetStringId(city.Key);
+                Cities.Add(new City { Id = cityId, Name = city.Key });
+                foreach (var place in city.Value)
+                {
+                    Places.Add(new Place { Name = place, CityId = cityId, Restaurants = new List<Restaurant>() });
+                }
+            }
+        }
+
         private class MockHttpSession : HttpSessionStateBase
         {
             private readonly Dictionary<string, object> _sessionDictionary = new Dictionary<string, object>();
@@ -28,19 +45,6 @@ namespace redfoodie.Tests.Controllers
                 set { _sessionDictionary[name] = value; }
             }
         }
-
-        private static readonly Random Rnd = new Random();
-
-        private static City[] Cities => new[]
-        {
-            new City {Id = "DelhiNCR", Name = "Delhi NCR"},
-            new City {Id = "Amritsar", Name = "Amritsar"},
-            new City {Id = "Chandigarh", Name = "Chandigarh"},
-            new City {Id = "Jaipur", Name = "Jaipur"},
-            new City {Id = "Ludhiana", Name = "Ludhiana"},
-            new City {Id = "Mumbai", Name = "Mumbai"},
-            new City {Id = "Pune", Name = "Pune"}
-        };
 
         private static ApplicationDbContext Db {
             get
@@ -81,17 +85,20 @@ namespace redfoodie.Tests.Controllers
 
                 foreach (var user in usersQueriableList)
                 {
-                    user.Votes = new List<Vote> { new Vote { UserId = user.Id, Value = Rnd.Next(100) < 50 } };
+                    user.Votes = new List<Vote> { new Vote { UserId = user.Id, Value = Commons.Rnd.Next(100) < 50 } };
                 }
 
                 // Force DbSet to return the IQueryable members of our converted list object as its data source
                 var mockUsers = new Mock<DbSet<ApplicationUser>>();
-                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.Provider).Returns(usersQueriableList.Provider);
+                mockUsers.As<IDbAsyncEnumerable<ApplicationUser>>().Setup(m => m.GetAsyncEnumerator())
+                    .Returns(new AsyncEnumerator<ApplicationUser>(usersQueriableList.GetEnumerator()));
+                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.Provider)
+                    .Returns(new AsyncQueryProvider<ApplicationUser>(usersQueriableList.Provider));
                 mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.Expression).Returns(usersQueriableList.Expression);
+                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.ElementType).Returns(usersQueriableList.ElementType);
                 mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.GetEnumerator()).Returns(usersQueriableList.GetEnumerator());
 
                 // Create a list of cities
-                
                 var citiesQueriableList = Cities.AsQueryable();
 
                 // Force DbSet to return the IQueryable members of our converted list object as its data source
@@ -105,7 +112,46 @@ namespace redfoodie.Tests.Controllers
                 mockCities.As<IQueryable<City>>().Setup(m => m.GetEnumerator()).Returns(citiesQueriableList.GetEnumerator());
                 mockCities.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => Cities.FirstOrDefault(d => Equals(d.Id, ids[0])));
 
-                return new ApplicationDbContext { Users = mockUsers.Object, Cities = mockCities.Object };
+                // Create a list of places
+                var placesQueriableList = Places.AsQueryable();
+
+                // Force DbSet to return the IQueryable members of our converted list object as its data source
+                var mockPlaces = new Mock<DbSet<Place>>();
+                mockPlaces.As<IDbAsyncEnumerable<Place>>().Setup(m => m.GetAsyncEnumerator())
+                    .Returns(new AsyncEnumerator<Place>(placesQueriableList.GetEnumerator()));
+                mockPlaces.As<IQueryable<Place>>().Setup(m => m.Provider)
+                    .Returns(new AsyncQueryProvider<Place>(placesQueriableList.Provider));
+                mockPlaces.As<IQueryable<Place>>().Setup(m => m.Expression).Returns(placesQueriableList.Expression);
+                mockPlaces.As<IQueryable<Place>>().Setup(m => m.ElementType).Returns(placesQueriableList.ElementType);
+                mockPlaces.As<IQueryable<Place>>().Setup(m => m.GetEnumerator()).Returns(placesQueriableList.GetEnumerator());
+
+                // Create a list of cuisines
+                var cuisinesQueriableList = Commons.CuisineList.Select(c => new Cuisine { Id = Commons.GetStringId(c), Name = c }).AsQueryable();
+
+                // Force DbSet to return the IQueryable members of our converted list object as its data source
+                var mockCuisines = new Mock<DbSet<Cuisine>>();
+                mockCuisines.As<IDbAsyncEnumerable<Cuisine>>().Setup(m => m.GetAsyncEnumerator())
+                    .Returns(new AsyncEnumerator<Cuisine>(cuisinesQueriableList.GetEnumerator()));
+                mockCuisines.As<IQueryable<Cuisine>>().Setup(m => m.Provider)
+                    .Returns(new AsyncQueryProvider<Cuisine>(cuisinesQueriableList.Provider));
+                mockCuisines.As<IQueryable<Cuisine>>().Setup(m => m.Expression).Returns(cuisinesQueriableList.Expression);
+                mockCuisines.As<IQueryable<Cuisine>>().Setup(m => m.ElementType).Returns(cuisinesQueriableList.ElementType);
+                mockCuisines.As<IQueryable<Cuisine>>().Setup(m => m.GetEnumerator()).Returns(cuisinesQueriableList.GetEnumerator());
+
+                // Create a list of restaurant groups
+                var restaurantGroupsQueriableList = Commons.RestaurantGroups.Select(g => new RestaurantGroup { Id = Commons.GetStringId(g.Key), Name = g.Key, ImageFileName = g.Value }).AsQueryable();
+
+                // Force DbSet to return the IQueryable members of our converted list object as its data source
+                var mockRestaurantGroups = new Mock<DbSet<RestaurantGroup>>();
+                mockRestaurantGroups.As<IDbAsyncEnumerable<RestaurantGroup>>().Setup(m => m.GetAsyncEnumerator())
+                    .Returns(new AsyncEnumerator<RestaurantGroup>(restaurantGroupsQueriableList.GetEnumerator()));
+                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.Provider)
+                    .Returns(new AsyncQueryProvider<RestaurantGroup>(restaurantGroupsQueriableList.Provider));
+                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.Expression).Returns(restaurantGroupsQueriableList.Expression);
+                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.ElementType).Returns(restaurantGroupsQueriableList.ElementType);
+                mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.GetEnumerator()).Returns(restaurantGroupsQueriableList.GetEnumerator());
+
+                return new ApplicationDbContext { Users = mockUsers.Object, Cities = mockCities.Object, Places = mockPlaces.Object, Cuisines = mockCuisines.Object, RestaurantGroups = mockRestaurantGroups.Object };
             }
         }
 
@@ -134,7 +180,7 @@ namespace redfoodie.Tests.Controllers
         }
 
         [TestMethod]
-        public async void Index()
+        public async Task Index()
         {
             // Arrange
             var controller = new HomeController { ControllerContext = ControllerContext, Db = Db};
@@ -147,11 +193,11 @@ namespace redfoodie.Tests.Controllers
         }
 
         [TestMethod]
-        public async void ChangeCity()
+        public async Task ChangeCity()
         {
             // Arrange
             var controller = new HomeController { ControllerContext = ControllerContext, Db = Db };
-            var curCity = Cities[Rnd.Next(Cities.Length)];
+            var curCity = Cities[Commons.Rnd.Next(Cities.Count)];
 
             // Act
             var result = await controller.Index(curCity.Id) as ViewResult;
@@ -203,7 +249,7 @@ namespace redfoodie.Tests.Controllers
                 new Tuple<double, double, string>(28.5280255, 77.2487134, "DelhiNCR")
             };
 
-            var controller = new HomeController { Db = Db };
+            var controller = new HomeController { ControllerContext = ControllerContext, Db = Db };
 
             foreach (var dataItem in testData)
             {

@@ -151,14 +151,15 @@
     <Content Include="queries.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="LoginByLoginPasswordTest.orderedtest">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\commons\commons.csproj">
+      <Project>{48e42f6d-b7c2-4165-9a27-eaebf5e9e58d}</Project>
+      <Name>commons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\redfoodie\redfoodie.csproj">
       <Project>{F8E657C6-5E9F-4ACB-BA1A-93089F5561C8}</Project>
       <Name>redfoodie</Name>

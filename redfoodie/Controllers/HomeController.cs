@@ -29,7 +29,7 @@ namespace redfoodie.Controllers
                 {
                     var currentCity = Db.Cities.Find("DelhiNCR");
                     Session["currentCity"] = currentCity;
-                    currentCityId = currentCity.Id;
+                    currentCityId = currentCity?.Id;
                 }
                 else
                 {
@@ -37,7 +37,7 @@ namespace redfoodie.Controllers
                     {
                         var currentCity = Db.Cities.Find(cityId);
                         Session["currentCity"] = currentCity;
-                        currentCityId = currentCity.Id;
+                        currentCityId = currentCity?.Id;
                     }
                     else
                     {
@@ -61,7 +61,7 @@ namespace redfoodie.Controllers
                 user = Db.Users.Find(User.Identity.GetUserId());
             }
 
-            var places = await Db.Places.Where(p => p.CityId == currentCityId && p.Restaurants.Any()).OrderByDescending(o => o.Restaurants.Count).Take(11).ToArrayAsync();
+            var places = await Db.Places.Where(p => string.Equals(p.CityId, currentCityId) && p.Restaurants.Any()).OrderByDescending(o => o.Restaurants.Count).Take(11).ToArrayAsync();
             if (Session != null)
             {
                 Session["popularLocations"] =
@@ -108,9 +108,9 @@ namespace redfoodie.Controllers
                 PlacesEven = places.Where((c, i) => i % 2 == 0).ToArray(),
                 RestaurantGroups = rgKeys.Select(key => Db.RestaurantGroups.Find(key)).Select(restaurantGroup => new RestaurantGroupViewModel
                 {
-                    Id = restaurantGroup.Id,
-                    Name = restaurantGroup.Name,
-                    ImageFullFileName = restaurantGroup.ImageFullFileName
+                    Id = restaurantGroup?.Id,
+                    Name = restaurantGroup?.Name,
+                    ImageFullFileName = restaurantGroup?.ImageFullFileName
                 }).ToArray()
             });
         }
@@ -153,7 +153,7 @@ namespace redfoodie.Controllers
             var locRev = (await geocoder.ReverseGeocodeAsync(latitude, longitude))
                 .Where(a => a.Type == GoogleAddressType.Political)
                 .LastOrDefault(a => a.Components.Any(c => c.Types.First() == GoogleAddressType.Locality))
-                ?.Components?.Take(2)?.Select(c => c.LongName);
+                ?.Components?.Take(2).Select(c => c.LongName);
             if (locRev == null) return Json(JsonResponseFactory.ErrorResponse("City not found"), JsonRequestBehavior.AllowGet);
             var locArr = locRev.ToArray();
             var cityId = locArr[1].Replace("New Delhi", "DelhiNCR");
