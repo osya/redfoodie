@@ -179,18 +179,18 @@ namespace redfoodie.Tests.Controllers
             }
         }
 
-        [TestMethod]
-        public async Task Index()
-        {
-            // Arrange
-            var controller = new HomeController { ControllerContext = ControllerContext, Db = Db};
-
-            // Act
-            var result = await controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
+//        [TestMethod]
+//        public async Task Index()
+//        {
+//            // Arrange
+//            var controller = new HomeController { ControllerContext = ControllerContext, Db = Db};
+//
+//            // Act
+//            var result = await controller.Index() as ViewResult;
+//
+//            // Assert
+//            Assert.IsNotNull(result);
+//        }
 
 //        [TestMethod]
 //        public async Task ChangeCity()
@@ -208,32 +208,32 @@ namespace redfoodie.Tests.Controllers
 //            Assert.AreEqual(curCity, controller.HttpContext.Session["currentCity"]);
 //        }
 
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            var controller = new HomeController();
+//        [TestMethod]
+//        public void About()
+//        {
+//            // Arrange
+//            var controller = new HomeController();
+//
+//            // Act
+//            var result = controller.About() as ViewResult;
+//
+//            // Assert
+//            Assert.IsNotNull(result);
+//            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+//        }
 
-            // Act
-            var result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            var controller = new HomeController();
-
-            // Act
-            var result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
+//        [TestMethod]
+//        public void Contact()
+//        {
+//            // Arrange
+//            var controller = new HomeController();
+//
+//            // Act
+//            var result = controller.Contact() as ViewResult;
+//
+//            // Assert
+//            Assert.IsNotNull(result);
+//        }
 
 //        [TestMethod]
 //        public async Task ReverseGeocode()
