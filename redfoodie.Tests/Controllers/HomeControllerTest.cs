@@ -125,8 +125,8 @@ namespace redfoodie.Tests.Controllers
                 mockPlaces.As<IQueryable<Place>>().Setup(m => m.ElementType).Returns(placesQueriableList.ElementType);
                 mockPlaces.As<IQueryable<Place>>().Setup(m => m.GetEnumerator()).Returns(placesQueriableList.GetEnumerator());
 
-                // Create a list of cuisines
-                var cuisinesQueriableList = Commons.CuisineList.Select(c => new Cuisine { Id = Commons.GetStringId(c), Name = c }).AsQueryable();
+//                // Create a list of cuisines
+//                var cuisinesQueriableList = Commons.CuisineList.Select(c => new Cuisine { Id = Commons.GetStringId(c), Name = c }).AsQueryable();
 
                 // Force DbSet to return the IQueryable members of our converted list object as its data source
 //                var mockCuisines = new Mock<DbSet<Cuisine>>();
