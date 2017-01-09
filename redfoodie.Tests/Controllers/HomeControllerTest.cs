@@ -151,7 +151,8 @@ namespace redfoodie.Tests.Controllers
                 mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.ElementType).Returns(restaurantGroupsQueriableList.ElementType);
                 mockRestaurantGroups.As<IQueryable<RestaurantGroup>>().Setup(m => m.GetEnumerator()).Returns(restaurantGroupsQueriableList.GetEnumerator());
 
-                return new ApplicationDbContext { Users = mockUsers.Object, Cities = mockCities.Object, Places = mockPlaces.Object, Cuisines = mockCuisines.Object, RestaurantGroups = mockRestaurantGroups.Object };
+//                return new ApplicationDbContext { Users = mockUsers.Object, Cities = mockCities.Object, Places = mockPlaces.Object, Cuisines = mockCuisines.Object, RestaurantGroups = mockRestaurantGroups.Object };
+                return null;
             }
         }
 
