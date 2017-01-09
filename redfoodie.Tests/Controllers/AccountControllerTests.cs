@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+//using Moq;
 using redfoodie.Controllers;
 using redfoodie.Models;
 
@@ -66,86 +66,86 @@ namespace redfoodie.Tests.Controllers
         }
         private static readonly RegisterViewModel DummyModel = new RegisterViewModel { Email = "my_email@ya.ru", UserName = "my_fullname", Password = "Aa123#" };
 
-        private static ControllerContext ControllerContext
-        {
-            get
-            {
-                var mockControllerContext = new Mock<ControllerContext>();
-                var mockSession = new Mock<HttpSessionStateBase>();
-                mockSession.SetupGet(s => s["currentCity"]).Returns(new City { Id = "DelhiNCR", Name = "Delhi NCR" });
-                mockControllerContext.Setup(p => p.HttpContext.Session).Returns(mockSession.Object);
-                return mockControllerContext.Object;
-            }
-        }
+//        private static ControllerContext ControllerContext
+//        {
+//            get
+//            {
+//                var mockControllerContext = new Mock<ControllerContext>();
+//                var mockSession = new Mock<HttpSessionStateBase>();
+//                mockSession.SetupGet(s => s["currentCity"]).Returns(new City { Id = "DelhiNCR", Name = "Delhi NCR" });
+//                mockControllerContext.Setup(p => p.HttpContext.Session).Returns(mockSession.Object);
+//                return mockControllerContext.Object;
+//            }
+//        }
 
-        private static async Task RegisterByLoginPasswordTest()
-        {
-            // Arrange
-            var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
-            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
+//        private static async Task RegisterByLoginPasswordTest()
+//        {
+//            // Arrange
+//            var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
+//            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
+//
+//            // Act
+//            var actual = await controller.Register(DummyModel);
+//
+//            // Assert
+//            Assert.IsNotNull(actual);
+//            Assert.IsTrue((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+//
+//            var user = UserManager.FindByName(DummyModel.UserName);
+//            Assert.AreEqual(DummyModel.UserName, user.UserName);
+//        }
 
-            // Act
-            var actual = await controller.Register(DummyModel);
+//        private static async Task RegisterExistedUserByLoginPasswordTest()
+//        {
+//            // Arrange
+//            var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
+//            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
+//
+//            // Act
+//            var actual = await controller.Register(DummyModel);
+//
+//            // Assert
+//            Assert.IsNotNull(actual);
+//            Assert.IsFalse((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+//
+//            var modelState = actual.Data.GetType().GetProperty("ModelState").GetValue(actual.Data, null);
+//            foreach (var el in (System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>)
+//                modelState)
+//            {
+//                var name = DummyModel.GetType().GetProperty(el.Key).GetValue(DummyModel, null);
+//                StringAssert.Matches(el.Value.First(), new Regex($"\\w '?{name}'? is already taken."));
+//            }
+//        }
 
-            // Assert
-            Assert.IsNotNull(actual);
-            Assert.IsTrue((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+//        private static async Task LoginTest()
+//        {
+//            // Arrange
+//            var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
+//            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
+//            var loginVm = new LoginViewModel { Email = DummyModel.Email, Password = DummyModel.Password};
+//
+//            // Act
+//            var actual = await controller.Login(loginVm);
+//
+//            // Assert
+//            Assert.IsNotNull(actual);
+//            Assert.IsTrue((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+//        }
 
-            var user = UserManager.FindByName(DummyModel.UserName);
-            Assert.AreEqual(DummyModel.UserName, user.UserName);
-        }
-
-        private static async Task RegisterExistedUserByLoginPasswordTest()
-        {
-            // Arrange
-            var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
-            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
-
-            // Act
-            var actual = await controller.Register(DummyModel);
-
-            // Assert
-            Assert.IsNotNull(actual);
-            Assert.IsFalse((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
-
-            var modelState = actual.Data.GetType().GetProperty("ModelState").GetValue(actual.Data, null);
-            foreach (var el in (System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>)
-                modelState)
-            {
-                var name = DummyModel.GetType().GetProperty(el.Key).GetValue(DummyModel, null);
-                StringAssert.Matches(el.Value.First(), new Regex($"\\w '?{name}'? is already taken."));
-            }
-        }
-
-        private static async Task LoginTest()
-        {
-            // Arrange
-            var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
-            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
-            var loginVm = new LoginViewModel { Email = DummyModel.Email, Password = DummyModel.Password};
-
-            // Act
-            var actual = await controller.Login(loginVm);
-
-            // Assert
-            Assert.IsNotNull(actual);
-            Assert.IsTrue((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
-        }
-
-        private static async Task LoginTestWithFailPassword()
-        {
-            // Arrange
-            var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
-            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
-            var loginVm = new LoginViewModel { Email = DummyModel.Email, Password = string.Empty };
-
-            // Act
-            var actual = await controller.Login(loginVm);
-
-            // Assert
-            Assert.IsNotNull(actual);
-            Assert.IsFalse((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
-        }
+//        private static async Task LoginTestWithFailPassword()
+//        {
+//            // Arrange
+//            var signInManager = new ApplicationSignInManager(UserManager, new Mock<IAuthenticationManager>().Object);
+//            var controller = new AccountController(UserManager, signInManager) { ControllerContext = ControllerContext };
+//            var loginVm = new LoginViewModel { Email = DummyModel.Email, Password = string.Empty };
+//
+//            // Act
+//            var actual = await controller.Login(loginVm);
+//
+//            // Assert
+//            Assert.IsNotNull(actual);
+//            Assert.IsFalse((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
+//        }
 
 //        [TestMethod]
 //        public async Task LoginByLoginPasswordTest()
