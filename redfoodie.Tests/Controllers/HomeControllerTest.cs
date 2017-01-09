@@ -89,15 +89,15 @@ namespace redfoodie.Tests.Controllers
                 }
 
                 // Force DbSet to return the IQueryable members of our converted list object as its data source
-//                var mockUsers = new Mock<DbSet<ApplicationUser>>();
-//                mockUsers.As<IDbAsyncEnumerable<ApplicationUser>>().Setup(m => m.GetAsyncEnumerator())
-//                    .Returns(new AsyncEnumerator<ApplicationUser>(usersQueriableList.GetEnumerator()));
-//                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.Provider)
-//                    .Returns(new AsyncQueryProvider<ApplicationUser>(usersQueriableList.Provider));
-//                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.Expression).Returns(usersQueriableList.Expression);
-//                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.ElementType).Returns(usersQueriableList.ElementType);
-//                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.GetEnumerator()).Returns(usersQueriableList.GetEnumerator());
-//
+                var mockUsers = new Mock<DbSet<ApplicationUser>>();
+                mockUsers.As<IDbAsyncEnumerable<ApplicationUser>>().Setup(m => m.GetAsyncEnumerator())
+                    .Returns(new AsyncEnumerator<ApplicationUser>(usersQueriableList.GetEnumerator()));
+                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.Provider)
+                    .Returns(new AsyncQueryProvider<ApplicationUser>(usersQueriableList.Provider));
+                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.Expression).Returns(usersQueriableList.Expression);
+                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.ElementType).Returns(usersQueriableList.ElementType);
+                mockUsers.As<IQueryable<ApplicationUser>>().Setup(m => m.GetEnumerator()).Returns(usersQueriableList.GetEnumerator());
+
 //                // Create a list of cities
 //                var citiesQueriableList = Cities.AsQueryable();
 //
