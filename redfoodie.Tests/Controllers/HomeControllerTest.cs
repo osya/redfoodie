@@ -192,21 +192,21 @@ namespace redfoodie.Tests.Controllers
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
-        public async Task ChangeCity()
-        {
-            // Arrange
-            var controller = new HomeController { ControllerContext = ControllerContext, Db = Db };
-            var curCity = Cities[Commons.Rnd.Next(Cities.Count)];
-
-            // Act
-            var result = await controller.Index(curCity.Id) as ViewResult;
-            
-            // Assert
-            Assert.IsNotNull(controller.HttpContext.Session);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(curCity, controller.HttpContext.Session["currentCity"]);
-        }
+//        [TestMethod]
+//        public async Task ChangeCity()
+//        {
+//            // Arrange
+//            var controller = new HomeController { ControllerContext = ControllerContext, Db = Db };
+//            var curCity = Cities[Commons.Rnd.Next(Cities.Count)];
+//
+//            // Act
+//            var result = await controller.Index(curCity.Id) as ViewResult;
+//            
+//            // Assert
+//            Assert.IsNotNull(controller.HttpContext.Session);
+//            Assert.IsNotNull(result);
+//            Assert.AreEqual(curCity, controller.HttpContext.Session["currentCity"]);
+//        }
 
         [TestMethod]
         public void About()
@@ -235,35 +235,35 @@ namespace redfoodie.Tests.Controllers
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
-        public async Task ReverseGeocode()
-        {
-            // Arrange
-            var testData = new[]
-            {
-                new Tuple<double, double, string>(31.6382146, 74.8660257, "Amritsar"),
-                new Tuple<double, double, string>(30.7333, 76.7794, "Chandigarh"),
-                new Tuple<double, double, string>(26.9124, 75.7873, "Jaipur"),
-                new Tuple<double, double, string>(30.8851301, 75.7953848, "Ludhiana"),
-                new Tuple<double, double, string>(19.0728300, 72.8826100, "Mumbai"),
-                new Tuple<double, double, string>(28.5280255, 77.2487134, "DelhiNCR")
-            };
-
-            var controller = new HomeController { ControllerContext = ControllerContext, Db = Db };
-
-            foreach (var dataItem in testData)
-            {
-                // Act
-                var result = await controller.ReverseGeocode(dataItem.Item1, dataItem.Item2);
-
-                // Assert
-                Assert.IsNotNull(result);
-                Assert.IsTrue((bool)result.Data.GetType().GetProperty("Success").GetValue(result.Data, null));
-
-                var objectValue = result.Data.GetType().GetProperty("Object").GetValue(result.Data, null);
-                var cityValue = objectValue.GetType().GetProperty("City").GetValue(objectValue, null);
-                Assert.AreEqual(cityValue.GetType().GetProperty("Id").GetValue(cityValue, null), dataItem.Item3);
-            }
-        }
+//        [TestMethod]
+//        public async Task ReverseGeocode()
+//        {
+//            // Arrange
+//            var testData = new[]
+//            {
+//                new Tuple<double, double, string>(31.6382146, 74.8660257, "Amritsar"),
+//                new Tuple<double, double, string>(30.7333, 76.7794, "Chandigarh"),
+//                new Tuple<double, double, string>(26.9124, 75.7873, "Jaipur"),
+//                new Tuple<double, double, string>(30.8851301, 75.7953848, "Ludhiana"),
+//                new Tuple<double, double, string>(19.0728300, 72.8826100, "Mumbai"),
+//                new Tuple<double, double, string>(28.5280255, 77.2487134, "DelhiNCR")
+//            };
+//
+//            var controller = new HomeController { ControllerContext = ControllerContext, Db = Db };
+//
+//            foreach (var dataItem in testData)
+//            {
+//                // Act
+//                var result = await controller.ReverseGeocode(dataItem.Item1, dataItem.Item2);
+//
+//                // Assert
+//                Assert.IsNotNull(result);
+//                Assert.IsTrue((bool)result.Data.GetType().GetProperty("Success").GetValue(result.Data, null));
+//
+//                var objectValue = result.Data.GetType().GetProperty("Object").GetValue(result.Data, null);
+//                var cityValue = objectValue.GetType().GetProperty("City").GetValue(objectValue, null);
+//                Assert.AreEqual(cityValue.GetType().GetProperty("Id").GetValue(cityValue, null), dataItem.Item3);
+//            }
+//        }
     }
 }

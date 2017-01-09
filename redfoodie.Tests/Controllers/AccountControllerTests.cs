@@ -147,13 +147,13 @@ namespace redfoodie.Tests.Controllers
             Assert.IsFalse((bool)actual.Data.GetType().GetProperty("Success").GetValue(actual.Data, null));
         }
 
-        [TestMethod]
-        public async Task LoginByLoginPasswordTest()
-        {
-            await RegisterByLoginPasswordTest();
-            await LoginTest();
-            await LoginTestWithFailPassword();
-            await RegisterExistedUserByLoginPasswordTest();
-        }
+//        [TestMethod]
+//        public async Task LoginByLoginPasswordTest()
+//        {
+//            await RegisterByLoginPasswordTest();
+//            await LoginTest();
+//            await LoginTestWithFailPassword();
+//            await RegisterExistedUserByLoginPasswordTest();
+//        }
     }
 }
