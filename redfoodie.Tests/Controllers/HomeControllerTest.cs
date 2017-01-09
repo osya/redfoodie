@@ -11,7 +11,7 @@ using commons;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using redfoodie.Controllers;
 using redfoodie.Models;
-//using Moq;
+using Moq;
 
 namespace redfoodie.Tests.Controllers
 {
