@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var googleApiKey = Environment.GetEnvironmentVariable("Redfoodie_Google_ApiKey");
+    var appHarborConfig = new AppHarborConfig();
+    var googleApiKey = appHarborConfig.Get("Redfoodie_Google_ApiKey");
 }
 @Styles.Render("~/bundles/restaurant-details/css")
 

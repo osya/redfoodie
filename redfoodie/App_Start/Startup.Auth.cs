@@ -57,10 +57,11 @@ namespace redfoodie
             //   consumerKey: "",
             //   consumerSecret: "");
 
+            var appHarborConfig = new AppHarborConfig();
             var fbOptions = new FacebookAuthenticationOptions
             {
-                AppId = Environment.GetEnvironmentVariable("Redfoodie_Facebook_AppId"),
-                AppSecret = Environment.GetEnvironmentVariable("Redfoodie_Facebook_AppSecret"),
+                AppId = appHarborConfig.Get("Redfoodie_Facebook_AppId"),
+                AppSecret = appHarborConfig.Get("Redfoodie_Facebook_AppSecret"),
                 Provider = new FacebookAuthenticationProvider
                 {
                     OnAuthenticated = context =>

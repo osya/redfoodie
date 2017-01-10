@@ -31,7 +31,8 @@ namespace redfoodie
             };
             transmission.Recipients.Add(recipient);
 
-            var client = new Client(Environment.GetEnvironmentVariable("Redfoodie_SparkPost_Password"));
+            var appHarborConfig = new AppHarborConfig();
+            var client = new Client(appHarborConfig.Get("Redfoodie_SparkPost_Password"));
             return client.Transmissions.Send(transmission);
         }
     }
