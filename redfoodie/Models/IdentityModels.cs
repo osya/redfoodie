@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlTypes;
 using System.IO;
@@ -65,7 +66,7 @@ namespace redfoodie.Models
     public sealed partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", false)
+            : base(Environment.ExpandEnvironmentVariables(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString), false)
         {
             Database.SetInitializer(new ApplicationDbInitializer());
         }
