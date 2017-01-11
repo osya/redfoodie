@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,7 +20,7 @@ namespace redfoodie
 
         protected void Application_Start()
         {
-            new LogEvent("message to myself").Raise();
+            new LogEvent(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()).Raise();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
