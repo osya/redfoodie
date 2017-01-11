@@ -56,7 +56,7 @@ namespace redfoodie.Models
                                 new Restaurant
                                 {
                                     Name = "Qubitos - The Terrace Cafe",
-                                    ImageFileName = "80x80_11817061_1621696381420078_8140013992622206840_n-qubitos-the-terrace-cafe-rajouri-garden-new-delhi-d7b7dd458721ce20daa4f4debad204b.jpg",
+                                    ImageFileName = "80x80_11817061_1621696381420078-qubitos-the-terrace-cafe-rajouri-garden-new-delhi.jpg",
                                     Location = CreatePoint(28.636326,77.12610700000005),
                                     Cuisines = new[] { context.Cuisines.Find("Chinese"), context.Cuisines.Find("European"), context.Cuisines.Find("Mexican"), context.Cuisines.Find("NorthIndian"), context.Cuisines.Find("Thai") },
                                     Groups = new[] {context.RestaurantGroups.Find("Rooftops") }
@@ -69,7 +69,7 @@ namespace redfoodie.Models
                                 new Restaurant
                                 {
                                     Name = "Starbucks",
-                                    ImageFileName = "80x80_150079_640496632666436_630408467_n-starbucks-greater-kailash-gk-2-new-delhi-be1ed8d6948346071d744a4e73ee79e7.jpg",
+                                    ImageFileName = "80x80_150079_640496632666436-starbucks-greater-kailash-gk-2-new-delhi.jpg",
                                     Location = CreatePoint(28.535360000000004,77.24210240370485),
                                     Cuisines = new[] { context.Cuisines.Find("Cafe") },
                                     Groups = new[] {context.RestaurantGroups.Find("Cafes") }
@@ -107,7 +107,7 @@ namespace redfoodie.Models
                                 new Restaurant
                                 {
                                     Name = "The Wine Company",
-                                    ImageFileName = "80x80_850632371_12812670517538516307-the-wine-company-dlf-cyber-city-gurgaon-d836a0b29b3f97ed84c146391a903fd5.jpg",
+                                    ImageFileName = "80x80_850632371-the-wine-company-dlf-cyber-city-gurgaon.jpg",
                                     Location = CreatePoint(28.496189943024365, 77.08889253743439),
                                     Cuisines = new[] { context.Cuisines.Find("European"), context.Cuisines.Find("Italian") },
                                     Groups = new[] {context.RestaurantGroups.Find("Trending"), context.RestaurantGroups.Find("BestBars") }
@@ -118,7 +118,7 @@ namespace redfoodie.Models
                             {
                                 new Restaurant {
                                     Name = "Rodeo",
-                                    ImageFileName = "80x80_IMG_20151201_151221098-rodeo-connaught-place-new-delhi-4e709125ffc4499be0f99fd7e683b5c9.jpg",
+                                    ImageFileName = "80x80_IMG_20151201-rodeo-connaught-place-new-delhi.jpg",
                                     Location = CreatePoint(28.633100127829337, 77.21808030608213),
                                     Cuisines = new[] { context.Cuisines.Find("Continental"), context.Cuisines.Find("Italian"), context.Cuisines.Find("Mexican"), context.Cuisines.Find("NorthIndian"), context.Cuisines.Find("TexMex") },
                                     Groups = new[] {context.RestaurantGroups.Find("Trending"), context.RestaurantGroups.Find("MexicanMagic") }
@@ -130,7 +130,7 @@ namespace redfoodie.Models
                                 new Restaurant
                                 {
                                     Name = "Capital Kitchen - Taj Palace Hotel",
-                                    ImageFileName = "80x80_14925471_10157806793365085_6999532131779578556_n-capital-kitchen-taj-palace-hotel-chanakyapuri-dff0fe8246e5b1b39279454475cc1.jpg",
+                                    ImageFileName = "80x80_14925471_10157806793365085-capital-kitchen-taj-palace-hotel-chanakyapuri.jpg",
                                     Location = CreatePoint(28.59196, 77.188775),
                                     Cuisines = new[] { context.Cuisines.Find("Asian"), context.Cuisines.Find("European"), context.Cuisines.Find("NorthIndian") }
                                 }
@@ -159,7 +159,7 @@ namespace redfoodie.Models
                             {
                                 new Restaurant
                                 {Name = "Indus Express - Vivanta by Taj",
-                                    ImageFileName = "80x80_Indus_Express_4x3-03%20(1)-indus-express-vivanta-by-taj-dwarka-new-delhi-03dd0896262d68be8af69065f854c5a0.jpg",
+                                    ImageFileName = "80x80_Indus_Express_4x3-03-indus-express-vivanta-by-taj-dwarka-new-delhi.jpg",
                                     Location = CreatePoint(28.558566986896484,77.06312557476463),
                                     Cuisines = new [] { context.Cuisines.Find("Mughlai"), context.Cuisines.Find("North Indian") },
                                     Groups = new[] { context.RestaurantGroups.Find("NewlyOpened"), context.RestaurantGroups.Find("15Off") }
