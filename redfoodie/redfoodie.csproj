@@ -262,6 +262,8 @@
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
     <Content Include="Content\collections\imgs\Download_on_the_App_Store_Badge_US-UK_135x40.svg" />
+    <Content Include="Content\collections\imgs\favicon.ico" />
+    <Content Include="Content\collections\imgs\login-app.jpg" />
     <Content Include="Content\css\invite.css" />
     <Content Include="Content\css\notification.css" />
     <Content Include="Content\css\restaurant-details.css" />
