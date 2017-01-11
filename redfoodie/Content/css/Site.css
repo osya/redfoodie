@@ -1293,7 +1293,7 @@ a:hover {
 .neighbourhoods-list ul {
   float: left;
 }
-.neighbourhoods-list .even {
+.neighbourhoods-list ul.even {
   float: right;
 }
 .neighbourhoods-list a {
