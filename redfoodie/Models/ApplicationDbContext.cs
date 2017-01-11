@@ -95,7 +95,7 @@ namespace redfoodie.Models
                                 new Restaurant
                                 {
                                     Name = "Bukhara - ITC Maurya",
-                                    ImageFileName = "80x80_photo259174768231688715-bukhara-itc-maurya-sardar-patel-marg-new-delhi-229aa203fd19ffeef1127eb57e025806.jpg",
+                                    ImageFileName = "80x80_photo259174768231688715-bukhara-itc-maurya-sardar-patel-marg-new-delhi.jpg",
                                     Location = CreatePoint(28.59671111966005,77.17371255693047),
                                     Cuisines = new[] { context.Cuisines.Find("NorthIndian") },
                                     Groups = new[] {context.RestaurantGroups.Find("Trending") }
@@ -167,7 +167,7 @@ namespace redfoodie.Models
                                 new Restaurant
                                 {
                                     Name = "Biryani Blues",
-                                    ImageFileName = "80x80_11042949_611278912305865_7781689162808340120_n-biryani-blues-sector-11-67defe9453e5ac16b7cad1107155a399.jpg",
+                                    ImageFileName = "80x80_11042949_611278912305865-biryani-blues-sector-11.jpg",
                                     Location = CreatePoint(28.374221, 77.320361),
                                     Cuisines = new [] { context.Cuisines.Find("Biryani"), context.Cuisines.Find("Hyderabadi") }
                                 }
