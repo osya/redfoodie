@@ -51,7 +51,7 @@ namespace redfoodie
             bundles.Add(new ScriptBundle("~/bundles/js/noty").Include(
                       "~/Scripts/js/jquery.noty.packaged.js"));
             bundles.Add(new ScriptBundle("~/bundles/selectize/js").Include(
-                      "~/Scripts/selectize.js"));
+                      "~/Scripts/js/standalone/selectize.js"));
 
             #if DEBUG   
                 BundleTable.EnableOptimizations = false;

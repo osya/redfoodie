@@ -11,7 +11,7 @@
       "path": "Scripts",
       "version": "0.12.4",
       "files": [
-        "js/selectize.js"
+        "js/standalone/selectize.js"
       ]
     }
   }

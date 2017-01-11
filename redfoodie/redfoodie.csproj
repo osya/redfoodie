@@ -356,8 +356,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\js\selectize.js" />
     <Content Include="Scripts\js\jquery.noty.packaged.js" />
+    <Content Include="Scripts\js\standalone\selectize.js" />
     <Content Include="Scripts\selectize.js" />
     <Content Include="Scripts\load-image.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />

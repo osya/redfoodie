@@ -528,121 +528,6 @@ ul.bxslider {
     }
   }
 }
-.front-form {
-  input:hover, textarea:hover {
-    background-color:transparent;
-  }
-  [type=submit], .button {
-    border:none;
-    height:55px;
-    width:300px;
-    background:#d91e18;
-    border-radius:11px;
-    text-align:center;
-    font-weight:400;
-    font-size:16px;
-    color:#ffffff;
-    letter-spacing:1px;
-    transition:background .3s ease-out;
-    display:block;
-    margin:20px auto 50px;
-    outline:none !important;
-  }
-  [type=submit] :hover, .button:hover {
-    background:#ca4433;
-  }
-  input, select {
-    background-color:#e5e5e3;
-    width:100%;
-    border:1px solid #e5e5e3;
-    outline:none;
-    transition:background .4s ease;
-    font-size:12px;
-    padding:15px;
-  }
-  textarea {
-    resize:vertical;
-    background-color:#e5e5e3;
-    width:100%;
-    border:1px solid #e5e5e3;
-    outline:none;
-    transition:background .4s ease;
-    font-size:12px;
-    padding:15px;
-  }
-  label {
-    font-weight:normal;
-    cursor:pointer;
-  }
-  .error {
-    color:red;
-    font-size:13px;
-    ul {
-      margin-bottom:-20px;
-    }
-  }
-  [type=checkbox] {
-    display:block !important;
-    visibility:hidden;
-    width:auto;
-    float:left;
-    margin-left:-20px;
-    :before {
-      font-family:'redfoodie';
-      content:"\e60d";
-      position:absolute;
-      width:10px;
-      height:10px;
-      visibility:visible;
-      font-size:17px;
-      line-height:20px;
-      cursor:pointer;
-    }
-    :checked:before {
-      color:red;
-      content:"\e60e";
-    }
-  }
-  .dropdown {
-    display:inline-block;
-    vertical-align:middle;
-    width:100%;
-    .selectize-input {
-      background-color:#e5e5e3 !important;
-      width:100%;
-      border:1px solid #e5e5e3 !important;
-      transition:background .4s ease;
-      font-size:12px;
-      padding:13px 15px 14px;
-      outline:none !important;
-      box-shadow:none !important;
-      border-radius:0 !important;
-      vertical-align:middle;
-    }
-    .selectize-dropdown {
-      border-radius:0;
-      margin:0;
-    }
-    .option.selected {
-      display:none;
-    }
-  }
-  .form-filed {
-    width:495px;
-    display:inline-block;
-    margin:20px 15px;
-    vertical-align:top;
-  }
-  .form-filed:nth-child(odd) {
-    margin-left:0;
-  }
-  .form-filed:nth-child(even) {
-    margin-right:0;
-  }
-}
-.front-form .selectize-control.dropdown:hover, .dropdown:hover .selectize-input {
-  background-color:transparent !important;
-}
 .accordion .panel-heading {
   background-color:transparent;
   a {
@@ -970,6 +855,121 @@ input[type="text"], input[type="password"], textarea {
 }
 input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
   border-color:#d94a38 !important;
+}
+.front-form {
+  input:hover, textarea:hover {
+    background-color:transparent;
+  }
+  [type=submit], .button {
+    border:none;
+    height:55px;
+    width:300px;
+    background:#d91e18;
+    border-radius:11px;
+    text-align:center;
+    font-weight:400;
+    font-size:16px;
+    color:#ffffff;
+    letter-spacing:1px;
+    transition:background .3s ease-out;
+    display:block;
+    margin:20px auto 50px;
+    outline:none !important;
+  }
+  [type=submit] :hover, .button:hover {
+    background:#ca4433;
+  }
+  input, select {
+    background-color:#e5e5e3;
+    width:100%;
+    border:1px solid #e5e5e3;
+    outline:none;
+    transition:background .4s ease;
+    font-size:12px;
+    padding:15px;
+  }
+  textarea {
+    resize:vertical;
+    background-color:#e5e5e3;
+    width:100%;
+    border:1px solid #e5e5e3;
+    outline:none;
+    transition:background .4s ease;
+    font-size:12px;
+    padding:15px;
+  }
+  label {
+    font-weight:normal;
+    cursor:pointer;
+  }
+  .error {
+    color:red;
+    font-size:13px;
+    ul {
+      margin-bottom:-20px;
+    }
+  }
+  [type=checkbox] {
+    display:block !important;
+    visibility:hidden;
+    width:auto;
+    float:left;
+    margin-left:-20px;
+    :before {
+      font-family:'redfoodie';
+      content:"\e60d";
+      position:absolute;
+      width:10px;
+      height:10px;
+      visibility:visible;
+      font-size:17px;
+      line-height:20px;
+      cursor:pointer;
+    }
+    :checked:before {
+      color:red;
+      content:"\e60e";
+    }
+  }
+  .dropdown {
+    display:inline-block;
+    vertical-align:middle;
+    width:100%;
+    .selectize-input {
+      background-color:#e5e5e3 !important;
+      width:100%;
+      border:1px solid #e5e5e3 !important;
+      transition:background .4s ease;
+      font-size:12px;
+      padding:13px 15px 14px;
+      outline:none !important;
+      box-shadow:none !important;
+      border-radius:0 !important;
+      vertical-align:middle;
+    }
+    .selectize-dropdown {
+      border-radius:0;
+      margin:0;
+    }
+    .option.selected {
+      display:none;
+    }
+  }
+  .form-filed {
+    width:495px;
+    display:inline-block;
+    margin:20px 15px;
+    vertical-align:top;
+  }
+  .form-filed:nth-child(odd) {
+    margin-left:0;
+  }
+  .form-filed:nth-child(even) {
+    margin-right:0;
+  }
+}
+.front-form .selectize-control.dropdown:hover, .dropdown:hover .selectize-input {
+  background-color:transparent !important;
 }
 a, a:focus {
   text-decoration:none;
