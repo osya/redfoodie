@@ -318,6 +318,8 @@
     <Content Include="Content\thumbs\restaurant_groups\580fbd8f1debb-222 %281%29.png" />
     <Content Include="Content\thumbs\rf-loading.gif" />
     <Content Include="Content\thumbs\user\kalki-1912\146x146_489b42243d3b25094806a8bad87d482981c2d519.jpg" />
+    <Content Include="Content\thumbs\user\satinder-1911\146x146_47d93a09346478c900d31e1920c57bd5c627d612.jpg" />
+    <Content Include="Content\thumbs\user\vforvictory-1978\146x146_013977b1504db7471d0f2e16b9aff2a3cb47a50f.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -409,8 +411,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\thumbs\user\satinder-1911\" />
-    <Folder Include="Content\thumbs\user\vforvictory-1978\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
