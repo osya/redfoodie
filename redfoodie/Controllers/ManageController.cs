@@ -334,7 +334,6 @@ namespace redfoodie.Controllers
             }
 
             // Save new file
-            Debug.Assert(filename != null);
             user.ImageFileName = filename;
             using (var fileStream = System.IO.File.Create(Server.MapPath(user.ImageFullFileName)))
             {

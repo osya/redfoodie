@@ -197,6 +197,7 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="HttpPostedFileExtensionsAttribute.cs" />
+    <Compile Include="LogEvent.cs" />
     <Compile Include="Migrations\201612071052275_Initial.cs" />
     <Compile Include="Migrations\201612071052275_Initial.Designer.cs">
       <DependentUpon>201612071052275_Initial.cs</DependentUpon>
