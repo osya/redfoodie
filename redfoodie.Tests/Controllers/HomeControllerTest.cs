@@ -24,15 +24,15 @@ namespace redfoodie.Tests.Controllers
 
         public HomeControllerTest()
         {
-//            foreach (var city in Commons.CitiesPlaces)
-//            {
-//                var cityId = Commons.GetStringId(city.Key);
-//                Cities.Add(new City { Id = cityId, Name = city.Key });
-//                foreach (var place in city.Value)
-//                {
-//                    Places.Add(new Place { Name = place, CityId = cityId, Restaurants = new List<Restaurant>() });
-//                }
-//            }
+            foreach (var city in Commons.CitiesPlaces)
+            {
+                var cityId = Commons.GetStringId(city.Key);
+                Cities.Add(new City { Id = cityId, Name = city.Key });
+                foreach (var place in city.Value)
+                {
+                    Places.Add(new Place { Name = place, CityId = cityId, Restaurants = new List<Restaurant>() });
+                }
+            }
         }
 
         //        private class MockHttpSession : HttpSessionStateBase
