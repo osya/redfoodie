@@ -378,6 +378,7 @@ namespace redfoodie.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
+                new LogEvent($"ExternalLoginConfirmation: CityId = {((City)Session["currentCity"])?.Id}").Raise();
                 var user = new ApplicationUser { UserName = info.DefaultUserName, Email = info.Email ?? model.Email, CityId = ((City)Session["currentCity"])?.Id };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
