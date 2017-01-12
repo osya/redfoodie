@@ -53,11 +53,6 @@ namespace redfoodie.Controllers
                         }
                     }
                 }
-                new LogEvent($"Index: CityId = {(Session["currentCity"] as City)?.Id}").Raise();
-            }
-            else
-            {
-                new LogEvent($"Index: Session == null").Raise();
             }
 
             ApplicationUser user = null;
