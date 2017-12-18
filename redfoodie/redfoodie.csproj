@@ -346,7 +346,6 @@
     <Content Include="package.json" />
     <Content Include="Content\view-profile.less" />
     <None Include="packman.json" />
-    <Content Include="README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="gulpfile.js" />
     <Content Include="Scripts\bootstrap.js" />
