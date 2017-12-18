@@ -1,0 +1,13 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+# environment:
+#     COVERALLS_REPO_TOKEN:
+#         secure: 1oW29ACh/5v8zpwxa7dtIV/0VC7FPUhH4AtKM7r8NrWp+znbePUE/JbeR/r/9KIi
+build_script:
+    - ps: dotnet restore ./redfoodie.csproj
+    - ps: dotnet build ./redfoodie.csproj
+# test_script:
+#  - ps: >-
+#     '(&"$env:UserProfile/.nuget/packages/opencover/4.6.519/tools/OpenCover.Console.exe" -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test ASPNetCoreAngular2YoExampleTest" -output:coverage.xml)'
+#     -and
+#     '(&"$env:UserProfile/.nuget/packages/coveralls.net/0.7.0/tools/csmacnz.Coveralls.exe" --opencover -i coverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID)'
