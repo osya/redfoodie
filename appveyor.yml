@@ -4,9 +4,9 @@ image: Visual Studio 2017
 #     COVERALLS_REPO_TOKEN:
 #         secure: 1oW29ACh/5v8zpwxa7dtIV/0VC7FPUhH4AtKM7r8NrWp+znbePUE/JbeR/r/9KIi
 before build:
-    - ps: nuget restore .\redfoodie.csproj
+    - ps: nuget restore ./redfoodie.sln
 build_script:
-    - ps: nuget build .\redfoodie.csproj
+    - ps: nuget build ./redfoodie.sln
 # test_script:
 #  - ps: >-
 #     '(&"$env:UserProfile/.nuget/packages/opencover/4.6.519/tools/OpenCover.Console.exe" -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test ASPNetCoreAngular2YoExampleTest" -output:coverage.xml)'
