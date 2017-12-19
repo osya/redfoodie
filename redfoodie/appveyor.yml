@@ -3,8 +3,9 @@ image: Visual Studio 2017
 # environment:
 #     COVERALLS_REPO_TOKEN:
 #         secure: 1oW29ACh/5v8zpwxa7dtIV/0VC7FPUhH4AtKM7r8NrWp+znbePUE/JbeR/r/9KIi
-build_script:
+before build:
     - ps: nuget restore ./redfoodie.csproj
+build_script:
     - ps: nuget build ./redfoodie.csproj
 # test_script:
 #  - ps: >-
