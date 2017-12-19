@@ -5,6 +5,8 @@ environment:
         secure: ijzQgjz4unt2qGfH2Q0klY6/Xi4oNhPl1RwZoZeN2b3LopjKrX0G+HMNArp4j5oz
 before_build:
     - ps: nuget restore ./redfoodie.sln
+build:
+    project: redfoodie.sln
 test_script:
  - ps: >-
     '("./packages/OpenCover.4.6.519/tools/OpenCover.Console.exe" -register:user -target:"C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/MSTest.exe" -targetargs:"/testcontainer:redfoodie.Tests/bin/Debug/redfoodie.Tests.dll -noshadow" -output:coverage.xml)'
