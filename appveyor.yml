@@ -5,6 +5,7 @@ environment:
         secure: ijzQgjz4unt2qGfH2Q0klY6/Xi4oNhPl1RwZoZeN2b3LopjKrX0G+HMNArp4j5oz
 before_build:
     - ps: nuget restore ./redfoodie.sln
+    - ps: nuget restore ./redfoodie.Tests/redfoodie.Tests.csproj
 build:
     project: redfoodie.sln
 test_script:
