@@ -12,5 +12,3 @@ namespace redfoodie
         }
     }
 }
-
-//TODO: Update NuGet packages for solution
