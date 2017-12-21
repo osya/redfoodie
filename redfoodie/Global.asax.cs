@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.Entity.SqlServer;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,9 +21,15 @@ namespace redfoodie
 
         protected void Application_Start()
         {
-            // TODO: Delete after debug
-            new LogEvent(@"AppDomain.CurrentDomain.BaseDirectory=" + AppDomain.CurrentDomain.BaseDirectory).Raise();
-            SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
+            // This directory calculation neede for AppHarbor
+            var dir = Server.MapPath("~");
+            var dirBin = Path.Combine(dir, "bin");
+            if (Directory.Exists(dirBin))
+            {
+                dir = dirBin;
+            }
+            SqlServerTypes.Utilities.LoadNativeAssemblies(dir);
+
             SqlProviderServices.SqlServerTypesAssemblyName =
                 "Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91";
             new LogEvent(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()).Raise();
