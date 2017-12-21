@@ -20,6 +20,8 @@ namespace redfoodie
 
         protected void Application_Start()
         {
+            // TODO: Delete after debug
+            new LogEvent(@"AppDomain.CurrentDomain.BaseDirectory=" + AppDomain.CurrentDomain.BaseDirectory).Raise();
             SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
             SqlProviderServices.SqlServerTypesAssemblyName =
                 "Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91";
