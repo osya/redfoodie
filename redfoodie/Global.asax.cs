@@ -28,6 +28,7 @@ namespace redfoodie
             {
                 dir = dirBin;
             }
+            new LogEvent($"LoadNativeAssemblies dir = {dir}").Raise();
             SqlServerTypes.Utilities.LoadNativeAssemblies(dir);
 
             SqlProviderServices.SqlServerTypesAssemblyName =
