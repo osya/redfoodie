@@ -21,9 +21,7 @@ namespace redfoodie
         protected void Application_Start()
         {
             // This directory calculation neede for AppHarbor
-            var dir = Server.MapPath("~");
-            new LogEvent($"Server.MapPath(\"~\")={dir}").Raise();
-            SqlServerTypes.Utilities.LoadNativeAssemblies(dir);
+            SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~"));
 
             SqlProviderServices.SqlServerTypesAssemblyName =
                 "Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91";
