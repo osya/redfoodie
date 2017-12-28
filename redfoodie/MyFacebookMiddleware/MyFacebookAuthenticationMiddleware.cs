@@ -32,8 +32,7 @@ namespace redfoodie.MyFacebookMiddleware
         {
             var httpMessageHandler = options.BackchannelHttpHandler ?? new WebRequestHandler();
             if (options.BackchannelCertificateValidator == null) return httpMessageHandler;
-            var webRequestHandler = httpMessageHandler as WebRequestHandler;
-            if (webRequestHandler == null)
+            if (!(httpMessageHandler is WebRequestHandler webRequestHandler))
                 throw new InvalidOperationException(Resources.ExceptionValidatorHandlerMismatch);
             webRequestHandler.ServerCertificateValidationCallback = options.BackchannelCertificateValidator.Validate;
             return httpMessageHandler;

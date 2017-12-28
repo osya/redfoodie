@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,26 +33,14 @@ namespace redfoodie.Controllers
 
         private ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            set 
-            { 
-                _signInManager = value; 
-            }
+            get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            set => _signInManager = value;
         }
 
         private ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            set
-            {
-                _userManager = value;
-            }
+            get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            set => _userManager = value;
         }
 
         //
@@ -193,7 +180,7 @@ namespace redfoodie.Controllers
         {
             var userQ = _db.Users.Where(m => string.Equals(m.Id, userId));
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (!await userQ.AnyAsync() || await userQ.CountAsync() > 1 || user == null) return Json(JsonResponseFactory.ErrorResponse("User not found or there are many users with these userName and Year of Birth")); ;
+            if (!await userQ.AnyAsync() || await userQ.CountAsync() > 1 || user == null) return Json(JsonResponseFactory.ErrorResponse("User not found or there are many users with these userName and Year of Birth"));
             var followUser = userQ.First();
 
             var follow = user.Follows.Any(m => string.Equals(m.FollowUserId, followUser.Id));

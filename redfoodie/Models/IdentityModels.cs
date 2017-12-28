@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlTypes;
 using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -66,7 +66,7 @@ namespace redfoodie.Models
     public sealed partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base(Environment.ExpandEnvironmentVariables(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString), false)
+            : base(Environment.ExpandEnvironmentVariables(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString), false)
         {
             Database.SetInitializer(new ApplicationDbInitializer());
         }

@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Security.Principal;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web;
-using System.Web.Mvc;
 using commons;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using redfoodie.Controllers;
 using redfoodie.Models;
-using Moq;
 
 namespace redfoodie.Tests.Controllers
 {
@@ -41,8 +32,8 @@ namespace redfoodie.Tests.Controllers
 
             public override object this[string name]
             {
-                get { return _sessionDictionary[name]; }
-                set { _sessionDictionary[name] = value; }
+                get => _sessionDictionary[name];
+                set => _sessionDictionary[name] = value;
             }
         }
 

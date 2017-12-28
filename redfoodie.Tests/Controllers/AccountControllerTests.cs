@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 //using Moq;
-using redfoodie.Controllers;
 using redfoodie.Models;
 
 namespace redfoodie.Tests.Controllers

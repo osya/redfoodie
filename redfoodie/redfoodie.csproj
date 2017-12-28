@@ -186,7 +186,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="AppHarborConfig.cs" />
     <Compile Include="Controllers\JsonResponseFactory.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
@@ -208,13 +207,9 @@
     <Compile Include="Migrations\201612111103452_Rename Review to ReviewText.Designer.cs">
       <DependentUpon>201612111103452_Rename Review to ReviewText.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612122229528_Add Restaurant Group Image.cs" />
-    <Compile Include="Migrations\201612122229528_Add Restaurant Group Image.Designer.cs">
-      <DependentUpon>201612122229528_Add Restaurant Group Image.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612131321243_Add MaxLength for ImageFilename.cs" />
-    <Compile Include="Migrations\201612131321243_Add MaxLength for ImageFilename.Designer.cs">
-      <DependentUpon>201612131321243_Add MaxLength for ImageFilename.cs</DependentUpon>
+    <Compile Include="Migrations\201712282346143_Add ImageFileName.cs" />
+    <Compile Include="Migrations\201712282346143_Add ImageFileName.Designer.cs">
+      <DependentUpon>201712282346143_Add ImageFileName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cuisine.cs" />
@@ -449,11 +444,8 @@
     <EmbeddedResource Include="Migrations\201612111103452_Rename Review to ReviewText.resx">
       <DependentUpon>201612111103452_Rename Review to ReviewText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612122229528_Add Restaurant Group Image.resx">
-      <DependentUpon>201612122229528_Add Restaurant Group Image.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612131321243_Add MaxLength for ImageFilename.resx">
-      <DependentUpon>201612131321243_Add MaxLength for ImageFilename.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712282346143_Add ImageFileName.resx">
+      <DependentUpon>201712282346143_Add ImageFileName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

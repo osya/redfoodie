@@ -26,8 +26,8 @@ namespace redfoodie
         /// </returns>
         public string Extensions
         {
-            get { return _innerAttribute.Extensions; }
-            set { _innerAttribute.Extensions = value; }
+            get => _innerAttribute.Extensions;
+            set => _innerAttribute.Extensions = value;
         }
 
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata,
@@ -63,8 +63,7 @@ namespace redfoodie
         /// <param name="value">A comma delimited list of valid file extensions.</param>
         public override bool IsValid(object value)
         {
-            var file = value as HttpPostedFileBase;
-            return _innerAttribute.IsValid(file != null ? file.FileName : value);
+            return _innerAttribute.IsValid(value is HttpPostedFileBase file ? file.FileName : value);
         }
     }
 }

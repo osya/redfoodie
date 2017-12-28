@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Configuration;
 using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -25,7 +25,7 @@ namespace redfoodie
 
             SqlProviderServices.SqlServerTypesAssemblyName =
                 "Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91";
-            new LogEvent(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()).Raise();
+            new LogEvent(Environment.ExpandEnvironmentVariables(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString)).Raise();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

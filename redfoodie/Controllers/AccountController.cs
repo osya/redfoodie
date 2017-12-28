@@ -34,26 +34,14 @@ namespace redfoodie.Controllers
 
         private ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            set 
-            { 
-                _signInManager = value; 
-            }
+            get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            set => _signInManager = value;
         }
 
         private ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            set
-            {
-                _userManager = value;
-            }
+            get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            set => _userManager = value;
         }
 
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
@@ -208,8 +196,7 @@ namespace redfoodie.Controllers
             {
                 var prevDate = Session["ForgotPasswordDate"] as DateTime?;
 
-                int forgotPasswordTimeout;
-                var res = int.TryParse(WebConfigurationManager.AppSettings["ForgotPasswordTimeout"], out forgotPasswordTimeout);
+                var res = int.TryParse(WebConfigurationManager.AppSettings["ForgotPasswordTimeout"], out var forgotPasswordTimeout);
                 if (prevDate != null && res && forgotPasswordTimeout > 0 && DateTime.Now.Subtract(prevDate.Value).Hours < forgotPasswordTimeout)
                 {
                     return Json(JsonResponseFactory.ErrorResponse("The password for this user has already been requested within the last 24 hours."));
@@ -471,7 +458,7 @@ namespace redfoodie.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        internal class ChallengeResult : HttpUnauthorizedResult
+        private class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri, string userId = null)
             {

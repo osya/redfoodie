@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -57,11 +58,10 @@ namespace redfoodie
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            var appHarborConfig = new AppHarborConfig();
             var fbOptions = new FacebookAuthenticationOptions
             {
-                AppId = appHarborConfig.Get("Redfoodie_Facebook_AppId"),
-                AppSecret = appHarborConfig.Get("Redfoodie_Facebook_AppSecret"),
+                AppId = Environment.ExpandEnvironmentVariables(WebConfigurationManager.AppSettings["Redfoodie_Facebook_AppId"]),
+                AppSecret = Environment.ExpandEnvironmentVariables(WebConfigurationManager.AppSettings["Redfoodie_Facebook_AppSecret"]),
                 Provider = new FacebookAuthenticationProvider
                 {
                     OnAuthenticated = context =>

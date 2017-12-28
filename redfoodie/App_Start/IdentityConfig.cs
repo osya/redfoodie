@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -31,8 +32,7 @@ namespace redfoodie
             };
             transmission.Recipients.Add(recipient);
 
-            var appHarborConfig = new AppHarborConfig();
-            var client = new Client(appHarborConfig.Get("Redfoodie_SparkPost_Password"));
+            var client = new Client(Environment.ExpandEnvironmentVariables(WebConfigurationManager.AppSettings["Redfoodie_SparkPost_Password"]));
             return client.Transmissions.Send(transmission);
         }
     }
@@ -111,7 +111,7 @@ namespace redfoodie
     // Configure the application sign-in manager which is used in this application.
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
-        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
+        private ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
         }

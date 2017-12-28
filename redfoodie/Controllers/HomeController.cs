@@ -14,10 +14,10 @@ namespace redfoodie.Controllers
     {
         private ApplicationDbContext _db;
 
-        public ApplicationDbContext Db
+        private ApplicationDbContext Db
         {
-            private get { return _db ?? (_db = new ApplicationDbContext()); }
-            set { _db = value; }
+            get => _db ?? (_db = new ApplicationDbContext());
+            set => _db = value;
         }
 
         public async Task<ActionResult> Index(string cityId = null)

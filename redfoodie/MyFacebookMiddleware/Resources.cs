@@ -36,14 +36,8 @@ namespace redfoodie.MyFacebookMiddleware
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         internal static CultureInfo Culture
         {
-            get
-            {
-                return _resourceCulture;
-            }
-            set
-            {
-                _resourceCulture = value;
-            }
+            get => _resourceCulture;
+            set => _resourceCulture = value;
         }
 
         /// <summary>

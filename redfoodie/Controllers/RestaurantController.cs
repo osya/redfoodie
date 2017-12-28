@@ -103,7 +103,7 @@ namespace redfoodie.Controllers
                 var cParam = Expression.Parameter(typeof(Cuisine), "c");
                 var anyPredicatExpr = Expression.Call(
                     null,
-                    typeof(string).GetMethod("Equals", new[] { typeof(string), typeof(string) }),
+                    typeof(string).GetMethod("Equals", new[] { typeof(string), typeof(string) }) ?? throw new InvalidOperationException(),
                     Expression.Property(cParam, "Id"),
                     Expression.Constant(cuisineId));
 
@@ -119,7 +119,7 @@ namespace redfoodie.Controllers
                 var gParam = Expression.Parameter(typeof(RestaurantGroup), "g");
                 var anyPredicatExpr = Expression.Call(
                     null,
-                    typeof(string).GetMethod("Equals", new[] { typeof(string), typeof(string) }),
+                    typeof(string).GetMethod("Equals", new[] { typeof(string), typeof(string) }) ?? throw new InvalidOperationException(),
                     Expression.Property(gParam, "Id"),
                     Expression.Constant(groupId));
 
@@ -135,7 +135,7 @@ namespace redfoodie.Controllers
             {
                 var keywordExpr = Expression.Call(
                     Expression.Property(rParam, "Name"),
-                    typeof(string).GetMethod("Contains", new[] { typeof(string) }),
+                    typeof(string).GetMethod("Contains", new[] { typeof(string) }) ?? throw new InvalidOperationException(),
                     Expression.Constant(searchWord));
                 var keywordLambda = Expression.Lambda<Func<Restaurant, bool>>(keywordExpr, rParam);
                 filterLambda = placeId != null || !string.IsNullOrEmpty(cityId) || !string.IsNullOrEmpty(cuisineId) || !string.IsNullOrEmpty(groupId) ?
@@ -181,14 +181,14 @@ namespace redfoodie.Controllers
 
             // Creating ViewBag.Title
             var sb = new StringBuilder();
-            sb.Append(!string.IsNullOrEmpty(modelIn.GroupId) ? $"{_db.RestaurantGroups.Find(modelIn.GroupId).Name} restaurants" : "Restaurants");
+            sb.Append(!string.IsNullOrEmpty(modelIn.GroupId) ? $"{_db.RestaurantGroups.Find(modelIn.GroupId)?.Name} restaurants" : "Restaurants");
             if (!string.IsNullOrEmpty(modelIn.CuisineId))
             {
-                sb.Append($" with {_db.Cuisines.Find(modelIn.CuisineId).Name}");
+                sb.Append($" with {_db.Cuisines.Find(modelIn.CuisineId)?.Name}");
             }
             if (modelIn.PlaceId != null)
             {
-                sb.Append($" in {_db.Places.Find(modelIn.PlaceId).Name}");
+                sb.Append($" in {_db.Places.Find(modelIn.PlaceId)?.Name}");
             }
             else if (!string.IsNullOrEmpty(currentCityId))
             {
@@ -196,12 +196,12 @@ namespace redfoodie.Controllers
                                (!string.IsNullOrEmpty(modelIn.CityId) &&
                                 string.Equals(modelIn.CityId, (Session["currentCity"] as City)?.Id))
                     ? (Session["currentCity"] as City)?.Name
-                    : _db.Cities.Find(modelIn.CityId).Name;
+                    : _db.Cities.Find(modelIn.CityId)?.Name;
                 sb.Append($" in {cityName} city");
             }
             else
             {
-                sb.Append($" in all cities");
+                sb.Append(" in all cities");
             }
             ViewBag.Title = sb.ToString();
 

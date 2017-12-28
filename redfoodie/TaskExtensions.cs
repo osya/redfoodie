@@ -26,8 +26,7 @@ namespace redfoodie
 
             public CultureAwaiter(Task<T> task)
             {
-                if (task == null) throw new ArgumentNullException(nameof(task));
-                _task = task;
+                _task = task ?? throw new ArgumentNullException(nameof(task));
             }
 
             public CultureAwaiter<T> GetAwaiter()

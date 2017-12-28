@@ -245,7 +245,7 @@
                     </figure>
                     <div class="user-details">
                         <div class="user-name">
-                            @Html.ActionLink(@restaurant.Name, "Details", "Restaurant", new { restaurantId = restaurant.Id }, new { @class="restaurant-name" })
+                            @Html.ActionLink(restaurant.Name, "Details", "Restaurant", new { restaurantId = restaurant.Id }, new { @class="restaurant-name" })
                         </div>
                         <div class="user-stats">
                             <span class="user-stat restaurant-locality">
