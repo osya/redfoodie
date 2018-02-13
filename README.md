@@ -1,4 +1,4 @@
-# The ASP.NET MVC 5-based clone of the ite www.redfoodie.com (which is based on PHP & Symfony)
+# The ASP.NET MVC 5-based clone of the www.redfoodie.com (which was based on PHP & Symfony)
 
 ## Introduction
 
