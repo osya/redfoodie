@@ -53,33 +53,35 @@
         return a.toLowerCase().replace(/[^\w ]+/g, "").replace(/ +/g, "-");
     }
 };
-(function (a) {
-    a.fn.loadingIcon = function(c) {
-        var b = this;
-        c = c === "attach" ? "attach" : "detach";
-        b.each(function() {
-            if (c === "attach") {
-                a("body").css("cursor", "progress");
-                var e = a(this).width();
-                var d = a(this).height();
-                a(this).children().hide();
-                a(this).append('<span class="icon-loading2"></span>');
-                a("span.icon-loading2", this).css("width", e + "px");
-                a("span.icon-loading2", this).css("height", d + "px");
-            } else {
-                a("body").css("cursor", "default");
-                a(this).find("span.icon-loading2").remove();
-                a(this).children().show();
-            }
-        });
-        return b;
-    };
-})(jQuery);
+//const a = jQuery;
+//(function (a) {
+jQuery.fn.loadingIcon = function (c) {
+    var b = this;
+    c = c === "attach" ? "attach" : "detach";
+    b.each(function () {
+        if (c === "attach") {
+            a("body").css("cursor", "progress");
+            var e = a(this).width();
+            var d = a(this).height();
+            a(this).children().hide();
+            a(this).append('<span class="icon-loading2"></span>');
+            a("span.icon-loading2", this).css("width", e + "px");
+            a("span.icon-loading2", this).css("height", d + "px");
+        } else {
+            a("body").css("cursor", "default");
+            a(this).find("span.icon-loading2").remove();
+            a(this).children().show();
+        }
+    });
+    return b;
+};
+//})(jQuery);
 $(document).ready(function () {
     $(document).on("click", "[data-modal-link=1]", function (f) {
         f.preventDefault();
         var $el = $(f.currentTarget).closest("[data-modal-link=1]");
-        var c = $(".pop_wrapper"), b;
+        var c = $(".pop_wrapper"),
+            b;
         if ("none" === c.css("display")) {
             c.css("top", "200px").show().css("opacity", 0);
             $("#ispg_appbundle_messagestype_sentTo").chosen();
@@ -137,9 +139,9 @@ jQuery.fn.highlight = function (b) {
         return l;
     }
 
-    return this.length && b && b.length
-        ? this.each(function() {
+    return this.length && b && b.length ?
+        this.each(function () {
             a(this, b.toUpperCase());
-        })
-        : this;
+        }) :
+        this;
 };
