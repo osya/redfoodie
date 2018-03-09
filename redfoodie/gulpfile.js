@@ -1,8 +1,9 @@
-﻿/// <binding Clean='clean' />
+﻿// jshint esversion: 6
+/// <binding Clean='clean' />
 (function () {
     "use strict";
 
-    var gulp = require("gulp"),
+    let gulp = require("gulp"),
         less = require("gulp-less"),
         postcss = require("gulp-postcss"),
         autoprefixer = require("autoprefixer");
